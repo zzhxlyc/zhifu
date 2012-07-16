@@ -1,0 +1,53 @@
+<form action="" method="post" <?php $HTML->file_form_need()?> >
+<table>
+<tr>
+	<td>企业名</td>
+	<td>
+		<input size="100" type="text" name="name" value="<?php echo $company->name?>" />
+		<span class="error"><?php echo $errors['name']?></span>
+	</td>
+</tr>
+<tr>
+	<td>邮箱</td>
+	<td>
+		<input size="100" type="text" name="email" value="<?php echo $company->email?>" />
+		<span class="error"><?php echo $errors['email']?></span>
+	</td>
+</tr>
+<tr>
+	<td>电话</td>
+	<td>
+		<input size="100" type="text" name="phone" value="<?php echo $company->phone?>" />
+		<span class="error"><?php echo $errors['phone']?></span>
+	</td>
+</tr>
+<tr>
+	<td>网址</td>
+	<td>
+		<input size="100" type="text" name="url" value="<?php echo $company->url?>" />
+		<span class="error"><?php echo $errors['url']?></span>
+	</td>
+</tr>
+<tr>
+	<td>描述</td>
+	<td>
+		<textarea name="description" rows="10" cols="80"><?php echo $company->description?></textarea>
+		<span class="error"><?php echo $errors['description']?></span>
+	</td>
+</tr>
+<tr>
+	<td>营业执照</td>
+	<td>
+		<input type="file" name="license" />
+		<span class="error"><?php echo $errors['license']?></span>
+	</td>
+</tr>
+<tr>
+	<td></td>
+	<td>
+		<input type="submit" value="添加" />
+		<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
+	</td>
+</tr>
+</table>
+</form>

@@ -1,0 +1,16 @@
+<?php
+include(CORE_LIB_DIR.'/basics.php');
+include(CORE_M_DIR.'/database/MySQLDatebase.php');
+include(CORE_M_DIR.'/Model.php');
+include(CORE_V_DIR.'/View.php');
+include(CORE_C_DIR.'/Controller.php');
+include(CORE_C_DIR.'/functions.php');
+include(CORE_CORE_DIR.'/Request.php');
+include(CORE_CORE_DIR.'/Response.php');
+include(CORE_CORE_DIR.'/Router.php');
+include(CORE_CORE_DIR.'/Dispatcher.php');
+include(CORE_CORE_DIR.'/Error.php');
+include(CORE_CORE_DIR.'/App.php');
+include(CORE_UTIL_DIR.'/Session.php');
+include(CORE_UTIL_DIR.'/StringUtils.php');
+include(CORE_UTIL_DIR.'/HTMLHelper.php');
