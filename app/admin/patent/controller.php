@@ -1,6 +1,6 @@
 <?php
 
-class PatentController extends AdminController {
+class PatentController extends AdminBaseController {
 	
 	public $models = array('Patent', 'Category', 'Log');
 	public $no_session = array();

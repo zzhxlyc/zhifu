@@ -1,6 +1,6 @@
 <?php
 
-class ExpertController extends AdminController {
+class ExpertController extends AdminBaseController {
 	
 	public $models = array('Expert', 'Log');
 	public $no_session = array();

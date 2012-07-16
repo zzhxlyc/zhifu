@@ -1,6 +1,6 @@
 <?php
 
-class TopicController extends AdminController {
+class TopicController extends AdminBaseController {
 	
 	public $models = array('Topic', 'Log');
 	public $no_session = array();

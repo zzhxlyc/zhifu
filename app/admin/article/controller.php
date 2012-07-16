@@ -1,6 +1,6 @@
 <?php
 
-class ArticleController extends AdminController {
+class ArticleController extends AdminBaseController {
 	
 	public $models = array('Article', 'Log');
 	public $no_session = array();

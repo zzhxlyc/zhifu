@@ -1,6 +1,6 @@
 <?php
 
-class PayController extends AdminController {
+class PayController extends AdminBaseController {
 	
 	public $models = array('Pay', 'Log');
 	public $no_session = array();

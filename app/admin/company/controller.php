@@ -1,6 +1,6 @@
 <?php
 
-class CompanyController extends AdminController {
+class CompanyController extends AdminBaseController {
 	
 	public $models = array('Company', 'Log');
 	public $no_session = array();

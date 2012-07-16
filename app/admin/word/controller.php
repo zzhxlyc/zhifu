@@ -1,6 +1,6 @@
 <?php
 
-class WordController extends AdminController {
+class WordController extends AdminBaseController {
 	
 	public $models = array('Word');
 	public $no_session = array('build');

@@ -1,6 +1,6 @@
 <?php
 
-class CategoryController extends AdminController {
+class CategoryController extends AdminBaseController {
 	
 	public $models = array('Category', 'Log');
 	public $no_session = array();

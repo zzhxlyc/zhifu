@@ -1,6 +1,6 @@
 <?php
 
-class TagController extends AdminController {
+class TagController extends AdminBaseController {
 	
 	public $models = array('Tag');
 	public $no_session = array('build');

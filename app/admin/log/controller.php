@@ -1,6 +1,6 @@
 <?php
 
-class LogController extends AdminController {
+class LogController extends AdminBaseController {
 	
 	public $models = array('Log');
 	public $no_session = array();

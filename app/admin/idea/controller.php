@@ -1,6 +1,6 @@
 <?php
 
-class IdeaController extends AdminController {
+class IdeaController extends AdminBaseController {
 	
 	public $models = array('Idea', 'Log');
 	public $no_session = array();

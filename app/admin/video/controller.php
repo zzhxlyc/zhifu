@@ -1,6 +1,6 @@
 <?php
 
-class VideoController extends AdminController {
+class VideoController extends AdminBaseController {
 	
 	public $models = array('Video', 'Log');
 	public $no_session = array();

@@ -1,6 +1,6 @@
 <?php
 
-class RecruitController extends AdminController {
+class RecruitController extends AdminBaseController {
 	
 	public $models = array('Recruit', 'Log');
 	public $no_session = array();

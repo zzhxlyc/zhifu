@@ -1,6 +1,6 @@
 <?php
 
-class MessageController extends AdminController {
+class MessageController extends AdminBaseController {
 	
 	public $models = array('Message', 'Log');
 	public $no_session = array();
