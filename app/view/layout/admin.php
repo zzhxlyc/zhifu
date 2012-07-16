@@ -5,20 +5,20 @@
 <?php $view->title(); ?>
 <?php $view->fetch_meta(); ?>
 <?php $view->icon(); ?>
-<?php $view->css('style'); ?>
+<?php $view->css('admin/style'); ?>
 <?php $view->fetch_css(); ?>
 <?php $view->js('common'); ?>
 <?php $view->fetch_js(); ?>
 </head>
 <body>
-	<div id="container">
+	<div id="wrapper">
 		<?php include(LAYOUT_DIR.'/admin/head.php'); ?>
-		<div id="content">
+		<div id="main">
 
 			<?php include($TEMPLATE_PAGE); ?>
 			
 		</div>
 		<?php include(LAYOUT_DIR.'/admin/foot.php'); ?>
-	</div>
+	</div><!--end for wrapper-->
 </body>
 </html>
