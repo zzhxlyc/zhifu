@@ -75,6 +75,7 @@ class ProblemController extends AdminBaseController {
 			$id = get_id($get);
 			if($id > 0){
 				$problem = $this->Problem->get($id);
+				$problem->format();
 			}
 			if($problem){
 				$this->set('problem', $problem);

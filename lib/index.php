@@ -29,9 +29,14 @@ if($controller){
 }
 
 $response->send();
+$TEMPLATE_DIR = $view->get_template_dir();
 $TEMPLATE_PAGE = $view->get_template();
-if($TEMPLATE_PAGE && file_exists($TEMPLATE_PAGE)){
-	$HTML = new HTMLHelper();
+$HTML = new HTMLHelper();
+if($TEMPLATE_DIR && file_exists($TEMPLATE_DIR.'/t.php')){
+	$TEMPLATE_PAGE = $TEMPLATE_DIR.'/t.php';
+	include($view->get_layout_file());
+}
+else if($TEMPLATE_PAGE && file_exists($TEMPLATE_PAGE)){
 	include($view->get_layout_file());
 }
 

@@ -1,5 +1,8 @@
 <?php
 include(CORE_LIB_DIR.'/basics.php');
+include(CORE_LIB_DIR.'/kses.php');
+include(CORE_LIB_DIR.'/formatting.php');
+include(CORE_LIB_DIR.'/functions.php');
 include(CORE_M_DIR.'/database/MySQLDatebase.php');
 include(CORE_M_DIR.'/Model.php');
 include(CORE_V_DIR.'/View.php');

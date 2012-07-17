@@ -135,17 +135,25 @@ class AdminController extends AdminBaseController {
 				$admin = $this->Admin->get($id);
 			}
 			if($admin){
-				$admin = $this->set_model($post, $admin);
-				$errors = $this->Admin->check($admin);
-				if($post['password'] != $post['password2']){
-					$errors['password2'] = '密码不一致';
+				if(strlen($post['password']) == 0){
+					$errors['password'] = '原密码不能为空';
+				}
+				else if(md5($post['password']) != $admin->password){
+					$errors['password'] = '原密码不正确';
+				}
+				if(strlen($post['password1']) == 0){
+					$errors['password1'] = '新密码不能为空';
+				}
+				if($post['password1'] != $post['password2']){
+					$errors['password2'] = '新密码不一致';
 				}
 				if(count($errors) == 0){
 					$post['id'] = $id;
-					$post['password'] = md5($post['password']);
+					$post['password'] = md5($post['password1']);
+					unset($post['password1']);
 					unset($post['password2']);
 					$this->Admin->save($post);
-					$this->response->redirect('index');
+					$this->redirect('pswd_succ');
 				}
 				else{
 					$this->set('errors', $errors);
@@ -170,6 +178,8 @@ class AdminController extends AdminBaseController {
 			}
 		}
 	}
+	
+	public function pswd_succ(){}
 	
 	public function delete(){
 		if($this->request->post){

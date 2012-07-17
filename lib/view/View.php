@@ -53,6 +53,23 @@ class View{
 		$this->template_abs = true;
 	}
 	
+	public function get_template_dir(){
+		if($this->template_abs){
+			return basename($this->template_abs);
+		}
+		else{
+			$pf = $this->prefix_folder;
+			$m = $this->module;
+			$t = $this->template;
+			if(empty($pf)){
+				return APP_DIR."/$m/t";
+			}
+			else{
+				return APP_DIR."/$pf/$m/t";
+			}
+		}
+	}
+	
 	public function get_template(){
 		if($this->template_abs){
 			return $this->template;

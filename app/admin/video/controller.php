@@ -62,7 +62,6 @@ class VideoController extends AdminBaseController {
 				if(count($errors) == 0){
 					$this->Video->escape($post);
 					$this->Video->save($post);
-					$this->Log->action_video_edit($admin, $post['title']);
 					$this->response->redirect('edit?id='.$id);
 				}
 				else{

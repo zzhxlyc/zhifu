@@ -7,10 +7,17 @@
 <form action="" method="post">
 <table>
 <tr>
-	<td>新密码</td>
+	<td>原密码</td>
 	<td>
 		<input type="password" name="password" />
 		<span class="error"><?php echo $errors['password']?></span>
+	</td>
+</tr>
+<tr>
+	<td>新密码</td>
+	<td>
+		<input type="password" name="password1" />
+		<span class="error"><?php echo $errors['password1']?></span>
 	</td>
 </tr>
 <tr>
