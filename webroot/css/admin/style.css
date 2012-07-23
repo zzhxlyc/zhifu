@@ -64,7 +64,10 @@ h4 {
 font-size: 16px;
 }
 
-
+#wrapper{
+	margin: 0 auto;
+	width: 960px;	
+}
 
 
 /****************************Header**********************************/
@@ -154,9 +157,9 @@ padding-top:5px;
 
 .left-nav li a{
 font-size:13px;
-padding-top:5px;
-padding-left:15px;
+padding-left:20px;
 color:#fff;
+background: url(../../images/grayArrow.gif) no-repeat 10px 4px;
 	
 }
 
@@ -205,10 +208,78 @@ color: #333;
 margin: 10px 0 10px 10px;
 }
 
+/****************************table**********************************/
+
+
+.normal-table{
+width:780px;
+border-spacing: 0;
+border-left:1px solid #a8abad;
+border-collapse: collapse;
+margin-bottom:10px;
+
+}
+
+.normal-table .top{
+font-weight:bold;
+
+}
 
 
 
+.normal-table td{
+text-align:center;
+padding:8px 0;
+border-right:1px solid #a8abad;
+border-bottom:1px solid #a8abad;
 
+}
+
+.normal-table tr.even td {
+background-color: #F3F3F3;
+}
+
+.normal-table .top td{
+color:#FFF;
+background:transparent url(../../images/calendar_header.png) repeat-x;
+padding:7px 0;
+border:0;
+}
+
+
+
+.normal-table .view-detail{
+display:block;
+width: 62px;
+height:22px;
+background: transparent url(../../images/btn-bg-mm.png) no-repeat 0 0;
+font-size: 12px;
+font-weight: bold;
+color: #362f2d;
+text-decoration: none;
+text-align: center;
+margin:0 auto;
+
+}
+
+a.batch-del{
+display:block;
+width: 62px;
+height:22px;
+background: transparent url(../../images/btn-bg-mm.png) no-repeat 0 0;
+font-size: 12px;
+font-weight: bold;
+color: #362f2d;
+text-decoration: none;
+text-align: center;
+
+}
+
+
+.normal-table .operate a{
+padding-right:10px;
+
+}
 
 
 
