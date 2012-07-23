@@ -1,8 +1,6 @@
-<div>
 	<?php include('sidebar.php')?>
-</div>
 
-<div>
+<div class="main-content">
 	<?php 
 		include($view->get_template());
 	?>

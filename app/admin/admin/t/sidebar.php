@@ -1,5 +1,5 @@
 	
-<ul>
+<ul class="left-nav">
 	<?php 
 		$array = array('pswd', 'pswd_succ');
 		if($request->get_module() == 'admin' && in_array($request->get_method(), $array)){

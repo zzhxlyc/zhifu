@@ -93,7 +93,7 @@ position: absolute;
 top: 72px;
 font-size: 15px;
 font-weight: bold;
-left: 20px;
+left: 150px;
 }
 
 
@@ -137,12 +137,46 @@ color: #ec1c23;
 background: url(../../images/tabs_left_on.png) no-repeat right; /* left corner */
 }
 
-/****************************main**********************************/
-#main{
-padding:20px;	
+/****************************left nav**********************************/
+
+.left-nav{
+width:150px;
+height:600px;
+background: url(../../images/box_top2.png) repeat-y 0 0;
+padding:10px 0;	
+float:left;
+}
+
+.left-nav li{
+padding-top:5px;	
 }
 
 
+.left-nav li a{
+font-size:13px;
+padding-top:5px;
+padding-left:15px;
+color:#fff;
+	
+}
+
+
+.left-nav li a:hover{
+text-decoration: underline;
+}
+
+
+
+
+/****************************main**********************************/
+#main{
+}
+
+/****************************main-content**********************************/
+.main-content{
+padding:10px;
+float:left;	
+}
 
 
 
@@ -151,7 +185,7 @@ padding:20px;
 
 /****************************footer**********************************/
 #footer {
-margin: 20px auto 0 auto;
+margin: 0 auto;
 padding-bottom: 10px;
 font-size: 11px;
 color: #333;

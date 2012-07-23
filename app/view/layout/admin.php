@@ -13,7 +13,7 @@
 <body>
 	<div id="wrapper">
 		<?php include(LAYOUT_DIR.'/admin/head.php'); ?>
-		<div id="main">
+		<div id="main" class="clearfix">
 
 			<?php include($TEMPLATE_PAGE); ?>
 			
