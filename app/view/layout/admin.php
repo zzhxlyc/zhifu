@@ -7,7 +7,10 @@
 <?php $view->icon(); ?>
 <?php $view->css('admin/style'); ?>
 <?php $view->fetch_css(); ?>
+<?php $view->js('jquery.min'); ?>
+<?php $view->js('province_city'); ?>
 <?php $view->js('common'); ?>
+
 <?php $view->fetch_js(); ?>
 </head>
 <body>

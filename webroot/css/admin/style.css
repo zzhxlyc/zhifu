@@ -179,6 +179,7 @@ text-decoration: underline;
 .main-content{
 padding:10px;
 float:left;	
+width:790px;
 }
 
 
@@ -280,7 +281,17 @@ text-align: center;
 padding-right:10px;
 
 }
+/****************************难题修改页面*****************************/
+.row{
+padding-bottom:10px;	
+clear:both;
+}
 
+.row label{
+display:block;
+float:left;
+width:60px;	
+}
 
 
 /****************************pagenavi*****************************/
