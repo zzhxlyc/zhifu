@@ -153,6 +153,7 @@ class Model{
 		foreach($condition as $key => $cond){
 			$i++;
 			$field = $op = '';
+			$key = trim($key);
 			if(strpos($key, ' ') === false){
 				$field = $key;
 				$op = '=';
@@ -212,7 +213,13 @@ class Model{
 					$sql .= " $field $op '$cond' ";
 				}
 				else if(is_string($cond)){
-					$sql .= " $field $op '$cond' ";
+					if(strpos($key, '.') !== false && strpos($cond, '.') !== false){
+						$other_field = $this->_get_table_field($cond);
+						$sql .= " $field $op $other_field ";
+					}
+					else {
+						$sql .= " $field $op '$cond' ";
+					}
 				}
 				else{
 					$sql .= " $field $op $cond ";
@@ -254,7 +261,8 @@ class Model{
 		$i = -1;
 		foreach($order as $key => $cond){
 			$i++;
-			$field = $this->_get_field($key);
+//			$field = $this->_get_field($key);
+			$field = $this->_get_table_field($key);
 			$ordr = strtolower($cond);
 			if($ordr == 'desc'){
 				$sql .= " $field DESC ";
@@ -406,6 +414,7 @@ class Model{
 		}
 		$this->last_sql = $sql;
 		$this->affect_num = $this->DB->query($sql);
+		return $this->affect_num;
 	}
 	
 	/*
@@ -662,87 +671,90 @@ class Model{
 
 function Model_TEST($model){
 	$model->get(1);
-	echo $model->last_sql.'<br>';
+	echo '1:'.$model->last_sql.'<br>';
 	$model->get_row(array('id'=>1));
-	echo $model->last_sql.'<br>';
+	echo '2:'.$model->last_sql.'<br>';
 	$model->get_row(array('id  '=>1));
-	echo $model->last_sql.'<br>';
+	echo '3:'.$model->last_sql.'<br>';
 	$model->get_row(array(' id  '=>1));
-	echo $model->last_sql.'<br>';
+	echo '4:'.$model->last_sql.'<br>';
 	$model->get_row(array('id   <> '=>1));
-	echo $model->last_sql.'<br>';
+	echo '5:'.$model->last_sql.'<br>';
 	$model->get_row(array('id <='=>1));
-	echo $model->last_sql.'<br>';
+	echo '6:'.$model->last_sql.'<br>';
 	$model->get_row(array('id !='=>1));
-	echo $model->last_sql.'<br>';
+	echo '7:'.$model->last_sql.'<br>';
 	$model->get_row(array('id'=>1, 'name'=>'abc'));
-	echo $model->last_sql.'<br>';
+	echo '8:'.$model->last_sql.'<br>';
 	$model->get_row(array('id'=>1, 'name like'=>'abc'));
-	echo $model->last_sql.'<br>';
+	echo '9:'.$model->last_sql.'<br>';
 	$model->get_row(array('id in'=>array(1, 2, 3), 'name like'=>'abc'));
-	echo $model->last_sql.'<br>';
+	echo '10:'.$model->last_sql.'<br>';
 	$model->get_row(array('id in'=>array(1), 'name like'=>'abc'));
-	echo $model->last_sql.'<br>';
+	echo '11:'.$model->last_sql.'<br>';
 	$model->get_row(array('id in'=>'1'), array('id'=>'desc', 'name'=>'desc'));
-	echo $model->last_sql.'<br>';
+	echo '12:'.$model->last_sql.'<br>';
 	$model->get_row(array(' id   in '=>1));
-	echo $model->last_sql.'<br>';
+	echo '13:'.$model->last_sql.'<br>';
 	
 	$model->get_list(array('id >'=>1));
-	echo $model->last_sql.'<br>';
+	echo '14:'.$model->last_sql.'<br>';
 	$model->get_list(array('id >'=>1, 'id <'=>10));
-	echo $model->last_sql.'<br>';
+	echo '15:'.$model->last_sql.'<br>';
 	$model->get_list(array('id >'=>1, 'name like'=>'a bc'));
-	echo $model->last_sql.'<br>';
+	echo '16:'.$model->last_sql.'<br>';
 	$model->get_list(array('id >'=>1, 'name like'=>'a bc'), array(), array(1, 3));
-	echo $model->last_sql.'<br>';
+	echo '17:'.$model->last_sql.'<br>';
 	
 	$model->get_joins(array('users.*', 'items.title as title'), array('users', 'items'), array('items.id >'=>1));
-	echo $model->last_sql.'<br>';
+	echo '18:'.$model->last_sql.'<br>';
 	$model->get_joins(array('u.*', 'i.title as title'), array('users as u', 'items as i'), array('i.id >'=>1));
-	echo $model->last_sql.'<br>';
+	echo '19:'.$model->last_sql.'<br>';
 	
-	echo 'DELETE -------------<br>';
+	echo '10:'.'DELETE -------------<br>';
 	$model->delete(100);
-	echo $model->last_sql.'<br>';
+	echo '11:'.$model->last_sql.'<br>';
 	$model->delete(array(100));
-	echo $model->last_sql.'<br>';
+	echo '12:'.$model->last_sql.'<br>';
 	$model->delete(array(100,200));
-	echo $model->last_sql.'<br>';
+	echo '13:'.$model->last_sql.'<br>';
 	
-	echo 'delete_all -------------<br>';
+	echo '14:'.'delete_all -------------<br>';
 	$model->delete_all(array());
-	echo $model->last_sql.'<br>';
+	echo '15:'.$model->last_sql.'<br>';
 	$model->delete_all(array('id'=>100));
-	echo $model->last_sql.'<br>';
+	echo '16:'.$model->last_sql.'<br>';
 	$model->delete_all(array('id >'=>100, 'sex'=>'M'));
-	echo $model->last_sql.'<br>';
+	echo '17:'.$model->last_sql.'<br>';
 	
-	echo 'UPDATE -------------<br>';
+	echo '18:'.'UPDATE -------------<br>';
 	$model->update(array(), array());
-	echo $model->last_sql.'<br>';
+	echo '19:'.$model->last_sql.'<br>';
 	$model->update(array('name'=>'a', 'sex'=>'F'), array());
-	echo $model->last_sql.'<br>';
+	echo '20:'.$model->last_sql.'<br>';
 	$model->update(array('name1'=>'a', 'sex1'=>'F'), array('1'=>1));
-	echo $model->last_sql.'<br>';
+	echo '21:'.$model->last_sql.'<br>';
 	$model->update(array('name'=>'a', 'sex'=>'F'), array('id'=>100));
-	echo $model->last_sql.'<br>';
+	echo '22:'.$model->last_sql.'<br>';
 	$model->update(array('name'=>'a', 'sex'=>'F'), array('id'=>100), array('id'=>'DESC'), array(10,20));
-	echo $model->last_sql.'<br>';
+	echo '23:'.$model->last_sql.'<br>';
 	
-	echo 'COUNT -------------<br>';
+	echo '24:'.'COUNT -------------<br>';
 	$model->count(array());
-	echo $model->last_sql.'<br>';
+	echo '25:'.$model->last_sql.'<br>';
 	$model->count(array('id'=>100));
-	echo $model->last_sql.'<br>';
+	echo '26:'.$model->last_sql.'<br>';
 	$model->count(array('id'=>100, 'name'=>'abc'));
-	echo $model->last_sql.'<br>';
+	echo '27:'.$model->last_sql.'<br>';
 	
-	echo 'SAVE -------------<br>';
+	echo '28:'.'SAVE -------------<br>';
 	$model->save(array());
-	echo $model->last_sql.'<br>';
+	echo '29:'.$model->last_sql.'<br>';
 	$model->save(array('age'=>1));
-	echo $model->last_sql.'<br>';
+	echo '30:'.$model->last_sql.'<br>';
 	$model->save(array('id'=>100, 'name'=>'abc', 'time'=>'2012-6-24 14:37:57'));
-	echo $model->last_sql.'<br>';
+	echo '31:'.$model->last_sql.'<br>';
+	
+	$model->get_list(array('name'=>'a.b'));
+	echo '14:'.$model->last_sql.'<br>';
 }

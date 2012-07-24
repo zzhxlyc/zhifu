@@ -32,5 +32,12 @@ class Problem extends AppModel{
 		);
 		return parent::format($format_array);
 	}
+	
+	public function get_status(){
+		$s = $this->status;
+		if($s == 0){
+			return '竞标中';
+		}
+	}
 
 }

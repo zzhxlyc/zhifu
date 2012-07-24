@@ -10,7 +10,6 @@ if(file_exists(APP_DIR.'/init.php')){
 	include(APP_DIR.'/init.php');
 }
 
-
 $view = new View();
 $request = new Request();
 $response = new Response($view);

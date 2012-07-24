@@ -5,6 +5,19 @@ function get_id($get){
 	return $id;
 }
 
+function get_ids($list, $array = true){
+	$ret = array();
+	foreach($list as $o){
+		$ret[] = $o->id;
+	}
+	if($array){
+		return $ret;
+	}
+	else{
+		return join(',', $ret);
+	}
+}
+
 function array_to_map($list, $field = 'id'){
 	$ret = array();
 	foreach($list as $obj){

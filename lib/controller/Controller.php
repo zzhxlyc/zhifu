@@ -18,6 +18,9 @@ class Controller{
 	}
 	
 	public function set($key, $value){
+		if(substr($key, 0, 1) == '$'){
+			$key = substr($key, 1);
+		}
 		$this->vars[$key] = $value;
 	}
 	

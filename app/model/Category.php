@@ -25,17 +25,18 @@ class Category extends AppModel{
 	
 	public function get_category(){
 		$list = $this->get_list();
-		$cat = array();
-		$subcat = array();
-		foreach($list as $category){
-			if($category->parent == 0){
-				$cat[] = $category;
-			}
-			else{
-				$subcat[] = $category;
+		$cat_array = array();
+		foreach($list as $cat){
+			if($cat->parent == 0){
+				$cat_array[$cat->id] = array('id'=>$cat->id, 'name'=>$cat->name, 'c'=>array());
 			}
 		}
-		return array($cat, $subcat);
+		foreach($list as $cat){
+			if($cat->parent > 0){
+				$cat_array[$cat->parent]['c'][$cat->id] = array('id'=>$cat->id, 'name'=>$cat->name);
+			}
+		}
+		return $cat_array;
 	}
 
 }

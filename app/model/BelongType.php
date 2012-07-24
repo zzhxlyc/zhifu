@@ -7,6 +7,8 @@ class BelongType {
 	const ADMIN = 'Admin';
 	const EXPERT = 'Expert';
 	const COMPANY = 'Company';
+	const PROBLEM = 'Problem';
+	const PATENT = 'Patent';
 	
 	public static function value_of($const){
 		$const = ucfirst(strtolower($const));

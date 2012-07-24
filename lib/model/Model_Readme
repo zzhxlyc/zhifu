@@ -1,0 +1,26 @@
+public function get($id){}
+
+public function get_row($condition = array(), $order = array()){}
+
+public function count(array $condition = null){}
+
+public function get_page($condition = array(), $order = array(), $page, $page_num){}
+
+public function get_list($condition = array(), $order = array(), $limit = ''){}
+
+
+public function get_joins($fields = array(), $tables = array(), 
+					$condition = array(), $order = array(), $limit = ''){
+	condition中当$key和$value都带有.时，$value作为$table.$column解析，
+		所以当要搜索$value带.字符时，$key需处理成无.形式（用as）
+}
+
+public function delete($param){
+	$param = $id, or array of id
+}
+
+public function delete_all($condition){}
+
+public function update($set, $condition, $order = array(), $limit = ''){}
+
+public function save($data){}
