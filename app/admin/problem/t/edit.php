@@ -16,14 +16,14 @@
 	<label for="cat">所属行业</label>
 	
 	<select name="cat">
-		<option value="">选择行业</option>
 	</select>
 	<span class="error"><?php echo $errors['cat']?></span>
 	
 	
 	<select name="subcat">
-		<option value="">选择行业</option>
 	</select>
+	<input type="hidden" name="cat" value="<?php echo $problem->cat?>" />
+	<input type="hidden" name="subcat" value="<?php echo $problem->subcat?>" />
 	<span class="error"><?php echo $errors['subcat']?></span>
 </div>
 
@@ -127,43 +127,60 @@ var catList = {<?php
 	echo join(',', $l)."\n";
 ?>
 };
-<?php 
-if($problem->cat > 0){
-	echo "set_cat($problem->cat);\n";
-}
-if($problem->subcat > 0){
-	echo "set_subcat($problem->subcat);\n";
-}	
-?>
+
 //-->
 </script>
 
 
 <script type="text/javascript">
 
-
 $(document).ready(function($){
-	$(".province_city").province_city_county(); 
+	var province=$('input[name=province]').val();
+	var city=$('input[name=city]').val();
+	var district=$('input[name=district]').val();
+	
+	var cat=$('input[name=cat]').val();
+	var subcat=$('input[name=subcat]').val();
+	
+	
+		
+	$(".province_city").province_city_county(province,city,district); 
+	
 	$( ".datepicker" ).datepicker({
 		dateFormat:"yy-mm-dd"
 		
 	});
 	
+	//cat从初始化
 	var cathtml='';
 	$.each(catList, function(i, t) {
 		cathtml+='<option value="'+t.id+'">'+t.n+'</option>';
 	});
-
 	$('select[name=cat]').append(cathtml);	
-
+	
+	
+	//subcat联动处理
 	$('select[name=cat]').change(function(){
-		$('select[name=subcat]').children().empty();
-		//var catId=$('select[name=cat]').val();
-		//var subCatList=catList.
-
+		$('select[name=subcat]').children().remove();
+		var catId=$('select[name=cat]').val();
+		var subCatList=catList[catId].c;
+		var subCatHtml='';
+		$.each(subCatList, function(i, t) {
+			subCatHtml+='<option value="'+t.id+'">'+t.name+'</option>';
+		});
+		
+		$('select[name=subcat]').append(subCatHtml);	
 
 	});
-
+	//默认值
+	$('select[name=cat]').val(cat);	
+	var oldSubCatHtml='';
+	$.each(catList[cat].c, function(i, t) {
+		oldSubCatHtml+='<option value="'+t.id+'">'+t.name+'</option>';
+	});
+	
+	$('select[name=subcat]').append(oldSubCatHtml);	
+	$('select[name=subcat]').val(subcat);
 	
 
 });	
