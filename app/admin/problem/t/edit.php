@@ -137,3 +137,38 @@ if($problem->subcat > 0){
 ?>
 //-->
 </script>
+
+
+<script type="text/javascript">
+
+
+$(document).ready(function($){
+	$(".province_city").province_city_county(); 
+	$( ".datepicker" ).datepicker({
+		dateFormat:"yy-mm-dd"
+		
+	});
+	
+	var cathtml='';
+	$.each(catList, function(i, t) {
+		cathtml+='<option value="'+t.id+'">'+t.n+'</option>';
+	});
+
+	$('select[name=cat]').append(cathtml);	
+
+	$('select[name=cat]').change(function(){
+		$('select[name=subcat]').children().empty();
+		//var catId=$('select[name=cat]').val();
+		//var subCatList=catList.
+
+
+	});
+
+	
+
+});	
+
+
+	
+	
+</script>

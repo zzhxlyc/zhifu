@@ -13,7 +13,6 @@
 <?php $view->js('jquery-ui.min'); ?>
 
 <?php $view->js('province_city'); ?>
-<?php $view->js('common'); ?>
 
 <?php $view->fetch_js(); ?>
 </head>
