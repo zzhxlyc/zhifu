@@ -60,7 +60,7 @@
 	if(is_array($tag_list)){
 		foreach($tag_list as $tag){
 	?>
-		<a href="javascript:;" count="<?php $tag->count?>" tagid="<?php echo $tag->id?>" id="tag_<?php echo $tag->id?>"><?php echo $tag->name?><img src="../../images/delete.png"></a>	
+		<a href="javascript:;" class="old" count="<?php $tag->count?>" tagid="<?php echo $tag->id?>" id="tag_<?php echo $tag->id?>"><?php echo $tag->name?><img src="../../images/delete.png"></a>	
 	<?php 
 		}
 	}
@@ -193,7 +193,7 @@ $(document).ready(function($){
 	//old_tag赋值
 	function setOldTagId(){
 		var oldtagId='';
-		$('.tag a').each(function(){
+		$('.tag .old').each(function(){
 			oldtagId+= $(this).attr('tagid')+',';
 
 		});
@@ -204,11 +204,10 @@ $(document).ready(function($){
 	
 	function setNewTagId(){
 		var newtagId='';
-		$('.tag a').each(function(){
-			if($(this).attr('tagid')===undefined)
-			{
-				newtagId+= $(this).text()+',';
-			}
+		$('.tag .new').each(function(){
+		
+			newtagId+= $(this).text()+',';
+		
 
 		});
 		newtagId=newtagId.substring(0,newtagId.length-1);
@@ -217,26 +216,32 @@ $(document).ready(function($){
 		
 	};
 	
-	$('#add-tag').click(function(){
-		var newtag=$('#new-tag').val();
-		
-		$('.tag').append('<a href="javascript:;">'+newtag+'<img src="../../images/delete.png"></a>');
+	function addNewTag(newtag){
+		$('.tag').append('<a href="javascript:;" class="new">'+newtag+'<img src="../../images/delete.png"></a>');
 		
 		setNewTagId();
+		$('.tag .new').click(function(){
+			$(this).remove();
+			setNewTagId();
+		});
+	}
 	
+	
+	$('#add-tag').click(function(){
+		var newtag=$('#new-tag').val();
+		addNewTag(newtag);
+			
 	});
 	
 	
 	$('.hot-tag a').click(function(){
 		var newtag=$(this).text();
-		$('.tag').append('<a href="javascript:;">'+newtag+'<img src="../../images/delete.png"></a>');
-		setNewTagId();
-		
+		addNewTag(newtag);
 		
 	});
 	
 
-	$('.tag a').click(function(){
+	$('.tag .old').click(function(){
 		$(this).remove();
 		setOldTagId();
 	});
