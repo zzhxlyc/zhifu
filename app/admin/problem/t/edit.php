@@ -51,24 +51,28 @@
 
 <div class="row">
 	<label for="tag">领域标签</label>
-	<input size="20" type="text" value="" /> <a href="#">添加</a>
-	<div>标签：
+	<input size="20" type="text" value="" id="new-tag" /> <a href="javascript:;" id="add-tag">添加</a>
+</div>	
+
+	<div class="tag row">
+		<label for="">标签</label>
 	<?php 
 	if(is_array($tag_list)){
 		foreach($tag_list as $tag){
 	?>
-		<span count="<?php $tag->count?>" id="tag_<?php echo $tag->id?>"><?php echo $tag->name?></span>	
+		<a href="javascript:;" count="<?php $tag->count?>" tagid="<?php echo $tag->id?>" id="tag_<?php echo $tag->id?>"><?php echo $tag->name?><img src="../../images/delete.png"></a>	
 	<?php 
 		}
 	}
 	?>
 	</div>
-	<div>热门标签：
+	<div class="hot-tag row">
+		<label for="">热门标签</label>
 	<?php 
 	if(is_array($most_common_tags)){
 		foreach($most_common_tags as $tag){
 	?>
-		<span count="<?php echo $tag['count']?>" id="tag_<?php echo $tag['id']?>"><?php echo $tag['name']?></span>	
+		<a href="javascript:;" count="<?php echo $tag['count']?>" tagid="<?php echo $tag['id']?>" id="tag_<?php echo $tag['id']?>"><?php echo $tag['name']?></a>	
 	<?php 
 		}
 	}
@@ -76,7 +80,7 @@
 	</div>
 	<input type="hidden" name="new_tag" />
 	<input type="hidden" name="old_tag" />
-</div>
+
 
 
 <div class="row">
@@ -181,6 +185,72 @@ $(document).ready(function($){
 	
 	$('select[name=subcat]').append(oldSubCatHtml);	
 	$('select[name=subcat]').val(subcat);
+	setOldTagId();
+	
+	
+	
+	
+	//old_tag赋值
+	function setOldTagId(){
+		var oldtagId='';
+		$('.tag a').each(function(){
+			oldtagId+= $(this).attr('tagid')+',';
+
+		});
+		oldtagId=oldtagId.substring(0,oldtagId.length-1);
+
+		$('input[name=old_tag]').val(oldtagId);
+	}
+	
+	function setNewTagId(){
+		var newtagId='';
+		$('.tag a').each(function(){
+			if($(this).attr('tagid')===undefined)
+			{
+				newtagId+= $(this).text()+',';
+			}
+
+		});
+		newtagId=newtagId.substring(0,newtagId.length-1);
+
+		$('input[name=new_tag]').val(newtagId);
+		
+	};
+	
+	$('#add-tag').click(function(){
+		var newtag=$('#new-tag').val();
+		
+		$('.tag').append('<a href="javascript:;">'+newtag+'<img src="../../images/delete.png"></a>');
+		
+		setNewTagId();
+	
+	});
+	
+	
+	$('.hot-tag a').click(function(){
+		var newtag=$(this).text();
+		$('.tag').append('<a href="javascript:;">'+newtag+'<img src="../../images/delete.png"></a>');
+		setNewTagId();
+		
+		
+	});
+	
+
+	$('.tag a').click(function(){
+		$(this).remove();
+		setOldTagId();
+	});
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 });	

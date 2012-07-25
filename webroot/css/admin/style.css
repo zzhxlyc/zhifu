@@ -304,6 +304,19 @@ float:left;
 width:60px;	
 }
 
+.tag a{
+border:1px solid #0078B6;	
+color:#4184BB;
+padding:3px 5px;	
+margin-right:4px;
+
+}
+.hot-tag a{
+background:#DAF5FA;
+color:#4184BB;
+padding:3px 5px;	
+
+}
 
 /****************************pagenavi*****************************/
 .wp-pagenavi {
