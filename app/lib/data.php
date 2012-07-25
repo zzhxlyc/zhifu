@@ -18,6 +18,28 @@ function get_ids($list, $array = true){
 	}
 }
 
+function split_ids($ids, $split = ','){
+	if($ids){
+		$array = explode($split, $ids);
+		$array = array_map('intval', $array);
+		$array = array_unique($array);
+		return $array;
+	}
+	return array();
+}
+
+function split_words($str, $split = ','){
+	$ret = array();
+	$array = explode($split, $str);
+	foreach($array as $s){
+		$s = trim($s);
+		if(strlen($s) > 0){
+			$ret[] = $s;
+		}
+	}
+	return $ret;
+}
+
 function array_to_map($list, $field = 'id'){
 	$ret = array();
 	foreach($list as $obj){

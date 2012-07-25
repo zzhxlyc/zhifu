@@ -74,5 +74,23 @@ class Word extends Model{
 		Option::persist(Word::$TREE_KEY, $trie_tree->export());
 		parent::delete($id_or_array);
 	}
+	
+	public function check_word($word){
+		if(empty($word)){
+			return true;
+		}
+		$tree_str = Option::find(Word::$TREE_KEY);
+		if($tree_str){ 
+			$trie_tree = new TrieTree();
+			$trie_tree->import($tree_str);
+			if($trie_tree->contain($word)){
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		return true;
+	}
 
 }

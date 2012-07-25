@@ -40,6 +40,17 @@ class ProblemController extends AdminBaseController {
 		}
 	}
 	
+	private function do_tag($old_tag, $new_tag){
+		$tag_array = array();
+		$new_tag_array = array();
+		if(strlen($old_tag) > 0){
+			$tag_array = split_ids($old_tag);
+		}
+		if(strlen($new_tag) > 0){
+			$new_tag_array = split_words($new_tag);
+		}
+	}
+	
 	public function edit(){
 		if($this->request->post){
 			$post = $this->request->post;
@@ -56,6 +67,7 @@ class ProblemController extends AdminBaseController {
 					$this->do_file($post, $errors, $this->request->file);
 				}
 				if(count($errors) == 0){
+					$this->do_tag($post['old_tag'], $post['new_tag']);
 					$post['lastmodify'] = DATETIME;
 					unset($post['tag']);
 					$this->Problem->escape($post);

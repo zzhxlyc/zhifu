@@ -3,7 +3,7 @@
 class WordController extends AdminBaseController {
 	
 	public $models = array('Word');
-	public $no_session = array('build');
+	public $no_session = array('build', 'check');
 	
 	public function before(){
 		parent::before();

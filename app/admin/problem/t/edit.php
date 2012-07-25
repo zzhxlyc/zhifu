@@ -28,9 +28,11 @@
 </div>
 
 <div class="row">
-	
 	<label for="">地区</label>
 	<div class="province_city"></div>
+	<input type="hidden" name="province" value="<?php echo $problem->province?>" />
+	<input type="hidden" name="city" value="<?php echo $problem->city?>" />
+	<input type="hidden" name="district" value="<?php echo $problem->district?>" />
 </div>	
 
 
@@ -82,8 +84,17 @@
 	<textarea name="description" rows="10" cols="80"><?php echo $problem->description?></textarea>
 	<span class="error"><?php echo $errors['description']?></span>
 </div>
+
 <div class="row">
-	附件
+	<label for="">附件</label>
+	<?php if($problem->file){?>
+	<a target="_blank" href="<?php echo UPLOAD_HOME."/$problem->file"?>">点击下载</a>
+	<?php }else{?>
+	还没有附件
+	<?php }?>
+</div>
+<div class="row">
+	<label for="">修改附件</label>
 	<input type="file" name="file" />
 	<span class="error"><?php echo $errors['file']?></span>
 </div>
@@ -91,7 +102,7 @@
 
 <div class="row">
 	<input type="submit" value="修改" />
-	<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
+	<input type="button" value="返回" onclick="location.href='<?php echo $home?>/index'" />
 	<?php echo $HTML->hidden('id', $problem->id)?>
 </div>
 
@@ -110,7 +121,8 @@ var catList = {<?php
 			$n = $subcat['name'];
 			$c[] = "{'id':$iid, 'name':'$n'}";
 		}
-		$l[] = sprintf("\n%d:{'n':'%s', 'c':[%s]}", $id, $cat['name'], join(',', $c));
+		$l[] = sprintf("\n%d:{'id':%d, 'n':'%s', 'c':[%s]}", 
+						$id, $id, $cat['name'], join(',', $c));
 	}
 	echo join(',', $l)."\n";
 ?>

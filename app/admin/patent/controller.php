@@ -82,9 +82,19 @@ class PatentController extends AdminBaseController {
 			}
 			if($patent){
 				$this->set('patent', $patent);
-				list($cat_list, $subcat_list) = $this->Category->get_category();
-				$this->set('cat_list', $cat_list);
-				$this->set('subcat_list', $subcat_list);
+				$cat_array = $this->Category->get_category();
+				$this->set('cat_array', $cat_array);
+				$tags = $this->TagItem->get_list(array('belong'=>$patent->id, 
+												'type'=>BelongType::PATENT));
+				$tag_id_array = get_ids($tags);
+				if($tag_id_array){
+					$tag_list = $this->Tag->get_list(array('id in'=>$tag_id_array));
+					$this->set('tag_list', $tag_list);
+				}
+				$most_common_tags = unserialize(Option::find('MOST_COMMON_TAGS'));
+				if($most_common_tags){
+					$this->set('$most_common_tags', $most_common_tags);
+				}
 			}
 			else{
 				$this->set('error', '不存在');

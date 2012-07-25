@@ -7,8 +7,8 @@
 <?php $view->icon(); ?>
 <?php $view->css('admin/style'); ?>
 <?php $view->css('jquery-ui'); ?>
-
 <?php $view->fetch_css(); ?>
+	<script>window.ROOT_URL = '<?php echo ROOT_URL?>';window.ADMIN_URL = '<?php echo ADMIN_HOME?>';</script>
 <?php $view->js('jquery.min'); ?>
 <?php $view->js('jquery-ui.min'); ?>
 
