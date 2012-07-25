@@ -2,12 +2,12 @@
 
 class PatentController extends AdminBaseController {
 	
-	public $models = array('Patent', 'Category', 'Log');
+	public $models = array('Patent', 'Category', 'Log', 'Tag', 'TagItem');
 	public $no_session = array();
 	
 	public function before(){
 		parent::before();
-		$this->set('home', ADMIN_PATENT_HOME.'/index');
+		$this->set('home', ADMIN_PATENT_HOME);
 	}
 	
 	public function index(){
@@ -16,8 +16,12 @@ class PatentController extends AdminBaseController {
 		$limit = 10;
 		$all = $this->Patent->count();
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Patent->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_PATENT_HOME.'/index?');
+		$list = $this->Patent->get_joins(array('patents.*', 'experts.name as name'), 
+										array('patents', 'experts'), 
+										array('patents.expert'=>'experts.id'), 
+										array('patents.time'=>'DESC'),
+										$pager->get_limit_str());
+		$links = $pager->get_page_links(ADMIN_PROBLEM_HOME.'/index?');
 		$this->set('list', $list);
 		$this->set('links', $links);
 	}

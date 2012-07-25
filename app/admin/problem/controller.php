@@ -7,7 +7,7 @@ class ProblemController extends AdminBaseController {
 	
 	public function before(){
 		parent::before();
-		$this->set('home', ADMIN_PROBLEM_HOME.'/index');
+		$this->set('home', ADMIN_PROBLEM_HOME);
 	}
 	
 	public function index(){
@@ -21,9 +21,9 @@ class ProblemController extends AdminBaseController {
 										array('problems.company'=>'companys.id'), 
 										array('problems.time'=>'DESC'),
 										$pager->get_limit_str());
-		$links = $pager->get_page_links(ADMIN_PROBLEM_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_PROBLEM_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
 	}
 	
 	private function do_file(&$data, &$errors, &$files){

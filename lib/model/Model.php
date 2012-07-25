@@ -375,7 +375,7 @@ class Model{
 			$sql .= ' ORDER BY '.$this->build_order($order);
 		}
 		if(!empty($limit)){
-			if(is_int($limit)){
+			if(is_int($limit) || is_string($limit)){
 				$sql .= ' LIMIT '.$limit;
 			}
 			else if(is_array($limit) && count($limit) == 2){

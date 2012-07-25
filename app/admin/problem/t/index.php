@@ -37,3 +37,7 @@
 <input type="submit" value="批量删除" />
 </form>
 
+<div class="page-nav">
+	<?php Pager::output_pager_list($page_list);?>
+</div>
+

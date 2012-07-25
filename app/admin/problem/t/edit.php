@@ -102,16 +102,17 @@
 
 <script type="text/javascript">
 <!--
-var catList = {
-<?php 
+var catList = {<?php 
+	$l = array();
 	foreach($cat_array as $id => $cat){
-		$c = '';
+		$c = array();
 		foreach($cat['c'] as $iid => $subcat){
 			$n = $subcat['name'];
-			$c .= "{'id'=>$iid, 'name'=>'$n'},";
+			$c[] = "{'id':$iid, 'name':'$n'}";
 		}
-		printf("%d:{'n':'%s', 'c':[%s]},\n", $id, $cat['name'], $c);
+		$l[] = sprintf("\n%d:{'n':'%s', 'c':[%s]}", $id, $cat['name'], join(',', $c));
 	}
+	echo join(',', $l)."\n";
 ?>
 };
 <?php 

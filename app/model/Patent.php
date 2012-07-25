@@ -23,5 +23,12 @@ class Patent extends AppModel{
 		);
 		return parent::escape($data, $escape_array, $ignore);
 	}
+	
+	public function get_status(){
+		$s = $this->status;
+		if($s == 0){
+			return '竞标中';
+		}
+	}
 
 }

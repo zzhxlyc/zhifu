@@ -9,10 +9,10 @@ class Pager{
 	public $first;
 	public $last;
 	
-	public function Pager($all, $now, $limit){
+	public function Pager($all, $now, $num){
 		$this->all = $all;
 		$this->first = self::$start;
-		$this->num = $limit;
+		$this->num = $num;
 		if($this->all % $this->num == 0){
 			$this->last = $this->all / $this->num + self::$start - 1;
 			if($this->last == 0){
@@ -33,10 +33,6 @@ class Pager{
 		else{
 			$this->now = self::$start;
 		}
-	}
-	
-	public function now(){
-		return $this->now;
 	}
 	
 	public function get_limit_str(){
@@ -87,7 +83,10 @@ class Pager{
 	
 	public static function output_pager_list($page_list, $anchor_id = ''){
 		if(count($page_list) == 0){
-			echo '没有相关信息';
+			//echo '没有相关信息';
+			return;
+		}
+		if(count($page_list) <= 3){
 			return;
 		}
 		if($anchor_id == ''){
