@@ -18,6 +18,19 @@ function get_ids($list, $array = true){
 	}
 }
 
+function get_attrs($list, $attr, $array = true){
+	$ret = array();
+	foreach($list as $o){
+		$ret[] = $o->$attr;
+	}
+	if($array){
+		return $ret;
+	}
+	else{
+		return join(',', $ret);
+	}
+}
+
 function split_ids($ids, $split = ','){
 	if($ids){
 		$array = explode($split, $ids);
@@ -71,6 +84,11 @@ function sort_as_ids($list, $id_list){
 		$s[] = $t[$id];
 	}
 	return $s;
+}
+
+function get_date($time){
+	$ts = strtotime($time);
+	return date('Y-m-d', $ts);
 }
 
 function subString($str, $allow, $last = '...'){

@@ -22,17 +22,12 @@
 	
 	<select name="subcat">
 	</select>
-	<input type="hidden" name="cat" value="<?php echo $problem->cat?>" />
-	<input type="hidden" name="subcat" value="<?php echo $problem->subcat?>" />
 	<span class="error"><?php echo $errors['subcat']?></span>
 </div>
 
 <div class="row">
 	<label for="">地区</label>
 	<div class="province_city"></div>
-	<input type="hidden" name="province" value="<?php echo $problem->province?>" />
-	<input type="hidden" name="city" value="<?php echo $problem->city?>" />
-	<input type="hidden" name="district" value="<?php echo $problem->district?>" />
 </div>	
 
 
@@ -45,7 +40,7 @@
 
 <div class="row">
 	<label for="deadline">截止日期</label>
-		<input size="20" type="text" name="deadline" class="datepicker" value="<?php echo $problem->deadline?>" readonly="readonly" />
+		<input size="20" type="text" name="deadline" class="datepicker" value="<?php echo get_date($problem->deadline)?>" readonly="readonly" />
 		<span class="error"><?php echo $errors['deadline']?></span>
 </div>
 
@@ -111,9 +106,14 @@
 </div>
 
 </form>
-<?php 
-	}
-?>
+
+<div>
+	<input type="hidden" name="cat" value="<?php echo $problem->cat?>" />
+	<input type="hidden" name="subcat" value="<?php echo $problem->subcat?>" />
+	<input type="hidden" name="province" value="<?php echo $problem->province?>" />
+	<input type="hidden" name="city" value="<?php echo $problem->city?>" />
+	<input type="hidden" name="district" value="<?php echo $problem->district?>" />
+</div>
 
 <script type="text/javascript">
 <!--
@@ -259,3 +259,7 @@ $(document).ready(function($){
 	
 	
 </script>
+
+<?php 
+	}
+?>

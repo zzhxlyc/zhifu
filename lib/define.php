@@ -33,7 +33,7 @@ define('ROOT_URL', $CONF->get('WEB_URL_ROOT'));
 
 define('JS_HOME', ROOT_URL.'/js');
 define('CSS_HOME', ROOT_URL.'/css');
-define('IMAGE_HOME', ROOT_URL.'/image');
+define('IMAGE_HOME', ROOT_URL.'/images');
 
 // ------------------------Config-----------------------
 date_default_timezone_set('Asia/Shanghai');
