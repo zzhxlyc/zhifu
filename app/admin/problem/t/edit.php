@@ -144,7 +144,10 @@ var catList = {<?php
 <script type="text/javascript">
 $(document).ready(function($){
 	
-	problemEditInit();
+	dateEventInit();
+	provinceEventInit();	
+	catEventInit();
+	tagEventInit();
 	
 	
 });	

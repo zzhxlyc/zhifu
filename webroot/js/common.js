@@ -1,22 +1,24 @@
 
-	
-	function problemEditInit(){
+function dateEventInit(){
+	$( ".datepicker" ).datepicker({
+		dateFormat:"yy-mm-dd"
+
+	});
+
+}
+	function provinceEventInit(){
+		
 		var province=$('input[name=province]').val();
 		var city=$('input[name=city]').val();
 		var district=$('input[name=district]').val();
-
+		
+		$(".province_city").province_city_county(province,city,district); 
+	}
+	
+	
+	function catEventInit(){
 		var cat=$('input[name=cat]').val();
 		var subcat=$('input[name=subcat]').val();
-
-
-
-		$(".province_city").province_city_county(province,city,district); 
-
-		$( ".datepicker" ).datepicker({
-			dateFormat:"yy-mm-dd"
-
-		});
-
 		//cat从初始化
 		var cathtml='';
 		$.each(catList, function(i, t) {
@@ -47,15 +49,69 @@
 
 		$('select[name=subcat]').append(oldSubCatHtml);	
 		$('select[name=subcat]').val(subcat);
-		setOldTagId();
-		
-		
-		
-		tagEventInit();
 		
 		
 	}
-	
+		
+		
+		
+	function tagEventInit(){
+		
+		setOldTagId();
+		
+		$('#add-tag').click(function(){
+			var newtag=$('#new-tag').val();
+			if(newtag.length==0)
+			{
+				alert('不能为空');
+			}
+			else{
+				if(checkDuplicate(newtag)){
+					alert('不能重复');
+				}
+				else{
+					$.ajax({
+						type: "POST",
+						url: window.ROOT_URL+"/ajax/checkword",
+						data:{word:newtag},
+						success:function(msg){
+							if(msg==0)
+							{
+								addNewTag(newtag);
+
+							}
+							else{
+								alert('含有敏感词 = =');
+							}
+						}
+					});
+
+				}
+			}
+
+		});
+
+
+		$('.hot-tag a').click(function(){
+			var newtag=$(this).text();
+			if(checkDuplicate(newtag)){
+				alert('不能重复');
+			}
+			else{
+				addNewTag(newtag);
+			}
+
+		});
+
+
+		$('.tag .old').click(function(){
+			$(this).remove();
+			setOldTagId();
+		});
+		
+		
+		
+	}
 	
 		
 	
@@ -121,61 +177,6 @@
 		
 	}
 	
-	
-	function tagEventInit(){
-		$('#add-tag').click(function(){
-			var newtag=$('#new-tag').val();
-			if(newtag.length==0)
-			{
-				alert('不能为空');
-			}
-			else{
-				if(checkDuplicate(newtag)){
-					alert('不能重复');
-				}
-				else{
-					$.ajax({
-						type: "POST",
-						url: window.ROOT_URL+"/ajax/checkword",
-						data:{word:newtag},
-						success:function(msg){
-							if(msg==0)
-							{
-								addNewTag(newtag);
-
-							}
-							else{
-								alert('含有敏感词 = =');
-							}
-						}
-					});
-
-				}
-			}
-
-		});
-
-
-		$('.hot-tag a').click(function(){
-			var newtag=$(this).text();
-			if(checkDuplicate(newtag)){
-				alert('不能重复');
-			}
-			else{
-				addNewTag(newtag);
-			}
-
-		});
-
-
-		$('.tag .old').click(function(){
-			$(this).remove();
-			setOldTagId();
-		});
-		
-		
-		
-	}
 	
 	
 	
