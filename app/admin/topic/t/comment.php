@@ -3,11 +3,9 @@
 <table class="normal-table" cellspacing="0" cellpadding="0">
 	<tr class="top">
 		<td width="30">选择</td>
-		<td>企业名称</td>
-		<td width="90">注册时间</td>
-		<td width="150">邮箱</td>
-		<td width="50">状态</td>
-		<td width="100">操作</td>
+		<td>内容</td>
+		<td width="140">日期</td>
+		<td width="150">操作</td>
 	</tr>
 	<?php 
 		$i = 0;
@@ -18,13 +16,11 @@
 	?>
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
-		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->name?></a></td>
-		<td><?php echo get_date($o->time)?></td>
-		<td><?php echo $o->email?></td>
-		<td><?php echo $o->status()?></td>
+		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
+		<td><?php echo $o->time?></td>
 		<td class="operate">
-			<a href="<?php echo $home.'/show?id='.$o->id?>">查看</a>
-			<a href="<?php echo $home.'/delete?id='.$o->id?>">删除</a>
+			<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
+			<a href="<?php echo $home."/delete?p=$o->parent&id=$o->id"?>">删除</a>
 		</td>
 	</tr>
 	<?php 
@@ -33,8 +29,11 @@
 </table>
 
 <input type="submit" value="批量删除" />
+<input type="hidden" name="p" value="<?php echo $o->parent?>" />
+<a href="<?php echo $home.'/index'?>">返回</a>
 </form>
 
 <div class="page-nav">
 	<?php Pager::output_pager_list($page_list);?>
 </div>
+

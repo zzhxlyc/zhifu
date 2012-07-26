@@ -23,5 +23,14 @@ class Article extends AppModel {
 		);
 		return parent::escape($data, $escape_array, $ignore);
 	}
+	
+	public function format(){
+		$format_array = array(
+			'string'=>array('title'),
+			'url'=>array(),
+			'html'=>array('content')
+		);
+		return parent::format($format_array);
+	}
 
 }

@@ -2,12 +2,12 @@
 
 class ExpertController extends AdminBaseController {
 	
-	public $models = array('Expert', 'Log');
+	public $models = array('Expert', 'Patent', 'Log', 'Tag', 'TagItem');
 	public $no_session = array();
 	
 	public function before(){
 		parent::before();
-		$this->set('home', ADMIN_EXPERT_HOME.'/index');
+		$this->set('home', ADMIN_EXPERT_HOME);
 	}
 	
 	public function index(){
@@ -19,9 +19,32 @@ class ExpertController extends AdminBaseController {
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Expert->get_page($condition, array('id'=>'DESC'), 
 											$pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_EXPERT_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_EXPERT_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
+	}
+	
+	private function set_data($id){
+		$tags = $this->TagItem->get_list(array('belong'=>$id, 
+										'type'=>BelongType::EXPERT));
+		$tag_id_array = get_attrs($tags, 'tag');
+		if($tag_id_array){
+			$tag_list = $this->Tag->get_list(array('id in'=>$tag_id_array));
+			$this->set('tag_list', $tag_list);
+		}
+	}
+	
+	private function add_data(&$expert){
+		$list = $this->Patent->get_list(array('expert'=>$expert->id));
+		$expert->patent_num = count($list);
+		$sum = 0;
+		foreach($list as $o){
+			$sum += $o->budget;
+		}
+		$expert->patent_budget = $sum;
+		
+		$expert->problem_num = 0;
+		$expert->problem_budget = 0;
 	}
 	
 	public function verify(){
@@ -40,28 +63,19 @@ class ExpertController extends AdminBaseController {
 					$this->Expert->escape($post);
 					$this->Expert->save($post);
 					$this->Log->action_expert_pass($admin, $expert->name);
-					$this->response->redirect('verify');
+					$this->response->redirect('show?id='.$expert->id);
 				}
 				else{
 					$this->set('errors', $errors);
 					$this->set('expert', $expert);
+					$this->set_data($expert->id);
+					$this->add_data($expert);
 				}
 			}
 			else{
-				$this->set('error', '不存在');
+				$this->response->redirect('show?id='.$id);
 			}
 		}
-		$get = $this->request->get;
-		$page = $get['page'];
-		$limit = 10;
-		$condition = array('verified'=>0);
-		$all = $this->Expert->count($condition);
-		$pager = new Pager($all, $page, $limit);
-		$list = $this->Expert->get_page($condition, array('id'=>'DESC'), 
-											$pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_COMPANY_HOME.'/index?');
-		$this->set('list', $list);
-		$this->set('links', $links);
 	}
 	
 	public function show(){
@@ -72,6 +86,8 @@ class ExpertController extends AdminBaseController {
 		}
 		if($expert){
 			$this->set('expert', $expert);
+			$this->set_data($expert->id);
+			$this->add_data($expert);
 		}
 		else{
 			$this->set('error', '不存在');
@@ -90,6 +106,9 @@ class ExpertController extends AdminBaseController {
 				$expert = $this->set_model($post, $expert);
 				$errors = $this->Expert->check($expert);
 				if(count($errors) == 0){
+					$this->do_tag($id, BelongType::EXPERT, 
+										$post['old_tag'], $post['new_tag']);
+					unset($post['old_tag'], $post['new_tag']);
 					$this->Expert->escape($post);
 					$this->Expert->save($post);
 					$this->Log->action_expert_edit($admin, $expert->name);
@@ -98,6 +117,8 @@ class ExpertController extends AdminBaseController {
 				else{
 					$this->set('errors', $errors);
 					$this->set('expert', $expert);
+					$this->set_data($expert->id);
+					$this->add_data($expert);
 				}
 			}
 			else{
@@ -112,29 +133,12 @@ class ExpertController extends AdminBaseController {
 			}
 			if($expert){
 				$this->set('expert', $expert);
+				$this->set_data($expert->id);
+				$this->add_data($expert);
 			}
 			else{
 				$this->set('error', '不存在');
 			}
-		}
-	}
-	
-	public function delete(){
-		if($this->request->post){
-			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			if(isset($post['ids'])){
-				$ids = $post['ids'];
-				$this->Expert->delete($ids);
-				$this->Log->action_expert_delete($admin, '多个公司');
-			}
-			else if(isset($post['id'])){
-				$id = $post['id'];
-				$expert = $this->Expert->get($id);
-				$this->Expert->delete($id);
-				$this->Log->action_expert_delete($admin, $expert->name);
-			}
-			$this->response->redirect('index');
 		}
 	}
 	

@@ -98,6 +98,7 @@ class PatentController extends AdminBaseController {
 				$patent = $this->Patent->get($id);
 			}
 			if($patent){
+				$patent->format();
 				$this->set('$patent', $patent);
 				$this->set_data($patent->id);
 			}

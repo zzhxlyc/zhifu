@@ -5,54 +5,72 @@
 	else{
 ?>
 <form action="<?php echo ADMIN_COMPANY_HOME.'/verify'?>" method="post" >
-<table>
-<tr>
-	<td>企业名</td>
-	<td>
-		<?php echo $company->name?>
-	</td>
-</tr>
-<tr>
-	<td>邮箱</td>
-	<td>
-		<?php echo $company->email?>
-	</td>
-</tr>
-<tr>
-	<td>电话</td>
-	<td>
-		<?php echo $company->phone?>
-	</td>
-</tr>
-<tr>
-	<td>网址</td>
-	<td>
-		<?php echo $company->url?>
-	</td>
-</tr>
-<tr>
-	<td>描述</td>
-	<td>
-		<div>
-		<?php echo $company->description?>
-		</div>
-	</td>
-</tr>
-<tr>
-	<td>营业执照</td>
-	<td><a href="<?php echo UPLOAD_HOME.'/'.$company->license?>">点击下载</a></td>
-</tr>
-<tr>
-	<td></td>
-	<td>
-		<?php if($company->verified == 0){?>
+<div class="row">
+	<label for="name">企业名</label>
+	<?php echo $company->name?>
+</div>
+<div class="row">
+	<label for="name">邮箱</label>
+	<?php echo $company->email?>
+</div>
+<div class="row">
+	<label for="name">电话</label>
+	<?php echo $company->phone?>
+</div>
+<div class="row">
+	<label for="name">网址</label>
+	<?php echo $company->url?>
+</div>
+<div class="row">
+	<label for="name">难题数</label>
+	<?php echo $company->problem_num?>
+</div>
+<div class="row">
+	<label for="name">难题总金额</label>
+	<?php echo $company->problem_budget?>
+</div>
+
+<div class="row">
+	<label for="name">专利数</label>
+	<?php echo $company->patent_num?>
+</div>
+<div class="row">
+	<label for="name">专利总金额</label>
+	<?php echo $company->patent_budget?>
+</div>
+
+<div class="tag row">
+	<label for="">领域标签</label>
+	<?php 
+	if(is_array($tag_list)){
+		foreach($tag_list as $tag){
+	?>
+		<a class="old" id="tag_<?php echo $tag->id?>"><?php echo $tag->name?></a>	
+	<?php 
+		}
+	}
+	?>
+</div>
+	
+<div class="row">
+	<label for="name">描述</label>
+	<?php echo $company->description?>
+</div>
+<div class="row">
+	<label for="name">营业执照</label>
+	<?php if($company->license){?>
+	<a href="<?php download($company->license)?>">点击下载</a>
+	<?php }?>
+</div>
+
+<div class="row">
+	<?php if($company->verified == 0){?>
 		<input type="submit" value="审核通过" />
-		<?php }?>
-		<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
+	<?php }?>
+		<input type="button" value="编辑" onclick="location.href='<?php echo $home."/edit?id=$company->id"?>'" />
+		<input type="button" value="返回" onclick="location.href='<?php echo $home?>/index'" />
 		<?php echo $HTML->hidden('id', $company->id)?>
-	</td>
-</tr>
-</table>
+</div>
 </form>
 <?php 
 	}

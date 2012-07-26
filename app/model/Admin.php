@@ -13,5 +13,23 @@ class Admin extends Model{
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		return $errors;
 	}
+	
+	public function escape(&$data, array $ignore = array()){
+		$escape_array = array(
+			'string'=>array(),
+			'url'=>array(),
+			'html'=>array()
+		);
+		return parent::escape($data, $escape_array, $ignore);
+	}
+	
+	public function status(){
+		if($this->flag == 1){
+			return '有效';
+		}
+		else{
+			return '无效';
+		}
+	}
 
 }

@@ -26,22 +26,13 @@ class Expert extends AppModel{
 		return parent::escape($data, $escape_array, $ignore);
 	}
 	
-	public function get($id){
-		$company = parent::get($id);
-		if($company){
-			$company->description = base64_decode($company->description);
+	public function status(){
+		if($this->verified == 1){
+			return '已验证';
 		}
-		return $company; 
-	}
-	
-	public function get_list($condition = array(), $order = array(), $limit = ''){
-		$list = parent::get_list($condition, $order, $limit);
-		if($list){
-			foreach($list as $company){
-				$company->description = base64_decode($company->description);
-			}
+		else{
+			return '未验证';
 		}
-		return $list; 
 	}
 	
 }

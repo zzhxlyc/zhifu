@@ -7,7 +7,7 @@ class TopicController extends AdminBaseController {
 	
 	public function before(){
 		parent::before();
-		$this->set('home', ADMIN_TOPIC_HOME.'/index');
+		$this->set('home', ADMIN_TOPIC_HOME);
 	}
 	
 	public function index(){
@@ -16,10 +16,23 @@ class TopicController extends AdminBaseController {
 		$limit = 10;
 		$all = $this->Topic->count();
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Topic->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_TOPIC_HOME.'/index?');
+		$list = $this->Topic->get_page(array('parent'=>0), array('id'=>'DESC'), $pager->now(), $limit);
+		$page_list = $pager->get_page_links(ADMIN_TOPIC_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
+	}
+	
+	public function comment(){
+		$get = $this->request->get;
+		$id = $get['id'];
+		$page = $get['page'];
+		$limit = 10;
+		$all = $this->Topic->count();
+		$pager = new Pager($all, $page, $limit);
+		$list = $this->Topic->get_page(array('parent'=>$id), array('id'=>'DESC'), $pager->now(), $limit);
+		$page_list = $pager->get_page_links(ADMIN_TOPIC_HOME.'/comment?id='.$id.'&');
+		$this->set('list', $list);
+		$this->set('$page_list', $page_list);
 	}
 	
 	public function add(){
@@ -58,10 +71,7 @@ class TopicController extends AdminBaseController {
 				$topic = $this->set_model($post, $topic);
 				$errors = $this->Topic->check($topic);
 				if(count($errors) == 0){
-					$this->do_file($post, $errors, $this->request->file);
-				}
-				if(count($errors) == 0){
-					$post['lastmodify'] = DATETIME;
+//					$post['lastmodify'] = DATETIME;
 					$this->Topic->escape($post);
 					$this->Topic->save($post);
 					$this->Log->action_topic_edit($admin, $post['title']);
@@ -92,22 +102,44 @@ class TopicController extends AdminBaseController {
 	}
 	
 	public function delete(){
+		$has_comment = false;
+		$array = array();
+		$parent = 0;
 		if($this->request->post){
 			$post = $this->request->post;
 			$admin = get_admin_session($this->session);
-			if(isset($post['ids'])){
-				$ids = $post['ids'];
-				$this->Topic->delete($ids);
-				$this->Log->action_topic_delete($admin, '多篇文章');
+			if(isset($post['c']) && $post['c'] == '1'){
+				$has_comment = true;
 			}
-			else if(isset($post['id'])){
-				$id = $post['id'];
-				$topic = $this->Topic->get($id);
-				$this->Topic->delete($id);
-				$this->Log->action_topic_delete($admin, $topic->title);
+			if(isset($post['p'])){
+				$parent = intval($post['p']);
 			}
-			$this->response->redirect('index');
+			if(isset($post['id'])){
+				$array = $post['id'];
+			}
 		}
+		else{
+			$get = $this->request->get;
+			if(isset($get['c']) && $get['c'] == '1'){
+				$has_comment = true;
+			}
+			if(isset($get['p'])){
+				$parent = intval($get['p']);
+			}
+			if(isset($get['id'])){
+				$array[] = get_id($get['id']);
+			}
+		}
+		if($has_comment){
+			$list = $this->Topic->get_list(array('id in'=>$array, 'parent'=>0));
+			$id_array = get_ids($list);
+			$this->Topic->delete_all(array('parent in'=>$id_array));
+		}
+		else if($parent > 0){
+			$count = $this->Topic->count(array('parent'=>$parent, 'id in'=>$array));
+			$this->Topic->update(array('comments eq'=>"comments - $count"), array('id'=>$parent));
+		}
+		parent::delete();
 	}
 	
 }

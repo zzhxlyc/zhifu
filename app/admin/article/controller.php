@@ -7,7 +7,7 @@ class ArticleController extends AdminBaseController {
 	
 	public function before(){
 		parent::before();
-		$this->set('home', ADMIN_ARTILCE_HOME.'/index');
+		$this->set('home', ADMIN_ARTICLE_HOME);
 	}
 	
 	public function index(){
@@ -17,9 +17,9 @@ class ArticleController extends AdminBaseController {
 		$all = $this->Article->count();
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Article->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_ARTILCE_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_ARTICLE_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
 	}
 	
 	private function do_file(&$data, &$errors, &$files){
@@ -102,25 +102,6 @@ class ArticleController extends AdminBaseController {
 			else{
 				$this->set('error', '不存在');
 			}
-		}
-	}
-	
-	public function delete(){
-		if($this->request->post){
-			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			if(isset($post['ids'])){
-				$ids = $post['ids'];
-				$this->Article->delete($ids);
-				$this->Log->action_article_delete($admin, '多篇文章');
-			}
-			else if(isset($post['id'])){
-				$id = $post['id'];
-				$article = $this->Article->get($id);
-				$this->Article->delete($id);
-				$this->Log->action_article_delete($admin, $article->title);
-			}
-			$this->response->redirect('index');
 		}
 	}
 	

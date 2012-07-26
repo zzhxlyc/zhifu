@@ -17,9 +17,9 @@ class Topic extends AppModel{
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title','content'),
+			'string'=>array('title'),
 			'url'=>array(),
-			'html'=>array()
+			'html'=>array('content')
 		);
 		return parent::escape($data, $escape_array, $ignore);
 	}

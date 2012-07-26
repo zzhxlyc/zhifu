@@ -17,7 +17,7 @@
 	<td></td>
 	<td>
 		<input type="submit" value="修改" />
-		<input type="button" value="返回" />
+		<input type="button" value="返回" onclick="location.href='<?php echo $home."/index"?>'" />
 		<?php echo $HTML->hidden('id', $admin->id)?>
 	</td>
 </tr>

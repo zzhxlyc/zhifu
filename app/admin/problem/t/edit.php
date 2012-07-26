@@ -49,8 +49,8 @@
 	<input size="20" type="text" value="" id="new-tag" /> <a href="javascript:;" id="add-tag">添加</a>
 </div>	
 
-	<div class="tag row">
-		<label for="">标签</label>
+<div class="tag row">
+	<label for="">标签</label>
 	<?php 
 	if(is_array($tag_list)){
 		foreach($tag_list as $tag){
@@ -60,9 +60,9 @@
 		}
 	}
 	?>
-	</div>
-	<div class="hot-tag row">
-		<label for="">热门标签</label>
+</div>
+<div class="hot-tag row">
+	<label for="">热门标签</label>
 	<?php 
 	if(is_array($most_common_tags)){
 		foreach($most_common_tags as $tag){
@@ -72,9 +72,9 @@
 		}
 	}
 	?>
-	</div>
 	<input type="hidden" name="new_tag" />
 	<input type="hidden" name="old_tag" />
+</div>
 
 
 

@@ -15,7 +15,7 @@ class AdminBaseController extends AppController {
 		$this->view->layout = 'admin';
 	}
 	
-	public function delete($model = ''){
+	public function delete($model = '', $redirect = true){
 		if($model == ''){
 			$model = $this->request->module;
 		}
@@ -48,7 +48,9 @@ class AdminBaseController extends AppController {
 				}
 			}
 		}
-		$this->response->redirect('index');
+		if($redirect){
+			$this->response->redirect('index');
+		}
 	}
 	
 }

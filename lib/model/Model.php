@@ -4,15 +4,16 @@ class Model{
 	
 	private static $models = array();
 	
-	private $DB;
 	public $_fuzzy = 'both';
 	public $_join = 'AND';
 	public $last_sql;
 	public $affect_num;
 	
-	function Model(){
+	function Model(){}
+	
+	private function get_db(){
 		global $DB;
-		$this->DB = $DB;
+		return $DB;
 	}
 	
 	public static function load_model($model){
@@ -41,7 +42,7 @@ class Model{
 	}
 	
 	private function _get_table_name(){
-		$db_name = $this->DB->get_database_name();
+		$db_name = $this->get_db()->get_database_name();
 		return "`$db_name`.`$this->table`";
 	}
 	
@@ -308,7 +309,7 @@ class Model{
 		$db_name = $this->_get_table_name();
 		$sql = "SELECT * FROM $db_name WHERE `id` = $id";
 		$this->last_sql = $sql;
-		$std = $this->DB->get_row($sql);
+		$std = $this->get_db()->get_row($sql);
 		return $this->_convert($std);
 	}
 	
@@ -322,7 +323,7 @@ class Model{
 		}
 		$sql .= ' LIMIT 1';
 		$this->last_sql = $sql;
-		$std = $this->DB->get_row($sql);
+		$std = $this->get_db()->get_row($sql);
 		return $this->_convert($std);
 	}
 	
@@ -332,7 +333,7 @@ class Model{
 			$sql .= ' WHERE '.$this->build_condition($condition);
 		}
 		$this->last_sql = $sql;
-		$std = $this->DB->get_row($sql);
+		$std = $this->get_db()->get_row($sql);
 		$count = $std->count;
 		$this->affect_num = $count;
 		return $count;
@@ -362,7 +363,7 @@ class Model{
 			}
 		}
 		$this->last_sql = $sql;
-		$list = $this->DB->get_list($sql);
+		$list = $this->get_db()->get_list($sql);
 		$count = count($list);
 		for($i = 0;$i < $count;$i++){
 			$list[$i] = $this->_convert($list[$i]);
@@ -395,7 +396,7 @@ class Model{
 			}
 		}
 		$this->last_sql = $sql;
-		$list = $this->DB->get_list($sql);
+		$list = $this->get_db()->get_list($sql);
 		$count = count($list);
 		for($i = 0;$i < $count;$i++){
 			$list[$i] = $this->_convert($list[$i]);
@@ -425,7 +426,7 @@ class Model{
 			return;
 		}
 		$this->last_sql = $sql;
-		$this->affect_num = $this->DB->query($sql);
+		$this->affect_num = $this->get_db()->query($sql);
 		return $this->affect_num;
 	}
 	
@@ -442,7 +443,7 @@ class Model{
 			return;
 		}
 		$this->last_sql = $sql;
-		$this->affect_num = $this->DB->query($sql);
+		$this->affect_num = $this->get_db()->query($sql);
 	}
 	
 	public function update($set, $condition = array(), $order = array(), $limit = ''){
@@ -468,7 +469,7 @@ class Model{
 			}
 		}
 		$this->last_sql = $sql;
-		$this->affect_num = $this->DB->query($sql);
+		$this->affect_num = $this->get_db()->query($sql);
 		return $this->affect_num;
 	}
 	
@@ -498,18 +499,18 @@ class Model{
 			return -1;
 		}
 		$this->last_sql = $sql;
-		$id = $this->DB->insert($sql);
+		$id = $this->get_db()->insert($sql);
 		return $id;
 	}
 	
 	public function query($sql){
 		$this->last_sql = $sql;
-		return $this->DB->query($sql);
+		return $this->get_db()->query($sql);
 	}
 	
 	public function select($sql){
 		$this->last_sql = $sql;
-		return $this->DB->get_list($sql);
+		return $this->get_db()->get_list($sql);
 	}
 	
 	protected function _check_get_value(&$data, $name){

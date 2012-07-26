@@ -31,7 +31,6 @@
 	<td></td>
 	<td>
 		<input type="submit" value="修改" />
-		<input type="button" value="返回" />
 	</td>
 </tr>
 </table>

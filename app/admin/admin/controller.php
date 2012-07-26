@@ -7,7 +7,7 @@ class AdminController extends AdminBaseController {
 	
 	public function before(){
 		parent::before();
-		$this->set('home', ADMIN_ADMIN_HOME.'/index');
+		$this->set('home', ADMIN_ADMIN_HOME);
 	}
 	
 	public function login(){
@@ -45,9 +45,9 @@ class AdminController extends AdminBaseController {
 		$all = $this->Admin->count();
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Admin->get_page(null, array('id'=>'ASC'), $pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_ADMIN_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_ADMIN_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
 	}
 	
 	private function check_username(&$user, &$error, $id = null){
@@ -180,14 +180,5 @@ class AdminController extends AdminBaseController {
 	}
 	
 	public function pswd_succ(){}
-	
-	public function delete(){
-		if($this->request->post){
-			$post = $this->request->post;
-			$ids = $post['ids'];
-			$this->Admin->delete($ids);
-			$this->response->redirect('index');
-		}
-	}
 	
 }
