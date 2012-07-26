@@ -217,6 +217,7 @@ $(document).ready(function($){
 	};
 	
 	function addNewTag(newtag){
+		
 		$('.tag').append('<a href="javascript:;" class="new">'+newtag+'<img src="../../images/delete.png"></a>');
 		
 		setNewTagId();
@@ -229,6 +230,7 @@ $(document).ready(function($){
 	
 	$('#add-tag').click(function(){
 		var newtag=$('#new-tag').val();
+		
 		addNewTag(newtag);
 			
 	});

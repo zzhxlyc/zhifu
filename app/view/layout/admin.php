@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
-
 <head>
 <?php $view->charset(); ?>
 <?php $view->title(); ?>
