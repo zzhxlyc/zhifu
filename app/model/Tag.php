@@ -24,15 +24,15 @@ class Tag extends AppModel{
 		return parent::escape($data, $escape_array, $ignore);
 	}
 	
-	public function plus(){
-		if($this->id){
-			$this->update(array('count'=>'count + 1'), array('id'=>$this->id));
+	public function plus(array $id_array){
+		if(is_array($id_array) && count($id_array) > 0){
+			$this->update(array('count eq'=>'`count` + 1'), array('id in'=>$id_array));
 		}
 	}
 	
-	public function plus_all($id_array){
+	public function minus(array $id_array){
 		if(is_array($id_array) && count($id_array) > 0){
-			$this->update(array('count'=>'count + 1'), array('id in'=>$id_array));
+			$this->update(array('count eq'=>'`count` - 1'), array('id in'=>$id_array));
 		}
 	}
 	

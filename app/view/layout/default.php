@@ -7,7 +7,10 @@
 <?php $view->icon(); ?>
 <?php $view->css('style'); ?>
 <?php $view->fetch_css(); ?>
-	<script>window.ROOT_URL = '<?php echo ROOT_URL?>';</script>
+<script>
+	window.ROOT_URL = '<?php echo ROOT_URL?>';
+	window.IMAGE_HOME = '<?php echo IMAGE_HOME?>';
+</script>
 <?php $view->js('common'); ?>
 <?php $view->fetch_js(); ?>
 </head>
