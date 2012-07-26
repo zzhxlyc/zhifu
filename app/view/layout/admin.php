@@ -15,6 +15,7 @@
 </script>
 <?php $view->js('jquery.min'); ?>
 <?php $view->js('jquery-ui.min'); ?>
+<?php $view->js('common'); ?>
 
 <?php $view->js('province_city'); ?>
 
