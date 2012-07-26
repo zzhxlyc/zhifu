@@ -1,5 +1,7 @@
 $(document).ready(function($){
 	
+	problemEditInit();
+	
 	function problemEditInit(){
 		var province=$('input[name=province]').val();
 		var city=$('input[name=city]').val();
