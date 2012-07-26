@@ -79,8 +79,8 @@
 
 
 <div class="row">
-	<label for="">详细描述</label>
-	<textarea name="description" rows="10" cols="80"><?php echo $problem->description?></textarea>
+	<label for="">详细描述</label><br/><br/>
+	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $problem->description?></textarea>
 	<span class="error"><?php echo $errors['description']?></span>
 </div>
 

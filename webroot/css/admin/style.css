@@ -149,7 +149,7 @@ background: url(../../images/tabs_left_on.png) no-repeat right; /* left corner *
 .left-nav{
 width:150px;
 height:600px;
-background: url(../../images/box_top2.png) repeat-y 0 0;
+background: #333;
 padding:10px 0;	
 float:left;
 }
@@ -170,6 +170,8 @@ background: url(../../images/grayArrow.gif) no-repeat 10px 4px;
 
 
 .left-nav li a.current{
+font-size:14px;
+	
 font-weight:bold;
 text-decoration: underline;
 
