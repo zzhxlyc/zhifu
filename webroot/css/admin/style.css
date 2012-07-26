@@ -321,7 +321,7 @@ padding:3px 5px;
 }
 
 /****************************pagenavi*****************************/
-.wp-pagenavi {
+.page-nav {
 clear: both;
 font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 height: 30px;
@@ -331,17 +331,17 @@ float:right;
 margin-top: 15px;
 }
 
-.wp-pagenavi p {
+.page-nav p {
 float: left;
 padding-top: 5px;
 }
-.wp-pagenavi  input {
+.page-nav  input {
 float: left;
 }
 
-.wp-pagenavi a, .wp-pagenavi span {
+.page-nav a, .page-nav span {
 	/* Change this image URL to the relative location of the sprite sheet: */
-background:url(../img/numbers_spritesheet.png) no-repeat;
+background:url(../../images/numbers_spritesheet.png) no-repeat;
 display: block;
 float: left;
 width: 28px;
@@ -352,36 +352,36 @@ line-height: 26px;
 margin-right: 3px;
 font-weight: bold;
 }
-.wp-pagenavi a:active {
+.page-nav a:active {
 margin-top: 1px;
 }
-.wp-pagenavi .pages, .wp-pagenavi .extend {
+.page-nav .pages, .page-nav .extend {
 background: none;
 width: auto;
 font-weight: normal;
 margin-right: 7px;
 line-height: 27px;
 }
-.wp-pagenavi .extend {
+.page-nav .extend {
 padding: 0 5px;
 margin: 0 5px 0 1px;
 }
-.wp-pagenavi .nextpostslink, .wp-pagenavi .previouspostslink, 
-	.wp-pagenavi .first, .wp-pagenavi .last {
+.page-nav .nextpostslink, .page-nav .previouspostslink, 
+	.page-nav .first, .page-nav .last {
 text-indent: -9999px;
 }
 
 /* Individual color themes */
 
-.wp-pagenavi a, .wp-pagenavi span {
+.page-nav a, .page-nav span {
 background-position: 0 0;
 color: #717171;
 text-shadow: 1px 1px 0 #fff;
 }
-.wp-pagenavi a:hover {
+.page-nav a:hover {
 background-position: 0 -27px;
 }
-.wp-pagenavi span.current {
+.page-nav span.current {
 text-shadow: 0 1px 0 #585858;
 color: #fff;
 background-position: -140px 0;
