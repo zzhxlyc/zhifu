@@ -4,7 +4,7 @@ function get_reflection($class_name, $method_name){
 	try{
 		$class = new ReflectionClass($class_name);
 		foreach($class->getmethods() as $method){
-			if($method->class == $class_name && $method->name == $method_name){
+			if($method->name == $method_name){
 				return array($class, $method);
 			}
 		}

@@ -136,11 +136,6 @@ var catList = {<?php
 </script>
 
 
-
-<?php 
-	}
-?>
-
 <script type="text/javascript">
 $(document).ready(function($){
 	
@@ -152,3 +147,8 @@ $(document).ready(function($){
 	
 });	
 </script>
+
+<?php 
+	}
+?>
+

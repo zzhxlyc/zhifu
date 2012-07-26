@@ -67,7 +67,7 @@ class Response{
 		$codeMessage = $this->_statusCodes[$this->_status];
 		$this->_setCookies();
 		$this->_sendHeader("{$this->_protocol} {$this->_status} {$codeMessage}");
-		$this->_setContentLength();
+//		$this->_setContentLength();
 		$this->_setContentType();
 		foreach ($this->_headers as $header => $value) {
 			$this->_sendHeader($header, $value);
@@ -101,19 +101,20 @@ class Response{
 	}
 	
 	protected function _setContentLength() {
-		$shouldSetLength = !isset($this->_headers['Content-Length']) && !in_array($this->_status, range(301, 307));
-		if (isset($this->_headers['Content-Length']) && $this->_headers['Content-Length'] === false) {
-			unset($this->_headers['Content-Length']);
-			return;
-		}
-		if ($shouldSetLength && !$this->outputCompressed()) {
-			$offset = ob_get_level() ? ob_get_length() : 0;
-			if (ini_get('mbstring.func_overload') & 2 && function_exists('mb_strlen')) {
-				$this->length($offset + mb_strlen($this->_body, '8bit'));
-			} else {
-				$this->length($this->_headers['Content-Length'] = $offset + strlen($this->_body));
-			}
-		}
+		unset($this->_headers['Content-Length']);
+//		$shouldSetLength = !isset($this->_headers['Content-Length']) && !in_array($this->_status, range(301, 307));
+//		if (isset($this->_headers['Content-Length']) && $this->_headers['Content-Length'] === false) {
+//			unset($this->_headers['Content-Length']);
+//			return;
+//		}
+//		if ($shouldSetLength && !$this->outputCompressed()) {
+//			$offset = ob_get_level() ? ob_get_length() : 0;
+//			if (ini_get('mbstring.func_overload') & 2 && function_exists('mb_strlen')) {
+//				$this->length($offset + mb_strlen($this->_body, '8bit'));
+//			} else {
+//				$this->length($this->_headers['Content-Length'] = $offset + strlen($this->_body));
+//			}
+//		}
 	}
 	
 	public function outputCompressed() {

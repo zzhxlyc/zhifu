@@ -3,7 +3,7 @@
 	<tr class="top">
 		<td width="30">选择</td>
 		<td>专利名称</td>
-		<td width="150">发布人</td>
+		<td width="100">发布人</td>
 		<td width="140">日期</td>
 		<td width="50">状态</td>
 		<td width="100">操作</td>

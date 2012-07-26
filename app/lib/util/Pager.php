@@ -35,6 +35,10 @@ class Pager{
 		}
 	}
 	
+	public function now(){
+		return $this->now;
+	}
+	
 	public function get_limit_str(){
 		$begin = $this->num * ($this->now - self::$start);
 		return "$begin, $this->num";

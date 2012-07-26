@@ -15,4 +15,40 @@ class AdminBaseController extends AppController {
 		$this->view->layout = 'admin';
 	}
 	
+	public function delete($model = ''){
+		if($model == ''){
+			$model = $this->request->module;
+		}
+		$Model = ucfirst($model);
+		$model = strtolower($model);
+		$action_method = "action_{$model}_delete";
+		if($this->request->post){
+			$post = $this->request->post;
+			$admin = get_admin_session($this->session);
+			if(isset($post['id'])){
+				$ids = $post['id'];
+				$num = $this->{$Model}->delete($ids);
+				if($num > 0){
+					if(method_exists($this->Log, $action_method)){
+						$this->Log->$action_method($admin, $num.'个');
+					}
+				}
+			}
+		}
+		else{
+			$get = $this->request->get;
+			if(isset($get['id'])){
+				$id = $get['id'];
+				$problem = $this->{$Model}->get($id);
+				if($problem){
+					$this->{$Model}->delete($id);
+					if(method_exists($this->Log, $action_method)){
+						$this->Log->$action_method($admin, $problem->title);
+					}
+				}
+			}
+		}
+		$this->response->redirect('index');
+	}
+	
 }

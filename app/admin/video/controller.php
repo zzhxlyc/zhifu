@@ -7,7 +7,7 @@ class VideoController extends AdminBaseController {
 	
 	public function before(){
 		parent::before();
-		$this->set('home', ADMIN_VIDEO_HOME.'/index');
+		$this->set('home', ADMIN_VIDEO_HOME);
 	}
 	
 	public function index(){
@@ -17,9 +17,9 @@ class VideoController extends AdminBaseController {
 		$all = $this->Video->count();
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Video->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_VIDEO_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_VIDEO_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
 	}
 	
 	public function add(){
@@ -85,25 +85,6 @@ class VideoController extends AdminBaseController {
 			else{
 				$this->set('error', '不存在');
 			}
-		}
-	}
-	
-	public function delete(){
-		if($this->request->post){
-			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			if(isset($post['ids'])){
-				$ids = $post['ids'];
-				$this->Video->delete($ids);
-				$this->Log->action_video_edit($admin, '多个视频');
-			}
-			else if(isset($post['id'])){
-				$id = $post['id'];
-				$video = $this->Video->get($id);
-				$this->Video->delete($id);
-				$this->Log->action_video_edit($admin, $video->title);
-			}
-			$this->response->redirect('index');
 		}
 	}
 	

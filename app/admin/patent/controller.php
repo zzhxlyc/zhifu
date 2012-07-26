@@ -40,6 +40,22 @@ class PatentController extends AdminBaseController {
 		}
 	}
 	
+	private function set_data($id){
+		$cat_array = $this->Category->get_category();
+		$this->set('cat_array', $cat_array);
+		$tags = $this->TagItem->get_list(array('belong'=>$id, 
+										'type'=>BelongType::PATENT));
+		$tag_id_array = get_attrs($tags, 'tag');
+		if($tag_id_array){
+			$tag_list = $this->Tag->get_list(array('id in'=>$tag_id_array));
+			$this->set('tag_list', $tag_list);
+		}
+		$most_common_tags = unserialize(Option::find('MOST_COMMON_TAGS'));
+		if($most_common_tags){
+			$this->set('$most_common_tags', $most_common_tags);
+		}
+	}
+	
 	public function edit(){
 		if($this->request->post){
 			$post = $this->request->post;
@@ -56,18 +72,19 @@ class PatentController extends AdminBaseController {
 					$this->do_file($post, $errors, $this->request->file);
 				}
 				if(count($errors) == 0){
+					$this->do_tag($id, BelongType::PATENT, 
+										$post['old_tag'], $post['new_tag']);
 					$post['lastmodify'] = DATETIME;
+					unset($post['old_tag'], $post['new_tag']);
 					$this->Patent->escape($post);
 					$this->Patent->save($post);
 					$this->Log->action_patent_edit($admin, $post['title']);
 					$this->response->redirect('edit?id='.$id);
 				}
 				else{
-					list($cat_list, $subcat_list) = $this->Category->get_category();
-					$this->set('cat_list', $cat_list);
-					$this->set('subcat_list', $subcat_list);
 					$this->set('errors', $errors);
 					$this->set('patent', $patent);
+					$this->set_data($problem->id);
 				}
 			}
 			else{
@@ -81,43 +98,12 @@ class PatentController extends AdminBaseController {
 				$patent = $this->Patent->get($id);
 			}
 			if($patent){
-				$this->set('patent', $patent);
-				$cat_array = $this->Category->get_category();
-				$this->set('cat_array', $cat_array);
-				$tags = $this->TagItem->get_list(array('belong'=>$patent->id, 
-												'type'=>BelongType::PATENT));
-				$tag_id_array = get_ids($tags);
-				if($tag_id_array){
-					$tag_list = $this->Tag->get_list(array('id in'=>$tag_id_array));
-					$this->set('tag_list', $tag_list);
-				}
-				$most_common_tags = unserialize(Option::find('MOST_COMMON_TAGS'));
-				if($most_common_tags){
-					$this->set('$most_common_tags', $most_common_tags);
-				}
+				$this->set('$patent', $patent);
+				$this->set_data($patent->id);
 			}
 			else{
 				$this->set('error', '不存在');
 			}
-		}
-	}
-	
-	public function delete(){
-		if($this->request->post){
-			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			if(isset($post['ids'])){
-				$ids = $post['ids'];
-				$this->Patent->delete($ids);
-				$this->Log->action_patent_delete($admin, '多个专利');
-			}
-			else if(isset($post['id'])){
-				$id = $post['id'];
-				$patent = $this->Patent->get($id);
-				$this->Patent->delete($id);
-				$this->Log->action_patent_delete($admin, $patent->title);
-			}
-			$this->response->redirect('index');
 		}
 	}
 	

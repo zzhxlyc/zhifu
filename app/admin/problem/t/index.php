@@ -1,5 +1,5 @@
 
-<form action="<?php echo ADMIN_PROBLEM_HOME.'/delete'?>" method="post">
+<form action="<?php echo $home.'/delete'?>" method="post">
 <table class="normal-table" cellspacing="0" cellpadding="0">
 	<tr class="top">
 		<td width="30">选择</td>
@@ -19,14 +19,14 @@
 	?>
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
-		<td><a href="<?php echo ADMIN_PROBLEM_HOME.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
+		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
 		<td><?php echo $o->name?></td>
 		<td><?php echo $o->time?></td>
 		<td><?php echo $o->get_status()?></td>
 		<td><?php echo $o->budget?></td>
 		<td class="operate">
-			<a href="<?php echo ADMIN_PROBLEM_HOME.'/edit?id='.$o->id?>">编辑</a>
-			<a href="<?php echo ADMIN_PROBLEM_HOME.'/delete?id='.$o->id?>">删除</a>
+			<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
+			<a href="<?php echo $home.'/delete?id='.$o->id?>">删除</a>
 		</td>
 	</tr>
 	<?php 

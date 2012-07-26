@@ -21,10 +21,18 @@
 	</td>
 </tr>
 <tr>
+	<td>图片</td>
+	<td>
+		<?php if($video->image){?>
+		<img src="<?php img($video->image)?>"/>
+		<?php }?>
+	</td>
+</tr>
+<tr>
 	<td></td>
 	<td>
 		<input type="submit" value="修改" />
-		<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
+		<input type="button" value="返回" onclick="location.href='<?php echo $home?>/index'" />
 		<?php echo $HTML->hidden('id', $video->id)?>
 	</td>
 </tr>
