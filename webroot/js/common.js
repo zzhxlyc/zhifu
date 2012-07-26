@@ -50,6 +50,10 @@
 		setOldTagId();
 		
 		
+		
+		tagEventInit();
+		
+		
 	}
 	
 	
@@ -118,55 +122,61 @@
 	}
 	
 	
-	$('#add-tag').click(function(){
-		var newtag=$('#new-tag').val();
-		if(newtag.length==0)
-		{
-			alert('不能为空');
-		}
-		else{
+	function tagEventInit(){
+		$('#add-tag').click(function(){
+			var newtag=$('#new-tag').val();
+			if(newtag.length==0)
+			{
+				alert('不能为空');
+			}
+			else{
+				if(checkDuplicate(newtag)){
+					alert('不能重复');
+				}
+				else{
+					$.ajax({
+						type: "POST",
+						url: window.ROOT_URL+"/ajax/checkword",
+						data:{word:newtag},
+						success:function(msg){
+							if(msg==0)
+							{
+								addNewTag(newtag);
+
+							}
+							else{
+								alert('含有敏感词 = =');
+							}
+						}
+					});
+
+				}
+			}
+
+		});
+
+
+		$('.hot-tag a').click(function(){
+			var newtag=$(this).text();
 			if(checkDuplicate(newtag)){
 				alert('不能重复');
 			}
 			else{
-				$.ajax({
-					type: "POST",
-					url: window.ROOT_URL+"/ajax/checkword",
-					data:{word:newtag},
-					success:function(msg){
-						if(msg==0)
-						{
-							addNewTag(newtag);
-							
-						}
-						else{
-							alert('含有敏感词 = =');
-						}
-					}
-				});
-			
+				addNewTag(newtag);
 			}
-		}
-			
-	});
-	
-	
-	$('.hot-tag a').click(function(){
-		var newtag=$(this).text();
-		if(checkDuplicate(newtag)){
-			alert('不能重复');
-		}
-		else{
-			addNewTag(newtag);
-		}
-		
-	});
-	
 
-	$('.tag .old').click(function(){
-		$(this).remove();
-		setOldTagId();
-	});
+		});
+
+
+		$('.tag .old').click(function(){
+			$(this).remove();
+			setOldTagId();
+		});
+		
+		
+		
+	}
+	
 	
 	
 
