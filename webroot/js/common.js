@@ -1,6 +1,4 @@
-$(document).ready(function($){
-	
-	problemEditInit();
+
 	
 	function problemEditInit(){
 		var province=$('input[name=province]').val();
@@ -182,4 +180,3 @@ $(document).ready(function($){
 	
 	
 
-});

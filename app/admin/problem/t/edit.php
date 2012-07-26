@@ -141,4 +141,11 @@ var catList = {<?php
 	}
 ?>
 
-
+<script type="text/javascript">
+$(document).ready(function($){
+	
+	problemEditInit();
+	
+	
+});	
+</script>
