@@ -7,7 +7,8 @@ class CategoryController extends AdminBaseController {
 	
 	public function before(){
 		parent::before();
-		$this->set('home', ADMIN_CATEGORY_HOME.'/index');
+		$this->set('home', ADMIN_CATEGORY_HOME);
+		$this->set('index_page', ADMIN_CATEGORY_HOME.'/index');
 	}
 	
 	public function index(){
@@ -19,9 +20,29 @@ class CategoryController extends AdminBaseController {
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Category->get_page($condition, array('id'=>'DESC'), 
 											$pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_CATEGORY_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_CATEGORY_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
+	}
+	
+	public function sub(){
+		$get = $this->request->get;
+		$page = $get['page'];
+		$parent = $get['id'];
+		$limit = 10;
+		if($parent){
+			$condition = array('parent'=>$parent);
+			$all = $this->Category->count($condition);
+			$pager = new Pager($all, $page, $limit);
+			$list = $this->Category->get_page($condition, array('id'=>'DESC'), 
+												$pager->now(), $limit);
+			$page_list = $pager->get_page_links(ADMIN_CATEGORY_HOME.'/sub?p='.$parent.'&');
+			$this->set('list', $list);
+			$this->set('$page_list', $page_list);
+		}
+		else{
+			$this->set('error', '无此一级行业');
+		}
 	}
 	
 	public function add(){
@@ -150,22 +171,24 @@ class CategoryController extends AdminBaseController {
 	}
 	
 	public function delete(){
+		$has_children = false;
+		$id_array = array();
+		$admin = get_admin_session($this->session);
 		if($this->request->post){
-			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			if(isset($post['ids'])){
-				$ids = $post['ids'];
-				$this->Category->delete($ids);
-				$this->Log->action_category_delete($admin, '多个行业');
-			}
-			else if(isset($post['id'])){
-				$id = $post['id'];
-				$category = $this->Category->get($id);
-				$this->Category->delete($id);
-				$this->Log->action_category_delete($admin, $category->name);
-			}
-			$this->response->redirect('index');
+			$data = $this->request->post;
+			$id_array = $data['id'];
 		}
+		else{
+			$data = $this->request->get;
+			$id_array[] = $data['id'];
+		}
+		if(isset($data['c']) && $data['c'] == '1'){
+			$has_children = true;
+		}
+		if($has_children){
+			$this->Topic->delete_all(array('parent in'=>$id_array));
+		}
+		parent::delete();
 	}
 	
 }

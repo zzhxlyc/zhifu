@@ -29,6 +29,18 @@ class Log extends AppModel{
 		return parent::escape($data, $escape_array, $ignore);
 	}
 	
+	public function get_type(){
+		if($this->type == 1){
+			return '普通';
+		}
+		else if($this->type == 2){
+			return '重要';
+		}
+		else if($this->type == 3){
+			return '关键';
+		}
+	}
+	
 	private function get_admin($admin_or_id){
 		if(!is_object($admin_or_id)){
 			$admin_model = new Admin();

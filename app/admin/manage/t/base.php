@@ -10,20 +10,19 @@
 <tr>
 	<td>网站标题</td>
 	<td>
-		<input type="text" name="title" value="<?php echo $title?>" />
+		<input size="100" type="text" name="title" value="<?php echo $title?>" />
 	</td>
 </tr>
 <tr>
 	<td>网站标语</td>
 	<td>
-		<input type="text" name="slogan" value="<?php echo $slogan?>" />
+		<input size="100" type="text" name="slogan" value="<?php echo $slogan?>" />
 	</td>
 </tr>
 <tr>
 	<td></td>
 	<td>
 		<input type="submit" value="修改" />
-		<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
 	</td>
 </tr>
 </table>

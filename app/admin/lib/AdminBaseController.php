@@ -13,6 +13,9 @@ class AdminBaseController extends AppController {
 			}
 		}
 		$this->view->layout = 'admin';
+		if(isset($this->vars['home'])){
+			$this->set('index_page', $this->vars['home'].'/index');
+		}
 	}
 	
 	public function delete($model = '', $redirect = true){

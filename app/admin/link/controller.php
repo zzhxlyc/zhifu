@@ -6,8 +6,8 @@ class LinkController extends AdminBaseController {
 	public $no_session = array();
 	
 	public function before(){
+		$this->set('home', ADMIN_LINK_HOME);
 		parent::before();
-		$this->set('home', ADMIN_LINK_HOME.'/index');
 	}
 	
 	public function index(){
@@ -17,9 +17,9 @@ class LinkController extends AdminBaseController {
 		$all = $this->Link->count();
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Link->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_LINK_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_LINK_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
 	}
 
 	private function do_file(&$data, &$errors, &$files){
@@ -99,25 +99,6 @@ class LinkController extends AdminBaseController {
 			else{
 				$this->set('error', '不存在');
 			}
-		}
-	}
-	
-	public function delete(){
-		if($this->request->post){
-			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			if(isset($post['ids'])){
-				$ids = $post['ids'];
-				$this->Link->delete($ids);
-				$this->Log->action_link_delete($admin, '多个视频');
-			}
-			else if(isset($post['id'])){
-				$id = $post['id'];
-				$link = $this->Link->get($id);
-				$this->Link->delete($id);
-				$this->Log->action_link_delete($admin, $link->title);
-			}
-			$this->redirect('index');
 		}
 	}
 	

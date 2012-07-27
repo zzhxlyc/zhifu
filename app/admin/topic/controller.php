@@ -8,6 +8,7 @@ class TopicController extends AdminBaseController {
 	public function before(){
 		parent::before();
 		$this->set('home', ADMIN_TOPIC_HOME);
+		$this->set('index_page', ADMIN_TOPIC_HOME.'/index');
 	}
 	
 	public function index(){
@@ -27,12 +28,17 @@ class TopicController extends AdminBaseController {
 		$id = $get['id'];
 		$page = $get['page'];
 		$limit = 10;
-		$all = $this->Topic->count();
-		$pager = new Pager($all, $page, $limit);
-		$list = $this->Topic->get_page(array('parent'=>$id), array('id'=>'DESC'), $pager->now(), $limit);
-		$page_list = $pager->get_page_links(ADMIN_TOPIC_HOME.'/comment?id='.$id.'&');
-		$this->set('list', $list);
-		$this->set('$page_list', $page_list);
+		if($id){
+			$all = $this->Topic->count();
+			$pager = new Pager($all, $page, $limit);
+			$list = $this->Topic->get_page(array('parent'=>$id), array('id'=>'DESC'), $pager->now(), $limit);
+			$page_list = $pager->get_page_links(ADMIN_TOPIC_HOME.'/comment?id='.$id.'&');
+			$this->set('list', $list);
+			$this->set('$page_list', $page_list);
+		}
+		else{
+			$this->set('error', '无此话题');
+		}
 	}
 	
 	public function add(){

@@ -1,4 +1,9 @@
-
+<?php 
+	if($error){
+		output_error($error, $index_page);
+	}
+	else{
+?>
 <form action="<?php echo $home.'/delete'?>" method="post">
 <table class="normal-table" cellspacing="0" cellpadding="0">
 	<tr class="top">
@@ -37,3 +42,6 @@
 	<?php Pager::output_pager_list($page_list);?>
 </div>
 
+<?php 
+	}
+?>

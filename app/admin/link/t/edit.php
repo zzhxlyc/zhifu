@@ -38,7 +38,7 @@
 	<td></td>
 	<td>
 		<input type="submit" value="修改" />
-		<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
+		<input type="button" value="返回" onclick="location.href='<?php echo $index_page?>'" />
 		<?php echo $HTML->hidden('id', $link->id)?>
 	</td>
 </tr>

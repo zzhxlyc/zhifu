@@ -1,6 +1,6 @@
 <?php 
 	if($error){
-		echo $error;
+		output_error($error, $index_page);
 	}
 	else{
 ?>

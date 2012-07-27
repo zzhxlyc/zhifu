@@ -3,11 +3,11 @@
 class WordController extends AdminBaseController {
 	
 	public $models = array('Word');
-	public $no_session = array('build', 'check');
+	public $no_session = array('build');
 	
 	public function before(){
 		parent::before();
-		$this->set('home', ADMIN_WORD_HOME.'/index');
+		$this->set('home', ADMIN_WORD_HOME);
 	}
 	
 	public function index(){
@@ -17,9 +17,9 @@ class WordController extends AdminBaseController {
 		$all = $this->Word->count();
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Word->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_WORD_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_WORD_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
 	}
 	
 	public function add(){
@@ -36,6 +36,7 @@ class WordController extends AdminBaseController {
 			if(count($errors) == 0){
 				$this->Word->escape($post);
 				$this->Word->save($post);
+				$this->build();
 				$this->response->redirect('index');
 			}
 			else{
@@ -59,6 +60,7 @@ class WordController extends AdminBaseController {
 				if(count($errors) == 0){
 					$this->Word->escape($post);
 					$this->Word->save($post);
+					$this->build();
 					$this->response->redirect('edit?id='.$id);
 				}
 				else{
@@ -86,18 +88,8 @@ class WordController extends AdminBaseController {
 	}
 	
 	public function delete(){
-		if($this->request->post){
-			$post = $this->request->post;
-			if(isset($post['ids'])){
-				$ids = $post['ids'];
-				$this->Word->delete($ids);
-			}
-			else if(isset($post['id'])){
-				$id = $post['id'];
-				$this->Word->delete($id);
-			}
-			$this->response->redirect('index');
-		}
+		parent::delete();
+		$this->build();
 	}
 	
 	public function build(){

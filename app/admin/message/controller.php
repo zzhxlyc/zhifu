@@ -6,8 +6,8 @@ class MessageController extends AdminBaseController {
 	public $no_session = array();
 	
 	public function before(){
+		$this->set('home', ADMIN_MESSAGE_HOME);
 		parent::before();
-		$this->set('home', ADMIN_MESSAGE_HOME.'/index');
 	}
 	
 	public function index(){
@@ -17,9 +17,9 @@ class MessageController extends AdminBaseController {
 		$all = $this->Message->count();
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Message->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_MESSAGE_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_MESSAGE_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
 	}
 	
 	public function send(){
@@ -61,6 +61,11 @@ class MessageController extends AdminBaseController {
 		}
 	}
 	
+	private function add_data(&$message){
+		$message->from_name = BelongType::get_user($message->from, $message->from_type);
+		$message->to_name = BelongType::get_user($message->to, $message->to_type);
+	}
+	
 	public function edit(){
 		if($this->request->post){
 			$post = $this->request->post;
@@ -79,6 +84,7 @@ class MessageController extends AdminBaseController {
 				}
 				else{
 					$this->set('errors', $errors);
+					$this->add_data($message);
 					$this->set('message', $message);
 				}
 			}
@@ -93,28 +99,12 @@ class MessageController extends AdminBaseController {
 				$message = $this->Message->get($id);
 			}
 			if($message){
+				$this->add_data($message);
 				$this->set('message', $message);
 			}
 			else{
 				$this->set('error', '不存在');
 			}
-		}
-	}
-	
-	public function delete(){
-		if($this->request->post){
-			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			if(isset($post['ids'])){
-				$ids = $post['ids'];
-				$this->Message->delete($ids);
-			}
-			else if(isset($post['id'])){
-				$id = $post['id'];
-				$message = $this->Message->get($id);
-				$this->Message->delete($id);
-			}
-			$this->response->redirect('index');
 		}
 	}
 	

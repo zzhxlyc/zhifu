@@ -6,8 +6,8 @@ class TagController extends AdminBaseController {
 	public $no_session = array('build');
 	
 	public function before(){
+		$this->set('home', ADMIN_TAG_HOME);
 		parent::before();
-		$this->set('home', ADMIN_TAG_HOME.'/index');
 	}
 	
 	public function index(){
@@ -17,9 +17,9 @@ class TagController extends AdminBaseController {
 		$all = $this->Tag->count();
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Tag->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_TAG_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_TAG_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
 	}
 	
 	public function add(){
@@ -83,21 +83,6 @@ class TagController extends AdminBaseController {
 			else{
 				$this->set('error', '不存在');
 			}
-		}
-	}
-	
-	public function delete(){
-		if($this->request->post){
-			$post = $this->request->post;
-			if(isset($post['ids'])){
-				$ids = $post['ids'];
-				$this->Tag->delete($ids);
-			}
-			else if(isset($post['id'])){
-				$id = $post['id'];
-				$this->Tag->delete($id);
-			}
-			$this->response->redirect('index');
 		}
 	}
 	

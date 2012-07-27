@@ -21,22 +21,24 @@
 	</td>
 </tr>
 <tr>
-	<td>信息发起用户</td>
-	<td><?php echo $message->from?></td>
+	<td>发起用户</td>
+	<td><?php echo BelongType::to_string($message->from_type)?> ：
+		<?php echo $message->from_name?></td>
 </tr>
 <tr>
-	<td>信息目标用户</td>
-	<td><?php echo $message->to?></td>
+	<td>目标用户</td>
+	<td><?php echo BelongType::to_string($message->to_type)?> ：
+		<?php echo $message->to_name?></td>
 </tr>
 <tr>
-	<td>是否已被阅读</td>
-	<td><?php echo $message->read == 1 ? 'Y' : 'N'?></td>
+	<td>阅读已否</td>
+	<td><?php echo $message->read == 1 ? '是' : '否'?></td>
 </tr>
 <tr>
 	<td></td>
 	<td>
 		<input type="submit" value="修改" />
-		<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
+		<input type="button" value="返回" onclick="location.href='<?php echo $index_page?>'" />
 		<?php echo $HTML->hidden('id', $message->id)?>
 	</td>
 </tr>

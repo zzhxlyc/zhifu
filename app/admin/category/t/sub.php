@@ -1,10 +1,15 @@
-
+<?php 
+	if($error){
+		output_error($error, $index_page);
+	}
+	else{
+?>
 <form action="<?php echo $home.'/delete'?>" method="post">
 <table class="normal-table" cellspacing="0" cellpadding="0">
 	<tr class="top">
 		<td width="30">选择</td>
-		<td>敏感词</td>
-		<td width="100">操作</td>
+		<td>二级行业名称</td>
+		<td width="200">操作</td>
 	</tr>
 	<?php 
 		$i = 0;
@@ -17,7 +22,7 @@
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->name?></a></td>
 		<td class="operate">
-			<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
+			<a href="<?php echo $home.'/editsub?id='.$o->id?>">编辑</a>
 			<a href="<?php echo $home.'/delete?id='.$o->id?>">删除</a>
 		</td>
 	</tr>
@@ -27,10 +32,14 @@
 </table>
 
 <input type="submit" value="批量删除" />
-<a href="<?php echo $home.'/add'?>">添加敏感词</a>
+<input type="hidden" name="c" value="1" />
+<a href="<?php echo $home.'/index'?>">返回一级行业</a>
+<a href="<?php echo $home.'/addsub'?>">添加二级行业</a>
 </form>
 
 <div class="page-nav">
 	<?php Pager::output_pager_list($page_list);?>
 </div>
-
+<?php 
+	}
+?>

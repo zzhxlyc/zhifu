@@ -36,7 +36,7 @@
 	<td></td>
 	<td>
 		<input type="submit" value="发送" />
-		<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
+		<input type="button" value="返回" onclick="location.href='<?php echo $index_page?>'" />
 	</td>
 </tr>
 </table>

@@ -6,8 +6,8 @@ class RecruitController extends AdminBaseController {
 	public $no_session = array();
 	
 	public function before(){
+		$this->set('home', ADMIN_RECRUIT_HOME);
 		parent::before();
-		$this->set('home', ADMIN_RECRUIT_HOME.'/index');
 	}
 	
 	public function index(){
@@ -17,9 +17,20 @@ class RecruitController extends AdminBaseController {
 		$all = $this->Recruit->count();
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Recruit->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_RECRUIT_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_RECRUIT_HOME.'/index?');
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$this->set('$page_list', $page_list);
+	}
+	
+	private function add_data(&$recruit){
+		$recruit->user_name = BelongType::get_user($recruit->belong, $recruit->type);
+		$available = $recruit->available;
+		$recruit->days = array();
+		$days = explode(',', $available);
+		foreach($days as $day){
+			$day = trim($day);
+			$recruit->days[] = explode('-', $day);
+		}
 	}
 	
 	public function edit(){
@@ -40,6 +51,7 @@ class RecruitController extends AdminBaseController {
 				}
 				else{
 					$this->set('errors', $errors);
+					$this->add_data($recruit);
 					$this->set('recruit', $recruit);
 				}
 			}
@@ -52,15 +64,7 @@ class RecruitController extends AdminBaseController {
 			$id = get_id($get);
 			if($id > 0){
 				$recruit = $this->Recruit->get($id);
-				$recruit->name = BelongType::get_user($recruit->belong, $recruit->type);
-				$recruit->typeName = BelongType::to_string($recruit->type);
-				$available = $recruit->available;
-				$recruit->days = array();
-				$days = explode(',', $available);
-				foreach($days as $day){
-					$day = trim($day);
-					$recruit->days[] = explode('-', $day);
-				}
+				$this->add_data($recruit);
 			}
 			if($recruit){
 				$this->set('recruit', $recruit);

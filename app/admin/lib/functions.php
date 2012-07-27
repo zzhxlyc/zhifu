@@ -21,9 +21,22 @@ function output_error($error, $home){
 	echo '<a href="'.$home.'">返回</a>';
 }
 
+function left_tab_current($module, $method = Null){
+	global $request;
+	if($module == $request->get_module()){
+		if($method == Null){
+			echo 'class="current"';
+		}
+		else if($request->get_method() == $method){
+			echo 'class="current"';
+		}
+	}
+}
+
 function if_tab1_current(){
 	global $request;
-	$array = array('problem', 'patent', 'topic', 'article', 'video');
+	$array = array('problem', 'patent', 'recruit', 'video', 'article',
+					'topic', 'message', 'category', 'tag');
 	if(in_array($request->get_module(), $array)){
 		echo 'class="current"';
 	}
