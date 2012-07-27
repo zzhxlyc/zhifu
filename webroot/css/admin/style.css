@@ -147,9 +147,9 @@ background: url(../../images/tabs_left_on.png) no-repeat right; /* left corner *
 /****************************left nav**********************************/
 
 .left-nav{
-width:150px;
-height:600px;
-background: #333;
+margin-top:20px;
+width:145px;
+border:1px solid #999;
 padding:10px 0;	
 float:left;
 }
@@ -162,8 +162,8 @@ padding-top:5px;
 .left-nav li a{
 font-size:13px;
 padding-left:20px;
-color:#fff;
 background: url(../../images/grayArrow.gif) no-repeat 10px 4px;
+color:#333;
 	
 }
 
@@ -171,6 +171,7 @@ background: url(../../images/grayArrow.gif) no-repeat 10px 4px;
 
 .left-nav li a.current{
 font-size:14px;
+color:red;
 	
 font-weight:bold;
 text-decoration: underline;
@@ -179,6 +180,8 @@ text-decoration: underline;
 
 .left-nav li a:hover{
 text-decoration: underline;
+color:red;
+
 }
 
 
@@ -190,9 +193,9 @@ text-decoration: underline;
 
 /****************************main-content**********************************/
 .main-content{
-padding:10px;
+padding:20px 0 0 20px;
 float:left;	
-width:790px;
+width:780px;
 }
 
 
@@ -202,7 +205,7 @@ width:790px;
 
 /****************************footer**********************************/
 #footer {
-margin: 0 auto;
+margin: 20px auto;
 padding-bottom: 10px;
 font-size: 11px;
 color: #333;
@@ -303,7 +306,7 @@ clear:both;
 .row label{
 display:block;
 float:left;
-width:60px;	
+width:70px;	
 }
 
 .tag a{
