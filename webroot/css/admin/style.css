@@ -323,6 +323,29 @@ padding:3px 5px;
 
 }
 
+/****************************招聘修改页面*****************************/
+.choose-time{
+width:640px;
+float:left;	
+}
+
+.choose-time span{
+display:block;
+width:80px;	
+height:40px;
+float:left;
+border:1px solid #999;
+margin:0 5px 5px 0;
+cursor:pointer;
+}
+.choose-time span.selected{
+background:#eee;
+border:1px solid #999;
+margin:0 5px 5px 0;
+cursor:pointer;
+}
+
+
 /****************************pagenavi*****************************/
 .page-nav {
 clear: both;

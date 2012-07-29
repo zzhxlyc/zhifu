@@ -19,23 +19,25 @@
 </div>
 <div class="row">
 	<label for="name">时间</label>
+	<div class="choose-time">
 	<?php 
 		if(is_array($recruit->days)){
 			for($i = 0;$i < 3;$i++){
 	?>
-		<div>
+		
 	<?php 
 				for($d = 0;$d < 7;$d++){
 	?>
-	<span><?php echo '周'.$d;?></span>
+	<span class="day<?php echo $d;?>"><?php echo '周'.$d;?></span>
 	<?php 
 				}
 	?>
-		</div>
+		
 	<?php 
 			}
 		}
 	?>
+	</div>
 </div>
 <div class="row">
 	<input type="submit" value="修改" />
@@ -47,3 +49,13 @@
 <?php 
 	}
 ?>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	timeChooseEventInit();
+	
+	
+});	
+	
+</script>

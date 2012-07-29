@@ -1,4 +1,123 @@
 
+
+function timeChooseEventInit(){
+	$('.choose-time span').toggle(function(){
+		$(this).addClass('selected');
+		
+		setDayAvailable();
+
+	},
+	function(){
+		$(this).removeClass('selected');
+		setDayAvailable();
+		
+	});
+	
+}
+
+
+
+function setDayAvailable(){
+	var day0=[],
+		day1=[],
+		day2=[],
+		day3=[],
+		day4=[],
+		day5=[],
+		day6=[];
+	$('.choose-time .day0').each(function(){
+		if($(this).hasClass('selected'))
+		{
+			day0.push('1');
+		}
+		else{
+			day0.push('0');
+		}
+		
+	});
+	day0=day0.join('-');
+	
+	$('.choose-time .day1').each(function(){
+		if($(this).hasClass('selected'))
+		{
+			day1.push('1');
+		}
+		else{
+			day1.push('0');
+		}
+		
+	});
+	day1=day1.join('-');
+	
+	$('.choose-time .day2').each(function(){
+		if($(this).hasClass('selected'))
+		{
+			day2.push('1');
+		}
+		else{
+			day2.push('0');
+		}
+		
+	});
+	day2=day2.join('-');
+	
+	$('.choose-time .day3').each(function(){
+		if($(this).hasClass('selected'))
+		{
+			day3.push('1');
+		}
+		else{
+			day3.push('0');
+		}
+		
+	});
+	day3=day3.join('-');
+	
+	$('.choose-time .day4').each(function(){
+		if($(this).hasClass('selected'))
+		{
+			day4.push('1');
+		}
+		else{
+			day4.push('0');
+		}
+		
+	});
+	day4=day4.join('-');
+	
+	$('.choose-time .day5').each(function(){
+		if($(this).hasClass('selected'))
+		{
+			day5.push('1');
+		}
+		else{
+			day5.push('0');
+		}
+		
+	});
+	day5=day5.join('-');
+	
+	$('.choose-time .day6').each(function(){
+		if($(this).hasClass('selected'))
+		{
+			day6.push('1');
+		}
+		else{
+			day6.push('0');
+		}
+		
+	});
+	day6=day6.join('-');
+	
+	var available=day0+' '+day1+' '+day2+' '+day3+' '+day4+' '+day5+' '+day6;
+	
+	//alert(available);
+	$('input[name=available]').val(available);
+}
+
+
+
+
 function dateEventInit(){
 	$( ".datepicker" ).datepicker({
 		dateFormat:"yy-mm-dd"
