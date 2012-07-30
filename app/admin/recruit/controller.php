@@ -26,7 +26,7 @@ class RecruitController extends AdminBaseController {
 		$recruit->user_name = BelongType::get_user($recruit->belong, $recruit->type);
 		$available = $recruit->available;
 		$recruit->days = array();
-		$days = explode(',', $available);
+		$days = explode(' ', $available);
 		foreach($days as $day){
 			$day = trim($day);
 			$recruit->days[] = explode('-', $day);

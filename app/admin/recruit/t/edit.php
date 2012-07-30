@@ -18,17 +18,26 @@
 	</select>
 </div>
 <div class="row">
+	<label for="name">描述</label>
+	<textarea name="description" rows="10" cols="80"><?php echo $recruit->description?></textarea>
+	<span class="error"><?php echo $errors['description']?></span>
+</div>
+<div class="row">
 	<label for="name">时间</label>
 	<div class="choose-time">
 	<?php 
 		if(is_array($recruit->days)){
+			$array_day = array('上午', '下午', '晚上');
 			for($i = 0;$i < 3;$i++){
-	?>
-		
-	<?php 
+				$array = array('周日','周一','周二','周三','周四','周五','周六');
 				for($d = 0;$d < 7;$d++){
+					$class = '';
+					if($recruit->days[$d][$i] == 1){
+						$class = 'selected';
+					}
 	?>
-	<span class="day<?php echo $d;?>"><?php echo '周'.$d;?></span>
+	<span class="day<?php echo $d;?> <?php echo $class?>">
+		<?php echo $array[$d].$array_day[$i];?></span>
 	<?php 
 				}
 	?>

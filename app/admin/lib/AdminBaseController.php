@@ -18,6 +18,22 @@ class AdminBaseController extends AppController {
 		}
 	}
 	
+	protected function get_delete_ids($get, $post){
+		if(isset($get['id'])){
+			$r = array($get['id']);
+		}
+		if(isset($post['id'])){
+			$r = $post['id'];
+		}
+		if(isset($r) && count($r) > 0){
+			$r = array_map('intval', $r);
+			return $r;
+		}
+		else{
+			return array();
+		}
+	}
+	
 	public function delete($model = '', $redirect = true){
 		if($model == ''){
 			$model = $this->request->module;

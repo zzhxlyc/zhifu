@@ -2,7 +2,7 @@
 
 class TagController extends AdminBaseController {
 	
-	public $models = array('Tag');
+	public $models = array('Tag', 'TagItem');
 	public $no_session = array('build');
 	
 	public function before(){
@@ -84,6 +84,15 @@ class TagController extends AdminBaseController {
 				$this->set('error', '不存在');
 			}
 		}
+	}
+	
+	public function delete(){
+		$r = $this->request;
+		$tag_id_array = $this->get_delete_ids($r->get, $r->post);
+		if($tag_id_array){
+			$this->TagItem->delete_all(array('tag in'=>$tag_id_array));
+		}
+		parent::delete();
 	}
 	
 	public function build(){
