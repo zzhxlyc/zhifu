@@ -339,8 +339,7 @@ margin:0 5px 5px 0;
 cursor:pointer;
 }
 .choose-time span.selected{
-background:#eee;
-border:1px solid #999;
+background:#F0FFE5;
 margin:0 5px 5px 0;
 cursor:pointer;
 }

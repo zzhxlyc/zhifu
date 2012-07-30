@@ -1,15 +1,17 @@
 
 
 function timeChooseEventInit(){
-	$('.choose-time span').toggle(function(){
-		$(this).addClass('selected');
-		
-		setDayAvailable();
+	$('.choose-time span').click(function(){
+		if($(this).hasClass('selected')){
+			$(this).removeClass('selected');
+			setDayAvailable();
+		}
+		else{
+			$(this).addClass('selected');
 
-	},
-	function(){
-		$(this).removeClass('selected');
-		setDayAvailable();
+			setDayAvailable();
+		}
+		
 		
 	});
 	
