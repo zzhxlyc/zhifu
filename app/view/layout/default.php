@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
+<html lang="zh-CN">
 <head>
 <?php $view->charset(); ?>
 <?php $view->title(); ?>
@@ -16,12 +16,17 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-		</div>
-		<div id="content">
+		
 			<?php include($TEMPLATE_PAGE); ?>
+			
+		<div class="footer">
+			<div class="footer_inner">
+			     <p>
+					<span class="fl">版权所有 © </span>
+					<span class="fr"><a href="#" target="_blank" class="a_first">关于我们</a>| <a href="#" target="_blank" class="a_first">联系我们</a>|<a href="#" class="a_last">服务条款</a>  </span></p>
 		</div>
-		<div id="footer">
+
+
 		</div>
 	</div>
 </body>
