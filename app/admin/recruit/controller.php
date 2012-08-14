@@ -14,9 +14,10 @@ class RecruitController extends AdminBaseController {
 		$get = $this->request->get;
 		$page = $get['page'];
 		$limit = 10;
-		$all = $this->Recruit->count();
+		$cond = array();
+		$all = $this->Recruit->count($cond);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Recruit->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
+		$list = $this->Recruit->get_page($cond, array('id'=>'DESC'), $pager->now(), $limit);
 		$page_list = $pager->get_page_links(ADMIN_RECRUIT_HOME.'/index?');
 		$this->set('list', $list);
 		$this->set('$page_list', $page_list);

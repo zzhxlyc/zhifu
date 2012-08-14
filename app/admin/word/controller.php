@@ -6,17 +6,18 @@ class WordController extends AdminBaseController {
 	public $no_session = array('build');
 	
 	public function before(){
-		parent::before();
 		$this->set('home', ADMIN_WORD_HOME);
+		parent::before();
 	}
 	
 	public function index(){
 		$get = $this->request->get;
 		$page = $get['page'];
 		$limit = 10;
-		$all = $this->Word->count();
+		$cond = array();
+		$all = $this->Word->count($cond);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Word->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
+		$list = $this->Word->get_page($cond, array('id'=>'DESC'), $pager->now(), $limit);
 		$page_list = $pager->get_page_links(ADMIN_WORD_HOME.'/index?');
 		$this->set('list', $list);
 		$this->set('$page_list', $page_list);

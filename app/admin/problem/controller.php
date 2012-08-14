@@ -6,8 +6,8 @@ class ProblemController extends AdminBaseController {
 	public $no_session = array();
 	
 	public function before(){
-		parent::before();
 		$this->set('home', ADMIN_PROBLEM_HOME);
+		parent::before();
 	}
 	
 	public function index(){
@@ -16,9 +16,9 @@ class ProblemController extends AdminBaseController {
 		$limit = 10;
 		$all = $this->Problem->count();
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Problem->get_joins(array('problems.*', 'companys.name as name'), 
+		$list = Model::get_joins(array('problems.*', 'companys.name as name'), 
 										array('problems', 'companys'), 
-										array('problems.company'=>'companys.id'), 
+										array('problems.company eq'=>'companys.id'), 
 										array('problems.time'=>'DESC'),
 										$pager->get_limit_str());
 		$page_list = $pager->get_page_links(ADMIN_PROBLEM_HOME.'/index?');

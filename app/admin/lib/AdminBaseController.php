@@ -13,8 +13,8 @@ class AdminBaseController extends AppController {
 			}
 		}
 		$this->view->layout = 'admin';
-		if(isset($this->vars['home'])){
-			$this->set('index_page', $this->vars['home'].'/index');
+		if($this->is_set('home')){
+			$this->set('index_page', $this->get('home').'/index');
 		}
 	}
 	

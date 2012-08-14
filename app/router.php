@@ -5,7 +5,7 @@
  * 								'module'=>'folder_name',
  * 								'prefix'=>'/'));
  */
-$router->add('/', array('C'=>'UserController', 'M'=>'index'));
+$router->add('/', array('C'=>'ProblemController', 'M'=>'index'));
 $router->add('/init', array('C'=>'InitController', 'M'=>'index'));
 $router->add('/test', array('C'=>'InitController', 'M'=>'test'));
 

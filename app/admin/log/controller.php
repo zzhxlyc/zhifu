@@ -14,9 +14,10 @@ class LogController extends AdminBaseController {
 		$get = $this->request->get;
 		$page = $get['page'];
 		$limit = 10;
-		$all = $this->Log->count();
+		$cond = array();
+		$all = $this->Log->count($cond);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Log->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
+		$list = $this->Log->get_page($cond, array('id'=>'DESC'), $pager->now(), $limit);
 		$page_list = $pager->get_page_links(ADMIN_LOG_HOME.'/index?');
 		$this->set('list', $list);
 		$this->set('$page_list', $page_list);

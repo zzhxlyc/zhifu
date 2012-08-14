@@ -79,7 +79,10 @@ function if_tab5_current(){
 
 function if_tab6_current(){
 	global $request;
-	return false;
+	$array = array('link');
+	if(in_array($request->get_module(), $array)){
+		echo 'class="current"';
+	}
 }
 
 function if_tab7_current(){

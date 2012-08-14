@@ -51,5 +51,14 @@ class Video extends AppModel{
 		}
 		return null;
 	}
+	
+	public function show_image(){
+		if($this->image){
+			return $this->image;
+		}
+		else{
+			return '';
+		}
+	}
 
 }

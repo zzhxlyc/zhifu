@@ -40,6 +40,12 @@ class HTMLHelper{
 		}
 	}
 	
+	public function current($now, $value){
+		if($now == $value){
+			echo 'current';
+		}
+	}
+	
 	public function checked($now, $value){
 		if($now == $value){
 			echo 'checked="checked"';

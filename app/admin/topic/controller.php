@@ -6,18 +6,18 @@ class TopicController extends AdminBaseController {
 	public $no_session = array();
 	
 	public function before(){
-		parent::before();
 		$this->set('home', ADMIN_TOPIC_HOME);
-		$this->set('index_page', ADMIN_TOPIC_HOME.'/index');
+		parent::before();
 	}
 	
 	public function index(){
 		$get = $this->request->get;
 		$page = $get['page'];
 		$limit = 10;
-		$all = $this->Topic->count();
+		$cond = array('parent'=>0);
+		$all = $this->Topic->count($cond);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Topic->get_page(array('parent'=>0), array('id'=>'DESC'), $pager->now(), $limit);
+		$list = $this->Topic->get_page($cond, array('id'=>'DESC'), $pager->now(), $limit);
 		$page_list = $pager->get_page_links(ADMIN_TOPIC_HOME.'/index?');
 		$this->set('list', $list);
 		$this->set('$page_list', $page_list);

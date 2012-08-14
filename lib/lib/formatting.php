@@ -535,3 +535,28 @@ function utf8_uri_encode( $utf8_string, $length = 0 ) {
 
 	return $unicode;
 }
+
+function utf8_strlen($str){
+	$l = strlen($str);
+	$length = 0;
+	for($i = 0;$i < $l;$i++){
+		$c = $str[$i];
+		$n = ord($c);
+		if(($n >> 7) == 0){			//0xxx xxxx, asci, single
+			$length++;
+		}
+		else if(($n >> 4) == 15){ 	//1111 xxxx, first in four char
+			$i += 3;
+			$length++;
+		}
+		else if(($n >> 5) == 7){ 	//111x xxxx, first in three char
+			$i += 2;
+			$length++;
+		}
+		else if(($n >> 6) == 3){ 	//11xx xxxx, first in two char
+			$i += 1;
+			$length++;
+		}
+	}
+	return $length;
+}

@@ -17,11 +17,26 @@ class Controller{
 		$this->load_model();
 	}
 	
-	public function set($key, $value){
+	private function var_key($key){
 		if(substr($key, 0, 1) == '$'){
 			$key = substr($key, 1);
 		}
+		return $key;
+	}
+	
+	public function set($key, $value){
+		$key = $this->var_key($key);
 		$this->vars[$key] = $value;
+	}
+	
+	public function get($key){
+		$key = $this->var_key($key);
+		return $this->vars[$key];
+	}
+	
+	public function is_set($key){
+		$key = $this->var_key($key);
+		return array_key_exists($key, $this->vars);
 	}
 	
 	public function get_vars(){

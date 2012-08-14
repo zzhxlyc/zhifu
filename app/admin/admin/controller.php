@@ -6,8 +6,8 @@ class AdminController extends AdminBaseController {
 	public $no_session = array();
 	
 	public function before(){
-		parent::before();
 		$this->set('home', ADMIN_ADMIN_HOME);
+		parent::before();
 	}
 	
 	public function login(){
@@ -42,9 +42,10 @@ class AdminController extends AdminBaseController {
 		$get = $this->request->get;
 		$page = $get['page'];
 		$limit = 10;
-		$all = $this->Admin->count();
+		$cond = array();
+		$all = $this->Admin->count($cond);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Admin->get_page(null, array('id'=>'ASC'), $pager->now(), $limit);
+		$list = $this->Admin->get_page($cond, array('id'=>'ASC'), $pager->now(), $limit);
 		$page_list = $pager->get_page_links(ADMIN_ADMIN_HOME.'/index?');
 		$this->set('list', $list);
 		$this->set('$page_list', $page_list);

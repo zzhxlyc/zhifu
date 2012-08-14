@@ -24,6 +24,11 @@ class Dispatcher{
 			$method = $r[1];
 			return array($module, $method);
 		}
+		else if(count($r) == 1){
+			$module = $r[0];
+			$method = 'index';
+			return array($module, $method);
+		}
 		return false;
 	}
 	

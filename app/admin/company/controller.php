@@ -6,8 +6,8 @@ class CompanyController extends AdminBaseController {
 	public $no_session = array();
 	
 	public function before(){
-		parent::before();
 		$this->set('home', ADMIN_COMPANY_HOME);
+		parent::before();
 	}
 	
 	public function index(){

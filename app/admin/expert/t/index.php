@@ -7,7 +7,7 @@
 		<td width="90">注册时间</td>
 		<td width="150">邮箱</td>
 		<td width="50">状态</td>
-		<td width="100">操作</td>
+		<td width="150">操作</td>
 	</tr>
 	<?php 
 		$i = 0;
@@ -23,6 +23,7 @@
 		<td><?php echo $o->email?></td>
 		<td><?php echo $o->status()?></td>
 		<td class="operate">
+			<a target="_blank" href="<?php echo ADMIN_SOLUTION_HOME.'/index?eid='.$o->id?>">查看竞标</a>
 			<a href="<?php echo $home.'/show?id='.$o->id?>">查看</a>
 			<a href="<?php echo $home.'/delete?id='.$o->id?>">删除</a>
 		</td>

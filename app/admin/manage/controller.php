@@ -6,8 +6,8 @@ class ManageController extends AdminBaseController {
 	public $no_session = array();
 	
 	public function before(){
+		$this->set('home', ADMIN_MANAGE_HOME);
 		parent::before();
-		$this->set('home', ADMIN_MANAGE_HOME.'/index');
 	}
 	
 	public function index(){

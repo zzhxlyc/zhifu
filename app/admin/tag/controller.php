@@ -14,9 +14,10 @@ class TagController extends AdminBaseController {
 		$get = $this->request->get;
 		$page = $get['page'];
 		$limit = 10;
-		$all = $this->Tag->count();
+		$cond = array();
+		$all = $this->Tag->count($cond);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Tag->get_page(null, array('id'=>'DESC'), $pager->now(), $limit);
+		$list = $this->Tag->get_page($cond, array('id'=>'DESC'), $pager->now(), $limit);
 		$page_list = $pager->get_page_links(ADMIN_TAG_HOME.'/index?');
 		$this->set('list', $list);
 		$this->set('$page_list', $page_list);

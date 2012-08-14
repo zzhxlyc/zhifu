@@ -8,7 +8,7 @@
 		<td width="140">日期</td>
 		<td width="50">状态</td>
 		<td width="80">金额</td>
-		<td width="100">操作</td>
+		<td width="150">操作</td>
 	</tr>
 	<?php 
 		$i = 0;
@@ -22,9 +22,10 @@
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
 		<td><?php echo $o->name?></td>
 		<td><?php echo $o->time?></td>
-		<td><?php echo $o->get_status()?></td>
+		<td><?php echo Problem::get_status($o->status)?></td>
 		<td><?php echo $o->budget?></td>
 		<td class="operate">
+			<a target="_blank" href="<?php echo ADMIN_SOLUTION_HOME.'/index?pid='.$o->id?>">查看竞标</a>
 			<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
 			<a href="<?php echo $home.'/delete?id='.$o->id?>">删除</a>
 		</td>

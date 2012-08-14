@@ -8,7 +8,8 @@ class Problem extends AppModel{
 		$check_arrays = array(
 			'need' => array('title', 'company', 'cat', 'subcat', 'budget'),
 			'length' => array('title'=>250),
-			'int' => array('company', 'cat', 'subcat', 'budget'),
+			'int' => array('company', 'cat', 'subcat'),
+			'number' => array('budget'),
 			'word'=> array('title', 'description'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
@@ -33,9 +34,8 @@ class Problem extends AppModel{
 		return parent::format($format_array);
 	}
 	
-	public function get_status(){
-		$s = $this->status;
-		if($s == 0){
+	public static function get_status($status){
+		if($status == 0){
 			return '竞标中';
 		}
 	}

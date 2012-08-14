@@ -19,9 +19,7 @@
 		<div id="header">
 		</div>
 		<div id="content">
-
 			<?php include($TEMPLATE_PAGE); ?>
-			
 		</div>
 		<div id="footer">
 		</div>
