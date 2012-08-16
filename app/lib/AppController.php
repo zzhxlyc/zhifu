@@ -2,6 +2,12 @@
 
 class AppController extends Controller{
 	
+	public function before(){
+		if($this->is_set('home')){
+			$this->set('index_page', $this->get('home').'/index');
+		}
+	}
+	
 	protected function upload_file($array){
 		$path = FileSystem::gen_upload_path($array['name']);
 		$save_path = FileSystem::get_save_path($path);

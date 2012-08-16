@@ -16,11 +16,6 @@ function get_user_cookie($cookie){
 //	return array(base64_decode($id), $type);
 }
 
-function output_error($error, $home){
-	echo '<p>'.$error.'</p>';
-	echo '<a href="'.$home.'">返回</a>';
-}
-
 function left_tab_current($module, $method = Null){
 	global $request;
 	if($module == $request->get_module()){

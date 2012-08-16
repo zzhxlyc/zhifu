@@ -222,9 +222,14 @@ class MysqlDAO {
 				$field = self::_get_table_field($field);
 				$op = strtolower($op);
 				if($op == 'in'){
-					if(is_array($cond) && count($cond) > 0){
-						$ids = self::id_array_to_string($cond);
-						$cond = "($ids)";
+					if(is_array($cond)){
+						if(count($cond) > 0){
+							$ids = self::id_array_to_string($cond);
+							$cond = "($ids)";
+						}
+						else{
+							continue;
+						}
 					}
 					else{
 						if(strpos($cond, ',') === false){

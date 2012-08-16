@@ -8,6 +8,11 @@ function download($file){
 	echo UPLOAD_HOME.'/'.$file;
 }
 
+function output_error($error, $home){
+	echo '<p>'.$error.'</p>';
+	echo '<a href="'.$home.'">返回</a>';
+}
+
 function output_page_list($page_list, $anchor_id = ''){
 	if(count($page_list) <= 3){
 		return;

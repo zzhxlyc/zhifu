@@ -46,6 +46,12 @@ class HTMLHelper{
 		}
 	}
 	
+	public function if_current($cond){
+		if($cond){
+			echo 'class="current"';
+		}
+	}
+	
 	public function checked($now, $value){
 		if($now == $value){
 			echo 'checked="checked"';

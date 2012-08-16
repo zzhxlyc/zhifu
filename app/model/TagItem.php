@@ -10,5 +10,22 @@ class TagItem extends Model{
 		$must_int = array('flag', 'limit');
 		return parent::check($data, $must_need, $length_check, $must_int, $ignore);
 	}
+	
+	public function get_most($list, $length = 10){
+		$r = array();
+		foreach($list as $tagid){
+			if(!in_array($tagid, $r)){
+				$r[$tagid] = 0;
+			}
+			$r[$tagid]++;
+		}
+		arsort($r);
+		if(count($r) > 10){
+			return array_slice($r, 0, 10);
+		}
+		else{
+			return $r;
+		}
+	}
 
 }

@@ -16,7 +16,7 @@ class ProblemController extends AppController {
 		$condition = array();
 		$order = array();
 		if($ord == 'time'){
-			$order['order'] = 'DESC';
+			$order['time'] = 'DESC';
 		}
 		else if($ord == 'deadline'){
 			$order['deadline'] = 'DESC';
