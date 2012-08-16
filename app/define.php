@@ -30,3 +30,10 @@ define('ADMIN_SOLUTION_HOME', ADMIN_HOME.'/solution');
 
 
 define('PROBLEM_HOME', ROOT_URL.'/problem');
+define('EXPERT_HOME', ROOT_URL.'/expert');
+define('PATENT_HOME', ROOT_URL.'/patent');
+define('IDEA_HOME', ROOT_URL.'/idea');
+define('VIDEO_HOME', ROOT_URL.'/video');
+define('TOPIC_HOME', ROOT_URL.'/topic');
+define('ARTICLE_HOME', ROOT_URL.'/article');
+define('RECRUIT_HOME', ROOT_URL.'/recruit');

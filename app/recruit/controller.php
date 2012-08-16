@@ -1,11 +1,11 @@
 <?php
 
-class ProblemController extends AppController {
+class RecruitController extends AppController {
 	
-	public $models = array('Problem');
+	public $models = array('Recruit');
 	
 	public function before(){
-		$this->set('home', PROBLEM_HOME);
+		$this->set('home', RECRUIT_HOME);
 		parent::before();
 	}
 	
@@ -28,9 +28,9 @@ class ProblemController extends AppController {
 		else{
 			$order['id'] = 'DESC';
 		}
-		$all = $this->Problem->count($condition);
+		$all = $this->Recruit->count($condition);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Problem->get_page($condition, $order, $pager->now(), $limit);
+		$list = $this->Recruit->get_page($condition, $order, $pager->now(), $limit);
 		$links = $pager->get_page_links(PROBLEM_HOME.'/index?');
 		$this->set('list', $list);
 		$this->set('links', $links);

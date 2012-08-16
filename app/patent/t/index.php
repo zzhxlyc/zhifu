@@ -1,11 +1,3 @@
-<div class="cat-wrapper">
-	<ul class="cat-nav">
-		<li><a href="#">所有分类</a></li>
-		<li><a href="#">光学</a></li>
-		<li><a href="#">计算机</a></li>
-		<li><a href="#">机械</a></li>
-	</ul>
-</div><!--end for cat-wrapper-->
 
 <div class="filter clearfix">
 	<div class="order">
@@ -21,7 +13,6 @@
 	</div>
 
 </div><!--end for filter-->
-
 <div class="list">
 	<?php 
 		if(is_array($list)){
@@ -30,10 +21,14 @@
 	?>
 	<div class="item clearfix">
 		<div class="pic">
-			<img src="<?php echo $o->image?>" width="200" height="150"  alt="<?php echo $o->title?>">
+			<img src="<?php echo $o->image?>" alt="<?php echo $o->title?>">
 		</div><!--end for pic-->
 		<div class="middle">
-			<h3 class="title"><?php echo $o->title?></h3>
+			<h3 class="title">
+				<a href="<?php echo $home.'/detail?id='.$o->id?>">
+				<?php echo $o->title?>
+				</a>
+			</h3>
 			<div class="content"><?php echo $desc?></div>						
 			<div class="status clearfix">
 				<div class="title">任务状态:</div>
@@ -48,7 +43,7 @@
 				<p>出价：<span class="num"><?php echo $o->budget?></span>元</p>
 				<p>截止日期：<span class="date"><?php echo $o->deadline?></span></p>						
 			</div>
-			<a href="<?php echo $home.'/'?>" class="btn">我要竞标</a>
+			<a href="<?php echo $home.'/'?>" class="btn">我要揭榜</a>
 		</div><!--end for right-->
 	</div><!--end for item-->
 	<?php 

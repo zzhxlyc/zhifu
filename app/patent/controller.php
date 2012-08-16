@@ -1,11 +1,11 @@
 <?php
 
-class ProblemController extends AppController {
+class PatentController extends AppController {
 	
-	public $models = array('Problem');
+	public $models = array('Patent');
 	
 	public function before(){
-		$this->set('home', PROBLEM_HOME);
+		$this->set('home', PATENT_HOME);
 		parent::before();
 	}
 	
@@ -28,10 +28,10 @@ class ProblemController extends AppController {
 		else{
 			$order['id'] = 'DESC';
 		}
-		$all = $this->Problem->count($condition);
+		$all = $this->Patent->count($condition);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Problem->get_page($condition, $order, $pager->now(), $limit);
-		$links = $pager->get_page_links(PROBLEM_HOME.'/index?');
+		$list = $this->Patent->get_page($condition, $order, $pager->now(), $limit);
+		$links = $pager->get_page_links($this->get('home').'/index?');
 		$this->set('list', $list);
 		$this->set('links', $links);
 	}
