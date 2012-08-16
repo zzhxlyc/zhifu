@@ -18,9 +18,10 @@
 	<div id="container">
 	
 		<?php include(LAYOUT_DIR.'/default/head.php'); ?>
-		
+	
 		<div class="wrapper">
 			<div class="main">
+				
 				<?php include($TEMPLATE_PAGE); ?>
 			</div>
 		</div>

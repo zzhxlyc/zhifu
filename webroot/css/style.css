@@ -35,6 +35,15 @@ h1 {
 font-size: 30px;
 }
 
+h2{
+font-size: 20px;
+margin-bottom:15px;
+	
+}
+h3{
+font-size: 16px;
+	
+}
 
 
 div {
@@ -65,7 +74,21 @@ float: left;
 float: right;
 }
 
+.btn{
+	display: block;
+	width: 80px;
+	height: 25px;
+	background: url(../images/btn-bg-blue-s.png) no-repeat 0 -25px;
+	text-align: center;
+	line-height: 25px;
+	font-size: 13px;
+	font-weight: bold;
+	color: white;
+}
 
+.btn:hover {
+background: url(../images/btn-bg-blue-s.png) no-repeat 0 0;
+}
 
 /*************************header***************************/
 
@@ -362,6 +385,7 @@ line-height: 25px;
 		line-height:27px;
 		background:url(../images/ss_hui.jpg) no-repeat;
 		margin-left:-5px;
+		display:inline;
 }
 
 
@@ -370,6 +394,13 @@ line-height: 25px;
 background:url(../images/ss.jpg) no-repeat;
 
 }
+
+.filter .job-btn{
+float:right;	
+margin-top:10px;
+
+}
+
 
 /****************************难题列表**********************************/
 
@@ -380,7 +411,6 @@ margin-top:20px;
 }
 
 .list .item{
-	height:150px;
 	padding-bottom:10px;
 	padding-top:20px;
 	border-bottom:1px dashed #999;
@@ -392,10 +422,6 @@ float:left;
 padding-right:10px;
 }
 
-.list .item .pic img{
-	width:200px;
-	height:150px;	
-}
 
 .list .item .middle {
 	float:left;
@@ -447,7 +473,7 @@ line-height:30px;
 .list .item .status {
 
 }
-.list .item .status div{
+.status div{
 	width:140px;
 	height:25px;
 	text-align:center;
@@ -456,7 +482,7 @@ line-height:30px;
 
 }
 
-.list .item .status .title{
+.status .title{
 	font-size:13px;
 	font-weight:bold;
 	padding:0;
@@ -464,7 +490,7 @@ line-height:30px;
 	
 }
 
-.list .item .status .status-item{
+.status .status-item{
 	font-size:13px;
 	border:1px solid #008CD7;
 	border-right:0;
@@ -472,12 +498,12 @@ line-height:30px;
 		
 }
 
-.list .item .status .last{
+.status .last{
 	border-right:1px solid #008CD7;
 
 }
 
-.list .item .status .current{
+.status .current{
 	background:#D8E5F4;
 	color:#008CD7;
 	font-weight:bold;
@@ -485,23 +511,8 @@ line-height:30px;
 }
 
 .list .item .btn{
-	display: block;
-	width: 80px;
-	height: 25px;
-	background: url(../images/btn-bg-blue-s.png) no-repeat 0 -25px;
-	text-align: center;
-	line-height: 25px;
-	font-size: 13px;
-	font-weight: bold;
-	color: white;
 	margin:30px 0 0 45px;
 }
-
-.list .item .btn:hover {
-background: url(../images/btn-bg-blue-s.png) no-repeat 0 0;
-}
-
-
 
 
 
@@ -509,8 +520,7 @@ background: url(../images/btn-bg-blue-s.png) no-repeat 0 0;
 .page-wrapper{
 	background: whiteSmoke;
 	border-bottom: 1px solid #E9E6E6;
-	position:absolute;
-	bottom:0;
+padding:5px 0;
 	width:100%;	
 	margin-top:20px;
 }
@@ -599,14 +609,183 @@ color: #fc7d39;
 
 .gopage-submit:hover {
 }
+/************兼职job**************/
+.job .item .content{
+height:40px;	
+overflow:hidden;
+font-size:13px;
+margin-bottom:5px;
+}
 
 
+.job .item .title{
+font-size:13px;
+}
+
+.job .item .time{
+font-size:13px;
+}
+/*添加job*/
+.row{
+padding-bottom:10px;	
+clear:both;
+font-size:13px;
+
+}
+
+.row label{
+display:block;
+float:left;
+width:60px;	
+
+}
+
+.row input.text{
+border:1px solid #ddd;	
+width:200px;
+}
+
+.row textarea.text{
+border:1px solid #ddd;	
+width:600px;
+height:100px;
+}
 
 
+.row input.btn{
+
+	border:0;
+	margin:30px 0 0 60px;
+	cursor:pointer;
+}
 
 
+.choose-time{
+width:640px;
+float:left;	
+margin-left:60px;
+}
+
+.choose-time span{
+display:block;
+width:80px;	
+height:40px;
+float:left;
+border:1px solid #ddd;
+margin:0 5px 5px 0;
+cursor:pointer;
+text-align:center;
+line-height:40px;
+}
+.choose-time span.selected{
+background:#F0FFE5;
+margin:0 5px 5px 0;
+cursor:pointer;
+}
+
+/************个人主页**************/
+#profile .header_wrap{
+height:123px;
+}
+
+.sidebar{
+float:left;	
+width:200px;
+}
+.detail-profile{
+background: #ECEFF5;
+padding:10px;
+font-size:13px;	
+margin-bottom:20px;
+}
+
+.detail-profile p{
+line-height:22px;	
+}
+
+.side-section{
+border: 1px solid #CEE1EE;	
+margin-bottom:20px;
+}
+
+.side-section .title{
+background: #F0F5F8;
+padding:5px 10px;	
+color:#000;
+font-size:14px;	
+
+}
+
+.side-section .content{
+padding:5px;
+}
 
 
+.side-section .item{
+
+}
 
 
+.main-content{
+float:left;
+margin-left:25px;
+width:680px;	
+}
+.section{
+margin-bottom:20px;
+
+}
+
+.section h3{
+font-size:16px;	
+background: #F0F5F8;
+padding:5px;
+}
+
+.section .list{
+margin-top: 0;
+}
+.section .list .item{
+	float:left;
+height:120px;
+border-bottom:0;
+padding-right:20px;
+}
+.section .list .item .pic{
+	float:none;
+padding-right: 0;
+}
+.section .list .item .des{
+text-align:center;
+}
+
+/************难题主页**************/
+
+.detail-profile p .price{
+font-size:20px;	
+padding-left:5px;
+}
+
+.section .line-list .item{
+border-bottom: 1px dashed #999;	
+padding-top:20px;
+padding-bottom:10px;
+}
+.section .line-list .item .pic{
+float:left;	
+padding-right:15px;
+text-align:center;
+}
+.section .line-list .item .pic .name{
+display:block;
+font-size:13px;
+font-weight:bold;
+}
+.join-btn {
+float: right;
+}
+
+.section .content{
+padding:20px 5px;
+}
 

@@ -22,11 +22,5 @@
 
 		</ul>
 	</div><!--end for header-->
-	<ul class="cat-nav">
-		<li><a href="#">所有分类</a></li>
-		<li><a href="#">光学</a></li>
-		<li><a href="#">计算机</a></li>
-		<li><a href="#">机械</a></li>
-	</ul>
 
 </div><!--end for header_wrap-->
