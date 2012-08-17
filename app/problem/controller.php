@@ -79,6 +79,9 @@ class ProblemController extends AppController {
 		}
 		$this->set('$experts', $experts);
 	}
+	public function add(){
+		
+	}
 	
 	public function solution(){
 		

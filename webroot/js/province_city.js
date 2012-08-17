@@ -26,7 +26,7 @@ $.fn.province_city_county = function(vprovince,vcity,vtown){
 	if(_self.data("province")){
 		$sel1.append("<option value='"+_self.data("province")[1]+"'>"+_self.data("province")[0]+"</option>");
 	}
-	$.get('../../js/province_city.xml', function(data){
+	$.get(window.ROOT_URL+'/js/province_city.xml', function(data){
         var arrList = [];
 		$(data).find('province').each(function(){
 			var $province = $(this);
@@ -67,7 +67,7 @@ $.fn.province_city_county = function(vprovince,vcity,vtown){
 			}
 		} else{
 			provinceValue = $('#province').val();
-			$.get('../../js/province_city.xml', function(data){
+			$.get(window.ROOT_URL+'/js/province_city.xml', function(data){
 				$(data).find('province[value="'+provinceValue+'"] > city').each(function(){
 					var $city = $(this);
 					$sel2.append("<option value='"+$city.attr('value')+"'>"+$city.attr('value')+"</option>");
@@ -97,7 +97,7 @@ $.fn.province_city_county = function(vprovince,vcity,vtown){
 	$sel2.change(function(){
 		$sel3[0].options.length=0;
 		var cityValue2 = $('#city').val();
-		$.get('../../js/province_city.xml', function(data){
+		$.get(window.ROOT_URL+'/js/province_city.xml', function(data){
 			$(data).find('city[value="'+cityValue2+'"] > county').each(function(){
 				var $county = $(this);
 				$sel3.append("<option value='"+$county.attr('value')+"'>"+$county.attr('value')+"</option>");
