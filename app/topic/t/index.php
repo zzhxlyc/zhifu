@@ -1,63 +1,100 @@
-<div class="cat-wrapper">
-	<ul class="cat-nav">
-		<li><a href="#">所有分类</a></li>
-		<li><a href="#">光学</a></li>
-		<li><a href="#">计算机</a></li>
-		<li><a href="#">机械</a></li>
-	</ul>
-</div><!--end for cat-wrapper-->
-
 <div class="filter clearfix">
-	<div class="order">
-		<label for="">排序:</label>
-		<a href="<?php echo $home.'/index?order=time'?>" <?php $HTML->if_current($_GET['order'] == 'time')?>>发布时间</a>
-		<a href="<?php echo $home.'/index?order=deadline'?>" <?php $HTML->if_current($_GET['order'] == 'deadline')?>>截止时间</a>
-		<a href="<?php echo $home.'/index?order=budget'?>" <?php $HTML->if_current($_GET['order'] == 'budget')?>>任务金额</a>
-	</div>
-
+	
 	<div class="search">
-		<input type="text" class="text">
-		<input type="button" class="btn">
+		<input type="text" class="text" />
+		<input type="button" class="btn" />
 	</div>
 
 </div><!--end for filter-->
 
-<div class="list">
-	<?php 
-		if(is_array($list)){
-			foreach($list as $o){
-				$desc = strip_tags($o->description);
-	?>
-	<div class="item clearfix">
-		<div class="pic">
-			<img src="<?php echo $o->image?>" width="200" height="150"  alt="<?php echo $o->title?>">
-		</div><!--end for pic-->
-		<div class="middle">
-			<h3 class="title"><?php echo $o->title?></h3>
-			<div class="content"><?php echo $desc?></div>						
-			<div class="status clearfix">
-				<div class="title">任务状态:</div>
-				<div class="status-item <?php $HTML->current(0, $o->status)?>">竞标中</div>
-				<div class="status-item <?php $HTML->current(1, $o->status)?>">专家会诊</div>
-				<div class="status-item last <?php $HTML->current(2, $o->status)?>">已完成</div>
-			</div>
-		</div><!--end for middle-->
+<div class="topic-list">
+	<h3>最新话题</h3>
+	<table>
+		<tr class="top">
+			<td width="60%">话题</td>
+			<td width="13%">作者</td>
+			<td width="7%">回应</td>
+			<td width="20%">最后回应</td>				
+		</tr>
+		<tr>
+			<td><a href="#">征人。。。</a></td>
+			<td>hpp</td>
+			<td>211</td>
+			<td>2012-8-4 11：00</td>					
+			
+		</tr>
+		<tr>
+			<td><a href="#">征人。。。</a></td>
+			<td>hpp</td>
+			<td>211</td>
+			<td>2012-8-4 11：00</td>					
+			
+		</tr>
+		<tr>
+			<td><a href="#">征人。。。</a></td>
+			<td>hpp</td>
+			<td>211</td>
+			<td>2012-8-4 11：00</td>					
+			
+		</tr>
+		<tr>
+			<td><a href="#">征人。。。</a></td>
+			<td>hpp</td>
+			<td>211</td>
+			<td>2012-8-4 11：00</td>					
+			
+		</tr>
+		<tr>
+			<td><a href="#">征人。。。</a></td>
+			<td>hpp</td>
+			<td>211</td>
+			<td>2012-8-4 11：00</td>					
+			
+		</tr>
+		<tr>
+			<td><a href="#">征人。。。</a></td>
+			<td>hpp</td>
+			<td>211</td>
+			<td>2012-8-4 11：00</td>					
+			
+		</tr>
+		<tr>
+			<td><a href="#">征人。。。</a></td>
+			<td>hpp</td>
+			<td>211</td>
+			<td>2012-8-4 11：00</td>					
+			
+		</tr>
+		<tr>
+			<td><a href="#">征人。。。</a></td>
+			<td>hpp</td>
+			<td>211</td>
+			<td>2012-8-4 11：00</td>					
+			
+		</tr>
+		<tr>
+			<td><a href="#">征人。。。</a></td>
+			<td>hpp</td>
+			<td>211</td>
+			<td>2012-8-4 11：00</td>					
+			
+		</tr>
+	</table>
+	
+	<div class="page-wrapper">
+				<div  class="pagenavi"><a class="page-prev page-prev-abled" href="####" title="1"></a>&nbsp;<a href="####" title="1">1</a>&nbsp;<span class="current" title="2">2</span>&nbsp;<a href="####" title="3">3</a>&nbsp;<a href="####" title="4">4</a>&nbsp;<a href="####" title="5">5</a>&nbsp;<a class="page-next page-next-abled" href="####" title="3"> </a></div>
+				<div id="goodslist2-page" class="pagenavi hidden"></div>
+	</div>
+	
+</div><!--end for topic-list-->
 
-		<div class="right">
-			<div class="price-deadline">
-				<p>出价：<span class="num"><?php echo $o->budget?></span>元</p>
-				<p>截止日期：<span class="date"><?php echo $o->deadline?></span></p>						
-			</div>
-			<a href="<?php echo $home.'/'?>" class="btn">我要竞标</a>
-		</div><!--end for right-->
-	</div><!--end for item-->
-	<?php 
-			}
-		}
-	?>
-</div><!--end for list-->
-
-<div class="page-wrapper">
-	<?php output_page_list($links);?>
+<div class="hot-topic-list">
+	<h3>热门话题</h3>
+	
+	<div class="item"><a href="#">sss </a></div>
+	<div class="item"><a href="#">仙剑奇侠传 (2005)的... </a></div>
+	<div class="item"><a href="#">仙剑奇侠传 (2005)的... </a></div>
+	<div class="item"><a href="#">sss </a></div>
+	
 </div>
-
+<div class="clear"></div>

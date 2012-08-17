@@ -8,6 +8,9 @@ class RecruitController extends AppController {
 		$this->set('home', RECRUIT_HOME);
 		parent::before();
 	}
+	public function ask(){
+		
+	}
 	
 	public function index(){
 		$get = $this->request->get;

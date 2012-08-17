@@ -64,7 +64,9 @@ line-height: 0;
 height: 0;
 }
 
-
+.clear{
+clear:both;	
+}
 
 .fl {
 float: left;
@@ -788,4 +790,81 @@ float: right;
 .section .content{
 padding:20px 5px;
 }
+
+/************视频主页**************/
+.new-video{
+	margin-top:20px;
+}
+
+.new-video .list .item {
+height: 150px;
+}
+
+.hot-video {
+	margin-top:40px;
+}
+/************话题主页**************/
+.topic-list{
+	width:640px;
+	float:left;
+	margin:20px 20px 20px 0;
+}
+
+.topic-list h3{
+	font-size: 16px;
+	background: #F0F5F8;
+	padding: 5px;
+	margin-bottom:10px;
+}
+
+
+.topic-list table{
+width:100%;
+}
+.topic-list table td{
+	border-bottom: 1px dashed #DDD;
+	padding: 3px 3px 3px 0;
+	word-wrap: break-word;
+	word-break: break-word;
+}
+.topic-list table .top td{
+font-size:13px;
+}
+
+
+.topic-list table td a{
+color:#369;
+padding:2px;
+}
+.topic-list table td a:hover{
+color:#fff;
+background-color:#369;
+
+}
+
+.hot-topic-list{
+	width:260px;
+	float:left;
+	margin:30px 0 20px 0;
+}
+.hot-topic-list h3{
+	font-size: 14px;
+	margin-bottom:10px;
+
+}
+
+.hot-topic-list .item{
+border-bottom: 1px dashed #DDD;
+padding:4px 0;
+}
+
+.hot-topic-list .item a{
+color:#369;
+}
+.hot-topic-list .item a:hover{
+color:#fff;
+background-color:#369;
+
+}
+
 
