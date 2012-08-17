@@ -7,9 +7,13 @@
 			<a href="#">我的订阅</a>|
 			<a href="#">我的小组</a>|
 			<a href="#">用户中心</a>|
-			<a href="#">发布</a>
-		</div>
+			<a href="#" class="add-content">
+				发布
 
+			</a>
+			
+		</div>
+		
 		<ul class="main-nav">
 			<li><a href="<?php echo PROBLEM_HOME?>" <?php head_tab1()?>>企业难题</a></li>
 			<li><a href="<?php echo IDEA_HOME?>" <?php head_tab2()?>>创意悬赏</a></li>

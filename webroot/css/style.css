@@ -110,6 +110,7 @@ background: url(../images/userinfo_bg.jpg) no-repeat right -8px;
 z-index: 9999;
 visibility: visible;
 position: relative;
+z-index:999;
 }
 
 .header .logo {
@@ -142,7 +143,26 @@ text-align: center;
 color: white;
 padding: 0 5px;
 }
+.top-nav .addbox{
+position:absolute;
+top:35px;	
+right:-999em;
+background:#fff;
+display:none;
+border:1px solid #999;
+}
+.top-nav a.add-content:hover .addbox{
+right:0;	
+}
 
+
+.top-nav .addbox li{
+height:30px;	
+}
+.top-nav .addbox li a{
+padding:2px 15px;
+color:#333;	
+}
 
 .main-nav {
 padding-top: 1px;
@@ -181,7 +201,10 @@ background: url(../images/nav_libg_now.gif) repeat-x right 0px white;
 vertical-align: bottom;
 color: #2271A8;
 }
-
+.cat-wrapper{
+position:absolute;
+top:122px;	
+}
 .cat-nav {
 width: 940px;
 height: 36px;
@@ -198,19 +221,26 @@ height: 35px;
 .cat-nav li a {
 font-size: 13px;
 font-family: '微软雅黑','黑体';
-line-height: 34px;
-text-align: center;
-height: 34px;
-display: block;
-margin: 1px 10px 1px 0;
-padding: 0 7px;
+background: #E1F0F7;
+line-height:36px;
+padding: 5px 10px;
+-webkit-border-radius: 30px;
+-moz-border-radius: 30px;
+-o-border-radius: 30px;
+border-radius: 30px;
+text-decoration: none;
+margin: 0 8px 5px 0;
+}
+.cat-nav li a.current {
+
+background: #259;
+color:#fff;
+
 }
 
-
 .cat-nav li a:hover {
-background: #fff;
-border: 1px solid #999;
-cursor: hand;
+	background: #259;
+	color:#fff;
 }
 /****************************footer**********************************/
 .footer {
@@ -243,7 +273,6 @@ padding-left: 10px;
 /****************************main wrapper**********************************/
 
 .wrapper {
-position: relative;
 clear: both;
 width: 958px;
 margin: 0 auto;
