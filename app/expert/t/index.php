@@ -35,20 +35,15 @@
 		<div class="middle">
 			<h3 class="title"><a href="<?php echo $home.'/profile?id='.$o->id?>"><?php echo $o->name?></a></h3>
 			<div class="content"><?php echo $desc?></div>						
-			<div class="status clearfix">
-				<div class="title">任务状态:</div>
-				<div class="status-item <?php $HTML->current(0, $o->status)?>">竞标中</div>
-				<div class="status-item <?php $HTML->current(1, $o->status)?>">专家会诊</div>
-				<div class="status-item last <?php $HTML->current(2, $o->status)?>">已完成</div>
-			</div>
+			
 		</div><!--end for middle-->
 
 		<div class="right">
 			<div class="price-deadline">
-				<p>出价：<span class="num"><?php echo $o->budget?></span>元</p>
-				<p>截止日期：<span class="date"><?php echo $o->deadline?></span></p>						
+				<p>参与项目总额：<span class="num"><?php echo $o->budget?></span>元</p>
+				<p>擅长领域：<span class="tag">自动化，骑车</span></p>						
 			</div>
-			<a href="<?php echo $home.'/'?>" class="btn">我要竞标</a>
+			<a href="<?php echo $home.'/'?>" class="btn">向他咨询</a>
 		</div><!--end for right-->
 	</div><!--end for item-->
 	<?php 

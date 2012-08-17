@@ -169,17 +169,17 @@ background: url(../images/aa.gif) right 0px no-repeat;
 }
 
 
-.main-nav li .current {
-background: url(../images/nav_libg_now.gif) repeat-x right 0px white;
-vertical-align: bottom;
-color: #2271A8;
-}
-
 .main-nav li .last {
 width: 124px;
 background: url(../images/bb.gif) right -1px no-repeat;
 }
 
+
+.main-nav li .current {
+background: url(../images/nav_libg_now.gif) repeat-x right 0px white;
+vertical-align: bottom;
+color: #2271A8;
+}
 
 .cat-nav {
 width: 940px;
@@ -793,15 +793,26 @@ padding:20px 5px;
 
 /************视频主页**************/
 .new-video{
-	margin-top:20px;
+	width:680px;
+	float:left;
+	margin:20px 30px 20px 0;
+	
 }
 
 .new-video .list .item {
 height: 150px;
+width:150px;
 }
 
 .hot-video {
-	margin-top:40px;
+	margin-top:25px;
+	float:left;
+	width:200px;
+}
+
+.hot-video h3{
+font-size:14px;
+background:none;
 }
 /************话题主页**************/
 .topic-list{
