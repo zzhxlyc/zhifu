@@ -8,7 +8,7 @@
 </div><!--end for filter-->
 
 <div class="topic-list">
-	<h3>最新话题</h3>
+	<h3>最新话题<a href="#" class="fr btn">发表话题</a></h3>
 	<table>
 		<tr class="top">
 			<td width="60%">话题</td>

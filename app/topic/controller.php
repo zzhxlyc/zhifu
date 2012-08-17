@@ -9,6 +9,14 @@ class TopicController extends AppController {
 		parent::before();
 	}
 	
+	public function detail(){
+		
+	}
+	public function add(){
+		
+	}
+	
+	
 	public function index(){
 		$get = $this->request->get;
 		$page = $get['page'];

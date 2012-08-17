@@ -28,8 +28,9 @@ height: 100%;
 
 a {
 text-decoration: none;
-color: #414141;
+color: #259;
 }
+
 
 h1 {
 font-size: 30px;
@@ -169,11 +170,11 @@ background: url(../images/aa.gif) right 0px no-repeat;
 }
 
 
+
 .main-nav li .last {
 width: 124px;
 background: url(../images/bb.gif) right -1px no-repeat;
 }
-
 
 .main-nav li .current {
 background: url(../images/nav_libg_now.gif) repeat-x right 0px white;
@@ -644,7 +645,13 @@ width:60px;
 
 .row input.text{
 border:1px solid #ddd;	
+}
+
+.row input.narrow{
 width:200px;
+}
+.row input.wide{
+width:600px;
 }
 
 .row textarea.text{
@@ -657,7 +664,7 @@ height:100px;
 .row input.btn{
 
 	border:0;
-	margin:30px 0 0 60px;
+	margin:0 20px 0 60px;
 	cursor:pointer;
 }
 
@@ -793,26 +800,15 @@ padding:20px 5px;
 
 /************视频主页**************/
 .new-video{
-	width:680px;
-	float:left;
-	margin:20px 30px 20px 0;
-	
+	margin-top:20px;
 }
 
 .new-video .list .item {
 height: 150px;
-width:150px;
 }
 
 .hot-video {
-	margin-top:25px;
-	float:left;
-	width:200px;
-}
-
-.hot-video h3{
-font-size:14px;
-background:none;
+	margin-top:40px;
 }
 /************话题主页**************/
 .topic-list{
@@ -877,5 +873,62 @@ color:#fff;
 background-color:#369;
 
 }
+/************添加话题**************/
+.back-btn{
+float:left;
+padding-top:5px;
+}
+
+/************单个话题**************/
+.topic{
+	width:640px;
+	float:left;
+}
+
+.topic-meta{
+	font-size:13px;
+	margin-bottom:10px;
+}
+.comment-list{
+	margin-left:60px;
+	margin-top:60px;
+	
+}
+.comment-list .item{
+	margin-top:30px;
+	
+}
+
+.comment-list .item .pic{
+	float:left;
+	margin-right:30px;
+}
 
 
+.comment-list .item .comment-content{
+	float:left;
+	
+	
+}
+
+.comment-list .item .comment-content .comment-meta{
+	background:#F0F5F8;
+	padding:4px;
+	width:480px;
+	margin-bottom:10px;
+}
+
+.comment-list .item .comment-content p{
+line-height:22px;
+}
+
+.reply{
+margin-top:40px;
+}
+
+.reply textarea{
+border:1px solid #ddd;
+width:560px;
+height:150px;	
+margin-bottom:10px;
+}
