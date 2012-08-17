@@ -4,7 +4,7 @@
 
 <div class="row">
 	<label for="title">标题：</label>
-	<input size="80" type="text" name="title" value="<?php echo $recruit->title?>" />
+	<input class="text wide" type="text" name="title" value="<?php echo $recruit->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 <div class="row">
@@ -36,8 +36,8 @@
 </div>
 <div class="row">
 	<input type="hidden" name="available" />
-	<input type="submit" value="保存" class="btn">
-	<input type="button" value="返回" class="btn" onclick="location.href='<?php echo $home?>'">
+	<input type="submit" value="保存" class="btn fl">
+	<a href="<?php echo $home?>" class="back-btn">返回</a>
 </div>	
 
 </form>
