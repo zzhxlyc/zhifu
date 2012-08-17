@@ -1,7 +1,12 @@
 <?php
 
-function img($image){
-	echo UPLOAD_HOME.'/'.$image;
+function img($image, $default = ''){
+	if(!empty($image) && file_exists(UPLOAD_DIR.'/'.$image)){
+		echo UPLOAD_HOME.'/'.$image;
+	}
+	else{
+		echo $default;
+	}
 }
 
 function download($file){
@@ -48,4 +53,13 @@ function output_page_list($page_list, $anchor_id = ''){
 	}
 	echo '</div>'."\n";
 	echo '<div id="goodslist2-page" class="pagenavi hidden"></div>'."\n";
+}
+
+function output_desc($desc){
+	$d = strip_tags($desc);
+	echo subString($d, 100);
+}
+
+function output_money($money){
+	echo $money;
 }

@@ -30,10 +30,10 @@
 	?>
 	<div class="item clearfix">
 		<div class="pic">
-			<img src="<?php echo $o->image?>" width="200" height="150"  alt="<?php echo $o->title?>">
+			<img src="<?php img($o->image)?>" width="200" height="150"  alt="<?php echo $o->title?>">
 		</div><!--end for pic-->
 		<div class="middle">
-			<h3 class="title"><?php echo $o->title?></h3>
+			<h3 class="title"><a href="<?php echo $home.'/profile?id='.$o->id?>"><?php echo $o->name?></a></h3>
 			<div class="content"><?php echo $desc?></div>						
 			<div class="status clearfix">
 				<div class="title">任务状态:</div>

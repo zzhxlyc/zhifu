@@ -16,85 +16,39 @@
 			<td width="7%">回应</td>
 			<td width="20%">最后回应</td>				
 		</tr>
+		<?php 
+			if(is_array($list)){
+				foreach($list as $o){
+		?>
 		<tr>
-			<td><a href="#">征人。。。</a></td>
-			<td>hpp</td>
-			<td>211</td>
-			<td>2012-8-4 11：00</td>					
-			
+			<td><a href="#"><?php echo $o->title?></a></td>
+			<td><?php echo $o->author?></td>
+			<td><?php echo $o->comments?></td>
+			<td><?php echo $o->time?></td>					
 		</tr>
-		<tr>
-			<td><a href="#">征人。。。</a></td>
-			<td>hpp</td>
-			<td>211</td>
-			<td>2012-8-4 11：00</td>					
-			
-		</tr>
-		<tr>
-			<td><a href="#">征人。。。</a></td>
-			<td>hpp</td>
-			<td>211</td>
-			<td>2012-8-4 11：00</td>					
-			
-		</tr>
-		<tr>
-			<td><a href="#">征人。。。</a></td>
-			<td>hpp</td>
-			<td>211</td>
-			<td>2012-8-4 11：00</td>					
-			
-		</tr>
-		<tr>
-			<td><a href="#">征人。。。</a></td>
-			<td>hpp</td>
-			<td>211</td>
-			<td>2012-8-4 11：00</td>					
-			
-		</tr>
-		<tr>
-			<td><a href="#">征人。。。</a></td>
-			<td>hpp</td>
-			<td>211</td>
-			<td>2012-8-4 11：00</td>					
-			
-		</tr>
-		<tr>
-			<td><a href="#">征人。。。</a></td>
-			<td>hpp</td>
-			<td>211</td>
-			<td>2012-8-4 11：00</td>					
-			
-		</tr>
-		<tr>
-			<td><a href="#">征人。。。</a></td>
-			<td>hpp</td>
-			<td>211</td>
-			<td>2012-8-4 11：00</td>					
-			
-		</tr>
-		<tr>
-			<td><a href="#">征人。。。</a></td>
-			<td>hpp</td>
-			<td>211</td>
-			<td>2012-8-4 11：00</td>					
-			
-		</tr>
+		<?php 
+				}
+			}
+		?>
 	</table>
 	
 	<div class="page-wrapper">
-				<div  class="pagenavi"><a class="page-prev page-prev-abled" href="####" title="1"></a>&nbsp;<a href="####" title="1">1</a>&nbsp;<span class="current" title="2">2</span>&nbsp;<a href="####" title="3">3</a>&nbsp;<a href="####" title="4">4</a>&nbsp;<a href="####" title="5">5</a>&nbsp;<a class="page-next page-next-abled" href="####" title="3"> </a></div>
-				<div id="goodslist2-page" class="pagenavi hidden"></div>
+		<?php output_page_list($links);?>
 	</div>
 	
 </div><!--end for topic-list-->
 
 <div class="hot-topic-list">
 	<h3>热门话题</h3>
-	
-	<div class="item"><a href="#">sss </a></div>
-	<div class="item"><a href="#">仙剑奇侠传 (2005)的... </a></div>
-	<div class="item"><a href="#">仙剑奇侠传 (2005)的... </a></div>
-	<div class="item"><a href="#">sss </a></div>
+	<?php 
+		if(is_array($hot_list)){
+			foreach($hot_list as $o){
+	?>
+	<div class="item"><a href="#"><?php echo $o->title?></a></div>
+	<?php 
+			}
+		}
+	?>
 	
 </div>
 <div class="clear"></div>

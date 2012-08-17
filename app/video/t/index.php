@@ -9,17 +9,22 @@
 
 <div class="section new-video">
 	<h3>最新视频</h3>
+<?php 
+	if(is_array($list)){
+		foreach($list as $o){
+?>
 	<div class="list clearfix">
 		<div class="item">
-			<div class="pic"><img src="http://zjuhpp.com/demo/wp-content/uploads/2012/02/hero.jpg" alt="" width="150" height="120"/></div>
-			<div class="des">xxxx</div>
+			<div class="pic"><img src="<?php img($o->image)?>" alt="" width="150" height="120"/></div>
+			<div class="des"><?php echo $o->title?></div>
 		</div>
-		
-		
 	</div><!--end for list-->
-	
-	
+<?php 
+		}
+	}
+?>
 </div><!--end for new-video-->
+
 
 
 <div class="section hot-video">

@@ -36,5 +36,9 @@ class ProblemController extends AppController {
 		$this->set('links', $links);
 	}
 	
+	public function detail(){
+		
+	}
+	
 	
 }

@@ -15,25 +15,11 @@ class VideoController extends AppController {
 		$ord = $get['order'];
 		$limit = 10;
 		$condition = array();
-		$order = array();
-		if($ord == 'time'){
-			$order['time'] = 'DESC';
-		}
-		else if($ord == 'deadline'){
-			$order['deadline'] = 'DESC';
-		}
-		else if($ord == 'budget'){
-			$order['budget'] = 'DESC';
-		}
-		else{
-			$order['id'] = 'DESC';
-		}
 		$all = $this->Video->count($condition);
-		$pager = new Pager($all, $page, $limit);
-		$list = $this->Video->get_page($condition, $order, $pager->now(), $limit);
-		$links = $pager->get_page_links(PROBLEM_HOME.'/index?');
+		$list = $this->Video->get_page($condition, array('time'=>'DESC'), 1, $limit);
 		$this->set('list', $list);
-		$this->set('links', $links);
+		$list2 = $this->Video->get_page($condition, array(), 1, $limit);
+		$this->set('list2', $list2);
 	}
 	
 	

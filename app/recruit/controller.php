@@ -8,9 +8,6 @@ class RecruitController extends AppController {
 		$this->set('home', RECRUIT_HOME);
 		parent::before();
 	}
-	public function ask(){
-		
-	}
 	
 	public function index(){
 		$get = $this->request->get;
@@ -34,9 +31,13 @@ class RecruitController extends AppController {
 		$all = $this->Recruit->count($condition);
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Recruit->get_page($condition, $order, $pager->now(), $limit);
-		$links = $pager->get_page_links(PROBLEM_HOME.'/index?');
+		$links = $pager->get_page_links($this->get('home').'/index?');
 		$this->set('list', $list);
 		$this->set('links', $links);
+	}
+	
+	public function ask(){
+		
 	}
 	
 	

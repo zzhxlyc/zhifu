@@ -5,7 +5,7 @@ class TopicController extends AppController {
 	public $models = array('Topic');
 	
 	public function before(){
-		$this->set('home', VIDEO_HOME);
+		$this->set('home', TOPIC_HOME);
 		parent::before();
 	}
 	
@@ -14,7 +14,7 @@ class TopicController extends AppController {
 		$page = $get['page'];
 		$ord = $get['order'];
 		$limit = 10;
-		$condition = array();
+		$condition = array('parent'=>0);
 		$order = array();
 		if($ord == 'time'){
 			$order['time'] = 'DESC';
@@ -31,9 +31,11 @@ class TopicController extends AppController {
 		$all = $this->Topic->count($condition);
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Topic->get_page($condition, $order, $pager->now(), $limit);
-		$links = $pager->get_page_links(PROBLEM_HOME.'/index?');
+		$links = $pager->get_page_links($this->get('home').'/index?');
 		$this->set('list', $list);
 		$this->set('links', $links);
+		$hot_list = $this->Topic->get_list($condition, array('comments'=>'DESC'), 10);
+		$this->set('hot_list', $hot_list);
 	}
 	
 	

@@ -70,6 +70,7 @@ class Controller{
 		Model::load($this->models);
 		foreach($this->models as $model){
 			$this->$model = new $model();
+			Model::add_object($model, $this->$model);
 		}
 	}
 	

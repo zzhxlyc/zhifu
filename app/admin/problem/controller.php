@@ -2,7 +2,7 @@
 
 class ProblemController extends AdminBaseController {
 	
-	public $models = array('Problem', 'Category', 'Log', 'Tag', 'TagItem');
+	public $models = array('Problem', 'Company', 'Category', 'Log', 'Tag', 'TagItem');
 	public $no_session = array();
 	
 	public function before(){
@@ -16,10 +16,10 @@ class ProblemController extends AdminBaseController {
 		$limit = 10;
 		$all = $this->Problem->count();
 		$pager = new Pager($all, $page, $limit);
-		$list = Model::get_joins(array('problems.*', 'companys.name as name'), 
-										array('problems', 'companys'), 
-										array('problems.company eq'=>'companys.id'), 
-										array('problems.time'=>'DESC'),
+		$list = Model::get_joins(array('P.*', 'C.name as name'), 
+										array('Problem as P', 'Company as C'), 
+										array('P.company eq'=>'C.id'), 
+										array('P.time'=>'DESC'),
 										$pager->get_limit_str());
 		$page_list = $pager->get_page_links(ADMIN_PROBLEM_HOME.'/index?');
 		$this->set('list', $list);

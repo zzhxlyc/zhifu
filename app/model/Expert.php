@@ -26,6 +26,15 @@ class Expert extends AppModel{
 		return parent::escape($data, $escape_array, $ignore);
 	}
 	
+	public function get_rate(){
+		if($this->rate_num == 0){
+			return 0;
+		}
+		else{
+			return sprintf('%.1f', $this->rate_total / $this->rate_num);
+		}
+	}
+	
 	public function status(){
 		if($this->verified == 1){
 			return '已验证';

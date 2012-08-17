@@ -3,7 +3,7 @@
 class ExpertController extends AppController {
 	
 	public $models = array('Expert', 'Tag', 'TagItem', 'Patent', 'Solution', 
-								'Expert');
+								'Expert', 'Problem');
 	
 	public function before(){
 		$this->set('home', EXPERT_HOME);
@@ -32,7 +32,7 @@ class ExpertController extends AppController {
 		$all = $this->Expert->count($condition);
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Expert->get_page($condition, $order, $pager->now(), $limit);
-		$links = $pager->get_page_links(PROBLEM_HOME.'/index?');
+		$links = $pager->get_page_links($this->get('home').'/index?');
 		$this->set('list', $list);
 		$this->set('links', $links);
 	}
@@ -49,6 +49,7 @@ class ExpertController extends AppController {
 		}
 		if($has_error){
 			$this->response->redirect_404();
+			return;
 		}
 		
 		$this->set('$Expert', $Expert);

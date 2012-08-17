@@ -3,6 +3,7 @@
 class MysqlDAO {
 	
 	private static $models = array();
+	private static $objects = array();
 	
 	function MysqlDAO(){}
 	
@@ -23,6 +24,10 @@ class MysqlDAO {
 		foreach($models as $model){
 			self::load_model($model);
 		}
+	}
+	
+	public static function add_object($model, $object){
+		self::$objects[$model] = $object;
 	}
 	
 	private static function _get_db_name(){
@@ -174,6 +179,23 @@ class MysqlDAO {
 		return $sql;
 	}
 	
+	private static function _turn_table_name($table){
+		$f = ord($table);
+		if($f >= ord('A') && $f <= ord('Z')){
+			if(array_key_exists($table, self::$objects)){
+				$Model = self::$objects[$table];
+				$t = $Model->table;
+			}
+			else{
+				$t = strtolower($table);
+			}
+		}
+		else{
+			$t = $table;
+		}
+		return " `$t` ";
+	}
+	
 	private static function build_table(array $table_array){
 		$sql = '';
 		$len = count($table_array);
@@ -191,7 +213,7 @@ class MysqlDAO {
 				}
 			}
 			if(!empty($table)){
-				$sql .= " `$table` ";
+				$sql .= self::_turn_table_name($table);
 				if(!empty($alias)){
 					$sql .= " AS `$alias` ";
 				}
@@ -247,8 +269,15 @@ class MysqlDAO {
 				else if($op == 'like'){
 					$sql .= " $field $op '%$cond%' ";
 				}
+				else if($op == 'leftlike'){
+					$sql .= " $field $op '%$cond' ";
+				}
+				else if($op == 'rightlike'){
+					$sql .= " $field $op '$cond%' ";
+				}
 				else if($op == 'eq'){
-					$sql .= " $field = $cond ";
+					$c = self::_get_table_field($cond);
+					$sql .= " $field = $c ";
 				}
 				else if(is_string($cond)){
 					$sql .= " $field $op '$cond' ";

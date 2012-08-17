@@ -13,13 +13,16 @@ class TagItem extends Model{
 	
 	public function get_most($list, $length = 10){
 		$r = array();
-		foreach($list as $tagid){
-			if(!in_array($tagid, $r)){
-				$r[$tagid] = 0;
+		if(is_array($list)){
+			foreach($list as $tag){
+				$tagid = $tag->id;
+				if(!in_array($tagid, $r)){
+					$r[$tagid] = 0;
+				}
+				$r[$tagid]++;
 			}
-			$r[$tagid]++;
+			arsort($r);
 		}
-		arsort($r);
 		if(count($r) > 10){
 			return array_slice($r, 0, 10);
 		}
