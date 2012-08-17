@@ -27,12 +27,27 @@ class VideoController extends AppController {
 		
 		list($from, $to) = DateCrossUtil::this_month();
 		$cond = array('time >='=>$from);
-		$hot_list = $this->Video->get_list($cond, array('click'=>'DESC'), 3);
+		$hot_list = $this->Video->get_list($cond, array('click'=>'DESC'), $limit);
 		$this->set('hot_list', $hot_list);
 	}
 	
 	public function url(){
+		$get = $this->request->get;
+		$id = get_id($get);
+		$has_error = true;
+		if($id){
+			$video = $this->Video->get($id);
+			if($video){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
 		
+		$video->click_up();
+		$this->response->redirect($video->url);
 	}
 	
 }

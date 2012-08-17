@@ -2,7 +2,8 @@
 
 class ProblemController extends AppController {
 	
-	public $models = array('Problem', 'Company', 'Expert', 'Tag', 'TagItem', 'Solution');
+	public $models = array('Problem', 'Company', 'Expert', 'Tag', 'TagItem', 
+						'Solution', 'Category');
 	
 	public function before(){
 		$this->set('home', PROBLEM_HOME);
@@ -79,8 +80,27 @@ class ProblemController extends AppController {
 		}
 		$this->set('$experts', $experts);
 	}
+	
+	private function add_data($id = Null){
+		$cat_array = $this->Category->get_category();
+		$this->set('cat_array', $cat_array);
+		if($id){
+			$tags = $this->TagItem->get_list(array('belong'=>$id, 
+											'type'=>BelongType::PROBLEM));
+			$tag_id_array = get_attrs($tags, 'tag');
+			if($tag_id_array){
+				$tag_list = $this->Tag->get_list(array('id in'=>$tag_id_array));
+				$this->set('tag_list', $tag_list);
+			}
+		}
+		$most_common_tags = unserialize(Option::find('MOST_COMMON_TAGS'));
+		if($most_common_tags){
+			$this->set('$most_common_tags', $most_common_tags);
+		}
+	}
+	
 	public function add(){
-		
+		$this->add_data();
 	}
 	
 	public function solution(){

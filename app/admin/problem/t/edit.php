@@ -33,15 +33,15 @@
 
 <div class="row">
 	<label for="budget">预算</label>
-		<input size="20" type="text" name="budget" value="<?php echo $problem->budget?>" />万元
-		<span class="error"><?php echo $errors['budget']?></span>
+	<input size="20" type="text" name="budget" value="<?php echo $problem->budget?>" />万元
+	<span class="error"><?php echo $errors['budget']?></span>
 </div>
 
 
 <div class="row">
 	<label for="deadline">截止日期</label>
-		<input size="20" type="text" name="deadline" class="datepicker" value="<?php echo get_date($problem->deadline)?>" readonly="readonly" />
-		<span class="error"><?php echo $errors['deadline']?></span>
+	<input size="20" type="text" name="deadline" class="datepicker" value="<?php echo get_date($problem->deadline)?>" readonly="readonly" />
+	<span class="error"><?php echo $errors['deadline']?></span>
 </div>
 
 <div class="row">

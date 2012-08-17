@@ -26,6 +26,10 @@ class Video extends AppModel{
 		return parent::escape($data, $escape_array, $ignore);
 	}
 	
+	public function click_up(){
+		$this->update(array('click eq'=>'click + 1'), array('id'=>$this->id));
+	}
+	
 	/**
 	 * http://v.youku.com/v_show/id_XNDIxODQ4NTUy.html
 	 * http://www.tudou.com/listplay/aAMUFQNfZnY.html
