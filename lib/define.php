@@ -12,7 +12,7 @@ define('CONF_DIR', ROOT_DIR.'/conf');
 define('APP_DIR', ROOT_DIR.'/app');
 
 define('LIB_DIR', APP_DIR.'/lib');
-define('LIB_UTIL_DIR', APP_DIR.'/util');
+define('LIB_UTIL_DIR', LIB_DIR.'/util');
 define('MODEL_DIR', APP_DIR.'/model');
 define('VIEW_DIR', APP_DIR.'/view');
 define('LAYOUT_DIR', VIEW_DIR.'/layout');

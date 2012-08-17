@@ -1,6 +1,6 @@
 <?php
 
-include(LIB_DIR.'/VideoUrlParser.class.php');
+include(LIB_UTIL_DIR.'/VideoUrlParser.class.php');
 
 class Video extends AppModel{
 
