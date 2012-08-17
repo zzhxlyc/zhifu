@@ -1,5 +1,18 @@
 <?php
 
+function get_user_id($user){
+	return $user->id;
+}
+
+function get_user_type($user){
+	$array = array('Company', 'Expert', 'Admin');
+	foreach($array as $type){
+		if(is_a($user, $type)){
+			return $type;
+		}
+	}
+}
+
 function img($image, $default = ''){
 	if(!empty($image) && file_exists(UPLOAD_DIR.'/'.$image)){
 		echo UPLOAD_HOME.'/'.$image;

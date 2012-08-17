@@ -6,7 +6,7 @@ class Topic extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'content', 'parent', 'belong', 'type'),
+			'need' => array('content', 'parent', 'belong', 'type'),
 			'length' => array('title'=>250),
 			'int' => array('parent', 'belong'),
 			'word' => array('title', 'content')
@@ -22,6 +22,30 @@ class Topic extends AppModel{
 			'html'=>array('content')
 		);
 		return parent::escape($data, $escape_array, $ignore);
+	}
+	
+	public function comment_plus($id = Null){
+		if($id){
+			$this->update(array('comments eq'=>'comments + 1'), array('id'=>$id));
+		}
+		else{
+			$this->update(array('comments eq'=>'comments + 1'), array('id'=>$this->parent));
+		}
+	}
+	
+	public function get_author_link(){
+		if($this->type == BelongType::COMPANY){
+			return COMPANY_HOME.'/detail?id='.$this->belong;
+		}
+		else if($this->type == BelongType::EXPERT){
+			return EXPERT_HOME.'/profile?id='.$this->belong;
+		}
+		else if($this->type == BelongType::ADMIN){
+			return '#';
+		}
+		else{
+			return '#';
+		}
 	}
 
 }

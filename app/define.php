@@ -31,6 +31,7 @@ define('ADMIN_SOLUTION_HOME', ADMIN_HOME.'/solution');
 
 define('PROBLEM_HOME', ROOT_URL.'/problem');
 define('EXPERT_HOME', ROOT_URL.'/expert');
+define('COMPANY_HOME', ROOT_URL.'/company');
 define('PATENT_HOME', ROOT_URL.'/patent');
 define('IDEA_HOME', ROOT_URL.'/idea');
 define('VIDEO_HOME', ROOT_URL.'/video');
