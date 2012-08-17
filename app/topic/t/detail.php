@@ -1,47 +1,73 @@
 <div class="topic">
-	<h2>话题名</h2>
+	<h2><?php echo $topic->title?></h2>
 	<div class="topic-meta">
-		<span class="time">2012-3-1 14:23</span>
-		<span class="author">来自：<a href="#">xxx</a></span>
+		<span class="time"><?php echo $topic->time?></span>
+		<span class="author">来自：
+			<a href="<?php echo $topic->get_author_link()?>"><?php echo $topic->author?></a>
+		</span>
+		<span class="op">
+			<a href="<?php echo $home.'/edit?id='.$topic->id?>">编辑</a>
+		</span>
 	</div>
 	<div class="topic-content">
-		话说，有个老汉在海边捡了一条大鱼，然后被人2万多块一斤给收走了！！！2万多一斤啊！！！！这是黄金做的吗！！！顺便说一下，那条鱼重160斤，大家请自己做一道小学数学题…… 
-
-		我拉个去~~~！！！比买彩票还随意啊~！！！+ 
-		大家有木有羡慕嫉妒恨啊！！
+		<?php echo $topic->content?>
 	</div>
 	<div class="comment-list">
+		<?php foreach($list as $o){?>
 		<div class="item clearfix">
-			<div class="pic"><img src="http://zjuhpp.com/demo/wp-content/uploads/2012/02/hero.jpg" alt="" width="48" height="48"  /></div>
 			<div class="comment-content">
-				<div class="comment-meta">2012-08-17 16:14:55 苏年锦食</div>
-				<p>真相·发家史·请看这里</p>
+				<div class="comment-meta">
+					<?php echo $o->time?> 
+					<a href="<?php echo $o->get_author_link()?>"><?php echo $o->author?></a>
+					<span class="op">
+						<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
+					</span>
+				</div>
+				<p><?php echo $o->content?></p>
 			</div>
 		</div><!--end for item-->
-		<div class="item clearfix">
-			<div class="pic"><img src="http://zjuhpp.com/demo/wp-content/uploads/2012/02/hero.jpg" alt="" width="48" height="48"  /></div>
-			<div class="comment-content">
-				<div class="comment-meta">2012-08-17 16:14:55 苏年锦食</div>
-				<p>真相·发家史·请看这里</p>
-			</div>
-		</div><!--end for item-->
-		<div class="item clearfix">
-			<div class="pic"><img src="http://zjuhpp.com/demo/wp-content/uploads/2012/02/hero.jpg" alt="" width="48" height="48"  /></div>
-			<div class="comment-content">
-				<div class="comment-meta">2012-08-17 16:14:55 苏年锦食</div>
-				<p>真相·发家史·请看这里</p>
-			</div>
-		</div><!--end for item-->
-
-
-
+		<?php }?>
 	</div>	<!--end for comment-list-->
+	
+	<div class="page-wrapper">
+		<?php output_page_list($links);?>
+	</div>
 	
 	<div class="reply">
 		<h2>我要回复</h2>
-		<textarea name="" class="" cols="30" rows="10"></textarea>
-		<a href="#" class="btn">回复</a>
+		<textarea id="content" class="" cols="30" rows="10"></textarea>
+		<input type="hidden" id="parent" value="<?php echo $topic->id?>" />
+		<a href="#" class="btn" onclick="reply()">回复</a>
+		<a href="#" class="btn" onclick="location.href='<?php echo $home?>'">返回</a>
 	</div>
 	
-	
 </div><!--end for topic-->
+
+<script type="text/javascript">
+<!--
+function check_content(content){
+	if(content == ''){
+		return false;
+	}
+	return true;
+}
+
+function reply(){
+	var content = $("#content").val();
+	var parent = parseInt($("#parent").val());
+	if(check_content(content) && parent > 0){
+		$.ajax({
+			type: "POST",
+			url: window.ROOT_URL + '/topic/reply',
+			data: "content="+content+"&parent="+parent,
+			success: function(msg){
+				alert(msg);
+			}
+		});
+	}
+	else{
+		alert('error');
+	}
+}
+//-->
+</script>

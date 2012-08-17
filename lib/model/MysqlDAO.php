@@ -522,7 +522,7 @@ class MysqlDAO {
 
 	public static function _update($table, array $set, array $condition = array(), 
 									array $order = array(), $limit = ''){
-		$sql = 'UPDATE '.$table;
+		$sql = 'UPDATE '.self::_get_table_name($table);
 		if(is_array($set) && count($set) > 0){
 			$sql .= ' SET '.self::build_set($set);
 		}

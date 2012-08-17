@@ -1,6 +1,6 @@
 <?php
 
-Model::load(array('AppModel', 'BelongType', 'Word', 'Option'));
+Model::load(array('AppModel', 'BelongType', 'Word', 'Option', 'Expert', 'Company'));
 
 App::load('util', 'TrieTree');
 App::load('util', 'FileSystem');

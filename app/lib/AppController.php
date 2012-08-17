@@ -6,6 +6,18 @@ class AppController extends Controller{
 		if($this->is_set('home')){
 			$this->set('index_page', $this->get('home').'/index');
 		}
+		$User = new Expert();
+		$User->id = 1;
+		$this->set('user', $User);
+	}
+	
+	public function get_data(){
+		if($this->request->post){
+			return $this->request->post;
+		}
+		else{
+			return $this->request->get;
+		}
 	}
 	
 	protected function upload_file($array){

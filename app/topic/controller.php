@@ -10,12 +10,128 @@ class TopicController extends AppController {
 	}
 	
 	public function detail(){
+		$get = $this->request->get;
+		$id = get_id($get);
+		$has_error = true;
+		if($id){
+			$topic = $this->Topic->get($id);
+			if($topic){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
 		
-	}
-	public function add(){
-		
+		$this->set('$topic', $topic);
+		$cond = array('parent'=>$id);
+		$all = $this->Topic->count($cond);
+		$limit = 10;
+		$page = $get['page'];
+		$pager = new Pager($all, $page, $limit);
+		$list = $this->Topic->get_page($cond, array('time'=>'DESC'), 
+										$pager->now(), $limit);
+		$links = $pager->get_page_links($this->get('home')."/detail?id=$id&");
+		$this->set('list', $list);
+		$this->set('links', $links);
 	}
 	
+	public function add(){
+		if($this->request->post){
+			$post = $this->request->post;
+			$post['parent'] = 0;
+			$post['belong'] = 1;
+			$post['type'] = BelongType::EXPERT;
+			$post['author'] = 'add';
+			$errors = $this->Topic->check($post);
+			if(count($errors) == 0){
+				$post['comments'] = 0;
+				$post['time'] = DATETIME;
+				$this->Topic->escape($post);
+				$id = $this->Topic->save($post);
+				$this->redirect('detail?id='.$id);
+			}
+			else{
+				$topic = $this->set_model($post);
+				$this->set('errors', $errors);
+				$this->set('topic', $topic);
+			}
+		}
+	}
+	
+	public function edit(){
+		$data = $this->get_data();
+		$id = get_id($data);
+		$has_error = true;
+		if($id){
+			$topic = $this->Topic->get($id);
+			if($topic){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		if($topic->parent == 0){
+			$back_id = $topic->id;
+		}
+		else{
+			$back_id = $topic->parent;
+		}
+		if($this->request->post){
+			$post = $this->request->post;
+			$topic = $this->set_model($post, $topic);
+			$errors = $this->Topic->check($topic);
+			if(count($errors) == 0){
+				$this->Topic->escape($post);
+				$id = $this->Topic->save($post);
+				$this->redirect('detail?id='.$back_id);
+			}
+			else{
+				$this->set('errors', $errors);
+			}
+		}
+		
+		$this->set('$topic', $topic);
+		$back_url = $this->get('home').'/detail?id='.$back_id;
+		$this->set('$back_url', $back_url);
+	}
+	
+	public function reply(){
+		$post = $this->request->post;
+		$parent = $post['parent'];
+		$has_error = true;
+		if($parent){
+			$topic = $this->Topic->get($parent);
+			if($topic && $topic->parent == 0){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->redirect('index');
+		}
+		$this->layout('ajax');
+		
+		$post['title'] = '';
+		$post['belong'] = 1;
+		$post['type'] = BelongType::EXPERT;
+		$post['author'] = 'aaa';
+		$errors = $this->Topic->check($post);
+		if(count($errors) == 0){
+			$post['comments'] = 0;
+			$post['time'] = DATETIME;
+			$this->Topic->escape($post);
+			$id = $this->Topic->save($post);
+			$this->Topic->comment_plus($parent);
+			echo $id;
+		}
+		else{
+			echo 0;
+		}
+	}
 	
 	public function index(){
 		$get = $this->request->get;
