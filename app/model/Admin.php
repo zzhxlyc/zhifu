@@ -1,6 +1,6 @@
 <?php
 
-class Admin extends Model{
+class Admin extends User {
 
 	public $table = 'admins';
 	
@@ -21,6 +21,10 @@ class Admin extends Model{
 			'html'=>array()
 		);
 		return parent::escape($data, $escape_array, $ignore);
+	}
+	
+	public function is_admin(){
+		return false;
 	}
 	
 	public function status(){

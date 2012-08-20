@@ -67,4 +67,11 @@ class FileSystem {
 		return TIMESTAMP.rand(100, 999);
 	}
 	
+	public static function remove($path){
+		$file = self::get_save_path($path);
+		if(file_exists($file) && is_file($file)){
+			unlink($file);
+		}
+	}
+	
 }

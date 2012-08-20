@@ -1,6 +1,12 @@
 <?php
 
-Model::load(array('AppModel', 'BelongType', 'Word', 'Option', 'Expert', 'Company'));
+include(MODEL_DIR.'/AppModel.php');
+include(MODEL_DIR.'/User.php');
+Model::add_model('AppModel');
+Model::add_model('User');
+
+Model::load(array('BelongType', 'Word', 'Option', 
+		'Expert', 'Company', 'Admin'));
 
 App::load('util', 'TrieTree');
 App::load('util', 'FileSystem');

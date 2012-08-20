@@ -1,7 +1,5 @@
 <?php
 
-Model::load(array('Admin', 'Company', 'Expert'));
-
 class BelongType {
 	
 	const ADMIN = 'Admin';

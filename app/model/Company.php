@@ -1,6 +1,6 @@
 <?php
 
-class Company extends AppModel{
+class Company extends User {
 
 	public $table = 'companys';
 	
@@ -23,6 +23,10 @@ class Company extends AppModel{
 			'html'=>array('description')
 		);
 		return parent::escape($data, $escape_array, $ignore);
+	}
+	
+	public function is_company(){
+		return true;
 	}
 	
 	public function status(){

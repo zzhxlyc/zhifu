@@ -1,10 +1,12 @@
 <div class="cat-wrapper">
+	<!-- 
 	<ul class="cat-nav">
 		<li><a href="#">所有分类</a></li>
 		<li><a href="#">光学</a></li>
 		<li><a href="#">计算机</a></li>
 		<li><a href="#">机械</a></li>
 	</ul>
+	 -->
 </div><!--end for cat-wrapper-->
 
 <div class="filter clearfix">
@@ -30,7 +32,7 @@
 	?>
 	<div class="item clearfix">
 		<div class="pic">
-			<img src="<?php echo $o->image?>" width="200" height="150"  alt="<?php echo $o->title?>">
+			<img src="<?php img($o->image)?>" width="200" height="150"  alt="<?php echo $o->title?>">
 		</div><!--end for pic-->
 		<div class="middle">
 			<h3 class="title"><a href="<?php echo $home.'/detail?id='.$o->id?>"><?php echo $o->title?></a></h3>

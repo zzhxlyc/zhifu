@@ -2,7 +2,32 @@
 
 class Model extends MysqlDAO {
 	
+	private static $models = array();
+	private static $objects = array();
+	
 	function Model(){}
+	
+	public static function add_model($model){
+		self::$models[] = $model;
+	}
+	
+	public static function load_model($model){
+		$file = MODEL_DIR."/$model.php";
+		if(file_exists($file) && !in_array($model, self::$models)){
+			include($file);
+			self::$models[] = $model;
+		}
+	}
+	
+	public static function load(array $models){
+		foreach($models as $model){
+			self::load_model($model);
+		}
+	}
+	
+	public static function add_object($model, $object){
+		self::$objects[$model] = $object;
+	}
 	
 	protected function _check_get_value(&$data, $name){
 		if(is_object($data)){

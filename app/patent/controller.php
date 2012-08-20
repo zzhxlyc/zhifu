@@ -2,11 +2,15 @@
 
 class PatentController extends AppController {
 	
-	public $models = array('Patent');
+	public $models = array('Patent', 'Tag', 'TagItem', 'Category');
 	
 	public function before(){
 		$this->set('home', PATENT_HOME);
 		parent::before();
+		$need_login = array();	// either
+		$need_company = array();
+		$need_expert = array();
+		$this->login_check($need_login, $need_company, $need_expert);
 	}
 	
 	public function index(){
@@ -34,6 +38,61 @@ class PatentController extends AppController {
 		$links = $pager->get_page_links($this->get('home').'/index?');
 		$this->set('list', $list);
 		$this->set('links', $links);
+	}
+	
+
+	private function set_data($Patent){
+		$cat_array = $this->Category->get_category();
+		$this->set('cat_array', $cat_array);
+		$this->add_tag_data($Patent->id, BelongType::PATENT);
+	}
+	
+	public function edit(){
+		$data = $this->get_data();
+		$id = $data['id'];
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Patent = $this->Patent->get($id);
+//			if($Patent && $User->is_expert() && $Patent->expert == $User->id){
+			if($Patent){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		if($this->request->post){
+			$post = $this->request->post;
+			$Patent = $this->set_model($post, $Patent);
+			$errors = $this->Patent->check($Patent);
+			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('image', $errors, $files);
+				if($path){$post['image'] = $path;}
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
+			}
+			if(count($errors) == 0){
+				$this->do_tag($id, BelongType::PATENT, 
+									$post['old_tag'], $post['new_tag']);
+				unset($post['old_tag'], $post['new_tag']);
+				if($post['image'] && $Patent->image){
+					FileSystem::remove($Patent->image);
+				}
+				if($post['file'] && $Patent->file){
+					FileSystem::remove($Patent->file);
+				}
+				$this->Patent->escape($post);
+				$this->Patent->save($post);
+				$this->redirect('edit?succ&id='.$id);
+			}
+			$this->set('errors', $errors);
+		}
+		$this->set_data($Patent);
+		$this->set('patent', $Patent);
 	}
 	
 	

@@ -2,112 +2,78 @@
 
 class CompanyController extends AppController {
 	
-	public $models = array('Company');
+	public $models = array('TagItem', 'Tag', 'Problem');
 	
 	public function before(){
-		$need_no_session = array();
-		$method = $this->request->get_method();
-		if(!in_array($method, $need_no_session)){
-			$this->load_session();
-			$admin = get_admin_session($this->session);
-			if(!$admin){
-				$this->response->redirect('login');
+		$this->set('home', COMPANY_HOME);
+		parent::before();
+		$need_login = array();	// either
+		$need_company = array();
+		$need_expert = array();
+		$this->login_check($need_login, $need_company, $need_expert);
+	}
+	
+	private function add_profile_data(&$company){
+		$this->add_tag_data($company->id, BelongType::COMPANY);
+		
+		$list = $this->Problem->get_list(array('company'=>$company->id));
+		$company->problem_num = count($list);
+		$sum = 0;
+		foreach($list as $o){
+			$sum += $o->budget;
+		}
+		$company->problem_budget = $sum;
+		
+		$company->patent_num = 0;
+		$company->patent_budget = 0;
+	}
+	
+	public function edit(){
+		$data = $this->get_data();
+		$id = $data['id'];
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Company = $this->Company->get($id);
+//			if($Company && $Company->id == $User->id){
+			if($Company){
+				$has_error = false;
 			}
 		}
-		$this->set('home', ADMIN_COMPANY_HOME.'/index');
-	}
-	
-	public function index(){
-		$get = $this->request->get;
-		$page = $get['page'];
-		$limit = 10;
-		$condition = array();
-		$all = $this->Company->count($condition);
-		$pager = new Pager($all, $page, $limit);
-		$list = $this->Company->get_page($condition, array('id'=>'DESC'), 
-											$pager->now(), $limit);
-		$links = $pager->get_page_links(ADMIN_COMPANY_HOME.'/index?');
-		$this->set('list', $list);
-		$this->set('links', $links);
-	}
-	
-	private function do_file(&$data, &$errors, &$files){
-		$file = $files['license'];
-		if($file && is_uploaded_file($file['tmp_name'])){
-			$error = $this->Company->check_file($file);
-			if(empty($error)){
-				$path = $this->upload_file($file);
-				$data['license'] = $path;
-			}
-			else{
-				$errors['license'] = $error;
-			}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
 		}
-	}
-	
-	public function register(){
+		
 		if($this->request->post){
 			$post = $this->request->post;
-			$post['verified'] = 0;
-			$errors = $this->Company->check($post);
+			$Company = $this->set_model($post, $Company);
+			$errors = $this->Company->check($Company);
 			if(count($errors) == 0){
-				$this->do_file($post, $errors, $this->request->file);
+				$files = $this->request->file;
+				$path = $this->do_file('image', $errors, $files);
+				if($path){$post['image'] = $path;}
+				$path = $this->do_file('license', $errors, $files);
+				if($path){$post['license'] = $path;}
 			}
 			if(count($errors) == 0){
-				$post['rate_total'] = 0;
-				$post['rate_num'] = 0;
-				$post['time'] = DATETIME;
+				$this->do_tag($id, BelongType::COMPANY, 
+									$post['old_tag'], $post['new_tag']);
+				unset($post['old_tag'], $post['new_tag']);
+				if($post['image'] && $Company->image){
+					FileSystem::remove($Company->image);
+				}
+				if($post['license'] && $Company->license){
+					FileSystem::remove($Company->license);
+				}
 				$this->Company->escape($post);
 				$this->Company->save($post);
-				$this->response->redirect('index');
-			}
-			else{
-				$company = $this->set_model($post);
-				$this->set('errors', $errors);
-				$this->set('company', $company);
+				$this->redirect('succ&edit?id='.$id);
 			}
 		}
+		$this->add_tag_data($Company->id, BelongType::COMPANY);
+		$this->set('company', $Company);
 	}
-
-	public function edit(){
-		if($this->request->post){
-			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			$id = get_id($post);
-			if($id > 0){
-				$company = $this->Company->get($id);
-			}
-			if($company){
-				$company = $this->set_model($post, $company);
-				$errors = $this->Company->check($company);
-				if(count($errors) == 0){
-					$this->Company->escape($post);
-					$this->Company->save($post);
-					$this->Log->action_company_edit($admin, $company->name);
-					$this->response->redirect('edit?id='.$id);
-				}
-				else{
-					$this->set('errors', $errors);
-					$this->set('company', $company);
-				}
-			}
-			else{
-				$this->set('error', '不存在');
-			}
-		}
-		else{
-			$get = $this->request->get;
-			$id = get_id($get);
-			if($id > 0){
-				$company = $this->Company->get($id);
-			}
-			if($company){
-				$this->set('company', $company);
-			}
-			else{
-				$this->set('error', '不存在');
-			}
-		}
-	}
+	
 	
 }

@@ -2,12 +2,15 @@
 
 class ProblemController extends AppController {
 	
-	public $models = array('Problem', 'Company', 'Expert', 'Tag', 'TagItem', 
-						'Solution', 'Category');
+	public $models = array('Problem', 'Tag', 'TagItem', 'Solution', 'Category');
 	
 	public function before(){
 		$this->set('home', PROBLEM_HOME);
 		parent::before();
+		$need_login = array();	// either
+		$need_company = array();
+		$need_expert = array();
+		$this->login_check($need_login, $need_company, $need_expert);
 	}
 	
 	public function index(){
@@ -81,26 +84,67 @@ class ProblemController extends AppController {
 		$this->set('$experts', $experts);
 	}
 	
-	private function add_data($id = Null){
+	private function add_data($Problem = null){
 		$cat_array = $this->Category->get_category();
 		$this->set('cat_array', $cat_array);
-		if($id){
-			$tags = $this->TagItem->get_list(array('belong'=>$id, 
-											'type'=>BelongType::PROBLEM));
-			$tag_id_array = get_attrs($tags, 'tag');
-			if($tag_id_array){
-				$tag_list = $this->Tag->get_list(array('id in'=>$tag_id_array));
-				$this->set('tag_list', $tag_list);
-			}
+		if($Problem){
+			$this->add_tag_data($Problem->id, BelongType::PROBLEM);
 		}
-		$most_common_tags = unserialize(Option::find('MOST_COMMON_TAGS'));
-		if($most_common_tags){
-			$this->set('$most_common_tags', $most_common_tags);
+		else{
+			$this->add_tag_data(0);
 		}
 	}
 	
 	public function add(){
 		$this->add_data();
+	}
+	
+	public function edit(){
+		$data = $this->get_data();
+		$id = $data['id'];
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Problem = $this->Problem->get($id);
+//			if($Problem && $User->is_company() && $Problem->company == $User->id){
+			if($Problem){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		if($this->request->post){
+			$post = $this->request->post;
+			$Problem = $this->set_model($post, $Problem);
+			$errors = $this->Problem->check($Problem);
+			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('image', $errors, $files);
+				if($path){$post['image'] = $path;}
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
+			}
+			if(count($errors) == 0){
+				$this->do_tag($id, BelongType::PROBLEM, 
+									$post['old_tag'], $post['new_tag']);
+				unset($post['old_tag'], $post['new_tag']);
+				if($post['image'] && $Problem->image){
+					FileSystem::remove($Problem->image);
+				}
+				if($post['file'] && $Problem->file){
+					FileSystem::remove($Problem->file);
+				}
+				$this->Problem->escape($post);
+				$this->Problem->save($post);
+				$this->redirect('edit?succ&id='.$id);
+			}
+			$this->set('errors', $errors);
+		}
+		$this->add_data($Problem);
+		$this->set('problem', $Problem);
 	}
 	
 	public function solution(){

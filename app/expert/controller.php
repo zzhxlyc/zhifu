@@ -82,4 +82,62 @@ class ExpertController extends AppController {
 		$this->set('$problems', $problems);
 	}
 	
+	private function add_profile_data(&$Expert){
+		$this->add_tag_data($Expert->id, BelongType::EXPERT);
+		
+		$list = $this->Problem->get_list(array('company'=>$Expert->id));
+		$Expert->problem_num = count($list);
+		$sum = 0;
+		foreach($list as $o){
+			$sum += $o->budget;
+		}
+		$Expert->problem_budget = $sum;
+		
+		$Expert->patent_num = 0;
+		$Expert->patent_budget = 0;
+	}
+	
+	public function edit(){
+		$data = $this->get_data();
+		$id = $data['id'];
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Expert = $this->Expert->get($id);
+//			if($Expert && $Expert->is_expert() && $Expert->id == $User->id){
+			if($Expert){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		if($this->request->post){
+			$post = $this->request->post;
+			$Expert = $this->set_model($post, $Expert);
+			$errors = $this->Expert->check($Expert);
+			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('image', $errors, $files);
+				if($path){$post['image'] = $path;}
+			}
+			if(count($errors) == 0){
+				$this->do_tag($id, BelongType::EXPERT, 
+									$post['old_tag'], $post['new_tag']);
+				unset($post['old_tag'], $post['new_tag']);
+				if($post['image'] && $Expert->image){
+					FileSystem::remove($Expert->image);
+				}
+				$this->Expert->escape($post);
+				$this->Expert->save($post);
+				$this->redirect('succ&edit?id='.$id);
+			}
+			$this->set('errors', $errors);
+		}
+		$this->add_tag_data($Expert->id, BelongType::EXPERT);
+		$this->set('expert', $Expert);
+	}
+	
 }

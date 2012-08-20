@@ -2,13 +2,82 @@
 
 class AppController extends Controller{
 	
+	public function load_model(){
+		$t = array('Company', 'Expert', 'Admin');
+		$this->models = array_merge($this->models, $t);
+		parent::load_model();
+	}
+	
 	public function before(){
+		$this->load_session();
+		$cookies = $this->request->cookie;
+		if(isset($cookies[COOKIE_U])){
+			$cookie = $cookies[COOKIE_U];
+			if(strpos($cookie, ';') !== false){
+				$r = explode(';', $cookie);
+				if(count($r) == 3){
+					list($type, $user, $pswd) = $r;
+					if($type && $user && $pswd){
+						$cond = array('username'=>$user, 'password'=>$pswd);
+						if($type == md5('Company')){
+							$Company = $this->Company->get_row($cond);
+							if($Company){
+								$this->set('User', $Company);
+							}
+						}
+						else if($type == md5('Expert')){
+							$Expert = $this->Expert->get_row($cond);
+							if($Expert){
+								$this->set('User', $Expert);
+							}
+						}
+					}
+				}
+			}
+		}
+		$session = $this->session;
+		if($session->exist('admin')){
+			$admin_id = intval($session->get('admin'));
+			if($admin_id){
+				$Admin = $this->Admin->get($admin_id);
+				if($Admin){
+					$this->set('User', $Admin);
+				}
+			}
+		}
 		if($this->is_set('home')){
 			$this->set('index_page', $this->get('home').'/index');
 		}
-		$User = new Expert();
-		$User->id = 1;
-		$this->set('user', $User);
+	}
+	
+	public function login_check($need_login, $need_company, $need_expert){
+		$method = $this->request->get_method();
+		$User = $this->get('User');
+		$redirect = false;
+		if(in_array($method, $need_login)){
+			$redirect = true;
+			if($User){
+				$redirect = false;
+			}
+		}
+		if(in_array($method, $need_company)){
+			$redirect = true;
+			if($User && $User->is_company()){
+				$redirect = false;
+			}
+		}
+		if(in_array($method, $need_expert)){
+			$redirect = true;
+			if($User && $User->is_expert()){
+				$redirect = false;
+			}
+		}
+		if($User && $User->is_admin()){
+			$redirect = false;
+		}
+		if($redirect){
+			$this->response->redirect(LOGIN_HOME);
+		}
 	}
 	
 	public function get_data(){
@@ -18,6 +87,41 @@ class AppController extends Controller{
 		else{
 			return $this->request->get;
 		}
+	}
+	
+	protected function add_tag_data($id, $type = '', $common = true){
+		if($id > 0){
+			$tags = $this->TagItem->get_list(array('belong'=>$id, 'type'=>$type));
+			$tag_id_array = get_attrs($tags, 'tag');
+			if($tag_id_array){
+				$tag_list = $this->Tag->get_list(array('id in'=>$tag_id_array));
+				$this->set('tag_list', $tag_list);
+			}
+		}
+		if($common){
+			$most_common_tags = unserialize(Option::find('MOST_COMMON_TAGS'));
+			if($most_common_tags){
+				$this->set('$most_common_tags', $most_common_tags);
+			}
+		}		
+	}
+	
+	protected function do_file($name, &$errors, &$files, $model = ''){
+		if($model == ''){
+			$model = ucfirst($this->request->get_module());
+		}
+		$file = $files[$name];
+		if($file && is_uploaded_file($file['tmp_name'])){
+			$error = $this->{$model}->check_file($file);
+			if(empty($error)){
+				$path = $this->upload_file($file);
+				return $path;
+			}
+			else{
+				$errors[$name] = $error;
+			}
+		}
+		return '';
 	}
 	
 	protected function upload_file($array){
@@ -52,27 +156,33 @@ class AppController extends Controller{
 			$new_tag_array = split_words($new_tag);
 		}
 		if($new_tag_array){
-			$tags = $this->Tag->get_list(array('name in'=>$new_tag_array));
+			if(is_array($new_tag_array) && count($new_tag_array) > 0){
+				$tags = $this->Tag->get_list(array('name str_in'=>$new_tag_array));
+				//数据库中已经存在的新加的这些tag, 是$new_tag_array的子集
+			}
+			else{
+				$tags = array();
+			}
 			$named_tags = array_to_map($tags, 'name');
 			$plus_tag_array = array();
 			foreach($new_tag_array as $tag_name){
 				$tag_id = 0;
-				if(!array_key_exists($tag_name, $named_tags)){
+				if(!array_key_exists($tag_name, $named_tags)){	//新的tag
 					$tag_data = array('name'=>$tag_name, 'count'=>1);
 					$errors = $this->Tag->check($tag_data); 
 					if(count($errors) == 0){
 						$tag_id = $this->Tag->save($tag_data);
 					}
 				}
-				else{
+				else{	//旧的tag
 					$tag_id = $named_tags[$tag_name]->id;
+					$plus_tag_array[] = $tag_id;
 				}
-				if($tag_id > 0 && !in_array($tag_id, $tag_array)){
+				if($tag_id > 0 && !in_array($tag_id, $tag_array)){	// 处理tag_item
 					$data = array('tag'=>$tag_id, 'belong'=>$object_id, 'type'=>$type);
 					$count = $this->TagItem->count($data);
 					if($count == 0){
 						$this->TagItem->save($data);
-						$plus_tag_array[] = $tag_id;
 					}
 				}
 			}

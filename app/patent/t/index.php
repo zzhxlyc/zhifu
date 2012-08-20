@@ -21,7 +21,7 @@
 	?>
 	<div class="item clearfix">
 		<div class="pic">
-			<img src="<?php echo $o->image?>" width="200" height="150" alt="<?php echo $o->title?>">
+			<img src="<?php img($o->image)?>" width="200" height="150" alt="<?php echo $o->title?>">
 		</div><!--end for pic-->
 		<div class="middle">
 			<h3 class="title">

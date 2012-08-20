@@ -9,6 +9,10 @@ class VideoController extends AppController {
 	public function before(){
 		$this->set('home', VIDEO_HOME);
 		parent::before();
+		$need_login = array();	// either
+		$need_company = array();
+		$need_expert = array();
+		$this->login_check($need_login, $need_company, $need_expert);
 	}
 	
 	public function index(){
@@ -49,5 +53,32 @@ class VideoController extends AppController {
 		$video->click_up();
 		$this->response->redirect($video->url);
 	}
+	
+	public function add(){
+		if($this->request->post){
+			$post = $this->request->post;
+			$User = $this->get('User');
+			$post['belong'] = $User->id;
+			$post['type'] = $User->get_type();
+			$errors = $this->Video->check($post);
+			if(count($errors) == 0){
+				$post['time'] = DATETIME;
+				$image = Video::get_image($post['url']);
+				if($image){
+					$post['image'] = $image;
+				}
+				$this->Video->escape($post);
+				$this->Video->save($post);
+				$this->redirect('add_succ');
+			}
+			else{
+				$video = $this->set_model($post);
+				$this->set('errors', $errors);
+				$this->set('video', $video);
+			}
+		}
+	}
+	
+	public function add_succ(){}
 	
 }

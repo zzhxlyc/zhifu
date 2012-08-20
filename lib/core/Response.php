@@ -133,6 +133,16 @@ class Response{
 		}
 	}
 	
+	public function set_cookie($name, $value, $path = '/', $expire = 0){
+		$defaults = array(
+			'name' => $name,
+			'value' => $value,
+			'expire' => $expire,
+			'path' => $path
+		);
+		$this->cookie($defaults);
+	}
+	
 	public function cookie($options = null) {
 		if ($options === null) {
 			return $this->_cookies;
@@ -155,7 +165,6 @@ class Response{
 			'httpOnly' => false
 		);
 		$options += $defaults;
-
 		$this->_cookies[$options['name']] = $options;
 	}
 	
@@ -170,6 +179,7 @@ class Response{
 	}
 	
 	public function redirect($url){
+		$this->send();
 		header('location:'.$url);
 		exit;
 	}

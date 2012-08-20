@@ -1,4 +1,6 @@
 <?php
+define('COOKIE_U', 'zhifu_u');
+
 define('USER_DIR', APP_DIR.'/user');
 define('UPLOAD_DIR', WEBROOT_DIR.'/upload');
 
@@ -28,7 +30,7 @@ define('ADMIN_PAY_HOME', ADMIN_HOME.'/pay');
 define('ADMIN_MANAGE_HOME', ADMIN_HOME.'/manage');
 define('ADMIN_SOLUTION_HOME', ADMIN_HOME.'/solution');
 
-
+define('LOGIN_HOME', ROOT_URL.'/login');
 define('PROBLEM_HOME', ROOT_URL.'/problem');
 define('EXPERT_HOME', ROOT_URL.'/expert');
 define('COMPANY_HOME', ROOT_URL.'/company');

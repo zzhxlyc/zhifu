@@ -3,12 +3,13 @@
 		echo $error;
 	}
 	else{
+		output_edit_succ();
 ?>
-<form action="" method="post" <?php $HTML->file_form_need()?> >
+<form action="<?php echo $home.'/edit'?>" method="post" <?php $HTML->file_form_need()?> >
 
 <div class="row">
 	<label for="name">专利名称</label>
-	<input size="100" type="text" name="title" value="<?php echo $patent->title?>" />
+	<input size="50" type="text" name="title" value="<?php echo $patent->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 <div class="row">
@@ -63,14 +64,13 @@
 	<span class="error"><?php echo $errors['description']?></span>
 </div>
 
+<?php if($patent->file){?>
 <div class="row">
 	<label for="">附件</label>
-	<?php if($patent->file){?>
 	<a target="_blank" href="<?php echo UPLOAD_HOME."/$patent->file"?>">点击下载</a>
-	<?php }else{?>
-	还没有附件
-	<?php }?>
 </div>
+<?php }?>
+
 <div class="row">
 	<label for="">修改附件</label>
 	<input type="file" name="file" />

@@ -2,32 +2,11 @@
 
 class MysqlDAO {
 	
-	private static $models = array();
-	private static $objects = array();
-	
 	function MysqlDAO(){}
 	
 	private static function get_db(){
 		global $DB;
 		return $DB;
-	}
-	
-	public static function load_model($model){
-		$file = MODEL_DIR."/$model.php";
-		if(file_exists($file) && !in_array($model, self::$models)){
-			include($file);
-			self::$models[] = $model;
-		}
-	}
-	
-	public static function load(array $models){
-		foreach($models as $model){
-			self::load_model($model);
-		}
-	}
-	
-	public static function add_object($model, $object){
-		self::$objects[$model] = $object;
 	}
 	
 	private static function _get_db_name(){
@@ -96,8 +75,15 @@ class MysqlDAO {
 	}
 	
 	private static function _get_value($value){
-		if(is_string($value)) return "'$value'";
-		else return $value;
+		if(is_string($value)){
+			return "'$value'";
+		}
+		else if(is_null($value)){
+			return "''";
+		}
+		else{
+			return $value;
+		}	
 	}
 
 	private static function build_column($attr){
@@ -265,6 +251,23 @@ class MysqlDAO {
 						}
 					}
 					$sql .= " $field $op $cond ";
+				}
+				else if($op == 'str_in'){
+					$op = 'in';
+					if(is_array($cond)){
+						if(count($cond) > 0){
+							$temp = array();
+							foreach($cond as $t){
+								$temp[] = "'$t'";
+							}
+							$temp = implode(',', $temp);
+							$cond = "($temp)";
+						}
+						else{
+							continue;
+						}
+						$sql .= " $field $op $cond ";
+					}
 				}
 				else if($op == 'like'){
 					$sql .= " $field $op '%$cond%' ";

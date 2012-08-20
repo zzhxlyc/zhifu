@@ -1,6 +1,6 @@
 <?php
 
-class Expert extends AppModel{
+class Expert extends User {
 	
 	public $table = 'experts';
 	
@@ -24,6 +24,10 @@ class Expert extends AppModel{
 			'html'=>array('description')
 		);
 		return parent::escape($data, $escape_array, $ignore);
+	}
+	
+	public function is_expert(){
+		return true;
 	}
 	
 	public function get_rate(){

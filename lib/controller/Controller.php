@@ -2,6 +2,7 @@
 
 class Controller{
 	
+	public $request;
 	public $response;
 	public $view;
 	public $session;
@@ -75,17 +76,28 @@ class Controller{
 	}
 	
 	public function redirect($method, $module = null, $prefix = null){
-		if($module == null){
-			$module = $this->request->get_module();
+		if($method == '/' && $module == null){
+			$this->response->redirect(ROOT_URL);
 		}
-		if($prefix == null){
+		if($prefix === null){
 			$prefix = $this->request->get_prefix();
 		}
-		if($prefix == '/'){
-			$url = ROOT_URL."/$module/$method";
+		if($module === null){
+			$module = $this->request->get_module();
+			if($prefix == '/'){
+				$url = ROOT_URL."/$module/$method";
+			}
+			else{
+				$url = ROOT_URL."$prefix/$module/$method";
+			}
 		}
-		else{
-			$url = ROOT_URL."$prefix/$module/$method";
+		else if($module === ''){
+			if($prefix == '/'){
+				$url = ROOT_URL."/$method";
+			}
+			else{
+				$url = ROOT_URL."$prefix/$method";
+			}
 		}
 		$this->response->redirect($url);
 	}

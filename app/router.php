@@ -6,8 +6,10 @@
  * 								'prefix'=>'/'));
  */
 $router->add('/', array('C'=>'ProblemController', 'M'=>'index'));
-$router->add('/init', array('C'=>'InitController', 'M'=>'index'));
-$router->add('/test', array('C'=>'InitController', 'M'=>'test'));
+$router->add('/login', array('C'=>'LoginController', 'M'=>'login'));
+$router->add('/reset', array('C'=>'LoginController', 'M'=>'reset'));
+$router->add('/captcha', array('C'=>'ZhifuController', 'M'=>'captcha'));
+$router->add('/register', array('C'=>'ZhifuController', 'M'=>'register'));
 
 $router->add_prefix('/admin', 'admin');
 include('admin/router.php');
