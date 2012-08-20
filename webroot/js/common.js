@@ -137,6 +137,8 @@ function dateEventInit(){
 	}
 	
 	
+	
+	
 	function catEventInit(){
 		var cat=$('input[name=cat]').val();
 		var subcat=$('input[name=subcat]').val();
@@ -171,6 +173,33 @@ function dateEventInit(){
 		$('select[name=subcat]').append(oldSubCatHtml);	
 		$('select[name=subcat]').val(subcat);
 		
+		
+	}
+	
+	function catEventInitNormal(){
+	
+		//cat从初始化
+		var cathtml='';
+		$.each(catList, function(i, t) {
+			cathtml+='<option value="'+t.id+'">'+t.n+'</option>';
+		});
+		$('select[name=cat]').append(cathtml);	
+
+
+		//subcat联动处理
+		$('select[name=cat]').change(function(){
+			$('select[name=subcat]').children().remove();
+			var catId=$('select[name=cat]').val();
+			var subCatList=catList[catId].c;
+			var subCatHtml='';
+			$.each(subCatList, function(i, t) {
+				subCatHtml+='<option value="'+t.id+'">'+t.name+'</option>';
+			});
+
+			$('select[name=subcat]').append(subCatHtml);	
+
+		});
+	
 		
 	}
 		
