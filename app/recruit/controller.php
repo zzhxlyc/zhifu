@@ -53,15 +53,16 @@ class RecruitController extends AppController {
 		$this->set('$recruit', $recruit);
 	}
 	
-	public function ask(){
+	public function add(){
 		if($this->request->post){
 			$post = $this->request->post;
-			$post['belong'] = 1;
-			$post['type'] = BelongType::EXPERT;
-			$post['author'] = 'add';
+			$User = $this->get('User');
+			$post['belong'] = $User->id;
+			$post['type'] = $User->get_type();
+			$post['author'] = $User->name;
 			$errors = $this->Recruit->check($post);
 			if(count($errors) == 0){
-				$post['status'] = 0;
+				$post['status'] = 1;
 				$post['time'] = DATETIME;
 				$this->Recruit->escape($post);
 				$id = $this->Recruit->save($post);
@@ -87,10 +88,9 @@ class RecruitController extends AppController {
 		
 		if($this->request->post){
 			$post = $this->request->post;
-			$post['belong'] = 1;
-			$post['type'] = BelongType::EXPERT;
-			$post['author'] = 'add';
-			$errors = $this->Recruit->check($post);
+			$User = $this->get('User');
+			$recruit = $this->set_model($post, $recruit);
+			$errors = $this->Recruit->check($recruit);
 			if(count($errors) == 0){
 				$this->Recruit->escape($post);
 				$this->Recruit->save($post);

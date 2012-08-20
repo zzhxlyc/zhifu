@@ -14,7 +14,8 @@ class Recruit extends AppModel{
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		
 		$array = array();
-		$a = $data['available'];
+		if(is_array($data)){$a = $data['available'];}
+		else if(is_object($data)){$a = $data->available;}
 		$ret = explode(' ', $a);
 		if(count($ret) == 7){
 			for($i = 0;$i < 7;$i++){
@@ -49,8 +50,8 @@ class Recruit extends AppModel{
 	}
 	
 	public function get_status(){
-		if($this->status == 0){
-			return '招聘中';
+		if($this->status == 1){
+			return '有效';
 		}
 		else{
 			return '已关闭';

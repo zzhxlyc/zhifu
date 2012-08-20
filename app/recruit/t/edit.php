@@ -10,8 +10,8 @@
 <div class="row">
 	<label for="name">状态</label>
 	<select name="status">
-		<option value="0" <?php $HTML->selected($recruit->status, 0)?>>招聘中</option>
-		<option value="1" <?php $HTML->selected($recruit->status, 1)?>>关闭</option>
+		<option value="1" <?php $HTML->selected($recruit->status, 1)?>>有效</option>
+		<option value="0" <?php $HTML->selected($recruit->status, 0)?>>关闭</option>
 	</select>
 </div>
 <div class="row">
