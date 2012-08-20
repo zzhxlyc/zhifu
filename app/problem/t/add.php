@@ -7,11 +7,20 @@
 
 </div><!--end for filter-->
 
-<form action="" method="post">
+<form action="" method="post" <?php $HTML->file_form_need()?>>
 
 <h2>发布企业技术难题</h2>
 
 <div class="add-problem">
+
+	<div>
+		<input type="hidden" name="cat" value="<?php echo $problem->cat?>" />
+		<input type="hidden" name="subcat" value="<?php echo $problem->subcat?>" />
+		<input type="hidden" name="province" value="<?php echo $problem->province?>" />
+		<input type="hidden" name="city" value="<?php echo $problem->city?>" />
+		<input type="hidden" name="district" value="<?php echo $problem->district?>" />
+	</div>
+
 	<div class="row">
 		<label for="">难题名称</label>
 		<input class="text wide" type="text" name="title" value="<?php echo $problem->title?>" />
@@ -20,9 +29,13 @@
 	
 	<div class="row">
 		<label for="cat">所属行业</label>
-		<select name="cat"></select>
+		<select name="cat">
+			<option value="">选择行业</option>
+		</select>
 		<span class="error"><?php echo $errors['cat']?></span>
-		<select name="subcat"></select>
+		<select name="subcat">
+			<option value="">选择行业</option>
+		</select>
 		<span class="error"><?php echo $errors['subcat']?></span>
 	</div>
 	
@@ -39,7 +52,7 @@
 	</div>
 	<div class="row">
 		<label for="deadline">截止日期</label>
-		<input size="20" type="text" name="deadline" class="datepicker" value="" readonly="readonly" />
+		<input size="20" type="text" name="deadline" class="datepicker" value="<?php echo get_date($problem->deadline)?>" readonly="readonly" />
 		<span class="error"><?php echo $errors['deadline']?></span>
 	</div>
 
@@ -84,6 +97,12 @@
 		<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $problem->description?></textarea>
 		<span class="error"><?php echo $errors['description']?></span>
 	</div>
+	
+	<div class="row">
+		<label for="">图像</label>
+		<input type="file" name="image" />
+		<span class="error"><?php echo $errors['image']?></span>
+	</div>
 
 	<div class="row">
 		<label for="">附件</label>
@@ -107,11 +126,11 @@
 </div>
 
 <div class="row">
-	<input type="hidden" name="type" value="" /> <!-- 1 for simple, 0 not -->
+	<input type="hidden" name="type" value="0" /> <!-- 1 for simple, 0 not -->
 	<input type="submit" value="发布" class="btn fl">
 	<a href="<?php echo $home?>" class="back-btn">返回</a>
 </div>
-	
+
 </form>
 
 <script type="text/javascript">
@@ -137,11 +156,6 @@ var catList = {<?php
 <script type="text/javascript">
 $(document).ready(function($){
 	
-	dateEventInit();
-	provinceEventInit();	
-	catEventInit();
-	tagEventInit();
-	
 	$('#normal-add').click(function(){
 		$(this).parent().children().removeClass('current');
 		$(this).addClass('current');
@@ -156,6 +170,9 @@ $(document).ready(function($){
 		$('.add-simple-problem').show();
 	});
 	
-	
+	dateEventInit();
+	provinceEventInit();	
+	tagEventInit();
+	catEventInit();
 });	
 </script>

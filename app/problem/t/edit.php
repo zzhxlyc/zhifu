@@ -15,14 +15,9 @@
 </div>	
 <div class="row">
 	<label for="cat">所属行业</label>
-	
-	<select name="cat">
-	</select>
+	<select name="cat"></select>
 	<span class="error"><?php echo $errors['cat']?></span>
-	
-	
-	<select name="subcat">
-	</select>
+	<select name="subcat"></select>
 	<span class="error"><?php echo $errors['subcat']?></span>
 </div>
 
@@ -56,7 +51,7 @@
 	if(is_array($tag_list)){
 		foreach($tag_list as $tag){
 	?>
-		<a href="javascript:;" class="old" count="<?php $tag->count?>" tagid="<?php echo $tag->id?>" id="tag_<?php echo $tag->id?>"><?php echo $tag->name?><img src="../../images/delete.png"></a>	
+		<a href="javascript:;" class="old" count="<?php $tag->count?>" tagid="<?php echo $tag->id?>" id="tag_<?php echo $tag->id?>"><?php echo $tag->name?><img src="<?php echo IMAGE_HOME?>/delete.png"></a>	
 	<?php 
 		}
 	}

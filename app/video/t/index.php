@@ -13,6 +13,7 @@
 <?php 
 	if(is_array($list)){
 		foreach($list as $o){
+			$title = subString($o->title, 10);
 ?>
 		<div class="item">
 			<div class="pic">
@@ -22,7 +23,7 @@
 			</div>
 			<div class="des">
 				<a target="_blank" href="<?php echo $home.'/url?id='.$o->id?>">
-					<?php echo $o->title?>
+					<?php echo $title?>
 				</a>
 			</div>
 		</div>
@@ -47,6 +48,7 @@
 <?php 
 	if(is_array($hot_list)){
 		foreach($hot_list as $o){
+			$title = subString($o->title, 10);
 ?>
 		<div class="item">
 			<div class="pic">
@@ -56,7 +58,7 @@
 			</div>
 			<div class="des">
 				<a target="_blank" href="<?php echo $home.'/url?id='.$o->id?>">
-					<?php echo $o->title?>
+					<?php echo $title?>
 				</a>
 			</div>
 		</div>

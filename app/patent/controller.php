@@ -40,11 +40,49 @@ class PatentController extends AppController {
 		$this->set('links', $links);
 	}
 	
+	public function add(){
+		if($this->request->post){
+			$post = $this->request->post;
+			$User = $this->get('User');
+			$post['expert'] = $User->id;
+			$Patent = $this->set_model($post, $Patent);
+			$errors = $this->Patent->check($Patent);
+			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('image', $errors, $files);
+				if($path){$post['image'] = $path;}
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
+			}
+			if(count($errors) == 0){
+				$old_tag = $post['old_tag'];
+				$new_tag = $post['new_tag'];
+				unset($post['old_tag'], $post['new_tag']);
+				$post['time'] = DATETIME;
+				$this->Patent->escape($post);
+				$id = $this->Patent->save($post);
+				$this->do_tag($id, BelongType::PATENT, $old_tag, $new_tag);
+				$this->redirect('detail?id='.$id);
+			}
+			$patent = $this->set_model($post, new Patent());
+			$this->set('$patent', $patent);
+			$this->set('errors', $errors);
+		}
+		$this->set_data();
+	}
+	
 
-	private function set_data($Patent){
+	private function set_data($Patent = ''){
 		$cat_array = $this->Category->get_category();
 		$this->set('cat_array', $cat_array);
-		$this->add_tag_data($Patent->id, BelongType::PATENT);
+		if($Patent){
+			$this->add_tag_data($Patent->id, BelongType::PATENT);
+		}
+		$this->add_common_tags();
+	}
+	
+	public function detail(){
+		
 	}
 	
 	public function edit(){

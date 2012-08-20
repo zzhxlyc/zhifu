@@ -87,8 +87,13 @@ function sort_as_ids($list, $id_list){
 }
 
 function get_date($time){
-	$ts = strtotime($time);
-	return date('Y-m-d', $ts);
+	if(!empty($time)){
+		$ts = strtotime($time);
+		return date('Y-m-d', $ts);
+	}
+	else{
+		return '';
+	}
 }
 
 function subString($str, $allow, $last = '...'){

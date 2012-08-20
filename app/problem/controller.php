@@ -42,7 +42,7 @@ class ProblemController extends AppController {
 	
 	public function detail(){
 		$get = $this->request->get;
-		$id = $get['id'];
+		$id = get_id($get);
 		$has_error = true;
 		if($id){
 			$Problem = $this->Problem->get($id);
@@ -60,16 +60,9 @@ class ProblemController extends AppController {
 		$Company = $this->Company->get($Problem->company);
 		$this->set('$Company', $Company);
 		
-		$cond = array('type'=>'Problem', 'belong'=>$id);
-		$tag_list = $this->TagItem->get_list($cond);
+		$tag_list = $this->add_tag_data($id, BelongType::PROBLEM, false);
 		$tag_list = $this->TagItem->get_most($tag_list);
-		if(count($tag_list) > 0){
-			$tags = $this->Tag->get_list(array('id in'=>$tag_list));
-		}
-		else{
-			$tags = array();
-		}
-		$this->set('$tags', $tags);
+		$this->set('$tags', $tag_list);
 		
 		$cond = array('expert'=>$id);
 		$solutions = $this->Solution->get_list($cond);
@@ -90,12 +83,47 @@ class ProblemController extends AppController {
 		if($Problem){
 			$this->add_tag_data($Problem->id, BelongType::PROBLEM);
 		}
-		else{
-			$this->add_tag_data(0);
-		}
+		$this->add_common_tags();
 	}
 	
 	public function add(){
+		if($this->request->post){
+			$post = $this->request->post;
+			$User = $this->get('User');
+			$post['company'] = $User->id;
+			$post['author'] = $User->name;
+			if($post['type'] == '1'){
+				$post['title'] = $post['t'];
+				$post['description'] = $post['desc'];
+			}
+			if(empty($post['deadline'])){
+				unset($post['deadline']);
+			}
+			unset($post['type'], $post['t'], $post['desc']);
+			$Problem = $this->set_model($post, $Problem);
+			$errors = $this->Problem->check($Problem);
+			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('image', $errors, $files);
+				if($path){$post['image'] = $path;}
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
+			}
+			if(count($errors) == 0){
+				$old_tag = $post['old_tag'];
+				$new_tag = $post['new_tag'];
+				unset($post['old_tag'], $post['new_tag']);
+				$post['time'] = DATETIME;
+				$post['status'] = 0;
+				$this->Problem->escape($post);
+				$id = $this->Problem->save($post);
+				$this->do_tag($id, BelongType::PROBLEM, $old_tag, $new_tag);
+				$this->redirect('detail?id='.$id);
+			}
+			$problem = $this->set_model($post, new Problem());
+			$this->set('$problem', $problem);
+			$this->set('errors', $errors);
+		}
 		$this->add_data();
 	}
 	

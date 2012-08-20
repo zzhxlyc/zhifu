@@ -1,11 +1,5 @@
-<?php 
-	if($error){
-		output_error($error);
-	}
-	else{
-		output_edit_succ();
-?>
-<form action="<?php echo $home.'/edit?id='.$patent->id?>" method="post" <?php $HTML->file_form_need()?> >
+
+<form action="" method="post" <?php $HTML->file_form_need()?> >
 
 <div class="row">
 	<label for="name">专利名称</label>
@@ -14,20 +8,20 @@
 </div>
 <div class="row">
 	<label for="cat">所属行业</label>
-	
 	<select name="cat">
+		<option value="">选择行业</option>
 	</select>
 	<span class="error"><?php echo $errors['cat']?></span>
-	
-	
 	<select name="subcat">
+		<option value="">选择行业</option>
 	</select>
 	<span class="error"><?php echo $errors['subcat']?></span>
 </div>
 
 <div class="row">
 	<label for="tag">领域标签</label>
-	<input size="20" type="text" value="" id="new-tag" /> <a href="javascript:;" id="add-tag">添加</a>
+	<input size="20" type="text" value="" id="new-tag" /> 
+	<a href="javascript:;" id="add-tag">添加</a>
 </div>	
 
 	<div class="tag row">
@@ -36,7 +30,8 @@
 	if(is_array($tag_list)){
 		foreach($tag_list as $tag){
 	?>
-		<a href="javascript:;" class="old" count="<?php $tag->count?>" tagid="<?php echo $tag->id?>" id="tag_<?php echo $tag->id?>"><?php echo $tag->name?><img src="<?php echo IMAGE_HOME?>/delete.png"></a>	
+		<a href="javascript:;" class="old" count="<?php $tag->count?>" tagid="<?php echo $tag->id?>" id="tag_<?php echo $tag->id?>">
+			<?php echo $tag->name?><img src="<?php echo IMAGE_HOME?>/delete.png"></a>	
 	<?php 
 		}
 	}
@@ -92,9 +87,8 @@
 
 
 <div class="row">
-	<input type="submit" value="修改" />
+	<input type="submit" value="保存" />
 	<a href="<?php echo $home.'/detail?id='.$patent->id?>">返回</a>
-	<?php echo $HTML->hidden('id', $patent->id)?>
 </div>
 
 </form>
@@ -127,13 +121,9 @@ var catList = {<?php
 <script type="text/javascript">
 $(document).ready(function($){
 	
-	catEventInit();
 	tagEventInit();
+	catEventInit();
 	
 	
 });	
 </script>
-
-<?php 
-	}
-?>

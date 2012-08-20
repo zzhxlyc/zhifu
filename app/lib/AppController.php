@@ -89,21 +89,25 @@ class AppController extends Controller{
 		}
 	}
 	
-	protected function add_tag_data($id, $type = '', $common = true){
-		if($id > 0){
-			$tags = $this->TagItem->get_list(array('belong'=>$id, 'type'=>$type));
-			$tag_id_array = get_attrs($tags, 'tag');
-			if($tag_id_array){
-				$tag_list = $this->Tag->get_list(array('id in'=>$tag_id_array));
+	protected function add_tag_data($id, $type, $set = true){
+		$tags = $this->TagItem->get_list(array('belong'=>$id, 'type'=>$type));
+		$tag_id_array = get_attrs($tags, 'tag');
+		if($tag_id_array){
+			$tag_list = $this->Tag->get_list(array('id in'=>$tag_id_array));
+			if($set){
 				$this->set('tag_list', $tag_list);
 			}
-		}
-		if($common){
-			$most_common_tags = unserialize(Option::find('MOST_COMMON_TAGS'));
-			if($most_common_tags){
-				$this->set('$most_common_tags', $most_common_tags);
+			else{
+				return $tag_list;
 			}
-		}		
+		}
+	}
+	
+	protected function add_common_tags(){
+		$most_common_tags = unserialize(Option::find('MOST_COMMON_TAGS'));
+		if($most_common_tags){
+			$this->set('$most_common_tags', $most_common_tags);
+		}
 	}
 	
 	protected function do_file($name, &$errors, &$files, $model = ''){

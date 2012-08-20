@@ -1,5 +1,9 @@
 <?php
 
+function TagItem_get_most_sort($a, $b){
+	return $a->count > $b->count;
+}
+
 class TagItem extends Model{
 
 	public $table = 'tag_items';
@@ -12,23 +16,8 @@ class TagItem extends Model{
 	}
 	
 	public function get_most($list, $length = 10){
-		$r = array();
-		if(is_array($list)){
-			foreach($list as $tag){
-				$tagid = $tag->id;
-				if(!in_array($tagid, $r)){
-					$r[$tagid] = 0;
-				}
-				$r[$tagid]++;
-			}
-			arsort($r);
-		}
-		if(count($r) > 10){
-			return array_slice($r, 0, 10);
-		}
-		else{
-			return $r;
-		}
+		usort($list, TagItem_get_most_sort);
+		return array_slice($list, 0, 10);
 	}
 
 }
