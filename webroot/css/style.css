@@ -827,6 +827,26 @@ float: right;
 padding:20px 5px;
 }
 
+.comment-section .item{
+border-bottom:1px solid #ddd;
+padding:10px 0 0 0;	
+}
+.comment-section .item .comment-meta .author{
+padding-right:10px;	
+}
+.comment-section .item .comment-meta .comment-time{
+color:#999;	
+}
+.comment-section .item p{
+line-height:24px;
+padding:4px 0;	
+}
+.comment-section .reply textarea{
+width:500px;
+height:200px;
+border:1px solid #ddd;	
+}
+
 /************视频主页**************/
 .new-video{
 	margin-top:20px;

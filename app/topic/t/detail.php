@@ -37,8 +37,8 @@
 		<h2>我要回复</h2>
 		<textarea id="content" class="" cols="30" rows="10"></textarea>
 		<input type="hidden" id="parent" value="<?php echo $topic->id?>" />
-		<a href="#" class="btn" onclick="reply()">回复</a>
-		<a href="#" class="btn" onclick="location.href='<?php echo $home?>'">返回</a>
+		<a href="#" class="btn fl" onclick="reply()">回复</a>
+		<a href="#" class="back-btn" onclick="location.href='<?php echo $home?>'">返回</a>
 	</div>
 	
 </div><!--end for topic-->

@@ -81,15 +81,54 @@
 		</div>
 	</div>
 	
-	<div class="section">
+	<div class="section comment-section">
 		<h3>留言</h3>
 		<div class="content">
+			<div class="item">
+				<div class="comment-meta">
+					<a class="author" href="#">sss</a><span class="comment-time">2012-07-02 16:49:09 </span>
+
+					<span class="op">
+						<a href="#reply">回复</a>
+					</span>
+				</div>
+				<p>http://www.anhuitai.com/——山寨网站给力啊</p>
+					
+				
+			</div><!--end for item-->
+			
+			<div class="item">
+				<div class="comment-meta">
+					<a class="author" href="#">sss</a><span class="comment-time">2012-07-02 16:49:09 </span>
+
+					<span class="op">
+						<a href="#reply">回复</a>
+					</span>
+				</div>
+				<p>http://www.anhuitai.com/——山寨网站给力啊</p>
+					
+				
+			</div><!--end for item-->
 			<?php foreach($comments as $comment){?>
-			<div>
+			
+			<?php }?>
+			
+			
+			<div class="reply" id="reply">
+				<textarea name="" id=""></textarea>
+				<a href="#" class="btn">回复</a>
 				
 			</div>
-			<?php }?>
-		</div>
-	</div>
+		</div><!--end for content-->
+	</div><!--end for comment-section-->
 	
 </div><!--end for main-content-->
+
+<script type="text/javascript">
+	$('.op a').click(function(){
+		var author=$(this).parent().parent().find('.author').text();
+		$('#reply textarea').val('回复：'+author+' ');
+	})
+	
+	
+</script>
