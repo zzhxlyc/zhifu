@@ -56,7 +56,19 @@
 	<input type="hidden" name="new_tag" />
 	<input type="hidden" name="old_tag" />
 </div>
-	
+<div class="hot-tag row">
+	<label for="">热门标签</label>
+	<?php 
+	if(is_array($most_common_tags)){
+		foreach($most_common_tags as $tag){
+	?>
+		<a href="javascript:;" count="<?php echo $tag['count']?>" tagid="<?php echo $tag['id']?>" id="tag_<?php echo $tag['id']?>"><?php echo $tag['name']?></a>	
+	<?php 
+		}
+	}
+	?>
+</div>
+
 <div class="row">
 	<label for="name">描述</label><br/><br/>
 	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $expert->description?></textarea>

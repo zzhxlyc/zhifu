@@ -34,10 +34,12 @@
 	<label for="name">专利数</label>
 	<?php echo $expert->patent_num?>
 </div>
+<!-- 
 <div class="row">
 	<label for="name">专利总金额</label>
 	<?php echo $expert->patent_budget?>
 </div>
+
 <div class="row">
 	<label for="name">难题数</label>
 	<?php echo $expert->problem_num?>
@@ -46,7 +48,7 @@
 	<label for="name">难题总金额</label>
 	<?php echo $expert->problem_budget?>
 </div>
-
+ -->
 
 <div class="tag row">
 	<label for="">领域标签</label>

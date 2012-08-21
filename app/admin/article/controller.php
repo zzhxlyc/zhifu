@@ -37,6 +37,10 @@ class ArticleController extends AdminBaseController {
 			}
 			if(count($errors) == 0){
 				$post['time'] = DATETIME;
+				$image = preg_image($post['content']);
+				if($image){
+					$post['image'] = $image;
+				}
 				$this->Article->escape($post);
 				$this->Article->save($post);
 				$this->Log->action_article_add($Admin->id, $post['title']);

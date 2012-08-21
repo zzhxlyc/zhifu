@@ -62,13 +62,9 @@ class CompanyController extends AdminBaseController {
 				$this->Company->save($post);
 				$admin = get_admin_session($this->session);
 				$this->Log->action_company_pass($admin, $Company->name);
-				$this->response->redirect('show?id='.$Company->id);
+				$this->redirect('show?id='.$Company->id);
 			}
-			else{
-				$this->set('errors', $errors);
-				$this->set('company', $Company);
-				$this->add_data($Company);
-			}
+			$this->redirect('show?id='.$Company->id);
 		}
 	}
 	

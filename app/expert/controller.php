@@ -3,7 +3,7 @@
 class ExpertController extends AppController {
 	
 	public $models = array('Expert', 'Tag', 'TagItem', 'Patent', 'Solution', 
-								'Expert', 'Problem');
+								'Expert', 'Problem', 'Comment');
 	
 	public function before(){
 		$this->set('home', EXPERT_HOME);
@@ -73,6 +73,9 @@ class ExpertController extends AppController {
 			$problems = array();
 		}
 		$this->set('$problems', $problems);
+		
+		$page = get_page($get);
+		$this->add_comments($id, BelongType::EXPERT, $page);
 	}
 	
 	private function add_profile_data(&$Expert){

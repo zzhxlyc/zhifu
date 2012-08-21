@@ -122,6 +122,13 @@ function set_value(&$o, $k, $v){
 	}
 }
 
+function preg_image($content){
+	$pattern = "/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/";
+	preg_match_all($pattern, $content, $m);
+	if(count($m[0]) == 0) return '';
+	return $m[1][0];
+}
+
 function subString($str, $allow, $last = '...'){
 	$l = strlen($str);
 	$length = 0;

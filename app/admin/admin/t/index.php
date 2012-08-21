@@ -6,7 +6,7 @@
 		<td>用户名</td>
 		<td width="90">添加时间</td>
 		<td width="120">最后登录IP</td>
-		<td width="120">最后登录时间</td>
+		<td width="140">最后登录时间</td>
 		<td width="50">状态</td>
 		<td width="100">操作</td>
 	</tr>

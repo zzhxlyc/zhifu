@@ -5,7 +5,7 @@ class ArticleController extends AppController {
 	public $models = array('Article');
 	
 	public function before(){
-		$this->set('home', VIDEO_HOME);
+		$this->set('home', ARTICLE_HOME);
 		parent::before();
 		$need_login = array();	// either
 		$need_company = array();

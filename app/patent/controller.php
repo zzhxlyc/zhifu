@@ -2,7 +2,7 @@
 
 class PatentController extends AppController {
 	
-	public $models = array('Patent', 'Tag', 'TagItem', 'Category', 'Deal');
+	public $models = array('Patent', 'Tag', 'TagItem', 'Category', 'Deal', 'Comment');
 	
 	public function before(){
 		$this->set('home', PATENT_HOME);
@@ -117,6 +117,9 @@ class PatentController extends AppController {
 			$companys = array();
 		}
 		$this->set('$companys', $companys);
+		
+		$page = get_page($get);
+		$this->add_comments($id, BelongType::PATENT, $page);
 	}
 	
 	public function edit(){

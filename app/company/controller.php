@@ -2,7 +2,8 @@
 
 class CompanyController extends AppController {
 	
-	public $models = array('TagItem', 'Tag', 'Problem', 'Patent', 'Deal', 'Solution');
+	public $models = array('TagItem', 'Tag', 'Problem', 'Patent', 'Deal', 
+							'Solution', 'Comment');
 	
 	public function before(){
 		$this->set('home', COMPANY_HOME);
@@ -64,6 +65,9 @@ class CompanyController extends AppController {
 			$patents = array();
 		}
 		$this->set('$patents', $patents);
+		
+		$page = get_page($get);
+		$this->add_comments($id, BelongType::COMPANY, $page);
 	}
 	
 	public function edit(){
