@@ -14,8 +14,7 @@ class Recruit extends AppModel{
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		
 		$array = array();
-		if(is_array($data)){$a = $data['available'];}
-		else if(is_object($data)){$a = $data->available;}
+		$a = get_value($data, 'available');
 		$ret = explode(' ', $a);
 		if(count($ret) == 7){
 			for($i = 0;$i < 7;$i++){
@@ -31,7 +30,7 @@ class Recruit extends AppModel{
 				}
 			}
 			if(!isset($errors['available'])){
-				$data['available'] = implode(' ', $array);
+				set_value($data, 'available', implode(' ', $array));
 			}
 		}
 		else{

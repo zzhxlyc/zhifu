@@ -3,7 +3,7 @@
 <tr>
 	<td>标题</td>
 	<td>
-		<input size="100" type="text" name="title" value="<?php echo $message->title?>" />
+		<input size="80" type="text" name="title" value="<?php echo $message->title?>" />
 		<span class="error"><?php echo $errors['title']?></span>
 	</td>
 </tr>

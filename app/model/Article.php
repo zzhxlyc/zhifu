@@ -32,5 +32,9 @@ class Article extends AppModel {
 		);
 		return parent::format($format_array);
 	}
+	
+	public static function default_image(){
+		return IMAGE_HOME.'/default.jpg';
+	}
 
 }

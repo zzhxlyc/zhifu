@@ -1,10 +1,11 @@
 <?php 
 	if($error){
-		echo $error;
+		output_error($error);
 	}
 	else{
+		output_edit_succ();
 ?>
-<form action="" method="post" >
+<form action="<?php echo $home.'/edit?id='.$message->id?>" method="post" >
 <table>
 <tr>
 	<td>标题</td>
@@ -23,7 +24,7 @@
 <tr>
 	<td>发起用户</td>
 	<td><?php echo BelongType::to_string($message->from_type)?> ：
-		<?php echo $message->from_name?></td>
+		<?php echo $message->from_author?></td>
 </tr>
 <tr>
 	<td>目标用户</td>
@@ -38,7 +39,7 @@
 	<td></td>
 	<td>
 		<input type="submit" value="修改" />
-		<input type="button" value="返回" onclick="location.href='<?php echo $index_page?>'" />
+		<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
 		<?php echo $HTML->hidden('id', $message->id)?>
 	</td>
 </tr>

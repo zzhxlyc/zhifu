@@ -84,7 +84,6 @@
 
 <div class="row">
 	<input type="submit" value="保存" />
-	<a href="<?php echo $home."/profile?id=$expert->id"?>">返回</a>
 	<?php echo $HTML->hidden('id', $expert->id)?>
 </div>
 </form>

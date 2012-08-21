@@ -1,11 +1,3 @@
-<div class="filter clearfix">
-	
-	<div class="search">
-		<input type="text" class="text" />
-		<input type="button" class="btn" />
-	</div>
-
-</div><!--end for filter-->
 
 <div class="topic-list">
 	<h3>最新话题<a href="<?php echo $home.'/add'?>" class="fr btn">发表话题</a></h3>

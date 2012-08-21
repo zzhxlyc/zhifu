@@ -3,7 +3,7 @@
 class AdminController extends AdminBaseController {
 	
 	public $models = array('Admin', 'Log');
-	public $no_session = array();
+	public $no_session = array('login');
 	
 	public function before(){
 		$this->set('home', ADMIN_ADMIN_HOME);
@@ -26,8 +26,13 @@ class AdminController extends AdminBaseController {
 				$admin = $this->Admin->get_row($search);
 				if($admin){
 					set_admin_session($this->session, $admin->id);
+					$data = array();
+					$data['id'] = $admin->id;
+					$data['lastlogin'] = DATETIME;
+					$data['lastip'] = IP;
+					$this->Admin->save($data);
 					$this->Log->action_login($admin);
-					$this->response->redirect('index');
+					$this->redirect('index', 'problem');
 				}
 				else{
 					$errors['password'] = '用户名或密码错误';
@@ -36,6 +41,7 @@ class AdminController extends AdminBaseController {
 			$this->set('user', $post['user']);
 			$this->set('errors', $errors);
 		}
+		$this->set('is_login', true);
 	}
 	
 	public function index(){
@@ -102,7 +108,7 @@ class AdminController extends AdminBaseController {
 				$this->check_username($admin->user, $errors, $id);
 				if(count($errors) == 0){
 					$this->Admin->save($post);
-					$this->response->redirect('edit?id='.$id);
+					$this->response->redirect('edit?succ&id='.$id);
 				}
 				else{
 					$this->set('errors', $errors);

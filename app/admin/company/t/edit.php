@@ -1,10 +1,11 @@
 <?php 
 	if($error){
-		output_error($error, $home);
+		output_error($error);
 	}
 	else{
+		output_edit_succ();
 ?>
-<form action="" method="post" >
+<form action="<?php echo $home.'/edit?id='.$company->id?>" method="post" >
 <div class="row">
 	<label for="name">企业名</label>
 	<input size="100" type="text" name="name" value="<?php echo $company->name?>" />
@@ -59,9 +60,6 @@
 </div>
 
 <div class="row">
-	<?php if($company->verified == 0){?>
-	<input type="submit" value="审核通过" />
-	<?php }?>
 	<input type="submit" value="保存" />
 	<input type="button" value="返回" onclick="location.href='<?php echo $home."/show?id=$company->id"?>'" />
 	<?php echo $HTML->hidden('id', $company->id)?>

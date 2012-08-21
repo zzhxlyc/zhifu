@@ -14,26 +14,14 @@ class ManageController extends AdminBaseController {
 		
 	}
 	
-	private function do_file(&$data, &$errors, &$files){
-		$field = 'logo';
-		$file = $files[$field];
-		if($file && is_uploaded_file($file['tmp_name'])){
-			if(empty($error)){
-				$path = $this->upload_file($file);
-				$data[$field] = $path;
-			}
-			else{
-				$errors[$field] = $error;
-			}
-		}
-	}
-	
 	public function base(){
 		if($this->request->post){
 			$post = $this->request->post;
 			$data = array();
 			$errors = array();
-			$this->do_file($data, $errors, $this->request->file);
+			$files = $this->request->file;
+			$path = $this->do_file('logo', $errors, $files);
+			if($path){$data['logo'] = $path;}
 			$data['title'] = esc_text($post['title']);
 			$data['slogan'] = esc_text($post['slogan']);
 			Option::persist('ADMIN_MANAGE_BASE', serialize($data));
@@ -41,7 +29,7 @@ class ManageController extends AdminBaseController {
 		}
 		else{
 			$data = unserialize(Option::find('ADMIN_MANAGE_BASE'));
-			$this->set('logo', UPLOAD_HOME.'/'.$data['logo']);
+			$this->set('logo', $data['logo']);
 			$this->set('title', $data['title']);
 			$this->set('slogan', $data['slogan']);
 		}

@@ -16,86 +16,69 @@ class PatentController extends AdminBaseController {
 		$limit = 10;
 		$all = $this->Patent->count();
 		$pager = new Pager($all, $page, $limit);
-		$list = Model::get_joins(array('patents.*', 'experts.name as name'), 
-										array('patents', 'experts'), 
-										array('patents.expert eq'=>'experts.id'), 
-										array('patents.time'=>'DESC'),
-										$pager->get_limit_str());
-		$links = $pager->get_page_links(ADMIN_PROBLEM_HOME.'/index?');
+		$cond = array();
+		$list = $this->Patent->get_page($cond, array('time'=>'DESC'), 
+											$pager->now(), $limit);
+		$links = $pager->get_page_links(ADMIN_PATENT_HOME.'/index?');
 		$this->set('list', $list);
 		$this->set('links', $links);
 	}
 	
-	private function do_file(&$data, &$errors, &$files){
-		$file = $files['file'];
-		if($file && is_uploaded_file($file['tmp_name'])){
-			$error = $this->Patent->check_file($file);
-			if(empty($error)){
-				$path = $this->upload_file($file);
-				$data['file'] = $path;
-			}
-			else{
-				$errors['file'] = $error;
-			}
-		}
-	}
-	
-	private function set_data($id){
-		$cat_array = $this->Category->get_category();
-		$this->set('cat_array', $cat_array);
-		$this->add_tag_data($id, BelongType::PATENT);
+	private function set_data($Patent){
+		$this->add_categorys();
+		$this->add_tag_data($Patent->id, BelongType::PATENT);
+		$this->add_common_tags();
 	}
 	
 	public function edit(){
+		$data = $this->get_data();
+		$id = $data['id'];
+		$has_error = true;
+		if($id){
+			$Patent = $this->Patent->get($id);
+			if($Patent){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->set('error', '不存在');
+			return;
+		}
+		
 		if($this->request->post){
 			$post = $this->request->post;
-			$post['expert'] = 1;
 			$admin = get_admin_session($this->session);
-			$id = get_id($post);
-			if($id > 0){
-				$patent = $this->Patent->get($id);
+			$Patent = $this->set_model($post, $Patent);
+			$errors = $this->Patent->check($Patent);
+			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('image', $errors, $files);
+				if($path){$post['image'] = $path;}
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
 			}
-			if($patent){
-				$patent = $this->set_model($post, $patent);
-				$errors = $this->Patent->check($patent);
-				if(count($errors) == 0){
-					$this->do_file($post, $errors, $this->request->file);
+			if(count($errors) == 0){
+				$this->do_tag($id, BelongType::PATENT, 
+								$post['old_tag'], $post['new_tag']);
+				unset($post['old_tag'], $post['new_tag']);
+				$post['lastmodify'] = DATETIME;
+				if($post['image'] && $Patent->image){
+					FileSystem::remove($Patent->image);
 				}
-				if(count($errors) == 0){
-					$this->do_tag($id, BelongType::PATENT, 
-										$post['old_tag'], $post['new_tag']);
-					$post['lastmodify'] = DATETIME;
-					unset($post['old_tag'], $post['new_tag']);
-					$this->Patent->escape($post);
-					$this->Patent->save($post);
-					$this->Log->action_patent_edit($admin, $post['title']);
-					$this->response->redirect('edit?id='.$id);
+				if($post['file'] && $Patent->file){
+					FileSystem::remove($Patent->file);
 				}
-				else{
-					$this->set('errors', $errors);
-					$this->set('patent', $patent);
-					$this->set_data($problem->id);
-				}
+				$this->Patent->escape($post);
+				$this->Patent->save($post);
+				$this->Log->action_patent_edit($admin, $post['title']);
+				$this->redirect('edit?succ&id='.$id);
 			}
 			else{
-				$this->set('error', '不存在');
+				$this->set('errors', $errors);
 			}
 		}
-		else{
-			$get = $this->request->get;
-			$id = get_id($get);
-			if($id > 0){
-				$patent = $this->Patent->get($id);
-			}
-			if($patent){
-				$patent->format();
-				$this->set('$patent', $patent);
-				$this->set_data($patent->id);
-			}
-			else{
-				$this->set('error', '不存在');
-			}
-		}
+		$this->set('patent', $Patent);
+		$this->set_data($Patent);
 	}
 	
 }

@@ -1,10 +1,11 @@
 <?php 
 	if($error){
-		echo $error;
+		output_error($error);
 	}
 	else{
+		output_edit_succ();
 ?>
-<form action="" method="post">
+<form action="<?php echo $home.'/edit?id='.$admin->id?>" method="post">
 <table>
 <tr>
 	<td>用户名</td>

@@ -5,7 +5,6 @@
 		<td>专利名称</td>
 		<td width="100">发布人</td>
 		<td width="140">日期</td>
-		<td width="50">状态</td>
 		<td width="100">操作</td>
 	</tr>
 	<?php 
@@ -18,9 +17,8 @@
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
-		<td><?php echo $o->name?></td>
+		<td><?php echo $o->author?></td>
 		<td><?php echo $o->time?></td>
-		<td><?php echo Patent::get_status($o->status)?></td>
 		<td class="operate">
 			<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
 			<a href="<?php echo $home.'/delete?id='.$o->id?>">删除</a>

@@ -24,16 +24,6 @@ class CompanyController extends AdminBaseController {
 		$this->set('$page_list', $page_list);
 	}
 	
-	private function set_data($id){
-		$tags = $this->TagItem->get_list(array('belong'=>$id, 
-										'type'=>BelongType::COMPANY));
-		$tag_id_array = get_attrs($tags, 'tag');
-		if($tag_id_array){
-			$tag_list = $this->Tag->get_list(array('id in'=>$tag_id_array));
-			$this->set('tag_list', $tag_list);
-		}
-	}
-	
 	private function add_data(&$company){
 		$list = $this->Problem->get_list(array('company'=>$company->id));
 		$company->problem_num = count($list);
@@ -48,98 +38,110 @@ class CompanyController extends AdminBaseController {
 	}
 	
 	public function verify(){
+		$data = $this->get_data();
+		$id = $data['id'];
+		$has_error = true;
+		if($id){
+			$Company = $this->Company->get($id);
+			if($Company){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->set('error', '不存在');
+			return;
+		}
+		
 		if($this->request->post){
 			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			$id = get_id($post);
-			if($id > 0){
-				$company = $this->Company->get($id);
-			}
-			if($company){
-				$company = $this->set_model($post, $company);
-				$errors = $this->Company->check($company);
-				if(count($errors) == 0){
-					$post['verified'] = 1;
-					$this->Company->escape($post);
-					$this->Company->save($post);
-					$this->Log->action_company_pass($admin, $company->name);
-					$this->response->redirect('show?id='.$company->id);
-				}
-				else{
-					$this->set('errors', $errors);
-					$this->set('company', $company);
-					$this->set_data($company->id);
-					$this->add_data($company);
-				}
+			$Company = $this->set_model($post, $Company);
+			$errors = $this->Company->check($Company);
+			if(count($errors) == 0){
+				$post['verified'] = 1;
+				$this->Company->escape($post);
+				$this->Company->save($post);
+				$admin = get_admin_session($this->session);
+				$this->Log->action_company_pass($admin, $Company->name);
+				$this->response->redirect('show?id='.$Company->id);
 			}
 			else{
-				$this->response->redirect('show?id='.$id);
+				$this->set('errors', $errors);
+				$this->set('company', $Company);
+				$this->add_data($Company);
 			}
 		}
 	}
 	
 	public function show(){
-		$get = $this->request->get;
-		$id = get_id($get);
-		if($id > 0){
-			$company = $this->Company->get($id);
+		$data = $this->get_data();
+		$id = $data['id'];
+		$has_error = true;
+		if($id){
+			$Company = $this->Company->get($id);
+			if($Company){
+				$has_error = false;
+			}
 		}
-		if($company){
-			$this->set('company', $company);
-			$this->set_data($company->id);
-			$this->add_data($company);
-		}
-		else{
+		if($has_error){
 			$this->set('error', '不存在');
+			return;
 		}
+		
+		$this->set('company', $Company);
+		$this->add_tag_data($Company->id, BelongType::COMPANY);
+		$this->add_common_tags();
+		$this->add_data($Company);
 	}
 
 	public function edit(){
+		$data = $this->get_data();
+		$id = $data['id'];
+		$has_error = true;
+		if($id){
+			$Company = $this->Company->get($id);
+			if($Company){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->set('error', '不存在');
+			return;
+		}
+		
 		if($this->request->post){
 			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			$id = get_id($post);
-			if($id > 0){
-				$company = $this->Company->get($id);
+			$Company = $this->set_model($post, $Company);
+			$errors = $this->Company->check($Company);
+			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('image', $errors, $files);
+				if($path){$post['image'] = $path;}
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
 			}
-			if($company){
-				$company = $this->set_model($post, $company);
-				$errors = $this->Company->check($company);
-				if(count($errors) == 0){
-					$this->do_tag($id, BelongType::COMPANY, 
-										$post['old_tag'], $post['new_tag']);
-					unset($post['old_tag'], $post['new_tag']);
-					$this->Company->escape($post);
-					$this->Company->save($post);
-					$this->Log->action_company_edit($admin, $company->name);
-					$this->response->redirect('edit?id='.$id);
+			if(count($errors) == 0){
+				$this->do_tag($id, BelongType::COMPANY, 
+									$post['old_tag'], $post['new_tag']);
+				unset($post['old_tag'], $post['new_tag']);
+				if($post['image'] && $Company->image){
+					FileSystem::remove($Company->image);
 				}
-				else{
-					$this->set_data($company->id);
-					$this->add_data($company);
-					$this->set('errors', $errors);
-					$this->set('company', $company);
+				if($post['file'] && $Company->file){
+					FileSystem::remove($Company->file);
 				}
+				$this->Company->escape($post);
+				$this->Company->save($post);
+				$admin = get_admin_session($this->session);
+				$this->Log->action_company_edit($admin, $Company->name);
+				$this->response->redirect('edit?succ&id='.$id);
 			}
 			else{
-				$this->set('error', '不存在');
+				$this->set('errors', $errors);
 			}
 		}
-		else{
-			$get = $this->request->get;
-			$id = get_id($get);
-			if($id > 0){
-				$company = $this->Company->get($id);
-			}
-			if($company){
-				$this->set('company', $company);
-				$this->set_data($company->id);
-				$this->add_data($company);
-			}
-			else{
-				$this->set('error', '不存在');
-			}
-		}
+		$this->set('company', $Company);
+		$this->add_tag_data($Company->id, BelongType::COMPANY);
+		$this->add_common_tags();
 	}
 	
 }

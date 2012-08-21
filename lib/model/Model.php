@@ -3,7 +3,7 @@
 class Model extends MysqlDAO {
 	
 	private static $models = array();
-	private static $objects = array();
+	public static $objects = array();
 	
 	function Model(){}
 	

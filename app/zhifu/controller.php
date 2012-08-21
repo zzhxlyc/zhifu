@@ -7,7 +7,7 @@ class ZhifuController extends AppController {
 	public $models = array();
 	
 	public function before(){
-		$this->load_session();
+		parent::before();
 	}
 	
 	public function captcha(){
@@ -62,6 +62,9 @@ class ZhifuController extends AppController {
 				$data['password'] = md5($pswd);
 				$data['email'] = $email;
 				$data['time'] = DATETIME;
+				$data['rate_total'] = 0;
+				$data['rate_num'] = 0;
+				$data['budget'] = 0;
 				$cond = array('username'=>$user);
 				if($type == BelongType::COMPANY){
 					$Company = $this->Company->get_row($cond);
@@ -95,5 +98,41 @@ class ZhifuController extends AppController {
 	}
 	
 	public function reg_succ(){}
+	
+	public function home(){
+		$User = $this->get('User');
+		if($User){
+			if($User->is_company()){
+				$this->redirect('profile?id='.$User->id, 'company');
+			}
+			else if($User->is_expert()){
+				$this->redirect('profile?id='.$User->id, 'expert');
+			}
+			else{
+				$this->redirect('login', '');
+			}
+		}
+		else{
+			$this->redirect('login', '');
+		}
+	}
+	
+	public function setting(){
+		$User = $this->get('User');
+		if($User){
+			if($User->is_company()){
+				$this->redirect('edit?id='.$User->id, 'company');
+			}
+			else if($User->is_expert()){
+				$this->redirect('edit?id='.$User->id, 'expert');
+			}
+			else{
+				$this->redirect('login', '');
+			}
+		}
+		else{
+			$this->redirect('login', '');
+		}
+	}
 	
 }

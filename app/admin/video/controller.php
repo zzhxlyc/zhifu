@@ -52,7 +52,6 @@ class VideoController extends AdminBaseController {
 	public function edit(){
 		if($this->request->post){
 			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
 			$id = get_id($post);
 			if($id > 0){
 				$video = $this->Video->get($id);
@@ -63,7 +62,7 @@ class VideoController extends AdminBaseController {
 				if(count($errors) == 0){
 					$this->Video->escape($post);
 					$this->Video->save($post);
-					$this->response->redirect('edit?id='.$id);
+					$this->response->redirect('edit?succ&id='.$id);
 				}
 				else{
 					$this->set('errors', $errors);

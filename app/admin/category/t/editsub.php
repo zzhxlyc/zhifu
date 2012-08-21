@@ -1,10 +1,11 @@
 <?php 
 	if($error){
-		output_error($error, $index_page);
+		output_error($error);
 	}
 	else{
+		output_edit_succ();
 ?>
-<form action="" method="post" >
+<form action="<?php echo $home.'/editsub?id='.$category->id?>" method="post" >
 <table>
 <tr>
 	<td>子行业</td>

@@ -27,6 +27,10 @@ class Admin extends User {
 		return false;
 	}
 	
+	public function get_name(){
+		return $this->user;
+	}
+	
 	public function status(){
 		if($this->flag == 1){
 			return '有效';

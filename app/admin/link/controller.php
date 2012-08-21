@@ -22,21 +22,6 @@ class LinkController extends AdminBaseController {
 		$this->set('list', $list);
 		$this->set('$page_list', $page_list);
 	}
-
-	private function do_file(&$data, &$errors, &$files){
-		$field = 'img';
-		$file = $files[$field];
-		if($file && is_uploaded_file($file['tmp_name'])){
-			$error = $this->Link->check_file($file);
-			if(empty($error)){
-				$path = $this->upload_file($file);
-				$data[$field] = $path;
-			}
-			else{
-				$errors[$field] = $error;
-			}
-		}
-	}
 	
 	public function add(){
 		if($this->request->post){
@@ -44,7 +29,9 @@ class LinkController extends AdminBaseController {
 			$admin = get_admin_session($this->session);
 			$errors = $this->Link->check($post);
 			if(count($errors) == 0){
-				$this->do_file($post, $errors, $this->request->file);
+				$files = $this->request->file;
+				$path = $this->do_file('img', $errors, $files);
+				if($path){$post['img'] = $path;}
 			}
 			if(count($errors) == 0){
 				$post['time'] = DATETIME;
@@ -74,10 +61,15 @@ class LinkController extends AdminBaseController {
 				$link = $this->set_model($post, $link);
 				$errors = $this->Link->check($link);
 				if(count($errors) == 0){
-					$this->do_file($post, $errors, $this->request->file);
+					$files = $this->request->file;
+					$path = $this->do_file('img', $errors, $files);
+					if($path){$post['img'] = $path;}
+					if($post['img'] && $link->img){
+						FileSystem::remove($link->img);
+					}
 					$this->Link->escape($post);
 					$this->Link->save($post);
-					$this->redirect('edit?id='.$id);
+					$this->redirect('edit?succ&id='.$id);
 				}
 				else{
 					$this->set('errors', $errors);

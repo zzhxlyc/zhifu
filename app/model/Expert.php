@@ -48,4 +48,8 @@ class Expert extends User {
 		}
 	}
 	
+	public static function default_image(){
+		return IMAGE_HOME.'/default.jpg';
+	}
+	
 }

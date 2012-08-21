@@ -37,5 +37,9 @@ class Company extends User {
 			return '未验证';
 		}
 	}
+	
+	public static function default_image(){
+		return IMAGE_HOME.'/default.jpg';
+	}
 
 }

@@ -6,7 +6,7 @@ class Patent extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'expert', 'cat', 'subcat'),
+			'need' => array('title', 'expert', 'description'),
 			'length' => array('title'=>250),
 			'int' => array('expert', 'cat', 'subcat'),
 			'word'=> array('title', 'description'),
@@ -37,6 +37,10 @@ class Patent extends AppModel{
 		if($status == 0){
 			return '竞标中';
 		}
+	}
+	
+	public static function default_image(){
+		return IMAGE_HOME.'/default.jpg';
 	}
 
 }

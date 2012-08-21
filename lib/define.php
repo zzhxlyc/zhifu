@@ -30,6 +30,7 @@ define('CORE_UTIL_DIR', CORE_DIR.'/util');
 include(ROOT_DIR.'/lib/util/Config.php');
 $CONF = new Config();
 define('ROOT_URL', $CONF->get('WEB_URL_ROOT'));
+define('WEB_TITLE', $CONF->get('WEB_TITLE'));
 
 define('JS_HOME', ROOT_URL.'/js');
 define('CSS_HOME', ROOT_URL.'/css');

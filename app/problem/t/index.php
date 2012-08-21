@@ -16,27 +16,28 @@
 		<a href="<?php echo $home.'/index?order=deadline'?>" <?php $HTML->if_current($_GET['order'] == 'deadline')?>>截止时间</a>
 		<a href="<?php echo $home.'/index?order=budget'?>" <?php $HTML->if_current($_GET['order'] == 'budget')?>>任务金额</a>
 	</div>
-
+	<!-- 
 	<div class="search">
 		<input type="text" class="text">
 		<input type="button" class="btn">
 	</div>
-
+	 -->
 </div><!--end for filter-->
 
 <div class="list">
 	<?php 
 		if(is_array($list)){
 			foreach($list as $o){
-				$desc = strip_tags($o->description);
 	?>
 	<div class="item clearfix">
 		<div class="pic">
-			<img src="<?php img($o->image)?>" width="200" height="150"  alt="<?php echo $o->title?>">
+			<a href="<?php echo $home.'/detail?id='.$o->id?>">
+			<img src="<?php img($o->image, $o->default_image())?>" width="200" height="150"  alt="<?php echo $o->title?>">
+			</a>
 		</div><!--end for pic-->
 		<div class="middle">
 			<h3 class="title"><a href="<?php echo $home.'/detail?id='.$o->id?>"><?php echo $o->title?></a></h3>
-			<div class="content"><?php echo $desc?></div>						
+			<div class="content"><?php output_desc($o->description)?></div>						
 			<div class="status clearfix">
 				<div class="title">任务状态:</div>
 				<div class="status-item <?php $HTML->current(0, $o->status)?>">竞标中</div>
@@ -47,8 +48,10 @@
 
 		<div class="right">
 			<div class="price-deadline">
+				<?php if($o->budget){?>
 				<p>出价：<span class="num"><?php echo $o->budget?></span>元</p>
-				<p>截止日期：<span class="date"><?php echo $o->deadline?></span></p>						
+				<?php }?>
+				<?php output_deadline($o->deadline)?>
 			</div>
 			<a href="<?php echo $home.'/'?>" class="btn">我要竞标</a>
 		</div><!--end for right-->

@@ -1,6 +1,6 @@
 <?php 
 	if($error){
-		output_error($error, $index_page);
+		output_error($error);
 	}
 	else{
 ?>
@@ -21,7 +21,7 @@
 	?>
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
-		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
+		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->content?></a></td>
 		<td><?php echo $o->time?></td>
 		<td class="operate">
 			<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>

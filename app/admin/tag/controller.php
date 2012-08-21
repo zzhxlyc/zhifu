@@ -61,7 +61,7 @@ class TagController extends AdminBaseController {
 				if(count($errors) == 0){
 					$this->Tag->escape($post);
 					$this->Tag->save($post);
-					$this->response->redirect('edit?id='.$id);
+					$this->response->redirect('edit?succ&id='.$id);
 				}
 				else{
 					$this->set('errors', $errors);

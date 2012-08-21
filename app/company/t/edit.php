@@ -85,7 +85,6 @@
 	<input type="submit" value="审核通过" />
 	<?php }?>
 	<input type="submit" value="保存" />
-	<a href="<?php echo $home."/profile?id=$company->id"?>">返回</a>
 	<?php echo $HTML->hidden('id', $company->id)?>
 </div>
 </form>

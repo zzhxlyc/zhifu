@@ -20,7 +20,7 @@
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
-		<td><?php echo $o->name?></td>
+		<td><?php echo $o->author?></td>
 		<td><?php echo $o->time?></td>
 		<td><?php echo Problem::get_status($o->status)?></td>
 		<td><?php echo $o->budget?></td>

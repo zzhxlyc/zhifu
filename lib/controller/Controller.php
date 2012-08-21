@@ -59,7 +59,9 @@ class Controller{
 			$this->view->set_template($module, $template);
 		}
 		if(empty($this->view->title)){
-			$this->view->set_title($this->request->get_method());
+			if(defined('WEB_TITLE')){
+				$this->view->set_title(WEB_TITLE);
+			}
 		}
 	}
 	
@@ -82,22 +84,23 @@ class Controller{
 		if($prefix === null){
 			$prefix = $this->request->get_prefix();
 		}
-		if($module === null){
-			$module = $this->request->get_module();
-			if($prefix == '/'){
-				$url = ROOT_URL."/$module/$method";
-			}
-			else{
-				$url = ROOT_URL."$prefix/$module/$method";
-			}
-		}
-		else if($module === ''){
+		if($module === ''){
 			if($prefix == '/'){
 				$url = ROOT_URL."/$method";
 			}
 			else{
 				$url = ROOT_URL."$prefix/$method";
 			}
+			$this->response->redirect($url);
+		}
+		if($module === null){
+			$module = $this->request->get_module();
+		}
+		if($prefix == '/'){
+			$url = ROOT_URL."/$module/$method";
+		}
+		else{
+			$url = ROOT_URL."$prefix/$module/$method";
 		}
 		$this->response->redirect($url);
 	}

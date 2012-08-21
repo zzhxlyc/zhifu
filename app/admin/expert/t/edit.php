@@ -1,10 +1,11 @@
 <?php 
 	if($error){
-		output_error($error, $home);
+		output_error($error);
 	}
 	else{
+		output_edit_succ();
 ?>
-<form action="" method="post" >
+<form action="<?php echo $home.'/edit?id='.$expert->id?>" method="post" >
 <div class="row">
 	<label for="name">姓名</label>
 	<input size="100" type="text" name="name" value="<?php echo $expert->name?>" />

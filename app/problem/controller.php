@@ -2,7 +2,8 @@
 
 class ProblemController extends AppController {
 	
-	public $models = array('Problem', 'Tag', 'TagItem', 'Solution', 'Category');
+	public $models = array('Problem', 'Tag', 'TagItem', 'Solution', 
+								'Category', 'Comment');
 	
 	public function before(){
 		$this->set('home', PROBLEM_HOME);
@@ -75,6 +76,8 @@ class ProblemController extends AppController {
 			$experts = array();
 		}
 		$this->set('$experts', $experts);
+		
+		$this->add_comments($id, BelongType::PROBLEM);
 	}
 	
 	private function add_data($Problem = null){
@@ -89,17 +92,19 @@ class ProblemController extends AppController {
 	public function add(){
 		if($this->request->post){
 			$post = $this->request->post;
+			if($post['type'] == '1'){
+				$data = array('title'=>$post['t'], 'description'=>$post['desc']);
+				$post = $data;
+			}
+			if(isset($post['deadline']) && empty($post['deadline'])){
+				unset($post['deadline']);
+			}
+			if(isset($post['type'])){
+				unset($post['type'], $post['t'], $post['desc']);
+			}
 			$User = $this->get('User');
 			$post['company'] = $User->id;
 			$post['author'] = $User->name;
-			if($post['type'] == '1'){
-				$post['title'] = $post['t'];
-				$post['description'] = $post['desc'];
-			}
-			if(empty($post['deadline'])){
-				unset($post['deadline']);
-			}
-			unset($post['type'], $post['t'], $post['desc']);
 			$Problem = $this->set_model($post, $Problem);
 			$errors = $this->Problem->check($Problem);
 			if(count($errors) == 0){

@@ -54,16 +54,9 @@ class ExpertController extends AppController {
 		
 		$this->set('$Expert', $Expert);
 		
-		$cond = array('type'=>'Expert', 'belong'=>$id);
-		$tag_list = $this->TagItem->get_list($cond);
+		$tag_list = $this->add_tag_data($id, BelongType::EXPERT, false);
 		$tag_list = $this->TagItem->get_most($tag_list);
-		if(count($tag_list) > 0){
-			$tags = $this->Tag->get_list(array('id in'=>$tag_list));
-		}
-		else{
-			$tags = array();
-		}
-		$this->set('$tags', $tags);
+		$this->set('$tags', $tag_list);
 		
 		$cond = array('expert'=>$id);
 		$patents = $this->Patent->get_list($cond, array('lastmodify'=>'DESC'));
@@ -132,11 +125,12 @@ class ExpertController extends AppController {
 				}
 				$this->Expert->escape($post);
 				$this->Expert->save($post);
-				$this->redirect('succ&edit?id='.$id);
+				$this->redirect('edit?succ&id='.$id);
 			}
 			$this->set('errors', $errors);
 		}
 		$this->add_tag_data($Expert->id, BelongType::EXPERT);
+		$this->add_common_tags();
 		$this->set('expert', $Expert);
 	}
 	

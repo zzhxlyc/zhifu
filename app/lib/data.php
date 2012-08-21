@@ -96,6 +96,24 @@ function get_date($time){
 	}
 }
 
+function get_value($o, $k){
+	if(is_array($o)){
+		return $o[$k];
+	}
+	else if(is_object($o)){
+		return $o->$k;
+	}
+}
+
+function set_value(&$o, $k, $v){
+	if(is_array($o)){
+		$o[$k] = $v;
+	}
+	else if(is_object($o)){
+		$o->$k = $v;
+	}
+}
+
 function subString($str, $allow, $last = '...'){
 	$l = strlen($str);
 	$length = 0;

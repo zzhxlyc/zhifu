@@ -68,6 +68,7 @@ class RecruitController extends AppController {
 				$id = $this->Recruit->save($post);
 				$this->redirect('show?id='.$id);
 			}
+			$this->set('$errors', $errors);
 		}
 	}
 	

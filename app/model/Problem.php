@@ -6,7 +6,7 @@ class Problem extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'company', 'cat', 'subcat', 'budget'),
+			'need' => array('title', 'company', 'description'),
 			'length' => array('title'=>250),
 			'int' => array('company', 'cat', 'subcat'),
 			'number' => array('budget'),
@@ -38,6 +38,10 @@ class Problem extends AppModel{
 		if($status == 0){
 			return '竞标中';
 		}
+	}
+	
+	public static function default_image(){
+		return IMAGE_HOME.'/default.jpg';
 	}
 
 }

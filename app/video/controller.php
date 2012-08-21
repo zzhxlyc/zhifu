@@ -60,6 +60,7 @@ class VideoController extends AppController {
 			$User = $this->get('User');
 			$post['belong'] = $User->id;
 			$post['type'] = $User->get_type();
+			$post['author'] = $User->name;
 			$errors = $this->Video->check($post);
 			if(count($errors) == 0){
 				$post['time'] = DATETIME;

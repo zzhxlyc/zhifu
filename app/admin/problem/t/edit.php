@@ -1,26 +1,27 @@
 <?php 
 	if($error){
-		echo $error;
+		output_error($error);
 	}
 	else{
+		output_edit_succ();
 ?>
 
-<form action="" method="post" <?php $HTML->file_form_need()?> >
+<form action="<?php echo $home.'/edit?id='.$problem->id?>" method="post" <?php $HTML->file_form_need()?> >
 	
 <div class="row">
 	<label for="name">难题名称</label>
-	<input size="100" type="text" name="title" value="<?php echo $problem->title?>" />
+	<input size="50" type="text" name="title" value="<?php echo $problem->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>	
 <div class="row">
 	<label for="cat">所属行业</label>
 	
 	<select name="cat">
+		<option value="-1">选择行业</option>
 	</select>
 	<span class="error"><?php echo $errors['cat']?></span>
-	
-	
 	<select name="subcat">
+		<option value="-1">选择行业</option>
 	</select>
 	<span class="error"><?php echo $errors['subcat']?></span>
 </div>
@@ -79,9 +80,8 @@
 
 
 <div class="row">
-	<label for="">详细描述</label><br/><br/>
+	<label for="">详细描述</label><span class="error"><?php echo $errors['description']?></span><br/><br/>
 	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $problem->description?></textarea>
-	<span class="error"><?php echo $errors['description']?></span>
 </div>
 
 <div class="row">
@@ -141,8 +141,8 @@ $(document).ready(function($){
 	
 	dateEventInit();
 	provinceEventInit();	
-	catEventInit();
 	tagEventInit();
+	catEventInit();
 	
 	
 });	

@@ -1,20 +1,21 @@
 <?php 
 	if($error){
-		echo $error;
+		output_error($error);
 	}
 	else{
+		output_edit_succ();
 ?>
-<form action="" method="post" >
+<form action="<?php echo $home.'/edit?id='.$recruit->id?>" method="post" >
 <div class="row">
 	<label for="name">发起用户</label>
 	<?php echo BelongType::to_string($recruit->type)?> ：
-		<?php echo $recruit->user_name?>
+		<?php echo $recruit->author?>
 </div>
 <div class="row">
 	<label for="name">状态</label>
 	<select name="status">
-		<option value="0" <?php $HTML->selected($recruit->status, 0)?>>招聘中</option>
-		<option value="1" <?php $HTML->selected($recruit->status, 1)?>>已关闭</option>
+		<option value="1" <?php $HTML->selected($recruit->status, 1)?>>有效</option>
+		<option value="0" <?php $HTML->selected($recruit->status, 0)?>>关闭</option>
 	</select>
 </div>
 <div class="row">

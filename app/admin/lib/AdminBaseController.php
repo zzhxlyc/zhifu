@@ -3,14 +3,16 @@
 class AdminBaseController extends AppController {
 	
 	public function before(){
+		$this->load_session();
 		$need_no_session = $this->no_session;
 		$method = $this->request->get_method();
 		if(!in_array($method, $need_no_session)){
-			$this->load_session();
 			$admin = get_admin_session($this->session);
-			if(!$admin){
-				$this->response->redirect('login', 'admin');
+			$Admin = $this->Admin->get($admin);
+			if(!$Admin){
+				$this->redirect('login', '');
 			}
+			$this->set('User', $Admin);
 		}
 		$this->view->layout = 'admin';
 		if($this->is_set('home')){

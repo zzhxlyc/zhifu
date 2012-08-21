@@ -79,7 +79,7 @@ class IdeaController extends AdminBaseController {
 					$this->Idea->escape($post);
 					$this->Idea->save($post);
 					$this->Log->action_idea_edit($admin, $post['title']);
-					$this->response->redirect('edit?id='.$id);
+					$this->response->redirect('edit?succ&id='.$id);
 				}
 				else{
 					$this->set('errors', $errors);

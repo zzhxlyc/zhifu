@@ -1,4 +1,4 @@
-<h2>添加求职信息</h2>
+<h2>添加兼职信息</h2>
 
 <form action="" method="post">
 

@@ -24,4 +24,19 @@ class AjaxController extends AppController {
 		}
 	}
 	
+	public function comment(){
+		if($this->request->post){
+			$post = $this->request->post;
+			$errors = $this->Comment->check($post);
+			if(count($errors) == 0){
+				$post['time'] = DATETIME;
+				$id = $this->Comment->save($post);
+				echo $id;
+			}
+			else{
+				echo 0;
+			}
+		}
+	}
+	
 }

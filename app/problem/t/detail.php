@@ -1,10 +1,15 @@
 <div class="sidebar">
 
 	<div class="detail-profile">
-		<img src="<?php img($Problem->image)?>" alt="<?php echo $Problem->title?>" width="180" height="150"/>
+		<img src="<?php img($Problem->image, $Problem->default_image())?>" alt="<?php echo $Problem->title?>" width="180" height="150"/>
 		<p><?php echo $Problem->title?></p>
-		<p>金额<span class="price"><?php output_money($Problem->budget)?></span></p>
-		<p></p>
+		<p>金额：<span class="price"><?php output_money($Problem->budget)?>万元</span></p>
+		<?php if(isset($Problem->province)){?>
+		<p>地区：<?php output_pcd($Problem)?></p>
+		<?php }?>
+		<?php if(isset($Problem->deadline)){?>
+		<p><?php output_deadline($Problem->deadline)?></p>
+		<?php }?>
 	</div><!--end for detail-profile-->
 	
 	<div class="side-section">
@@ -38,9 +43,6 @@
 			<div class="status-item last  <?php $HTML->current($Problem->status, 3)?>">交付互评</div>
 			
 		</div>
-		
-		
-		
 	</div><!--end for section-->
 
 
@@ -65,7 +67,29 @@
 			</div><!--end for item-->
 			<?php }?>
 		</div><!--end for list-->
-	</div><!--end for section-->		
+	</div><!--end for section-->	
 	
+	<div class="section">
+		<h3>难题介绍</h3>
+		<div class="content">
+			<?php echo $Problem->description?>
+		</div>
+		<div class="content">
+			<?php if($Problem->file){?>
+			附件：<a target="_blank" href="<?php echo UPLOAD_HOME."/$Problem->file"?>">点击下载</a>
+			<?php }?>
+		</div>
+	</div>
+	
+	<div class="section">
+		<h3>留言</h3>
+		<div class="content">
+			<?php foreach($comments as $comment){?>
+			<div>
+				
+			</div>
+			<?php }?>
+		</div>
+	</div>
 	
 </div><!--end for main-content-->

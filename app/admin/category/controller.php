@@ -100,7 +100,7 @@ class CategoryController extends AdminBaseController {
 				if(count($errors) == 0){
 					$this->Category->escape($post);
 					$this->Category->save($post);
-					$this->response->redirect('edit?id='.$id);
+					$this->response->redirect('edit?succ&id='.$id);
 				}
 				else{
 					$this->set('errors', $errors);
@@ -142,7 +142,7 @@ class CategoryController extends AdminBaseController {
 				if(count($errors) == 0){
 					$this->Category->escape($post);
 					$this->Category->save($post);
-					$this->response->redirect('editsub?id='.$id);
+					$this->response->redirect('editsub?succ&id='.$id);
 				}
 				else{
 					$this->set('errors', $errors);

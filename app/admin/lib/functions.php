@@ -1,12 +1,11 @@
 <?php
 
 function set_admin_session($session, $admin_id){
-//	$session->set('admin', $admin_id);
+	$session->set('Admin', $admin_id);
 }
 
 function get_admin_session($session){
-	return 1;
-//	return $session->get('admin');
+	return $session->get('Admin');
 }
 
 function get_user_cookie($cookie){

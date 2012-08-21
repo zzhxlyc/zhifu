@@ -64,5 +64,9 @@ class Video extends AppModel{
 			return '';
 		}
 	}
+	
+	public static function default_image(){
+		return IMAGE_HOME.'/default.jpg';
+	}
 
 }

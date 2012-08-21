@@ -168,8 +168,8 @@ class MysqlDAO {
 	private static function _turn_table_name($table){
 		$f = ord($table);
 		if($f >= ord('A') && $f <= ord('Z')){
-			if(array_key_exists($table, self::$objects)){
-				$Model = self::$objects[$table];
+			if(array_key_exists($table, Model::$objects)){
+				$Model = Model::$objects[$table];
 				$t = $Model->table;
 			}
 			else{

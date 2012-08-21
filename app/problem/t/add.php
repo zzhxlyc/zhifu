@@ -93,9 +93,8 @@
 
 
 	<div class="row">
-		<label for="">详细描述</label><br/><br/>
+		<label for="">详细描述</label><span class="error"><?php echo $errors['description']?></span><br/><br/>
 		<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $problem->description?></textarea>
-		<span class="error"><?php echo $errors['description']?></span>
 	</div>
 	
 	<div class="row">
@@ -126,7 +125,7 @@
 </div>
 
 <div class="row">
-	<input type="hidden" name="type" value="0" /> <!-- 1 for simple, 0 not -->
+	<input type="hidden" id="type" name="type" value="0" /> <!-- 1 for simple, 0 not -->
 	<input type="submit" value="发布" class="btn fl">
 	<a href="<?php echo $home?>" class="back-btn">返回</a>
 </div>
@@ -161,6 +160,7 @@ $(document).ready(function($){
 		$(this).addClass('current');
 		$('.add-problem').show();
 		$('.add-simple-problem').hide();
+		$('#type').val('0');
 	});
 	
 	$('#simple-add').click(function(){
@@ -168,6 +168,7 @@ $(document).ready(function($){
 		$(this).addClass('current');
 		$('.add-problem').hide();
 		$('.add-simple-problem').show();
+		$('#type').val('1');
 	});
 	
 	dateEventInit();

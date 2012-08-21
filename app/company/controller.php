@@ -2,7 +2,7 @@
 
 class CompanyController extends AppController {
 	
-	public $models = array('TagItem', 'Tag', 'Problem');
+	public $models = array('TagItem', 'Tag', 'Problem', 'Patent', 'Deal', 'Solution');
 	
 	public function before(){
 		$this->set('home', COMPANY_HOME);
@@ -28,6 +28,44 @@ class CompanyController extends AppController {
 		$company->patent_budget = 0;
 	}
 	
+	public function profile(){
+		$get = $this->request->get;
+		$id = $get['id'];
+		$has_error = true;
+		if($id){
+			$Company = $this->Company->get($id);
+			if($Company){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		$this->set('$Company', $Company);
+		
+		$tag_list = $this->add_tag_data($id, BelongType::COMPANY, false);
+		$tag_list = $this->TagItem->get_most($tag_list);
+		$this->set('$tags', $tag_list);
+		
+		$cond = array('company'=>$id);
+		$problems = $this->Problem->get_list($cond, array('lastmodify'=>'DESC'));
+		$this->set('$problems', $problems);
+		
+		$cond = array('company'=>$id);
+		$deals = $this->Deal->get_list($cond);
+		if(count($deals) > 0){
+			$patent_ids = get_attrs($deals, 'patent');
+			$cond = array('id in'=>$patent_ids);
+			$patents = $this->Patent->get_list($cond, array('lastmodify'=>'DESC'));
+		}
+		else{
+			$patents = array();
+		}
+		$this->set('$patents', $patents);
+	}
+	
 	public function edit(){
 		$data = $this->get_data();
 		$id = $data['id'];
@@ -35,7 +73,7 @@ class CompanyController extends AppController {
 		$has_error = true;
 		if($id){
 			$Company = $this->Company->get($id);
-//			if($Company && $Company->id == $User->id){
+//			if($Company && $User->is_company() && $Company->id == $User->id){
 			if($Company){
 				$has_error = false;
 			}
@@ -72,6 +110,7 @@ class CompanyController extends AppController {
 			}
 		}
 		$this->add_tag_data($Company->id, BelongType::COMPANY);
+		$this->add_common_tags();
 		$this->set('company', $Company);
 	}
 	

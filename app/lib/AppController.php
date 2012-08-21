@@ -89,6 +89,11 @@ class AppController extends Controller{
 		}
 	}
 	
+	protected function add_categorys(){
+		$cat_array = $this->Category->get_category();
+		$this->set('cat_array', $cat_array);
+	}
+	
 	protected function add_tag_data($id, $type, $set = true){
 		$tags = $this->TagItem->get_list(array('belong'=>$id, 'type'=>$type));
 		$tag_id_array = get_attrs($tags, 'tag');
@@ -101,6 +106,9 @@ class AppController extends Controller{
 				return $tag_list;
 			}
 		}
+		else{
+			return array();
+		}
 	}
 	
 	protected function add_common_tags(){
@@ -110,13 +118,25 @@ class AppController extends Controller{
 		}
 	}
 	
+	protected function add_comments($id, $type, $set = true){
+		$comments = $this->Comment->get_list(array('object'=>$id, 'type'=>$type));
+		if($set){
+			$this->set('comments', $comments);
+		}
+		else{
+			return $comments;
+		}
+	}
+	
 	protected function do_file($name, &$errors, &$files, $model = ''){
 		if($model == ''){
 			$model = ucfirst($this->request->get_module());
 		}
 		$file = $files[$name];
 		if($file && is_uploaded_file($file['tmp_name'])){
-			$error = $this->{$model}->check_file($file);
+			if(isset($this->{$model})){
+				$error = $this->{$model}->check_file($file);
+			}
 			if(empty($error)){
 				$path = $this->upload_file($file);
 				return $path;

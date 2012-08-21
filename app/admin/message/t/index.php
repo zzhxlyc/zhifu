@@ -4,7 +4,9 @@
 	<tr class="top">
 		<td width="30">选择</td>
 		<td>标题</td>
-		<td width="200">操作</td>
+		<td width="120">发送用户</td>
+		<td width="120">接受用户</td>
+		<td width="100">操作</td>
 	</tr>
 	<?php 
 		$i = 0;
@@ -17,6 +19,8 @@
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
+		<td><?php echo $o->from_author?>（<?php echo BelongType::to_string($o->from_type)?>）</td>
+		<td><?php echo $o->to_name?>（<?php echo BelongType::to_string($o->to_type)?>）</td>
 		<td class="operate">
 			<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
 			<a href="<?php echo $home.'/delete?p=1&id='.$o->id?>">删除</a>

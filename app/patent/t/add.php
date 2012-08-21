@@ -9,11 +9,11 @@
 <div class="row">
 	<label for="cat">所属行业</label>
 	<select name="cat">
-		<option value="">选择行业</option>
+		<option value="-1">选择行业</option>
 	</select>
 	<span class="error"><?php echo $errors['cat']?></span>
 	<select name="subcat">
-		<option value="">选择行业</option>
+		<option value="-1">选择行业</option>
 	</select>
 	<span class="error"><?php echo $errors['subcat']?></span>
 </div>
@@ -54,9 +54,8 @@
 
 
 <div class="row">
-	<label for="">详细描述</label><br/><br/>
+	<label for="">详细描述</label><span class="error"><?php echo $errors['description']?></span><br/><br/>
 	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $patent->description?></textarea>
-	<span class="error"><?php echo $errors['description']?></span>
 </div>
 
 <?php if($patent->image){?>
@@ -88,7 +87,7 @@
 
 <div class="row">
 	<input type="submit" value="保存" />
-	<a href="<?php echo $home.'/detail?id='.$patent->id?>">返回</a>
+	<a href="<?php echo $home?>">返回</a>
 </div>
 
 </form>

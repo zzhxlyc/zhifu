@@ -62,7 +62,7 @@ class WordController extends AdminBaseController {
 					$this->Word->escape($post);
 					$this->Word->save($post);
 					$this->build();
-					$this->response->redirect('edit?id='.$id);
+					$this->response->redirect('edit?succ&id='.$id);
 				}
 				else{
 					$this->set('errors', $errors);

@@ -29,6 +29,7 @@ define('ADMIN_RECRUIT_HOME', ADMIN_HOME.'/recruit');
 define('ADMIN_PAY_HOME', ADMIN_HOME.'/pay');
 define('ADMIN_MANAGE_HOME', ADMIN_HOME.'/manage');
 define('ADMIN_SOLUTION_HOME', ADMIN_HOME.'/solution');
+define('ADMIN_LOGIN_HOME', ADMIN_HOME.'/login');
 
 define('LOGIN_HOME', ROOT_URL.'/login');
 define('PROBLEM_HOME', ROOT_URL.'/problem');

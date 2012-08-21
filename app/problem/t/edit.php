@@ -15,9 +15,13 @@
 </div>	
 <div class="row">
 	<label for="cat">所属行业</label>
-	<select name="cat"></select>
+	<select name="cat">
+		<option value="-1">选择行业</option>
+	</select>
 	<span class="error"><?php echo $errors['cat']?></span>
-	<select name="subcat"></select>
+	<select name="subcat">
+		<option value="-1">选择行业</option>
+	</select>
 	<span class="error"><?php echo $errors['subcat']?></span>
 </div>
 
@@ -150,8 +154,8 @@ $(document).ready(function($){
 	
 	dateEventInit();
 	provinceEventInit();	
-	catEventInit();
 	tagEventInit();
+	catEventInit();
 	
 	
 });	

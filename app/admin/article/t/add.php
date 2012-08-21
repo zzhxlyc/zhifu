@@ -2,14 +2,13 @@
 
 <div class="row">
 	<label for="name">标题</label>
-	<input size="100" type="text" name="title" value="<?php echo $article->title?>" />
+	<input size="80" type="text" name="title" value="<?php echo $article->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 	
 <div class="row">
-	<label for="">内容</label><br/><br/>
+	<label for="">内容</label><span class="error"><?php echo $errors['content']?></span><br/><br/>
 	<textarea class="ckeditor" name="content" rows="10" cols="80"><?php echo $article->content?></textarea>
-	<span class="error"><?php echo $errors['content']?></span>
 </div>
 
 <div class="row">

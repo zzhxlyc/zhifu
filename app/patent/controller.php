@@ -2,7 +2,7 @@
 
 class PatentController extends AppController {
 	
-	public $models = array('Patent', 'Tag', 'TagItem', 'Category');
+	public $models = array('Patent', 'Tag', 'TagItem', 'Category', 'Deal');
 	
 	public function before(){
 		$this->set('home', PATENT_HOME);
@@ -45,6 +45,7 @@ class PatentController extends AppController {
 			$post = $this->request->post;
 			$User = $this->get('User');
 			$post['expert'] = $User->id;
+			$post['author'] = $User->name;
 			$Patent = $this->set_model($post, $Patent);
 			$errors = $this->Patent->check($Patent);
 			if(count($errors) == 0){
@@ -82,7 +83,40 @@ class PatentController extends AppController {
 	}
 	
 	public function detail(){
+		$get = $this->request->get;
+		$id = get_id($get);
+		$has_error = true;
+		if($id){
+			$Patent = $this->Patent->get($id);
+			if($Patent){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
 		
+		$this->set('$Patent', $Patent);
+		
+		$Expert = $this->Expert->get($Patent->expert);
+		$this->set('$Expert', $Expert);
+		
+		$tag_list = $this->add_tag_data($id, BelongType::PATENT, false);
+		$tag_list = $this->TagItem->get_most($tag_list);
+		$this->set('$tags', $tag_list);
+		
+		$cond = array('patent'=>$id);
+		$deals = $this->Deal->get_list($cond);
+		if(count($deals) > 0){
+			$company_ids = get_attrs($deals, 'company');
+			$cond = array('id in'=>$company_ids);
+			$companys = $this->Company->get_list($cond);
+		}
+		else{
+			$companys = array();
+		}
+		$this->set('$companys', $companys);
 	}
 	
 	public function edit(){

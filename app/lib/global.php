@@ -70,17 +70,57 @@ function output_page_list($page_list, $anchor_id = ''){
 	echo '<div id="goodslist2-page" class="pagenavi hidden"></div>'."\n";
 }
 
-function output_desc($desc){
+function output_desc($desc, $length = 100){
 	$d = strip_tags($desc);
-	echo subString($d, 100);
+	echo subString($d, $length);
 }
 
 function output_money($money){
-	echo $money;
+	if($money){
+		echo $money;
+	}
+	else{
+		echo 0;
+	}
+}
+
+function output_pcd($o){
+	echo "$o->province$o->city$o->district";
+}
+
+function output_deadline($datetime){
+	if($datetime){
+		if(!is_expire($o->deadline)){
+			echo '<p>截止日期：<span class="date">'.$datetime.'</span></p>';
+		}
+		else{
+			echo '<p>截止日期：已过期</p>';
+		}
+	}
+	else{
+		echo '<p>截止日期：有效</p>';
+	}
 }
 
 function output_edit_succ(){
 	if(isset($_GET['succ'])){
 		echo '<p>修改成功</p>';
 	}
+}
+
+function output_score($o){
+	if($o->rate_num == 0){
+		echo '未评分';
+	}
+	else{
+		printf('%.1d分', $o->rate_total / $o->rate_num);
+	}
+}
+
+function is_expire($datetime, $addend = false){
+	if($addend){
+		$datetime .= '23:59:59';
+	}
+	$ts = strtotime($datetime);
+	return $ts < time();
 }

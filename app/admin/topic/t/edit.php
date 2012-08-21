@@ -1,19 +1,21 @@
 <?php 
 	if($error){
-		output_error($error, $index_page);
+		output_error($error);
 	}
 	else{
+		output_edit_succ();
 ?>
-<form action="" method="post" >
+<form action="<?php echo $home.'/edit?id='.$topic->id?>" method="post" >
+<?php if($topic->parent == 0){?>
 <div class="row">
 	<label for="name">标题</label>
 	<input size="100" type="text" name="title" value="<?php echo $topic->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
+<?php }?>
 <div class="row">
-	<label for="">内容</label><br/><br/>
+	<label for="">内容</label><span class="error"><?php echo $errors['content']?></span><br/><br/>
 	<textarea class="ckeditor" name="content" rows="10" cols="80"><?php echo $topic->content?></textarea>
-	<span class="error"><?php echo $errors['content']?></span>
 </div>
 <div class="row">
 	<input type="submit" value="保存" />

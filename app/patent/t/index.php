@@ -6,12 +6,13 @@
 		<a href="<?php echo $home.'/index?order=deadline'?>" <?php $HTML->if_current($_GET['order'] == 'deadline')?>>截止时间</a>
 		<a href="<?php echo $home.'/index?order=budget'?>" <?php $HTML->if_current($_GET['order'] == 'budget')?>>任务金额</a>
 	</div>
-
+	
+	<!-- 
 	<div class="search">
 		<input type="text" class="text">
 		<input type="button" class="btn">
 	</div>
-
+	 -->
 </div><!--end for filter-->
 <div class="list">
 	<?php 
@@ -21,7 +22,9 @@
 	?>
 	<div class="item clearfix">
 		<div class="pic">
-			<img src="<?php img($o->image)?>" width="200" height="150" alt="<?php echo $o->title?>">
+			<a href="<?php echo $home.'/detail?id='.$o->id?>">
+			<img src="<?php img($o->image, $o->default_image())?>" width="200" height="150" alt="<?php echo $o->title?>">
+			</a>
 		</div><!--end for pic-->
 		<div class="middle">
 			<h3 class="title">
@@ -41,7 +44,6 @@
 		<div class="right">
 			<div class="price-deadline">
 				<p>出价：<span class="num"><?php echo $o->budget?></span>元</p>
-				<p>截止日期：<span class="date"><?php echo $o->deadline?></span></p>						
 			</div>
 			<a href="<?php echo $home.'/'?>" class="btn">我要揭榜</a>
 		</div><!--end for right-->

@@ -44,10 +44,11 @@ class TopicController extends AppController {
 	public function add(){
 		if($this->request->post){
 			$post = $this->request->post;
+			$User = $this->get('User');
 			$post['parent'] = 0;
-			$post['belong'] = 1;
-			$post['type'] = BelongType::EXPERT;
-			$post['author'] = 'add';
+			$post['belong'] = $User->id;
+			$post['type'] = $User->get_type();
+			$post['author'] = $User->name;
 			$errors = $this->Topic->check($post);
 			if(count($errors) == 0){
 				$post['comments'] = 0;

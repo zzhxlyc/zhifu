@@ -1,11 +1,3 @@
-<div class="filter clearfix">
-	
-	<div class="search">
-		<input type="text" class="text" />
-		<input type="button" class="btn" />
-	</div>
-
-</div><!--end for filter-->
 
 <div class="section new-video">
 	<h3>最新视频</h3>
@@ -18,7 +10,7 @@
 		<div class="item">
 			<div class="pic">
 				<a target="_blank" href="<?php echo $home.'/url?id='.$o->id?>">
-					<img src="<?php img($o->image)?>" alt="" width="150" height="120"/>
+					<img src="<?php img($o->image, $o->default_image())?>" alt="" width="150" height="120"/>
 				</a>
 			</div>
 			<div class="des">
@@ -53,7 +45,7 @@
 		<div class="item">
 			<div class="pic">
 				<a target="_blank" href="<?php echo $home.'/url?id='.$o->id?>">
-					<img src="<?php img($o->image)?>" alt="" width="150" height="120"/>
+					<img src="<?php img($o->image, $o->default_image())?>" alt="" width="150" height="120"/>
 				</a>
 			</div>
 			<div class="des">

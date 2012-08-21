@@ -3,7 +3,7 @@
 <tr>
 	<td>Logo设置</td>
 	<td>
-		<img alt="" src="<?php echo $logo?>">
+		<img alt="" src="<?php img($logo)?>">
 		<input type="file" name="logo" />
 	</td>
 </tr>

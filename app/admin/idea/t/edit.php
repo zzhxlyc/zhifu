@@ -1,10 +1,11 @@
 <?php 
 	if($error){
-		echo $error;
+		output_error($error);
 	}
 	else{
+		output_edit_succ();
 ?>
-<form action="" method="post" <?php $HTML->file_form_need()?> >
+<form action="<?php echo $home.'/edit?id='.$problem->id?>" method="post" <?php $HTML->file_form_need()?> >
 <table>
 <tr>
 	<td>标题</td>

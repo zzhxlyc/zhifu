@@ -4,7 +4,7 @@
 		<a href="<?php echo $home.'/index?type=zhaopin'?>" <?php $HTML->if_current($_GET['type'] == 'zhaopin')?>>顾问招聘</a>
 		<a href="<?php echo $home.'/index?type=qiuzhi'?>" <?php $HTML->if_current($_GET['type'] == 'qiuzhi')?>>顾问求职</a>
 	</div>
-	<a href="<?php echo $home.'/add'?>" class="job-btn btn">我要求职</a>
+	<a href="<?php echo $home.'/add'?>" class="job-btn btn">我要发布</a>
 </div>
 
 <div class="list job">

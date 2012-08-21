@@ -26,7 +26,7 @@ class MessageController extends AdminBaseController {
 	public function send(){
 		if($this->request->post){
 			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
+			$Admin = $this->get('User');
 			$errors = array();
 			if(empty($post['to_name'])){
 				$errors['to_name'] = '发送用户不能为空';
@@ -40,12 +40,12 @@ class MessageController extends AdminBaseController {
 				if($user_id > 0){
 					$post['to'] = $user_id;
 					$post['read'] = 0;
-					$post['from'] = $admin;
+					$post['from'] = $Admin->id;
 					$post['from_type'] = BelongType::ADMIN;
+					$post['from_author'] = $Admin->get_name();
 					$errors = $this->Message->check($post);
 					if(count($errors) == 0){
 						$post['time'] = DATETIME;
-						unset($post['to_name']);
 						$this->Message->escape($post);
 						$this->Message->save($post);
 						$this->Log->action_message_send($admin, $post);
@@ -62,51 +62,35 @@ class MessageController extends AdminBaseController {
 		}
 	}
 	
-	private function add_data(&$message){
-		$message->from_name = BelongType::get_user($message->from, $message->from_type);
-		$message->to_name = BelongType::get_user($message->to, $message->to_type);
-	}
-	
 	public function edit(){
+		$data = $this->get_data();
+		$id = $data['id'];
+		$has_error = true;
+		if($id){
+			$message = $this->Message->get($id);
+			if($message){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->set('error', '不存在');
+			return;
+		}
+		
 		if($this->request->post){
 			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			$id = get_id($post);
-			if($id > 0){
-				$message = $this->Message->get($id);
-			}
-			if($message){
-				$message = $this->set_model($post, $message);
-				$errors = $this->Message->check($message);
-				if(count($errors) == 0){
-					$this->Message->escape($post);
-					$this->Message->save($post);
-					$this->response->redirect('edit?id='.$id);
-				}
-				else{
-					$this->set('errors', $errors);
-					$this->add_data($message);
-					$this->set('message', $message);
-				}
+			$message = $this->set_model($post, $message);
+			$errors = $this->Message->check($message);
+			if(count($errors) == 0){
+				$this->Message->escape($post);
+				$this->Message->save($post);
+				$this->response->redirect('edit?succ&id='.$id);
 			}
 			else{
-				$this->set('error', '不存在');
+				$this->set('errors', $errors);
 			}
 		}
-		else{
-			$get = $this->request->get;
-			$id = get_id($get);
-			if($id > 0){
-				$message = $this->Message->get($id);
-			}
-			if($message){
-				$this->add_data($message);
-				$this->set('message', $message);
-			}
-			else{
-				$this->set('error', '不存在');
-			}
-		}
+		$this->set('message', $message);
 	}
 	
 }

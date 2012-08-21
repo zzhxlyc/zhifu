@@ -23,34 +23,23 @@ class ArticleController extends AdminBaseController {
 		$this->set('$page_list', $page_list);
 	}
 	
-	private function do_file(&$data, &$errors, &$files){
-		$file = $files['file'];
-		if($file && is_uploaded_file($file['tmp_name'])){
-			$error = $this->Article->check_file($file);
-			if(empty($error)){
-				$path = $this->upload_file($file);
-				$data['file'] = $path;
-			}
-			else{
-				$errors['file'] = $error;
-			}
-		}
-	}
-	
 	public function add(){
 		if($this->request->post){
 			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			$post['admin'] = $admin;
+			$Admin = $this->get('User');
+			$post['admin'] = get_admin_session($this->session);
+			$post['author'] = $Admin->name;
 			$errors = $this->Article->check($post);
 			if(count($errors) == 0){
-				$this->do_file($post, $errors, $this->request->file);
+				$files = $this->request->file;
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
 			}
 			if(count($errors) == 0){
 				$post['time'] = DATETIME;
 				$this->Article->escape($post);
 				$this->Article->save($post);
-				$this->Log->action_article_add($admin, $post['title']);
+				$this->Log->action_article_add($Admin->id, $post['title']);
 				$this->response->redirect('index');
 			}
 			else{
@@ -62,48 +51,45 @@ class ArticleController extends AdminBaseController {
 	}
 	
 	public function edit(){
+		$data = $this->get_data();
+		$id = $data['id'];
+		$has_error = true;
+		if($id){
+			$Article = $this->Article->get($id);
+			if($Article){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->set('error', '不存在');
+			return;
+		}
+		
 		if($this->request->post){
 			$post = $this->request->post;
-			$admin = get_admin_session($this->session);
-			$id = get_id($post);
-			if($id > 0){
-				$article = $this->Article->get($id);
+			$Article = $this->set_model($post, $Article);
+			$errors = $this->Article->check($Article);
+			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
 			}
-			if($article){
-				$article = $this->set_model($post, $article);
-				$errors = $this->Article->check($article);
-				if(count($errors) == 0){
-					$this->do_file($post, $errors, $this->request->file);
+			if(count($errors) == 0){
+				$post['lastmodify'] = DATETIME;
+				if($post['file'] && $Article->file){
+					FileSystem::remove($Article->file);
 				}
-				if(count($errors) == 0){
-					$post['lastmodify'] = DATETIME;
-					$this->Article->escape($post);
-					$this->Article->save($post);
-					$this->Log->action_article_edit($admin, $post['title']);
-					$this->response->redirect('edit?id='.$id);
-				}
-				else{
-					$this->set('errors', $errors);
-					$this->set('article', $article);
-				}
+				$this->Article->escape($post);
+				$this->Article->save($post);
+				$admin = get_admin_session($this->session);
+				$this->Log->action_article_edit($admin, $post['title']);
+				$this->response->redirect('edit?succ&id='.$id);
 			}
 			else{
-				$this->set('error', '不存在');
+				$this->set('errors', $errors);
 			}
 		}
-		else{
-			$get = $this->request->get;
-			$id = get_id($get);
-			if($id > 0){
-				$article = $this->Article->get($id);
-			}
-			if($article){
-				$this->set('article', $article);
-			}
-			else{
-				$this->set('error', '不存在');
-			}
-		}
+		$this->set('article', $Article);
 	}
 	
 }

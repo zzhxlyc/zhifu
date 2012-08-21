@@ -1,18 +1,24 @@
 <div class="header_wrap">
 	<div class="header">
 		<h1 class="logo"><a href="#">知富网</a></h1>
+		<?php if(isset($User)){?>
 		<div class="top-nav">
-			<a href="#">首页</a>|
-			<a href="#">个人主页</a>|
-			<a href="#">我的订阅</a>|
-			<a href="#">我的小组</a>|
-			<a href="#">用户中心</a>|
+			<a href="<?php echo ROOT_URL?>">首页</a>|
+			<a href="<?php echo ROOT_URL.'/home'?>">个人主页</a>|
+			<a href="<?php echo ROOT_URL.'/read'?>">我的订阅</a>|
+			<a href="<?php echo ROOT_URL.'/group'?>">我的小组</a>|
+			<a href="<?php echo ROOT_URL.'/setting'?>">用户中心</a>|
 			<a href="#" class="add-content">
-				发布
-
+				<?php if($User->is_company()){?>
+					<a href="<?php echo PROBLEM_HOME.'/add'?>">发布难题</a>
+					<a href="<?php echo IDEA_HOME.'/add'?>">创意悬赏</a>
+				<?php }?>
+				<?php if($User->is_expert()){?>
+					<a href="<?php echo PATENT_HOME.'/add'?>">发布专利</a>
+				<?php }?>
 			</a>
-			
 		</div>
+		<?php }?>
 		
 		<ul class="main-nav">
 			<li><a href="<?php echo PROBLEM_HOME?>" <?php head_tab1()?>>企业难题</a></li>

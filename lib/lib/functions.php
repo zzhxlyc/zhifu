@@ -7,3 +7,11 @@ function p($text, $exit = true){
 		exit;
 	}
 }
+
+function dump_sql(){
+	global $DB;
+	$sqls = $DB->sql_list;
+	foreach($sqls as $sql){
+		echo '<p>'.$sql.'</p>';
+	}
+}

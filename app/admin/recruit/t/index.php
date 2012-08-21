@@ -4,7 +4,8 @@
 	<tr class="top">
 		<td width="30">选择</td>
 		<td>招聘名称</td>
-		<td width="100">状态</td>
+		<td width="100">发布者</td>
+		<td width="80">状态</td>
 		<td width="140">发布时间</td>
 		<td width="100">操作</td>
 	</tr>
@@ -18,6 +19,7 @@
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
+		<td><?php echo $o->author?></td>
 		<td><?php echo $o->get_status()?></td>
 		<td><?php echo $o->time?></td>
 		<td class="operate">
