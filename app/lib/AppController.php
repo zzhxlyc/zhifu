@@ -118,10 +118,23 @@ class AppController extends Controller{
 		}
 	}
 	
-	protected function add_comments($id, $type, $set = true){
-		$comments = $this->Comment->get_list(array('object'=>$id, 'type'=>$type));
+	protected function add_comments($id, $type, $page = 1, $set = true){
+		$cond = array('object'=>$id, 'type'=>$type);
+		$order = array('time'=>'DESC');
+		$limit = 10;
+		$all = $this->Comment->count($cond);
+		$pager = new Pager($all, $page, $limit);
+		$comments = $this->Comment->get_page($cond, $order, $pager->now(), $limit);
+		$array = array(
+			BelongType::COMPANY => COMPANY_HOME."/profile?id=$id&",
+			BelongType::EXPERT => EXPERT_HOME."/profile?id=$id&",
+			BelongType::PROBLEM => PROBLEM_HOME."/detail?id=$id&",
+			BelongType::PATENT => PATENT_HOME."/detail?id=$id&",
+		);
+		$links = $pager->get_page_links($array[$type]);
 		if($set){
 			$this->set('comments', $comments);
+			$this->set('links', $links);
 		}
 		else{
 			return $comments;

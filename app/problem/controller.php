@@ -77,7 +77,8 @@ class ProblemController extends AppController {
 		}
 		$this->set('$experts', $experts);
 		
-		$this->add_comments($id, BelongType::PROBLEM);
+		$page = get_page($get);
+		$this->add_comments($id, BelongType::PROBLEM, $page);
 	}
 	
 	private function add_data($Problem = null){

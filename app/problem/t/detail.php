@@ -84,42 +84,35 @@
 	<div class="section comment-section">
 		<h3>留言</h3>
 		<div class="content">
+			<?php foreach($comments as $comment){ ?>
 			<div class="item">
 				<div class="comment-meta">
-					<a class="author" href="#">sss</a><span class="comment-time">2012-07-02 16:49:09 </span>
-
+					<a class="author" href="<?php echo get_author_link($comment)?>"><?php echo $comment->author?></a>
+					<span class="comment-time"><?php echo $comment->time?></span>
 					<span class="op">
-						<a href="#reply">回复</a>
+						<a href="javascript:void(0)">回复</a>
 					</span>
 				</div>
-				<p>http://www.anhuitai.com/——山寨网站给力啊</p>
-					
-				
+				<p><?php echo $comment->content?></p>
 			</div><!--end for item-->
+			<?php }?>
 			
-			<div class="item">
-				<div class="comment-meta">
-					<a class="author" href="#">sss</a><span class="comment-time">2012-07-02 16:49:09 </span>
-
-					<span class="op">
-						<a href="#reply">回复</a>
-					</span>
-				</div>
-				<p>http://www.anhuitai.com/——山寨网站给力啊</p>
-					
-				
-			</div><!--end for item-->
-			<?php foreach($comments as $comment){?>
-			
+			<?php if(count($links) > 3){?>
+			<div class="page-wrapper">
+				<?php output_page_list($links);?>
+			</div>
 			<?php }?>
 			
 			
 			<div class="reply" id="reply">
-				<textarea name="" id=""></textarea>
-				<a href="#" class="btn">回复</a>
+				<textarea name="" id="reply_content"></textarea>
+				<a href="javascript:void(0)" class="btn">回复</a>
 				
 			</div>
 		</div><!--end for content-->
+		
+		<input type="hidden" id="object" name="object" value="<?php echo $Problem->id?>" />
+		<input type="hidden" id="type" name="type" value="<?php echo BelongType::PROBLEM?>" />
 	</div><!--end for comment-section-->
 	
 </div><!--end for main-content-->
@@ -127,8 +120,34 @@
 <script type="text/javascript">
 	$('.op a').click(function(){
 		var author=$(this).parent().parent().find('.author').text();
-		$('#reply textarea').val('回复：'+author+' ');
+		$('#reply textarea').val('回复 '+author+'：');
 	})
 	
-	
+	$('.btn').click(function(){
+		var object = $("#object").val();
+		var type = $("#type").val();
+		var content = $("#reply_content").val();
+		if(content != ''){
+			$.ajax({
+				type: "POST",
+				url: window.ROOT_URL + "/ajax/comment",
+				data: "object="+object+"&type="+type+"&content="+content,
+				success: function(msg){
+					var r = parseInt(msg);
+					if(r > 0){
+						alert('回复成功');
+					}
+					else if(r == -1){
+						alert('请先登录');
+					}
+					else{
+						alert('回复失败');
+					}
+				}
+			});
+		}
+		else{
+			alert('回复内容为空');
+		}
+	});
 </script>

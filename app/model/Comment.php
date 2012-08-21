@@ -8,7 +8,7 @@ class Comment extends AppModel{
 		$check_arrays = array(
 			'need' => array('object', 'type', 'content', 'user', 'author', 'user_type'),
 			'length' => array(),
-			'int' => array('object', 'type'),
+			'int' => array('object', 'user'),
 			'word'=> array(),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);

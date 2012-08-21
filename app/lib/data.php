@@ -96,6 +96,14 @@ function get_date($time){
 	}
 }
 
+function get_page($data, $field = 'page'){
+	$page = intval($data[$field]);
+	if($page <= 0){
+		$page = 1;
+	}
+	return $page;
+}
+
 function get_value($o, $k){
 	if(is_array($o)){
 		return $o[$k];

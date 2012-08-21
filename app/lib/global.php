@@ -117,6 +117,16 @@ function output_score($o){
 	}
 }
 
+function get_author_link($o, $type_field = 'user_type', $id_field = 'user'){
+	$type = $o->{$type_field};
+	if($type == BelongType::EXPERT){
+		return EXPERT_HOME.'/profile?id='.$o->{$id_field};
+	}
+	else if($type == BelongType::COMPANY){
+		return COMPANY_HOME.'/profile?id='.$o->{$id_field};
+	}
+}
+
 function is_expire($datetime, $addend = false){
 	if($addend){
 		$datetime .= '23:59:59';

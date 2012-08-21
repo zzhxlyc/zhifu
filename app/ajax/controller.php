@@ -2,10 +2,20 @@
 
 class AjaxController extends AppController {
 	
-	public $models = array('Word');
+	public $models = array('Word', 'Comment');
 	
 	public function before(){
+		parent::before();
 		$this->layout('ajax');
+		$not_need_login = array();
+		$User = $this->get('User');
+		$method = $this->request->get_method();
+		if(!in_array($method, $not_need_login)){
+			if(!$User){
+				echo -1;
+				exit;
+			}
+		}
 	}
 	
 	public function checkword(){
@@ -27,6 +37,10 @@ class AjaxController extends AppController {
 	public function comment(){
 		if($this->request->post){
 			$post = $this->request->post;
+			$User = $this->get('User');
+			$post['user'] = $User->id;
+			$post['author'] = $User->name;
+			$post['user_type'] = $User->get_type();
 			$errors = $this->Comment->check($post);
 			if(count($errors) == 0){
 				$post['time'] = DATETIME;
