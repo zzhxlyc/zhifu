@@ -67,7 +67,7 @@ class CompanyController extends AppController {
 		$this->set('$patents', $patents);
 		
 		$page = get_page($get);
-		$this->add_comments($id, BelongType::COMPANY, $page);
+		$this->add_comments($Company, $page);
 	}
 	
 	public function edit(){

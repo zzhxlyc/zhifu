@@ -39,22 +39,22 @@
 			<h3 class="title"><a href="<?php echo $home.'/detail?id='.$o->id?>"><?php echo $o->title?></a></h3>
 			<div class="content"><?php output_desc($o->description)?></div>						
 			<div class="status clearfix">
-				<div class="title">状态:</div>
-				<div class="status-item <?php $HTML->current(0, $o->status)?>">竞标中</div>
-				<div class="status-item <?php $HTML->current(1, $o->status)?>">专家会诊</div>
-				<div class="status-item last <?php $HTML->current(2, $o->status)?>">已完成</div>
+				<div class="title">状态：</div>
+				<div class="status-item <?php $HTML->current($o->status, 0)?>">竞标中</div>
+				<div class="status-item <?php $HTML->current($o->status, 1)?>">评奖中</div>
+				<div class="status-item last  <?php $HTML->current($o->status, 2)?>">结束</div>
 			</div>
 		</div><!--end for middle-->
 
 		<div class="right">
 			<div class="price-deadline">
 				<?php if($o->budget){?>
-				<p>出价：<span class="num"><?php echo $o->budget?></span>元</p>
+				<p>出价：<span class="num"><?php echo $o->budget?></span>万元</p>
 				<?php }?>
 				<?php output_deadline($o->deadline)?>
 			</div>
 			<?php if(is_expert($User)){?>
-			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">我要竞标</a>
+			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">我有创意</a>
 			<?php }?>
 		</div><!--end for right-->
 	</div><!--end for item-->

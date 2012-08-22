@@ -1,29 +1,27 @@
-<?php include('sidebar.php')?>
+<?php include('sidebar.php');?>
 
 <div class="main-content">
 	<div class="section">
-		<h3>项目状态
+		<h3>创意状态
 			<?php if(is_expert($User)){?>
-			<a href="<?php echo $home.'/submit?id='.$Problem->id?>" class="join-btn btn">我要竞标</a>
+			<a href="<?php echo $home.'/submit?id='.$Idea->id?>" class="join-btn btn">我有创意</a>
 			<?php }?>
 		</h3>
 		<div class="content status clearfix">
-			<div class="status-item <?php $HTML->current($Problem->status, 0)?>">发布蓝图</div>
-			<div class="status-item <?php $HTML->current($Problem->status, 1)?>">竞标中</div>
-			<div class="status-item <?php $HTML->current($Problem->status, 2)?>">付款</div>
-			<div class="status-item last  <?php $HTML->current($Problem->status, 3)?>">交付互评</div>
-			
+			<div class="status-item <?php $HTML->current($Idea->status, 0)?>">竞标中</div>
+			<div class="status-item <?php $HTML->current($Idea->status, 1)?>">评奖中</div>
+			<div class="status-item last  <?php $HTML->current($Idea->status, 2)?>">结束</div>
 		</div>
 	</div><!--end for section-->
 
 
 
 	<div class="section">
-		<h3>竞标专家（<?php echo count($solutions)?>）</h3>
+		<h3>竞标专家（<?php echo count($items)?>）</h3>
 		<div class="content line-list">
 			<?php 
-				foreach($solutions as $solution){
-					$expert = $experts[$solution->expert];
+				foreach($items as $item){
+					$expert = $experts[$item->expert];
 			?>
 			<div class="item clearfix">
 				<div class="pic">
@@ -38,8 +36,8 @@
 					</span>
 				</div>
 				<div class="des">
-					<a href="<?php echo $home."/item?problem=$Problem->id&item=$solution->id"?>">
-					<?php echo $solution->title?>
+					<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
+					<?php echo $item->title?>
 					</a>
 				</div>
 			</div><!--end for item-->
@@ -48,13 +46,13 @@
 	</div><!--end for section-->	
 	
 	<div class="section">
-		<h3>难题介绍</h3>
+		<h3>创意介绍</h3>
 		<div class="content">
-			<?php echo $Problem->description?>
+			<?php echo $Idea->description?>
 		</div>
 		<div class="content">
-			<?php if($Problem->file){?>
-			附件：<a target="_blank" href="<?php echo UPLOAD_HOME."/$Problem->file"?>">点击下载</a>
+			<?php if($Idea->file){?>
+			附件：<a target="_blank" href="<?php echo UPLOAD_HOME."/$Idea->file"?>">点击下载</a>
 			<?php }?>
 		</div>
 	</div>
@@ -89,43 +87,29 @@
 			</div>
 		</div><!--end for content-->
 		
-		<input type="hidden" id="object" name="object" value="<?php echo $Problem->id?>" />
-		<input type="hidden" id="type" name="type" value="<?php echo BelongType::PROBLEM?>" />
+		<input type="hidden" id="object" name="object" value="<?php echo $Idea->id?>" />
+		<input type="hidden" id="type" name="type" value="<?php echo BelongType::IDEA?>" />
 	</div><!--end for comment-section-->
 	
 </div><!--end for main-content-->
 
 <script type="text/javascript">
-	$('.op a').click(function(){
-		var author=$(this).parent().parent().find('.author').text();
-		$('#reply textarea').val('回复 '+author+'：');
-	})
-	
-	$('.btn').click(function(){
-		var object = $("#object").val();
-		var type = $("#type").val();
-		var content = $("#reply_content").val();
-		if(content != ''){
-			$.ajax({
-				type: "POST",
-				url: window.ROOT_URL + "/ajax/comment",
-				data: "object="+object+"&type="+type+"&content="+content,
-				success: function(msg){
-					var r = parseInt(msg);
-					if(r > 0){
-						alert('回复成功');
-					}
-					else if(r == -1){
-						alert('请先登录');
-					}
-					else{
-						alert('回复失败');
-					}
-				}
-			});
-		}
-		else{
-			alert('回复内容为空');
+<!--
+$(".idea_finish").click(function (){
+	var idea = $("#object").val();
+	$.ajax({
+		type: "POST",
+		url: window.ROOT_URL + "/idea/finish",
+		data: "idea="+idea,
+		success: function(msg){
+			if(msg == '0'){
+				alert('success');
+			}
+			else{
+				alert(msg);
+			}
 		}
 	});
+});
+//-->
 </script>

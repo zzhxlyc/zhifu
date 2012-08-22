@@ -99,8 +99,8 @@ class PatentController extends AppController {
 		
 		$this->set('$Patent', $Patent);
 		
-		$Expert = $this->Expert->get($Patent->expert);
-		$this->set('$Expert', $Expert);
+//		$Expert = $this->Expert->get($Patent->expert);
+//		$this->set('$Expert', $Expert);
 		
 		$tag_list = $this->add_tag_data($id, BelongType::PATENT, false);
 		$tag_list = $this->TagItem->get_most($tag_list);
@@ -116,10 +116,11 @@ class PatentController extends AppController {
 		else{
 			$companys = array();
 		}
-		$this->set('$companys', $companys);
+		$this->set('$companys', get_map_by_id($companys));
+		$this->set('$deals', $deals);
 		
 		$page = get_page($get);
-		$this->add_comments($id, BelongType::PATENT, $page);
+		$this->add_comments($Patent, $page);
 	}
 	
 	public function edit(){
@@ -168,6 +169,41 @@ class PatentController extends AppController {
 		}
 		$this->set_data($Patent);
 		$this->set('patent', $Patent);
+	}
+	
+	public function submit(){
+		$data = $this->get_data();
+		$id = $data['id'];
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Patent = $this->Patent->get($id);
+			if($Patent && $User->is_company()){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		if($this->request->post){
+			$cond = array('patent'=>$id, 'company'=>$User->id);
+			$count = $this->Deal->count($cond);
+			if($count == 0){
+				$data = array();
+				$data['patent'] = $id;
+				$data['pname'] = $Patent->title;
+				$data['company'] = $User->id;
+				$data['author'] = $User->name;
+				$data['time'] = DATETIME;
+				$this->Deal->save($data);
+			}
+			$this->redirect('detail?id='.$id);
+		}
+		$this->set('$Patent', $Patent);
+		$this->show_tags($Patent);
+//		$this->show_categorys($Patent);
 	}
 	
 	

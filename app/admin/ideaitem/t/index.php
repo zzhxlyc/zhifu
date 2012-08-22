@@ -19,12 +19,12 @@
 	?>
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
-		<td><a target="_blank" href="<?php echo ADMIN_PROBLEM_HOME.'/edit?id='.$o->problem?>"><?php echo $o->pname?></a></td>
+		<td><a target="_blank" href="<?php echo ADMIN_IDEA_HOME.'/edit?id='.$o->idea?>"><?php echo $o->pname?></a></td>
 		<td><a target="_blank" href="<?php echo ADMIN_EXPERT_HOME.'/show?id='.$o->expert?>"><?php echo $o->author?></a></td>
 		<td><?php echo $o->get_status()?></td>
 		<td><?php echo $o->time?></td>
 		<td class="operate">
-			<a href="<?php echo $home."/show?pid=$o->problem&eid=$o->expert"?>">查看</a>
+			<a href="<?php echo $home."/show?pid=$o->idea&eid=$o->expert"?>">查看</a>
 			<a href="<?php echo $home.'/delete?id='.$o->id?>">删除</a>
 		</td>
 	</tr>

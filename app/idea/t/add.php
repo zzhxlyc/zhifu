@@ -1,16 +1,11 @@
-<?php 
-	if($error){
-		output_error($error);
-	}
-	else{
-		output_edit_succ();
-?>
 
-<form action="<?php echo $home.'/edit?id='.$idea->id?>" method="post" <?php $HTML->file_form_need()?> >
+<form action="" method="post" <?php $HTML->file_form_need()?>>
+
+<h2>发布创意悬赏</h2>
 
 <div class="row">
 	<label for="">名称</label>
-	<input size="100" type="text" name="title" value="<?php echo $idea->title?>" />
+	<input class="text wide" type="text" name="title" value="<?php echo $idea->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 
@@ -101,29 +96,14 @@
 	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $idea->description?></textarea>
 </div>
 
-<?php if($idea->image){?>
 <div class="row">
 	<label for="">图像</label>
-	<img alt="" src="<?php img($idea->image)?>">
-</div>
-<?php }?>
-
-<div class="row">
-	<label for="">修改图像</label>
 	<input type="file" name="image" />
 	<span class="error"><?php echo $errors['image']?></span>
 </div>
 
 <div class="row">
 	<label for="">附件</label>
-	<?php if($idea->file){?>
-	<a target="_blank" href="<?php echo UPLOAD_HOME."/$idea->file"?>">点击下载</a>
-	<?php }else{?>
-	还没有附件
-	<?php }?>
-</div>
-<div class="row">
-	<label for="">修改附件</label>
 	<input type="file" name="file" />
 	<span class="error"><?php echo $errors['file']?></span>
 </div>
@@ -131,9 +111,8 @@
 <div class="row">
 	<input type="hidden" name="cat" value="<?php echo $idea->cat?>" />
 	<input type="hidden" name="subcat" value="<?php echo $idea->subcat?>" />
-	<?php echo $HTML->hidden('id', $idea->id)?>
-	<input type="submit" value="修改" class="btn fl">
-	<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
+	<input type="submit" value="发布" class="btn fl">
+	<a href="<?php echo $home?>" class="back-btn">返回</a>
 </div>
 
 </form>
@@ -158,19 +137,10 @@ var catList = {<?php
 //-->
 </script>
 
-
 <script type="text/javascript">
 $(document).ready(function($){
-	
 	dateEventInit();
 	tagEventInit();
-	catEventInit();
-	
-	
+	catEventInitNormal();
 });	
 </script>
-
-<?php 
-	}
-?>
-

@@ -75,7 +75,7 @@ class ExpertController extends AppController {
 		$this->set('$problems', $problems);
 		
 		$page = get_page($get);
-		$this->add_comments($id, BelongType::EXPERT, $page);
+		$this->add_comments($Expert, $page);
 	}
 	
 	private function add_profile_data(&$Expert){

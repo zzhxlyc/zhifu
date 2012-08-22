@@ -40,5 +40,23 @@ class ArticleController extends AppController {
 		$this->set('links', $links);
 	}
 	
+	public function detail(){
+		$get = $this->request->get;
+		$id = get_id($get);
+		$has_error = true;
+		if($id){
+			$Article = $this->Article->get($id);
+			if($Article){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		$this->set('$Article', $Article);
+	}
+	
 	
 }

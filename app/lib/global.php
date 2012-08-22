@@ -90,7 +90,7 @@ function output_pcd($o){
 
 function output_deadline($datetime){
 	if($datetime){
-		if(!is_expire($o->deadline)){
+		if(!is_expire($datetime)){
 			echo '<p>截止日期：<span class="date">'.$datetime.'</span></p>';
 		}
 		else{
@@ -133,4 +133,25 @@ function is_expire($datetime, $addend = false){
 	}
 	$ts = strtotime($datetime);
 	return $ts < time();
+}
+
+function is_company($o){
+	if($o && is_a($o, 'User') && $o->is_company()){
+		return true;
+	}
+	return false;
+}
+
+function is_expert($o){
+	if($o && is_a($o, 'User') && $o->is_expert()){
+		return true;
+	}
+	return false;
+}
+
+function is_admin($o){
+	if($o && is_a($o, 'User') && $o->is_admin()){
+		return true;
+	}
+	return false;
 }

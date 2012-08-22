@@ -209,13 +209,6 @@ class Log extends AppModel{
 					'time'=>DATETIME, 'type'=>self::TYPE_NORMAL));
 	}
 	
-	public function action_problem_add($admin_or_id, $article_title){
-		$admin = $this->get_admin($admin_or_id);
-		$action = sprintf('管理员 %s 添加难题 %s', $admin->user, $article_title);
-		$this->save(array('admin'=>$admin->id, 'action'=>$action, 
-					'time'=>DATETIME, 'type'=>self::TYPE_NORMAL));
-	}
-	
 	public function action_problem_edit($admin_or_id, $article_title){
 		$admin = $this->get_admin($admin_or_id);
 		$action = sprintf('管理员 %s 修改难题 %s', $admin->user, $article_title);
@@ -240,6 +233,20 @@ class Log extends AppModel{
 	public function action_link_delete($admin_or_id, $link_title){
 		$admin = $this->get_admin($admin_or_id);
 		$action = sprintf('管理员 %s 删除友情链接 %s', $admin->user, $link_title);
+		$this->save(array('admin'=>$admin->id, 'action'=>$action, 
+					'time'=>DATETIME, 'type'=>self::TYPE_IMPORTANT));
+	}
+	
+	public function action_idea_edit($admin_or_id, $title){
+		$admin = $this->get_admin($admin_or_id);
+		$action = sprintf('管理员 %s 修改创意 %s', $admin->user, $title);
+		$this->save(array('admin'=>$admin->id, 'action'=>$action, 
+					'time'=>DATETIME, 'type'=>self::TYPE_NORMAL));
+	}
+	
+	public function action_idea_delete($admin_or_id, $title){
+		$admin = $this->get_admin($admin_or_id);
+		$action = sprintf('管理员 %s 删除创意 %s', $admin->user, $title);
 		$this->save(array('admin'=>$admin->id, 'action'=>$action, 
 					'time'=>DATETIME, 'type'=>self::TYPE_IMPORTANT));
 	}

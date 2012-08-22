@@ -1,16 +1,15 @@
 <?php
 
-class Idea extends AppModel{
+class IdeaItem extends AppModel{
 
-	public $table = 'ideas';
+	public $table = 'idea_items';
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'company', 'budget', 'description'),
+			'need' => array('idea', 'expert', 'title', 'content'),
 			'length' => array('title'=>250),
-			'int' => array('one', 'two', 'three'),
-			'number' => array('budget', 'one_m', 'two_m', 'three_m'),
-			'word'=> array('title', 'description'),
+			'int' => array('idea', 'expert'),
+			'word'=> array('title', 'content'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		return $errors;
@@ -20,18 +19,24 @@ class Idea extends AppModel{
 		$escape_array = array(
 			'string'=>array('title'),
 			'url'=>array(),
-			'html'=>array('description')
+			'html'=>array('content')
 		);
 		return parent::escape($data, $escape_array, $ignore);
 	}
 	
-	public static function default_image(){
-		return IMAGE_HOME.'/default.jpg';
-	}
-	
-	public static function get_status($status){
+	public function get_status(){
+		$status = $this->status;
 		if($status == 0){
 			return '竞标中';
+		}
+		else if($status == 1){
+			return '一等奖';
+		}
+		else if($status == 2){
+			return '二等奖';
+		}
+		else if($status == 3){
+			return '三等奖';
 		}
 	}
 

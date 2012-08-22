@@ -10,7 +10,7 @@
 
 <div class="row">
 	<label for="">名称</label>
-	<input size="100" type="text" name="title" value="<?php echo $idea->title?>" />
+	<input class="text wide" type="text" name="title" value="<?php echo $idea->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 
@@ -133,7 +133,7 @@
 	<input type="hidden" name="subcat" value="<?php echo $idea->subcat?>" />
 	<?php echo $HTML->hidden('id', $idea->id)?>
 	<input type="submit" value="修改" class="btn fl">
-	<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
+	<a href="<?php echo $home?>" class="back-btn">返回</a>
 </div>
 
 </form>

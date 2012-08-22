@@ -9,9 +9,22 @@
 
 <div class="row">
 	<label for="name">专利名称</label>
-	<input size="50" type="text" name="title" value="<?php echo $patent->title?>" />
+	<input size="60" type="text" name="title" value="<?php echo $patent->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
+
+<div class="row">
+	<label for="name">专利号</label>
+	<input size="60" type="text" name="pid" value="<?php echo $patent->pid?>" />
+	<span class="error"><?php echo $errors['pid']?></span>
+</div>
+
+<div class="row">
+	<label for="name">价格</label>
+	<input size="10" type="text" name="budget" value="<?php echo $patent->budget?>" />万元
+	<span class="error"><?php echo $errors['budget']?></span>
+</div>
+
 <div class="row">
 	<label for="cat">所属行业</label>
 	

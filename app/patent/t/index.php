@@ -34,10 +34,9 @@
 			</h3>
 			<div class="content"><?php echo $desc?></div>						
 			<div class="status clearfix">
-				<div class="title">任务状态:</div>
-				<div class="status-item <?php $HTML->current(0, $o->status)?>">竞标中</div>
-				<div class="status-item <?php $HTML->current(1, $o->status)?>">专家会诊</div>
-				<div class="status-item last <?php $HTML->current(2, $o->status)?>">已完成</div>
+				<div class="title">状态:</div>
+				<div class="status-item <?php $HTML->current(0, $o->status)?>">审核中</div>
+				<div class="status-item last <?php $HTML->current(1, $o->status)?>">正常</div>
 			</div>
 		</div><!--end for middle-->
 
@@ -45,7 +44,9 @@
 			<div class="price-deadline">
 				<p>出价：<span class="num"><?php echo $o->budget?></span>元</p>
 			</div>
-			<a href="<?php echo $home.'/'?>" class="btn">我要揭榜</a>
+			<?php if(is_company($User)){?>
+			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">我要购买</a>
+			<?php }?>
 		</div><!--end for right-->
 	</div><!--end for item-->
 	<?php 

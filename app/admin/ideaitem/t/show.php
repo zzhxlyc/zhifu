@@ -6,8 +6,8 @@
 ?>
 
 <div class="row">
-	<label for="name">难题名称</label>
-	<?php echo $problem->title?>
+	<label for="name">创意名称</label>
+	<?php echo $idea->title?>
 </div>	
 
 <div class="row">
@@ -17,17 +17,17 @@
 
 <div class="row">
 	<label for="name">方案</label>
-	<?php echo $solution->title?>
+	<?php echo $item->title?>
 </div>
 
 <div class="row">
 	<label for="name">详细描述</label>
-	<?php echo $solution->description?>
+	<?php echo $item->content?>
 </div>
 
 <div class="row">
 	<label for="name">进展状态</label>
-	<?php echo $solution->get_status()?>
+	<?php echo $item->get_status()?>
 </div>
 
 <div>

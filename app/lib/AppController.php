@@ -94,6 +94,36 @@ class AppController extends Controller{
 		$this->set('cat_array', $cat_array);
 	}
 	
+	protected function show_categorys($o){
+		$model = ucfirst(get_class($o));
+		$cat = intval($o->cat);
+		$subcat = intval($o->subcat);
+		if($cat > 0){
+			$C1 = $this->Category->get($cat);
+			if($C1){
+				$o->cat_name = $C1->name;
+			}
+		}
+		if($subcat > 0){
+			$C2 = $this->Category->get($subcat);
+			if($C2){
+				$o->subcat_name = $C2->name;
+			}
+		}
+	}
+	
+	protected function show_tags($o){
+		$type = BelongType::get_type($o);
+		$tag_list = $this->add_tag_data($o->id, $type, false);
+		$tags = $this->TagItem->get_most($tag_list);
+		$this->set('$tags', $tags);
+	}
+	
+	protected function add_tags($o, $set = true){
+		$type = BelongType::get_type($o);
+		return $this->add_tag_data($o->id, $type, $set);
+	}
+	
 	protected function add_tag_data($id, $type, $set = true){
 		$tags = $this->TagItem->get_list(array('belong'=>$id, 'type'=>$type));
 		$tag_id_array = get_attrs($tags, 'tag');
@@ -118,8 +148,9 @@ class AppController extends Controller{
 		}
 	}
 	
-	protected function add_comments($id, $type, $page = 1, $set = true){
-		$cond = array('object'=>$id, 'type'=>$type);
+	protected function add_comments($o, $page = 1, $set = true){
+		$type = BelongType::get_type($o);
+		$cond = array('object'=>$o->id, 'type'=>$type);
 		$order = array('time'=>'DESC');
 		$limit = 10;
 		$all = $this->Comment->count($cond);
@@ -130,6 +161,7 @@ class AppController extends Controller{
 			BelongType::EXPERT => EXPERT_HOME."/profile?id=$id&",
 			BelongType::PROBLEM => PROBLEM_HOME."/detail?id=$id&",
 			BelongType::PATENT => PATENT_HOME."/detail?id=$id&",
+			BelongType::IDEA => IDEA_HOME."/detail?id=$id&",
 		);
 		$links = $pager->get_page_links($array[$type]);
 		if($set){

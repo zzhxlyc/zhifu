@@ -16,18 +16,15 @@ class SolutionController extends AdminBaseController {
 		$pid = intval($get['pid']);
 		$eid = intval($get['eid']);
 		$limit = 10;
+		$order = array('time'=>'DESC');
 		if($pid){
 			$problem = $this->Problem->get($pid);
 			if($problem){
 				$condition = array('problem'=>$pid);
 				$all = $this->Solution->count($condition);
 				$pager = new Pager($all, $page, $limit);
-				$list = $this->Solution->get_joins(array('S.*', 'E.name as name'), 
-												array('solutions AS S', 'experts as E'),
-												array('S.problem'=>$pid, 'S.expert'=>'E.id'), 
-												array('S.time'=>'ASC'),
-												$pager->get_limit_str());
-				$page_list = $pager->get_page_links(ADMIN_SOLUTION_HOME.'/index?');
+				$list = $this->Solution->get_list($condition, $order, $pager->now(), $limit);
+				$page_list = $pager->get_page_links(ADMIN_SOLUTION_HOME."/index?pid=$pid&");
 				$this->set('list', $list);
 				$this->set('$problem', $problem);
 				$this->set('$page_list', $page_list);
@@ -39,12 +36,8 @@ class SolutionController extends AdminBaseController {
 				$condition = array('expert'=>$eid);
 				$all = $this->Solution->count($condition);
 				$pager = new Pager($all, $page, $limit);
-				$list = $this->Solution->get_joins(array('S.*', 'P.title as title'), 
-												array('solutions AS S', 'problems AS P'), 
-												array('S.expert'=>$eid, 'S.problem'=>'P.id'), 
-												array('S.time'=>'ASC'),
-												$pager->get_limit_str());
-				$page_list = $pager->get_page_links(ADMIN_SOLITION_HOME.'/index?');
+				$list = $this->Solution->get_list($condition, $order, $pager->now(), $limit);
+				$page_list = $pager->get_page_links(ADMIN_SOLUTION_HOME."/index?eid=$eid&");
 				$this->set('list', $list);
 				$this->set('$expert', $expert);
 				$this->set('$page_list', $page_list);

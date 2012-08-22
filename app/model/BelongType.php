@@ -7,6 +7,7 @@ class BelongType {
 	const COMPANY = 'Company';
 	const PROBLEM = 'Problem';
 	const PATENT = 'Patent';
+	const IDEA = 'Idea';
 	
 	public static function value_of($const){
 		$const = ucfirst(strtolower($const));
@@ -33,6 +34,22 @@ class BelongType {
 			return '企业';
 		}
 		return '未知';
+	}
+	
+	public static function get_type($o){
+		$array = array(
+			'Company'=>self::COMPANY,
+			'Expert'=>self::EXPERT,
+			'Problem'=>self::PROBLEM,
+			'Patent'=>self::PATENT,
+			'Idea'=>self::IDEA,
+			'Admin'=>self::ADMIN,
+		);
+		foreach($array as $class => $type){
+			if(is_a($o, $class)){
+				return $type;
+			}
+		}
 	}
 	
 	public static function get_user($id, $const, $obj = 0){

@@ -1,12 +1,12 @@
 <?php
 
-class ProblemController extends AppController {
+class IdeaController extends AppController {
 	
-	public $models = array('Problem', 'Tag', 'TagItem', 'Solution', 
+	public $models = array('Idea', 'Tag', 'TagItem', 'IdeaItem', 
 								'Category', 'Comment');
 	
 	public function before(){
-		$this->set('home', PROBLEM_HOME);
+		$this->set('home', IDEA_HOME);
 		parent::before();
 		$need_login = array();	// either
 		$need_company = array();
@@ -33,10 +33,10 @@ class ProblemController extends AppController {
 		else{
 			$order['id'] = 'DESC';
 		}
-		$all = $this->Problem->count($condition);
+		$all = $this->Idea->count($condition);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Problem->get_page($condition, $order, $pager->now(), $limit);
-		$links = $pager->get_page_links(PROBLEM_HOME.'/index?');
+		$list = $this->Idea->get_page($condition, $order, $pager->now(), $limit);
+		$links = $pager->get_page_links(IDEA_HOME.'/index?');
 		$this->set('list', $list);
 		$this->set('links', $links);
 	}
@@ -46,8 +46,8 @@ class ProblemController extends AppController {
 		$id = get_id($get);
 		$has_error = true;
 		if($id){
-			$Problem = $this->Problem->get($id);
-			if($Problem){
+			$Idea = $this->Idea->get($id);
+			if($Idea){
 				$has_error = false;
 			}
 		}
@@ -56,19 +56,19 @@ class ProblemController extends AppController {
 			return;
 		}
 		
-		$this->set('$Problem', $Problem);
+		$this->set('$Idea', $Idea);
 		
-		$Company = $this->Company->get($Problem->company);
+		$Company = $this->Company->get($Idea->company);
 		$this->set('$Company', $Company);
 		
-		$tag_list = $this->add_tag_data($id, BelongType::PROBLEM, false);
+		$tag_list = $this->add_tag_data($id, BelongType::IDEA, false);
 		$tag_list = $this->TagItem->get_most($tag_list);
 		$this->set('$tags', $tag_list);
 		
-		$cond = array('problem'=>$id);
-		$solutions = $this->Solution->get_list($cond);
-		if(count($solutions) > 0){
-			$expert_ids = get_attrs($solutions, 'expert');
+		$cond = array('expert'=>$id);
+		$items = $this->IdeaItem->get_list($cond);
+		if(count($items) > 0){
+			$expert_ids = get_attrs($items, 'expert');
 			$cond = array('id in'=>$expert_ids);
 			$experts = $this->Expert->get_list($cond);
 		}
@@ -76,17 +76,17 @@ class ProblemController extends AppController {
 			$experts = array();
 		}
 		$this->set('$experts', get_map_by_id($experts));
-		$this->set('$solutions', $solutions);
+		$this->set('$items', $items);
 		
 		$page = get_page($get);
-		$this->add_comments($Problem, $page);
+		$this->add_comments($Idea, $page);
 	}
 	
-	private function add_data($Problem = null){
+	private function add_data($Idea = null){
 		$cat_array = $this->Category->get_category();
 		$this->set('cat_array', $cat_array);
-		if($Problem){
-			$this->add_tag_data($Problem->id, BelongType::PROBLEM);
+		if($Idea){
+			$this->add_tag_data($Idea->id, BelongType::IDEA);
 		}
 		$this->add_common_tags();
 	}
@@ -94,21 +94,11 @@ class ProblemController extends AppController {
 	public function add(){
 		if($this->request->post){
 			$post = $this->request->post;
-			if($post['type'] == '1'){
-				$data = array('title'=>$post['t'], 'description'=>$post['desc']);
-				$post = $data;
-			}
-			if(isset($post['deadline']) && empty($post['deadline'])){
-				unset($post['deadline']);
-			}
-			if(isset($post['type'])){
-				unset($post['type'], $post['t'], $post['desc']);
-			}
 			$User = $this->get('User');
 			$post['company'] = $User->id;
 			$post['author'] = $User->name;
-			$Problem = $this->set_model($post, $Problem);
-			$errors = $this->Problem->check($Problem);
+			$Idea = $this->set_model($post, $Idea);
+			$errors = $this->Idea->check($Idea);
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
@@ -122,13 +112,13 @@ class ProblemController extends AppController {
 				unset($post['old_tag'], $post['new_tag']);
 				$post['time'] = DATETIME;
 				$post['status'] = 0;
-				$this->Problem->escape($post);
-				$id = $this->Problem->save($post);
-				$this->do_tag($id, BelongType::PROBLEM, $old_tag, $new_tag);
+				$this->Idea->escape($post);
+				$id = $this->Idea->save($post);
+				$this->do_tag($id, BelongType::IDEA, $old_tag, $new_tag);
 				$this->redirect('detail?id='.$id);
 			}
-			$problem = $this->set_model($post, new Problem());
-			$this->set('$problem', $problem);
+			$idea = $this->set_model($post);
+			$this->set('$idea', $idea);
 			$this->set('errors', $errors);
 		}
 		$this->add_data();
@@ -140,9 +130,9 @@ class ProblemController extends AppController {
 		$User = $this->get('User');
 		$has_error = true;
 		if($id){
-			$Problem = $this->Problem->get($id);
-//			if($Problem && $User->is_company() && $Problem->company == $User->id){
-			if($Problem){
+			$Idea = $this->Idea->get($id);
+//			if($Idea && $User->is_company() && $Idea->company == $User->id){
+			if($Idea){
 				$has_error = false;
 			}
 		}
@@ -153,8 +143,8 @@ class ProblemController extends AppController {
 		
 		if($this->request->post){
 			$post = $this->request->post;
-			$Problem = $this->set_model($post, $Problem);
-			$errors = $this->Problem->check($Problem);
+			$Idea = $this->set_model($post, $Idea);
+			$errors = $this->Idea->check($Idea);
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
@@ -163,23 +153,23 @@ class ProblemController extends AppController {
 				if($path){$post['file'] = $path;}
 			}
 			if(count($errors) == 0){
-				$this->do_tag($id, BelongType::PROBLEM, 
+				$this->do_tag($id, BelongType::IDEA, 
 									$post['old_tag'], $post['new_tag']);
 				unset($post['old_tag'], $post['new_tag']);
-				if($post['image'] && $Problem->image){
-					FileSystem::remove($Problem->image);
+				if($post['image'] && $Idea->image){
+					FileSystem::remove($Idea->image);
 				}
-				if($post['file'] && $Problem->file){
-					FileSystem::remove($Problem->file);
+				if($post['file'] && $Idea->file){
+					FileSystem::remove($Idea->file);
 				}
-				$this->Problem->escape($post);
-				$this->Problem->save($post);
+				$this->Idea->escape($post);
+				$this->Idea->save($post);
 				$this->redirect('edit?succ&id='.$id);
 			}
 			$this->set('errors', $errors);
 		}
-		$this->add_data($Problem);
-		$this->set('problem', $Problem);
+		$this->add_data($Idea);
+		$this->set('idea', $Idea);
 	}
 	
 	public function submit(){
@@ -188,8 +178,8 @@ class ProblemController extends AppController {
 		$User = $this->get('User');
 		$has_error = true;
 		if($id){
-			$Problem = $this->Problem->get($id);
-			if($Problem && $User->is_expert()){
+			$Idea = $this->Idea->get($id);
+			if($Idea && $User->is_expert()){
 				$has_error = false;
 			}
 		}
@@ -198,44 +188,42 @@ class ProblemController extends AppController {
 			return;
 		}
 		
-		if($this->request->post){
+		if($this->request->post && $Idea->status == 0){
 			$post = $this->request->post;
 			$post['expert'] = $User->id;
 			$post['author'] = $User->name;
-			$post['problem'] = $Problem->id;
-			$post['pname'] = $Problem->title;
-			$Solution = $this->set_model($post, new Solution());
-			$errors = $this->Solution->check($Solution);
+			$post['idea'] = $Idea->id;
+			$post['pname'] = $Idea->title;
+			$IdeaItem = $this->set_model($post, new IdeaItem());
+			$errors = $this->IdeaItem->check($IdeaItem);
 			if(count($errors) == 0){
 				$post['status'] = 0;
 				$post['time'] = DATETIME;
 				unset($post['id']);
-				$this->Solution->escape($post);
-				$item = $this->Solution->save($post);
-				$this->redirect("item?problem=$Problem->id&item=$item");
+				$this->IdeaItem->escape($post);
+				$this->IdeaItem->save($post);
+				$this->redirect('detail?id='.$Idea->id);
 			}
-			$this->set('$solution', $Solution);
+			$this->set('Item', $IdeaItem);
 			$this->set('errors', $errors);
 		}
-		$this->set('$Problem', $Problem);
-		$this->show_tags($Problem);
-		$this->show_categorys($Problem);
-		
-		$cond = array('problem'=>$id);
-		$solutions = $this->Solution->get_list($cond);
-		$this->set('$solutions', $solutions);
+		if($Idea->status > 0 || is_expire($Idea->deadline)){
+			$this->set('closed', true);
+		}
+		$this->set('$Idea', $Idea);
+		$this->show_tags($Idea);
 	}
 	
 	public function item(){
 		$data = $this->get_data();
-		$problem = $data['problem'];
+		$idea = $data['idea'];
 		$item = $data['item'];
 		$User = $this->get('User');
 		$has_error = true;
-		if($problem && $item){
-			$Problem = $this->Problem->get($problem);
-			if($Problem){
-				$Item = $this->Solution->get($item);
+		if($idea && $item){
+			$Idea = $this->Idea->get($idea);
+			if($Idea){
+				$Item = $this->IdeaItem->get($item);
 				if($Item){
 					$has_error = false;
 				}
@@ -246,21 +234,21 @@ class ProblemController extends AppController {
 			return;
 		}
 		
-		$this->set('$Problem', $Problem);
-		$this->show_tags($Problem);
+		$this->set('$Idea', $Idea);
+		$this->show_tags($Idea);
 		$this->set('$Item', $Item);
 	}
 	
 	public function itemedit(){
 		$data = $this->get_data();
-		$problem = $data['problem'];
+		$idea = $data['idea'];
 		$item = $data['item'];
 		$User = $this->get('User');
 		$has_error = true;
-		if($problem && $item){
-			$Problem = $this->Problem->get($problem);
-			if($Problem){
-				$Item = $this->Solution->get($item);
+		if($idea && $item){
+			$Idea = $this->Idea->get($idea);
+			if($Idea){
+				$Item = $this->IdeaItem->get($item);
 				if($Item){
 					$has_error = false;
 				}
@@ -271,53 +259,102 @@ class ProblemController extends AppController {
 			return;
 		}
 		
-		if($this->request->post && $Problem->status <= 2){
+		if($this->request->post && $Idea->status == 0){
 			$post = $this->request->post;
 			$post['id'] = $item;
-			unset($post['problem'], $post['item']);
+			unset($post['idea'], $post['item']);
 			$Item = $this->set_model($post, $Item);
-			$errors = $this->Solution->check($Item);
+			$errors = $this->IdeaItem->check($Item);
 			if(count($errors) == 0){
-				$this->Solution->escape($post);
-				$this->Solution->save($post);
-				$this->redirect('item?problem='.$problem.'&item='.$item);
+				$this->IdeaItem->escape($post);
+				$this->IdeaItem->save($post);
+				$this->redirect('item?idea='.$idea.'&item='.$item);
 			}
 			$this->set('errors', $errors);
 		}
-		if($Problem->status == 3 || is_expire($Problem->deadline)){
+		if($Idea->status > 0 || is_expire($Idea->deadline)){
 			$this->set('closed', true);
 		}
 		$this->set('$Item', $Item);
-		$this->set('$Problem', $Problem);
-		$this->show_tags($Problem);
+		$this->set('$Idea', $Idea);
+		$this->show_tags($Idea);
 	}
 	
 	public function choose(){
 		$data = $this->get_data();
-		$problem = $data['problem'];
-		$item = $data['item'];
+		$idea = intval($data['idea']);
+		$item = intval($data['item']);
 		$User = $this->get('User');
 		$has_error = true;
-		if($problem && $item){
-			$Problem = $this->Problem->get($problem);
-			if($Problem){
-				$Item = $this->Solution->get($item);
+		if($idea && $item){
+			$Idea = $this->Idea->get($idea);
+			if($Idea){
+				$Item = $this->IdeaItem->get($item);
 				if($Item){
 					$has_error = false;
 				}
 			}
 		}
 		if($has_error){
-			$this->response->redirect_404();
+			echo 'error';
 			return;
 		}
 		
-		if($this->request->post && $Problem->status <= 2){
-			$data = array('id'=>$item, 'status'=>1);
-			$this->Solution->save($data);
-			$this->redirect('detail?id='.$problem);
+		$this->layout('ajax');
+		if($this->request->post){
+			$post = $this->request->post;
+			$prize = intval($post['prize']);
+			$error = '';
+			if($prize != 1 && $prize != 2 && $prize != 3){
+				$error = '奖项有误';	
+			}
+			else if($Idea->status == 2){
+				$error = '已停止评奖';	
+			}
+			else{
+				$cond = array('status'=>$prize, 'idea'=>$idea);
+				$count = $this->IdeaItem->count($cond);
+				if($prize == 1 && $count >= $Idea->one ||
+					($prize == 2 && $count >= $Idea->two)||
+					($prize == 3 && $count >= $Idea->three)){
+					$error = '奖项已设置完';
+				}
+			}
+			if(empty($error)){
+				$data = array('id'=>$item, 'status'=>$prize);
+				$this->IdeaItem->save($data);
+				$data = array('id'=>$idea, 'status'=>1);
+				$this->Idea->save($data);
+				echo 0;
+			}
+			else{
+				echo $error;
+			}
 		}
-		$this->redirect('item?problem='.$problem.'&item='.$item);
+	}
+	
+	public function finish(){
+		$data = $this->get_data();
+		$id = intval($data['idea']);
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Idea = $this->Idea->get($id);
+			if($Idea && $User->is_expert()){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			echo 'error';
+			return;
+		}
+		
+		$this->layout('ajax');
+		if($this->request->post){
+			$data = array('id'=>$id, 'status'=>2);
+			$this->Idea->save($data);
+			echo 0;
+		}
 	}
 	
 }

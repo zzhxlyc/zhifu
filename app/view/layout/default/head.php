@@ -5,8 +5,7 @@
 		<div class="top-nav">
 			<a href="<?php echo ROOT_URL?>">首页</a>|
 			<a href="<?php echo ROOT_URL.'/home'?>">个人主页</a>|
-			<a href="<?php echo ROOT_URL.'/read'?>">我的订阅</a>|
-			<a href="<?php echo ROOT_URL.'/group'?>">我的小组</a>|
+			<a href="<?php echo ROOT_URL.'/feed'?>">我的订阅</a>|
 			<a href="<?php echo ROOT_URL.'/setting'?>">用户中心</a>|
 			<a href="#" class="add-content">
 				<?php if($User->is_company()){?>
@@ -16,7 +15,14 @@
 				<?php if($User->is_expert()){?>
 					<a href="<?php echo PATENT_HOME.'/add'?>">发布专利</a>
 				<?php }?>
+					<a href="<?php echo VIDEO_HOME.'/add'?>">发布视频</a>
 			</a>
+		</div>
+		<?php }else{?>
+		<div class="top-nav">
+			<a href="<?php echo ROOT_URL?>">首页</a>|
+			<a href="<?php echo ROOT_URL.'/register'?>">注册</a>|
+			<a href="<?php echo ROOT_URL.'/login'?>">登陆</a>
 		</div>
 		<?php }?>
 		

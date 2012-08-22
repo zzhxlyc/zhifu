@@ -10,7 +10,7 @@
 	
 <div class="row">
 	<label for="name">难题名称</label>
-	<input size="100" type="text" name="title" value="<?php echo $problem->title?>" />
+	<input size="60" type="text" name="title" value="<?php echo $problem->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>	
 <div class="row">

@@ -6,9 +6,10 @@ class Patent extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'expert', 'description'),
-			'length' => array('title'=>250),
+			'need' => array('title', 'expert', 'pid', 'description'),
+			'length' => array('title'=>250, 'pid'=>250),
 			'int' => array('expert', 'cat', 'subcat'),
+			'number' => array('budget'),
 			'word'=> array('title', 'description'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
@@ -17,7 +18,7 @@ class Patent extends AppModel{
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title'),
+			'string'=>array('title', 'pid'),
 			'url'=>array(),
 			'html'=>array('description')
 		);
