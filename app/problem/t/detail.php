@@ -118,8 +118,8 @@
 						var html=[];
 						html.push('<div class="item">');
 						html.push('<div class="comment-meta">');
-						html.push('<a class="author" href="#">'+'用户名'+'</a>');
-						html.push('<span class="comment-time">'+'时间'+'</span>');
+						html.push('<a class="author" href="#">'+msg.id+'</a>');
+						html.push('<span class="comment-time">'+msg.time+'</span>');
 						html.push('<span class="op"><a href="javascript:void(0)">回复</a></span>');
 						html.push('</span></div>');
 						html.push('<p>'+content+'</p>');
