@@ -114,6 +114,19 @@
 					var r = parseInt(msg);
 					if(r > 0){
 						alert('回复成功');
+						$("#reply_content").val('');
+						var html=[];
+						html.push('<div class="item">');
+						html.push('<div class="comment-meta">');
+						html.push('<a class="author" href="#">'+'用户名'+'</a>');
+						html.push('<span class="comment-time">'+'时间'+'</span>');
+						html.push('<span class="op"><a href="javascript:void(0)">回复</a></span>');
+						html.push('</span></div>');
+						html.push('<p>'+content+'</p>');
+						html.push('</div>');
+						html=html.join('');
+						$('.comment-section .content .item:eq(0)').before(html);
+						
 					}
 					else if(r == -1){
 						alert('请先登录');
