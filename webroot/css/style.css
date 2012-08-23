@@ -673,7 +673,8 @@ width:60px;
 }
 
 .row input.text{
-border:1px solid #ddd;	
+border:1px solid #ddd;
+height:22px;	
 }
 
 .row input.narrow{
@@ -987,14 +988,14 @@ margin-top:10px;
 }
 
 
-.add-problem .tag a{
+.tag a{
 border:1px solid #0078B6;	
 color:#4184BB;
 padding:3px 5px;	
 margin-right:4px;
 
 }
-.add-problem .hot-tag a{
+.hot-tag a{
 background:#DAF5FA;
 color:#4184BB;
 padding:3px 5px;	

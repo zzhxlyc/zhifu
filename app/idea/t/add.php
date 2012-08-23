@@ -29,13 +29,13 @@
 
 <div class="row">
 	<label for="deadline">截止日期</label>
-	<input size="20" type="text" name="deadline" class="datepicker" value="<?php echo get_date($idea->deadline)?>" readonly="readonly" />
+	<input size="20" type="text" name="deadline" class="datepicker text" value="<?php echo get_date($idea->deadline)?>" readonly="readonly" />
 	<span class="error"><?php echo $errors['deadline']?></span>
 </div>
 
 <div class="row">
 	<label for="tag">领域标签</label>
-	<input size="20" type="text" value="" id="new-tag" /> 
+	<input size="20" class="text" type="text" value="" id="new-tag" /> 
 	<a href="javascript:;" id="add-tag">添加</a>
 </div>	
 
@@ -69,25 +69,25 @@
 
 <div class="row">
 	<label for="">一等奖</label>
-	<input size="10" type="text" name="one" value="<?php echo $idea->one?>" />名
+	<input size="10" type="text" class="text" name="one" value="<?php echo $idea->one?>" />名
 	<span class="error"><?php echo $errors['one']?></span>
-	<input size="10" type="text" name="one_m" value="<?php echo $idea->one_m?>" />万
+	<input size="10" type="text" class="text" name="one_m" value="<?php echo $idea->one_m?>" />万
 	<span class="error"><?php echo $errors['one_m']?></span>
 </div>
 
 <div class="row">
 	<label for="">二等奖</label>
-	<input size="10" type="text" name="two" value="<?php echo $idea->two?>" />名
+	<input size="10" type="text" class="text" name="two" value="<?php echo $idea->two?>" />名
 	<span class="error"><?php echo $errors['two']?></span>
-	<input size="10" type="text" name="two_m" value="<?php echo $idea->two_m?>" />万
+	<input size="10" type="text" class="text" name="two_m" value="<?php echo $idea->two_m?>" />万
 	<span class="error"><?php echo $errors['two_m']?></span>
 </div>
 
 <div class="row">
 	<label for="">三等奖</label>
-	<input size="10" type="text" name="three" value="<?php echo $idea->three?>" />名
+	<input size="10" type="text" class="text" name="three" value="<?php echo $idea->three?>" />名
 	<span class="error"><?php echo $errors['three']?></span>
-	<input size="10" type="text" name="three_m" value="<?php echo $idea->three_m?>" />万
+	<input size="10" type="text" class="text" name="three_m" value="<?php echo $idea->three_m?>" />万
 	<span class="error"><?php echo $errors['three_m']?></span>
 </div>
 
