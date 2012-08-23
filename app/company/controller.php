@@ -39,6 +39,11 @@ class CompanyController extends AppController {
 				$has_error = false;
 			}
 		}
+		else{
+			$Company = $this->get('User');
+			$id = $Company->id;
+			$has_error = false;
+		}
 		if($has_error){
 			$this->response->redirect_404();
 			return;
@@ -46,9 +51,7 @@ class CompanyController extends AppController {
 		
 		$this->set('$Company', $Company);
 		
-		$tag_list = $this->add_tag_data($id, BelongType::COMPANY, false);
-		$tag_list = $this->TagItem->get_most($tag_list);
-		$this->set('$tags', $tag_list);
+		$tag_list = $this->show_tags($Company);
 		
 		$cond = array('company'=>$id);
 		$problems = $this->Problem->get_list($cond, array('lastmodify'=>'DESC'));
@@ -71,26 +74,20 @@ class CompanyController extends AppController {
 	}
 	
 	public function edit(){
-		$data = $this->get_data();
-		$id = $data['id'];
 		$User = $this->get('User');
-		$has_error = true;
-		if($id){
-			$Company = $this->Company->get($id);
-//			if($Company && $User->is_company() && $Company->id == $User->id){
-			if($Company){
-				$has_error = false;
-			}
-		}
-		if($has_error){
-			$this->response->redirect_404();
-			return;
-		}
+		$Company = $User;
+		$this->set('company', $Company);
 		
 		if($this->request->post){
 			$post = $this->request->post;
-			$Company = $this->set_model($post, $Company);
-			$errors = $this->Company->check($Company);
+			$new_Company = $this->set_model($post, $Company);
+			$errors = $this->Company->check($new_Company);
+			if(count($errors) == 0 && $post['name'] != $User->name){
+				$U = $this->find_user_by_name($post['name'], $User->id);
+				if($U){
+					$errors['name'] = '此用户名已被使用';
+				}
+			}
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
@@ -99,8 +96,7 @@ class CompanyController extends AppController {
 				if($path){$post['license'] = $path;}
 			}
 			if(count($errors) == 0){
-				$this->do_tag($id, BelongType::COMPANY, 
-									$post['old_tag'], $post['new_tag']);
+				$this->do_tags($User, $post['old_tag'], $post['new_tag']);
 				unset($post['old_tag'], $post['new_tag']);
 				if($post['image'] && $Company->image){
 					FileSystem::remove($Company->image);
@@ -110,12 +106,13 @@ class CompanyController extends AppController {
 				}
 				$this->Company->escape($post);
 				$this->Company->save($post);
-				$this->redirect('succ&edit?id='.$id);
+				$this->redirect('edit?succ');
 			}
+			$this->set('errors', $errors);
+			$this->set('company', $new_Company);
 		}
-		$this->add_tag_data($Company->id, BelongType::COMPANY);
+		$this->add_tags($Company);
 		$this->add_common_tags();
-		$this->set('company', $Company);
 	}
 	
 	

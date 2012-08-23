@@ -5,7 +5,7 @@
 		<div class="top-nav">
 			<a href="<?php echo ROOT_URL?>">首页</a>|
 			<a href="<?php echo ROOT_URL.'/home'?>">个人主页</a>|
-			<a href="<?php echo ROOT_URL.'/feed'?>">我的订阅</a>|
+			<!-- <a href="<?php echo ROOT_URL.'/feed'?>">我的订阅</a>| -->
 			<a href="<?php echo ROOT_URL.'/setting'?>">用户中心</a>|
 			<a href="#" class="add-content">
 				<?php if($User->is_company()){?>

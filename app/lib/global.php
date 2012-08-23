@@ -117,13 +117,15 @@ function output_score($o){
 	}
 }
 
-function get_author_link($o, $type_field = 'user_type', $id_field = 'user'){
-	$type = $o->{$type_field};
+function get_author_link($id, $type){
 	if($type == BelongType::EXPERT){
-		return EXPERT_HOME.'/profile?id='.$o->{$id_field};
+		return EXPERT_HOME.'/profile?id='.$id;
 	}
 	else if($type == BelongType::COMPANY){
-		return COMPANY_HOME.'/profile?id='.$o->{$id_field};
+		return COMPANY_HOME.'/profile?id='.$id;
+	}
+	else{
+		return '#';
 	}
 }
 

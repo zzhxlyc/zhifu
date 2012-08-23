@@ -87,8 +87,9 @@ class Request{
 	public function _file(){
 		if (isset($_FILES) && is_array($_FILES)) {
 			foreach ($_FILES as $name => $data) {
-				if ($name != 'data') {
-					$this->file[$name] = $data;
+				$this->file[$name] = $data;
+				if(array_key_exists($name, $this->post)){
+					unset($this->post[$name]);
 				}
 			}
 		}

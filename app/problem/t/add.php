@@ -1,7 +1,7 @@
 <div class="filter clearfix">
 	<div class="order">
-		<a href="#" class="current" id="normal-add">详细发布</a>
-		<a href="#" id="simple-add">简洁发布</a>
+		<a href="#" <?php $HTML->if_current($type == 0)?> id="normal-add">详细发布</a>
+		<a href="#" <?php $HTML->if_current($type == 1)?> id="simple-add">简洁发布</a>
 	
 	</div>
 
@@ -115,19 +115,19 @@
 	<div class="row">
 		<label for="">难题名称</label>
 		<input class="text wide" type="text" name="t" value="" />
-		<span class="error"><?php echo $errors['t']?></span>
+		<span class="error"><?php echo $errors['title']?></span>
 	</div>
 	<div class="row">
 		<label for="desc">简单描述</label>
 		<textarea name="desc" class="text"><?php echo $recruit->description?></textarea>
-		<span class="error"><?php echo $errors['desc']?></span>
+		<span class="error"><?php echo $errors['description']?></span>
 	</div>
 </div>
 
 <div class="row">
-	<input type="hidden" id="type" name="type" value="0" /> <!-- 1 for simple, 0 not -->
+	<input type="hidden" id="type" name="type" value="<?php echo $type?>" /> <!-- 1 for simple, 0 not -->
 	<input type="submit" value="发布" class="btn fl">
-	<a href="<?php echo $home?>" class="back-btn">返回</a>
+	<!-- <a href="<?php echo $home?>" class="back-btn">返回</a> -->
 </div>
 
 </form>
@@ -154,6 +154,11 @@ var catList = {<?php
 
 <script type="text/javascript">
 $(document).ready(function($){
+
+	if($("#type").val() == '1'){
+		$('.add-problem').hide();
+		$('.add-simple-problem').show();
+	}
 	
 	$('#normal-add').click(function(){
 		$(this).parent().children().removeClass('current');

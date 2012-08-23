@@ -27,7 +27,7 @@ Class MySQLDatebase{
 	}
 	
 	public function get_row($sql){
-		//echo $sql.'<br>';
+//		echo $sql.'<br>';
 		$this->sql_list[] = $sql;
 		$result = mysql_query($sql);
 		return mysql_fetch_object($result);

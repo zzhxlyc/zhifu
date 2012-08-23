@@ -115,12 +115,15 @@ class Controller{
 	protected function set_model($data, $obj = null){
 		$class_name = ucfirst($this->request->get_module());
 		if($obj == null){
-			$obj = new $class_name();
+			$o = new $class_name();
+		}
+		else{
+			$o = clone $obj;
 		}
 		foreach($data as $key => $value){
-			$obj->$key = $value;
+			$o->$key = $value;
 		}
-		return $obj;
+		return $o;
 	}
 	
 }

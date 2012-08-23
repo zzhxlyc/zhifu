@@ -47,6 +47,11 @@ class ExpertController extends AppController {
 				$has_error = false;
 			}
 		}
+		else{
+			$Expert = $this->get('User');
+			$id = $Expert->id;
+			$has_error = false;
+		}
 		if($has_error){
 			$this->response->redirect_404();
 			return;
@@ -54,9 +59,7 @@ class ExpertController extends AppController {
 		
 		$this->set('$Expert', $Expert);
 		
-		$tag_list = $this->add_tag_data($id, BelongType::EXPERT, false);
-		$tag_list = $this->TagItem->get_most($tag_list);
-		$this->set('$tags', $tag_list);
+		$tag_list = $this->show_tags($Expert);
 		
 		$cond = array('expert'=>$id);
 		$patents = $this->Patent->get_list($cond, array('lastmodify'=>'DESC'));
@@ -79,7 +82,7 @@ class ExpertController extends AppController {
 	}
 	
 	private function add_profile_data(&$Expert){
-		$this->add_tag_data($Expert->id, BelongType::EXPERT);
+		$this->add_tags($Expert);
 		
 		$list = $this->Problem->get_list(array('company'=>$Expert->id));
 		$Expert->problem_num = count($list);
@@ -94,47 +97,45 @@ class ExpertController extends AppController {
 	}
 	
 	public function edit(){
-		$data = $this->get_data();
-		$id = $data['id'];
 		$User = $this->get('User');
-		$has_error = true;
-		if($id){
-			$Expert = $this->Expert->get($id);
-//			if($Expert && $Expert->is_expert() && $Expert->id == $User->id){
-			if($Expert){
-				$has_error = false;
-			}
-		}
-		if($has_error){
-			$this->response->redirect_404();
-			return;
-		}
+		$Expert = $User;
+		$this->set('expert', $Expert);
 		
 		if($this->request->post){
 			$post = $this->request->post;
-			$Expert = $this->set_model($post, $Expert);
-			$errors = $this->Expert->check($Expert);
+			$new_Expert = $this->set_model($post, $Expert);
+			$errors = $this->Expert->check($new_Expert);
+			if(count($errors) == 0 && $post['name'] != $User->name){
+				$U = $this->find_user_by_name($post['name'], $User->id);
+				if($U){
+					$errors['name'] = '此用户名已被使用';
+				}
+			}
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
 				if($path){$post['image'] = $path;}
+				$path = $this->do_file('license', $errors, $files);
+				if($path){$post['license'] = $path;}
 			}
 			if(count($errors) == 0){
-				$this->do_tag($id, BelongType::EXPERT, 
-									$post['old_tag'], $post['new_tag']);
+				$this->do_tags($User, $post['old_tag'], $post['new_tag']);
 				unset($post['old_tag'], $post['new_tag']);
 				if($post['image'] && $Expert->image){
 					FileSystem::remove($Expert->image);
 				}
+				if($post['license'] && $Expert->license){
+					FileSystem::remove($Expert->license);
+				}
 				$this->Expert->escape($post);
 				$this->Expert->save($post);
-				$this->redirect('edit?succ&id='.$id);
+				$this->redirect('edit?succ');
 			}
 			$this->set('errors', $errors);
+			$this->set('expert', $new_Expert);
 		}
-		$this->add_tag_data($Expert->id, BelongType::EXPERT);
+		$this->add_tags($Expert);
 		$this->add_common_tags();
-		$this->set('expert', $Expert);
 	}
 	
 }

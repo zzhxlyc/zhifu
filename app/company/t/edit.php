@@ -4,7 +4,7 @@
 	}
 	else{
 ?>
-<form action="<?php echo $home.'/edit?id='.$company->id?>" method="post" <?php $HTML->file_form_need()?>>
+<form action="<?php echo $home.'/edit'?>" method="post" <?php $HTML->file_form_need()?>>
 <div class="row">
 	<label for="name">企业名</label>
 	<input size="50" type="text" name="name" value="<?php echo $company->name?>" />

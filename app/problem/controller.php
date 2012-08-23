@@ -97,6 +97,7 @@ class ProblemController extends AppController {
 			if($post['type'] == '1'){
 				$data = array('title'=>$post['t'], 'description'=>$post['desc']);
 				$post = $data;
+				$this->set('type', 1);
 			}
 			if(isset($post['deadline']) && empty($post['deadline'])){
 				unset($post['deadline']);
@@ -131,6 +132,9 @@ class ProblemController extends AppController {
 			$this->set('$problem', $problem);
 			$this->set('errors', $errors);
 		}
+		else{
+			$this->set('type', 0);
+		}
 		$this->add_data();
 	}
 	
@@ -141,7 +145,7 @@ class ProblemController extends AppController {
 		$has_error = true;
 		if($id){
 			$Problem = $this->Problem->get($id);
-//			if($Problem && $User->is_company() && $Problem->company == $User->id){
+//			if($Problem && $Problem->company == $User->id){
 			if($Problem){
 				$has_error = false;
 			}
@@ -163,8 +167,7 @@ class ProblemController extends AppController {
 				if($path){$post['file'] = $path;}
 			}
 			if(count($errors) == 0){
-				$this->do_tag($id, BelongType::PROBLEM, 
-									$post['old_tag'], $post['new_tag']);
+				$this->do_tags($Problem, $post['old_tag'], $post['new_tag']);
 				unset($post['old_tag'], $post['new_tag']);
 				if($post['image'] && $Problem->image){
 					FileSystem::remove($Problem->image);

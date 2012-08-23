@@ -89,6 +89,22 @@ class AppController extends Controller{
 		}
 	}
 	
+	protected function find_user_by_name($name, $not_eq_id = Null){
+		$cond = array('name'=>$name);
+		if($not_eq_id){
+			$cond['id !='] = $not_eq_id;
+		}
+		$Company = $this->Company->get_row($cond);
+		if($Company){
+			return $Company;
+		}
+		$Expert = $this->Expert->get_row($cond);
+		if($Expert){
+			return $Expert;
+		}
+		return false;
+	}
+	
 	protected function add_categorys(){
 		$cat_array = $this->Category->get_category();
 		$this->set('cat_array', $cat_array);
@@ -198,6 +214,11 @@ class AppController extends Controller{
 		$save_path = FileSystem::get_save_path($path);
 		move_uploaded_file($array['tmp_name'], $save_path);
 		return $path;
+	}
+	
+	protected function do_tags($o, $old_tag, $new_tag){
+		$type = BelongType::get_type($o);
+		return $this->do_tag($o->id, $type, $old_tag, $new_tag);
 	}
 	
 	protected function do_tag($object_id, $type, $old_tag, $new_tag){

@@ -6,9 +6,9 @@ class Message extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'content', 'from', 'from_type', 'to', 'to_type', 'read'),
+			'need' => array('title', 'content'),
 			'length' => array('title'=>250),
-			'int' => array('from', 'to', 'read'),
+			'int' => array(),
 			'word' => array('title', 'content')
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);

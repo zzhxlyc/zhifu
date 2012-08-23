@@ -50,6 +50,9 @@ class TopicController extends AppController {
 			$post['type'] = $User->get_type();
 			$post['author'] = $User->name;
 			$errors = $this->Topic->check($post);
+			if(trim($post['title']) == ''){
+				$errors['title'] = '不能为空';
+			}
 			if(count($errors) == 0){
 				$post['comments'] = 0;
 				$post['time'] = DATETIME;
