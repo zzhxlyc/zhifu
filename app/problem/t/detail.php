@@ -101,7 +101,7 @@
 		$('#reply textarea').val('回复 '+author+'：');
 	})
 	
-	$('.btn').click(function(){
+	$('#reply .btn').click(function(){
 		var object = $("#object").val();
 		var type = $("#type").val();
 		var content = $("#reply_content").val();

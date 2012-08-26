@@ -1006,8 +1006,16 @@ margin-top:10px;
 display:none;
 }
 
-
-
+.success-notice{
+	background: url(../images/success.png) no-repeat 10px 5px;
+	background-color: #E6EFC2;
+	border: 1px solid #C6D880;
+	color: #4E6100;	
+	height:40px;
+	padding:20px 0 0 70px;
+	margin-bottom:15px;
+	font-size:13px;
+}
 
 
 

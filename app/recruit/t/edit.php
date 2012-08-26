@@ -44,7 +44,7 @@
 <div class="row">
 	<input type="hidden" name="available" />
 	<input type="hidden" name="id" value="<?php echo $recruit->id?>" />
-	<input type="submit" value="保存" class="btn">
+	<input type="submit" value="保存" class="btn fl">
 	<a href="<?php echo $home.'/show?id='.$recruit->id?>" class="back-btn">返回</a>
 </div>	
 

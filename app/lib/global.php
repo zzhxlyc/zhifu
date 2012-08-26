@@ -104,7 +104,7 @@ function output_deadline($datetime){
 
 function output_edit_succ(){
 	if(isset($_GET['succ'])){
-		echo '<p>修改成功</p>';
+		echo '<div class="success-notice">修改成功</div>';
 	}
 }
 
