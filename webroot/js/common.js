@@ -8,17 +8,18 @@ function commentReplyEvent(){
 				type: "POST",
 				url: window.ROOT_URL + "/ajax/comment",
 				data: "object="+object+"&type="+type+"&content="+content,
-				success: function(msg){
-					var r = parseInt(msg);
+				success: function(ret){
+					eval("msg=" + ret);
+					var r = parseInt(msg.succ);
 					if(r > 0){
 						alert('回复成功');
 						$("#reply_content").val('');
 						var html=[];
 						html.push('<div class="item">');
 						html.push('<div class="comment-meta">');
-						html.push('<a class="author" href="#">'+msg.id+'</a>');
+						html.push('<a class="author" href="#">'+msg.name+'</a>');
 						html.push('<span class="comment-time">'+msg.time+'</span>');
-						html.push('<span class="op"><a href="javascript:void(0)">回复</a></span>');
+//						html.push('<span class="op"><a href="javascript:void(0)">回复</a></span>');
 						html.push('</span></div>');
 						html.push('<p>'+content+'</p>');
 						html.push('</div>');

@@ -112,7 +112,7 @@
 	<input type="hidden" name="cat" value="<?php echo $idea->cat?>" />
 	<input type="hidden" name="subcat" value="<?php echo $idea->subcat?>" />
 	<input type="submit" value="发布" class="btn fl">
-	<a href="<?php echo $home?>" class="back-btn">返回</a>
+	<!-- <a href="<?php echo $home?>" class="back-btn">返回</a> -->
 </div>
 
 </form>

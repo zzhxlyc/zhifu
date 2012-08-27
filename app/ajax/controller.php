@@ -42,14 +42,20 @@ class AjaxController extends AppController {
 			$post['author'] = $User->name;
 			$post['user_type'] = $User->get_type();
 			$errors = $this->Comment->check($post);
+			$ret = array();
 			if(count($errors) == 0){
 				$post['time'] = DATETIME;
 				$id = $this->Comment->save($post);
-				echo $id;
+				$ret['succ'] = 1;
+				$ret['id'] = $id;
+				$ret['name'] = $User->name;
+				$ret['time'] = DATETIME;
 			}
 			else{
-				echo 0;
+				$ret['succ'] = 0;
+				$ret['error'] = implode(';', $errors);
 			}
+			echo json_encode($ret);
 		}
 	}
 	

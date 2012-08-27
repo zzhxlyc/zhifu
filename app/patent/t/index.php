@@ -42,7 +42,9 @@
 
 		<div class="right">
 			<div class="price-deadline">
-				<p>出价：<span class="num"><?php echo $o->budget?></span>元</p>
+				<?php if($o->budget){?>
+				<p>出价：<span class="num"><?php echo $o->budget?></span>万元</p>
+				<?php }?>
 			</div>
 			<?php if(is_company($User)){?>
 			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">我要购买</a>

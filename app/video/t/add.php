@@ -17,7 +17,7 @@
 
 <div class="row">
 	<input type="submit" class="btn fl" value="添加" />
-	<a href="<?php echo $home?>" class="back-btn">返回</a>
+	<!-- <a href="<?php echo $home?>" class="back-btn">返回</a> -->
 </div>
 
 
