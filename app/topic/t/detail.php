@@ -52,7 +52,7 @@
 $('.quote').click(function(){
 	var author=$(this).parent().parent().find('.author').text();
 	var authorComment=$(this).parent().parent().parent().parent().find('p').text();
-	$('#content').val('引用'+author+'的回复'+authorComment);
+	$('#content').val('<blockquote><a href="#">'+author+'</a><p>'+authorComment+'</p></blockquote>');
 	
 });
 
