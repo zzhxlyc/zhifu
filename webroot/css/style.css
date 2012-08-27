@@ -464,13 +464,13 @@ padding-right:10px;
 }
 
 .list .item .title {
-font-size:16px;
+font-size:14px;
 padding-bottom:10px;
 }
 
 .list .item .content {
 	width:530px;
-	height:80px;
+	height:90px;
 }
 
 .list .item .right {
@@ -517,7 +517,7 @@ line-height:30px;
 
 }
 
-.status .title{
+.item .status .title{
 	font-size:13px;
 	font-weight:bold;
 	padding:0;
@@ -867,8 +867,13 @@ padding-top:4px;
 	margin-top:20px;
 }
 
-.new-video .list .item {
+.new-video .list,.hot-video .list{
+	margin-left:22px;
+}
+
+.new-video .list .item,.hot-video .list .item {
 height: 150px;
+padding-right:22px;
 }
 
 .hot-video {

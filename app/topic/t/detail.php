@@ -18,8 +18,10 @@
 			<div class="comment-content">
 				<div class="comment-meta">
 					<?php echo $o->time?> 
-					<a href="<?php echo $o->get_author_link()?>"><?php echo $o->author?></a>
+					<a href="<?php echo $o->get_author_link()?>" class="author"><?php echo $o->author?></a>
 					<span class="op">
+						<a href="javascript:;" class="quote">引用</a>
+						
 						<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
 					</span>
 				</div>
@@ -45,6 +47,15 @@
 
 <script type="text/javascript">
 <!--
+
+
+$('.quote').click(function(){
+	var author=$(this).parent().parent().find('.author').text();
+	var authorComment=$(this).parent().parent().parent().parent().find('p').text();
+	$('#content').val('引用'+author+'的回复'+authorComment);
+	
+});
+
 function check_content(content){
 	if(content == ''){
 		return false;
