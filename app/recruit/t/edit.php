@@ -4,7 +4,7 @@
 
 <div class="row">
 	<label for="title">标题：</label>
-	<input size="80" type="text" name="title" value="<?php echo $recruit->title?>" />
+	<input size="80" type="text" class="text" name="title" value="<?php echo $recruit->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 <div class="row">

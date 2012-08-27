@@ -4,30 +4,31 @@
 	}
 	else{
 ?>
+<h2>用户中心</h2>
 <form action="<?php echo $home.'/edit'?>" method="post" <?php $HTML->file_form_need()?>>
 <div class="row">
 	<label for="name">企业名</label>
-	<input size="50" type="text" name="name" value="<?php echo $company->name?>" />
+	<input size="50" type="text" class="text" name="name" value="<?php echo $company->name?>" />
 	<span class="error"><?php echo $errors['name']?></span>
 </div>
 <div class="row">
 	<label for="name">邮箱</label>
-	<input size="50" type="text" name="email" value="<?php echo $company->email?>" />
+	<input size="50" type="text" class="text" name="email" value="<?php echo $company->email?>" />
 	<span class="error"><?php echo $errors['email']?></span>
 </div>
 <div class="row">
 	<label for="name">电话</label>
-	<input size="50" type="text" name="phone" value="<?php echo $company->phone?>" />
+	<input size="50" type="text" class="text" name="phone" value="<?php echo $company->phone?>" />
 	<span class="error"><?php echo $errors['phone']?></span>
 </div>
 <div class="row">
 	<label for="name">网址</label>
-	<input size="50" type="text" name="url" value="<?php echo $company->url?>" />
+	<input size="50" type="text" class="text" name="url" value="<?php echo $company->url?>" />
 	<span class="error"><?php echo $errors['url']?></span>
 </div>
 <div class="row">
 	<label for="tag">领域标签</label>
-	<input size="20" type="text" value="" id="new-tag" /> 
+	<input size="20" type="text" class="text" value="" id="new-tag" /> 
 	<a href="javascript:;" id="add-tag">添加</a>
 </div>	
 
@@ -84,7 +85,7 @@
 	<?php if($company->verified == 0){?>
 	<input type="submit" value="审核通过" />
 	<?php }?>
-	<input type="submit" value="保存" />
+	<input type="submit" value="保存"  class="btn" />
 	<?php echo $HTML->hidden('id', $company->id)?>
 </div>
 </form>

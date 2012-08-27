@@ -7,17 +7,17 @@
 			<form action="" method="post">
 <div class="row">
 	<label for="name">收信人</label>
-	<input size="30" type="text" name="user" value="<?php echo $user?>" />
+	<input size="30" type="text" class="text" name="user" value="<?php echo $user?>" />
 	<span class="error"><?php echo $errors['user']?></span>
 </div>
 <div class="row">
 	<label for="name">标题</label>
-	<input size="70" type="text" name="title" value="<?php echo $message->title?>" />
+	<input size="70" type="text" class="text" name="title" value="<?php echo $message->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 <div class="row">
 	<label for="">内容</label>
-	<textarea name="content" rows="10" cols="80"><?php echo $message->content?></textarea>
+	<textarea name="content" class="text" rows="10" cols="80"><?php echo $message->content?></textarea>
 	<span class="error"><?php echo $errors['content']?></span>
 </div>
 <div class="row">

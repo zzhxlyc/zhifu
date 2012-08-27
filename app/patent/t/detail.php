@@ -6,6 +6,8 @@
 			<?php if(is_company($User)){?>
 			<a href="<?php echo $home.'/submit?id='.$Patent->id?>" class="join-btn btn">我要购买</a>
 			<?php }?>
+			<a href="<?php echo $home.'/edit?id='.$Patent->id?>" class="edit">编辑</a>
+			
 		</h3>
 		<div class="content status clearfix">
 			<div class="status-item <?php $HTML->current($Patent->status, 0)?>">审核中</div>

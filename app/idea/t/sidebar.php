@@ -1,7 +1,7 @@
 <div class="sidebar">
 
 	<div class="detail-profile">
-		<img src="<?php img($Idea->image, $Idea->default_image())?>" alt="<?php echo $Idea->title?>" width="180" height="150"/>
+		<img src="<?php img($Idea->image, $Idea->default_image())?>" alt="<?php echo $Idea->title?>" width="180" height="135"/>
 		<p><?php echo $Idea->title?></p>
 		<p>金额：<span class="price"><?php output_money($Idea->budget)?>万元</span></p>
 		<?php if(isset($Idea->deadline)){?>

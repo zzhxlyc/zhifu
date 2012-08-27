@@ -1,7 +1,7 @@
 <div class="sidebar">
 
 	<div class="detail-profile">
-		<img src="<?php img($Patent->image, $Patent->default_image())?>" alt="<?php echo $Patent->title?>" width="180" height="150"/>
+		<img src="<?php img($Patent->image, $Patent->default_image())?>" alt="<?php echo $Patent->title?>" width="180" height="135"/>
 		<p><?php echo $Patent->title?></p>
 		<p>专利号：<?php echo $Patent->pid?></p>
 		<p>金额：<span class="price"><?php output_money($Patent->budget)?>万元</span></p>

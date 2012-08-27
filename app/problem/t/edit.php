@@ -5,77 +5,96 @@
 	else{
 		output_edit_succ();
 ?>
-
+<h2>修改难题信息</h2>
 <form action="<?php echo $home.'/edit?id='.$problem->id?>" method="post" <?php $HTML->file_form_need()?> >
+<div class="edit-left">
+	<div class="row">
+		<label for="name">难题名称</label>
+		<input size="60" type="text" class="text" name="title" value="<?php echo $problem->title?>" />
+		<span class="error"><?php echo $errors['title']?></span>
+	</div>	
+	<div class="row">
+		<label for="cat">所属行业</label>
+		<select name="cat">
+			<option value="-1">选择行业</option>
+		</select>
+		<span class="error"><?php echo $errors['cat']?></span>
+		<select name="subcat">
+			<option value="-1">选择行业</option>
+		</select>
+		<span class="error"><?php echo $errors['subcat']?></span>
+	</div>
+
+	<div class="row">
+		<label for="">地区</label>
+		<div class="province_city"></div>
+	</div>	
+
+
+	<div class="row">
+		<label for="budget">预算</label>
+		<input size="20" type="text" class="text" name="budget" value="<?php echo $problem->budget?>" />万元
+		<span class="error"><?php echo $errors['budget']?></span>
+	</div>
+
+
+	<div class="row">
+		<label for="deadline">截止日期</label>
+		<input size="20" type="text" class="text" name="deadline" class="datepicker" value="<?php echo get_date($problem->deadline)?>" readonly="readonly" />
+		<span class="error"><?php echo $errors['deadline']?></span>
+	</div>
+
+	<div class="row">
+		<label for="tag">领域标签</label>
+		<input size="20" type="text" class="text" value="" id="new-tag" /> <a href="javascript:;" id="add-tag">添加</a>
+	</div>	
+
+	<div class="tag row">
+		<label for="">标签</label>
+		<?php 
+		if(is_array($tag_list)){
+			foreach($tag_list as $tag){
+		?>
+			<a href="javascript:;" class="old" count="<?php $tag->count?>" tagid="<?php echo $tag->id?>" id="tag_<?php echo $tag->id?>"><?php echo $tag->name?><img src="<?php echo IMAGE_HOME?>/delete.png"></a>	
+		<?php 
+			}
+		}
+		?>
+	</div>
+	<div class="hot-tag row">
+		<label for="">热门标签</label>
+		<?php 
+		if(is_array($most_common_tags)){
+			foreach($most_common_tags as $tag){
+		?>
+			<a href="javascript:;" count="<?php echo $tag['count']?>" tagid="<?php echo $tag['id']?>" id="tag_<?php echo $tag['id']?>"><?php echo $tag['name']?></a>	
+		<?php 
+			}
+		}
+		?>
+		<input type="hidden" name="new_tag" />
+		<input type="hidden" name="old_tag" />
+	</div>
+
 	
-<div class="row">
-	<label for="name">难题名称</label>
-	<input size="60" type="text" name="title" value="<?php echo $problem->title?>" />
-	<span class="error"><?php echo $errors['title']?></span>
-</div>	
-<div class="row">
-	<label for="cat">所属行业</label>
-	<select name="cat">
-		<option value="-1">选择行业</option>
-	</select>
-	<span class="error"><?php echo $errors['cat']?></span>
-	<select name="subcat">
-		<option value="-1">选择行业</option>
-	</select>
-	<span class="error"><?php echo $errors['subcat']?></span>
-</div>
+	
+	
+</div>	<!--end for edit-left-->
+<div class="edit-right">
+	<?php if($problem->image){?>
+	<div class="row">
+		<label for="">图像</label>
+		<img alt="" src="<?php img($problem->image)?>" width="300" height="180">
+	</div>
+	<?php }?>
 
-<div class="row">
-	<label for="">地区</label>
-	<div class="province_city"></div>
-</div>	
-
-
-<div class="row">
-	<label for="budget">预算</label>
-	<input size="20" type="text" name="budget" value="<?php echo $problem->budget?>" />万元
-	<span class="error"><?php echo $errors['budget']?></span>
-</div>
-
-
-<div class="row">
-	<label for="deadline">截止日期</label>
-	<input size="20" type="text" name="deadline" class="datepicker" value="<?php echo get_date($problem->deadline)?>" readonly="readonly" />
-	<span class="error"><?php echo $errors['deadline']?></span>
-</div>
-
-<div class="row">
-	<label for="tag">领域标签</label>
-	<input size="20" type="text" value="" id="new-tag" /> <a href="javascript:;" id="add-tag">添加</a>
-</div>	
-
-<div class="tag row">
-	<label for="">标签</label>
-	<?php 
-	if(is_array($tag_list)){
-		foreach($tag_list as $tag){
-	?>
-		<a href="javascript:;" class="old" count="<?php $tag->count?>" tagid="<?php echo $tag->id?>" id="tag_<?php echo $tag->id?>"><?php echo $tag->name?><img src="<?php echo IMAGE_HOME?>/delete.png"></a>	
-	<?php 
-		}
-	}
-	?>
-</div>
-<div class="hot-tag row">
-	<label for="">热门标签</label>
-	<?php 
-	if(is_array($most_common_tags)){
-		foreach($most_common_tags as $tag){
-	?>
-		<a href="javascript:;" count="<?php echo $tag['count']?>" tagid="<?php echo $tag['id']?>" id="tag_<?php echo $tag['id']?>"><?php echo $tag['name']?></a>	
-	<?php 
-		}
-	}
-	?>
-	<input type="hidden" name="new_tag" />
-	<input type="hidden" name="old_tag" />
-</div>
-
+	<div class="row">
+		<label for="">修改图像</label>
+		<input type="file" name="image" /><br />
+		<span class="error"><?php echo $errors['image']?></span>
+	</div>	
+	
+</div><!--end for edit-right-->
 
 
 <div class="row">
@@ -84,18 +103,7 @@
 	<span class="error"><?php echo $errors['description']?></span>
 </div>
 
-<?php if($problem->image){?>
-<div class="row">
-	<label for="">图像</label>
-	<img alt="" src="<?php img($problem->image)?>">
-</div>
-<?php }?>
 
-<div class="row">
-	<label for="">修改图像</label>
-	<input type="file" name="image" />
-	<span class="error"><?php echo $errors['image']?></span>
-</div>
 
 <div class="row">
 	<label for="">附件</label>
@@ -113,8 +121,8 @@
 
 
 <div class="row">
-	<input type="submit" value="修改" />
-	<a href="<?php echo $home.'/detail?id='.$problem->id?>">返回</a>
+	<input type="submit" class="btn fl" value="修改" />
+	<a href="<?php echo $home.'/detail?id='.$problem->id?>" class="back-btn">返回</a>
 	<?php echo $HTML->hidden('id', $problem->id)?>
 </div>
 

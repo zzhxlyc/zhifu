@@ -6,6 +6,8 @@
 			<?php if(is_expert($User)){?>
 			<a href="<?php echo $home.'/submit?id='.$Problem->id?>" class="join-btn btn">我要竞标</a>
 			<?php }?>
+			
+			<a href="<?php echo $home.'/edit?id='.$Problem->id?>" class="edit">编辑</a>
 		</h3>
 		<div class="content status clearfix">
 			<div class="status-item <?php $HTML->current($Problem->status, 0)?>">发布蓝图</div>

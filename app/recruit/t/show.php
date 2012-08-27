@@ -14,7 +14,7 @@
 </div>
 <div class="row clearfix">
 	<label for="available">时间：</label>
-	<div class="choose-time">
+	<div class="choose-time no-margin">
 	<?php 
 		$array_day = array('上午', '下午', '晚上');
 		for($i = 0;$i < 3;$i++){

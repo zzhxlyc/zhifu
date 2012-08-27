@@ -93,6 +93,9 @@ float: right;
 background: url(../images/btn-bg-blue-s.png) no-repeat 0 0;
 }
 
+.error{
+color:red;	
+}
 /*************************header***************************/
 
 .header_wrap {
@@ -659,7 +662,7 @@ font-size:13px;
 }
 /*添加job*/
 .row{
-padding-bottom:10px;	
+padding-bottom:15px;	
 clear:both;
 font-size:13px;
 
@@ -669,7 +672,8 @@ font-size:13px;
 display:block;
 float:left;
 width:60px;	
-
+padding-top: 3px;
+font-weight:bold;
 }
 
 .row input.text{
@@ -694,7 +698,7 @@ height:100px;
 .row input.btn{
 
 	border:0;
-	margin:0 20px 0 60px;
+	margin-left:60px;
 	cursor:pointer;
 }
 
@@ -704,7 +708,10 @@ width:640px;
 float:left;	
 margin-left:60px;
 }
-
+.no-margin{
+	margin-left:0;
+	
+}
 .choose-time span{
 display:block;
 width:80px;	
@@ -717,7 +724,7 @@ text-align:center;
 line-height:40px;
 }
 .choose-time span.selected{
-background:#F0FFE5;
+background:#afeea1;
 margin:0 5px 5px 0;
 cursor:pointer;
 }
@@ -848,6 +855,13 @@ height:200px;
 border:1px solid #ddd;	
 }
 
+
+h3 a.edit{
+float:right;
+font-size:13px;
+padding-right:10px;	
+padding-top:4px;
+}
 /************视频主页**************/
 .new-video{
 	margin-top:20px;
@@ -927,6 +941,7 @@ background-color:#369;
 .back-btn{
 float:left;
 padding-top:5px;
+padding-left:20px;
 }
 
 /************单个话题**************/
@@ -1016,6 +1031,14 @@ display:none;
 	margin-bottom:15px;
 	font-size:13px;
 }
-
+/************难题修改**************/
+.edit-left{
+	width:500px;
+	float:left;
+}
+.edit-right{
+	width:400px;
+	float:left;
+}
 
 
