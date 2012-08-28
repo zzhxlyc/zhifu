@@ -127,17 +127,20 @@
 	<input type="file" name="file" />
 	<span class="error"><?php echo $errors['file']?></span>
 </div>
-
 <div class="row">
-	<input type="hidden" name="cat" value="<?php echo $idea->cat?>" />
-	<input type="hidden" name="subcat" value="<?php echo $idea->subcat?>" />
-	<?php echo $HTML->hidden('id', $idea->id)?>
 	<input type="submit" value="修改" class="btn fl">
 	<input type="button" value="返回" onclick="location.href='<?php echo $home?>'" />
+	<?php echo $HTML->hidden('id', $idea->id)?>
+	
 </div>
 
-</form>
 
+</form>
+<div>
+	<input type="hidden" name="cat" value="<?php echo $idea->cat?>" />
+	<input type="hidden" name="subcat" value="<?php echo $idea->subcat?>" />
+
+</div>
 <script type="text/javascript">
 <!--
 var catList = {<?php 
