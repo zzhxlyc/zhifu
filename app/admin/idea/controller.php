@@ -47,7 +47,6 @@ class IdeaController extends AdminBaseController {
 		
 		if($this->request->post){
 			$post = $this->request->post;
-			p($post);
 			$admin = get_admin_session($this->session);
 			$Idea = $this->set_model($post, $Idea);
 			$errors = $this->Idea->check($Idea);

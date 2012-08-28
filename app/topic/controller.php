@@ -7,7 +7,7 @@ class TopicController extends AppController {
 	public function before(){
 		$this->set('home', TOPIC_HOME);
 		parent::before();
-		$need_login = array();	// either
+		$need_login = array('add', 'edit', 'reply');	// either
 		$need_company = array();
 		$need_expert = array();
 		$this->login_check($need_login, $need_company, $need_expert);
@@ -71,10 +71,11 @@ class TopicController extends AppController {
 	public function edit(){
 		$data = $this->get_data();
 		$id = get_id($data);
+		$User = $this->get('User');
 		$has_error = true;
 		if($id){
 			$topic = $this->Topic->get($id);
-			if($topic){
+			if($topic && $topic->belong == $User->id && $topic->type == $User->get_type()){
 				$has_error = false;
 			}
 		}

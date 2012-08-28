@@ -1,5 +1,7 @@
 <?php
 
+include(LIB_DIR.'/mail/email.php');
+
 class LoginController extends AppController {
 	
 	public $models = array('ResetCode');
@@ -97,8 +99,10 @@ class LoginController extends AppController {
 					if($Company){
 						$data['type'] = BelongType::COMPANY;
 						$data['user'] = $Company->id;
-						$this->ResetCode->save($data);
-						$this->redirect('succ');
+						if(send_forget_email($Company->name, $data['code'])){
+							$this->ResetCode->save($data);
+							$this->redirect('succ');
+						}
 					}
 				}
 				else if($type == BelongType::EXPERT){
@@ -106,8 +110,10 @@ class LoginController extends AppController {
 					if($Expert){
 						$data['type'] = BelongType::EXPERT;
 						$data['user'] = $Expert->id;
-						$this->ResetCode->save($data);
-						$this->redirect('succ');
+						if(send_forget_email($Expert->name, $data['code'])){
+							$this->ResetCode->save($data);
+							$this->redirect('succ');
+						}
 					}
 				}
 				else{

@@ -1,6 +1,10 @@
 <?php
 define('COOKIE_U', 'zhifu_u');
 
+define('MAIL_USER', $CONF->get('MAIL_USER'));
+define('MAIL_PSWD', $CONF->get('MAIL_PSWD'));
+define('MAIL_NAME', $CONF->get('MAIL_NAME'));
+
 define('USER_DIR', APP_DIR.'/user');
 define('UPLOAD_DIR', WEBROOT_DIR.'/upload');
 

@@ -31,14 +31,11 @@ class MessageController extends AdminBaseController {
 			if(empty($post['to_name'])){
 				$errors['to_name'] = '发送用户不能为空';
 			}
-			$post['to_type'] = BelongType::value_of($post['to_type']);
-			if(empty($post['to_type'])){
-				$errors['to_type'] = '发送用户类型不能为空';
-			}
 			if(count($errors) == 0){
-				$user_id = BelongType::get_user_by_name($post['to_name'], $post['to_type']);
-				if($user_id > 0){
-					$post['to'] = $user_id;
+				$user = $this->find_user_by_name($post['to_name']);
+				if($user > 0){
+					$post['to'] = $user->id;
+					$post['to_type'] = $user->get_type();
 					$post['read'] = 0;
 					$post['from'] = $Admin->id;
 					$post['from_type'] = BelongType::ADMIN;

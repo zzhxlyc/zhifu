@@ -12,7 +12,6 @@ function commentReplyEvent(){
 					eval("msg=" + ret);
 					var r = parseInt(msg.succ);
 					if(r > 0){
-						alert('回复成功');
 						$("#reply_content").val('');
 						var html=[];
 						html.push('<div class="item">');
@@ -27,11 +26,9 @@ function commentReplyEvent(){
 						$('.comment-section .comment-begin').after(html);
 						
 					}
-					else if(r == -1){
-						alert('请先登录');
-					}
 					else{
-						alert('回复失败');
+						var error = msg.error;
+						alert(error);
 					}
 				}
 			});

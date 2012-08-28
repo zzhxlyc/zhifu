@@ -90,7 +90,7 @@ class AppController extends Controller{
 	}
 	
 	protected function find_user_by_name($name, $not_eq_id = Null){
-		$cond = array('name'=>$name);
+		$cond = array('name'=>esc_text($name));
 		if($not_eq_id){
 			$cond['id !='] = $not_eq_id;
 		}

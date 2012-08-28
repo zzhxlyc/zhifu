@@ -6,7 +6,9 @@
 			<a href="<?php echo $topic->get_author_link()?>"><?php echo $topic->author?></a>
 		</span>
 		<span class="op">
+			<?php if($User && $User->id == $topic->belong && $User->get_type() == $topic->type){?>
 			<a href="<?php echo $home.'/edit?id='.$topic->id?>">编辑</a>
+			<?php }?>
 		</span>
 	</div>
 	<div class="topic-content">
@@ -21,9 +23,12 @@
 					
 					<a href="<?php echo $o->get_author_link()?>" class="author"><?php echo $o->author?></a>
 					<span class="op">
+						<?php if($User){?>
 						<a href="javascript:;" class="quote">引用</a>
-						
+						<?php }?>
+						<?php if($User && $User->id == $topic->belong){?>
 						<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
+						<?php }?>
 					</span>
 				</div>
 				<p><?php echo $o->content?></p>
