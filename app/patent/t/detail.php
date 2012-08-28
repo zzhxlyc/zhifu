@@ -58,6 +58,8 @@
 	<div class="section comment-section">
 		<h3>留言</h3>
 		<div class="content">
+			<div class="comment-begin"></div>
+			
 			<?php foreach($comments as $comment){ ?>
 			<div class="item">
 				<div class="comment-meta">

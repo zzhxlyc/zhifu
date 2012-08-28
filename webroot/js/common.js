@@ -24,7 +24,7 @@ function commentReplyEvent(){
 						html.push('<p>'+content+'</p>');
 						html.push('</div>');
 						html=html.join('');
-						$('.comment-section .content .item:eq(0)').before(html);
+						$('.comment-section .comment-begin').after(html);
 						
 					}
 					else if(r == -1){

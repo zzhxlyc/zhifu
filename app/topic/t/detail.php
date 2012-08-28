@@ -72,7 +72,25 @@ function reply(){
 			url: window.ROOT_URL + '/topic/reply',
 			data: "content="+content+"&parent="+parent,
 			success: function(msg){
-				alert(msg);
+				var html=[];
+				
+				html.push('<div class="item clearfix">');
+				html.push('<div class="comment-content">')
+				html.push('<div class="comment-meta">');
+				html.push('时间 <a class="author" href="#">'+'作者名'+'</a>');
+				html.push('<span class="op"><a href="javascript:;" class="quote">引用</a><a href="javascript:void(0)">编辑</a></span>');
+				html.push('</span></div>');
+				html.push('<p>'+'内容'+'</p>');
+				html.push('</div>');
+				html.push('</div>');
+				
+				html=html.join('');
+				
+				
+				$('.comment-list').append(html);
+				
+				
+				
 			}
 		});
 	}
