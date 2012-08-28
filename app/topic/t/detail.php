@@ -17,7 +17,8 @@
 		<div class="item clearfix">
 			<div class="comment-content">
 				<div class="comment-meta">
-					<?php echo $o->time?> 
+					<span class="time"><?php echo $o->time?> </span>
+					
 					<a href="<?php echo $o->get_author_link()?>" class="author"><?php echo $o->author?></a>
 					<span class="op">
 						<a href="javascript:;" class="quote">引用</a>
@@ -51,8 +52,10 @@
 
 $('.quote').click(function(){
 	var author=$(this).parent().parent().find('.author').text();
+	var time=$(this).parent().parent().find('.time').text();
+	
 	var authorComment=$(this).parent().parent().parent().parent().find('p').text();
-	$('#content').val('<blockquote><a href="javascript:;">'+author+'</a><p>'+authorComment+'</p></blockquote>');
+	$('#content').val('<blockquote>以下是引用<a href="javascript:;">'+author+'</a>在'+time+'的回复<p>'+authorComment+'</p></blockquote>');
 	
 });
 
@@ -72,12 +75,13 @@ function reply(){
 			url: window.ROOT_URL + '/topic/reply',
 			data: "content="+content+"&parent="+parent,
 			success: function(msg){
+				$("#content").val('');
 				var html=[];
 				
 				html.push('<div class="item clearfix">');
 				html.push('<div class="comment-content">')
 				html.push('<div class="comment-meta">');
-				html.push('时间 <a class="author" href="#">'+'作者名'+'</a>');
+				html.push('<span class="time">时间</span> <a class="author" href="#">'+'作者名'+'</a>');
 				html.push('<span class="op"><a href="javascript:;" class="quote">引用</a><a href="javascript:void(0)">编辑</a></span>');
 				html.push('</span></div>');
 				html.push('<p>'+content+'</p>');
