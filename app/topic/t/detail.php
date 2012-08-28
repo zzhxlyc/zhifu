@@ -39,8 +39,8 @@
 		<h2>我要回复</h2>
 		<textarea id="content" class="" cols="30" rows="10"></textarea>
 		<input type="hidden" id="parent" value="<?php echo $topic->id?>" />
-		<a href="#" class="btn fl" onclick="reply()">回复</a>
-		<a href="#" class="back-btn" onclick="location.href='<?php echo $home?>'">返回</a>
+		<a href="javascript:;" class="btn fl" onclick="reply()">回复</a>
+		<a href="javascript:;" class="back-btn" onclick="location.href='<?php echo $home?>'">返回</a>
 	</div>
 	
 </div><!--end for topic-->
@@ -52,7 +52,7 @@
 $('.quote').click(function(){
 	var author=$(this).parent().parent().find('.author').text();
 	var authorComment=$(this).parent().parent().parent().parent().find('p').text();
-	$('#content').val('<blockquote><a href="#">'+author+'</a><p>'+authorComment+'</p></blockquote>');
+	$('#content').val('<blockquote><a href="javascript:;">'+author+'</a><p>'+authorComment+'</p></blockquote>');
 	
 });
 
@@ -80,7 +80,7 @@ function reply(){
 				html.push('时间 <a class="author" href="#">'+'作者名'+'</a>');
 				html.push('<span class="op"><a href="javascript:;" class="quote">引用</a><a href="javascript:void(0)">编辑</a></span>');
 				html.push('</span></div>');
-				html.push('<p>'+'内容'+'</p>');
+				html.push('<p>'+content+'</p>');
 				html.push('</div>');
 				html.push('</div>');
 				
