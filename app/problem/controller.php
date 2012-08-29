@@ -423,4 +423,47 @@ class ProblemController extends AppController {
 		}
 	}
 	
+	public function score(){
+		$data = $this->get_data();
+		$id = intval($data['id']);
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Problem = $this->Problem->get($id);
+			if($Problem){
+				$cond = array('problem'=>$id, 'status'=>1);
+				$Item = $this->Solution->get_row($cond);
+				if($Item){
+					if(is_company_object($User, $Problem) ||
+							is_expert_object($User, $Item)){
+						$has_error = false;
+					}
+				}
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		if($this->request->post){
+			$post = $this->request->post;
+			$score = intval($post['score']);
+		}
+		$this->set('$Problem', $Problem);
+		$this->show_tags($Problem);
+		$this->set('$Item', $Item);
+		
+		if($User->is_company()){
+			$Expert = $this->Expert->get($Item->expert);
+			$this->set('$Expert', $Expert);
+			$this->set('score', $item->c_score);
+		}
+		else{
+			$Company = $this->Company->get($Problem->company);
+			$this->set('$Company', $Company);
+			$this->set('score', $item->e_score);
+		}
+	}
+	
 }

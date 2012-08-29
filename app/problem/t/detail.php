@@ -18,8 +18,6 @@
 		</div>
 	</div><!--end for section-->
 
-
-
 	<div class="section">
 		<h3>竞标专家（<?php echo count($solutions)?>）</h3>
 		<div class="content line-list">

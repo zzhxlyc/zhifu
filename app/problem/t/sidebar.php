@@ -42,6 +42,7 @@
 		<?php if($Problem->status == 1){?>
 			<a href="javascript:void(0)" class="problem_finish">结束竞标</a>
 		<?php }?>
+		<a href="<?php echo $home.'/score?id='.$Problem->id?>">评分</a>
 		</div>
 	</div>
 	<?php }?>
