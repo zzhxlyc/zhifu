@@ -23,6 +23,16 @@
 	
 	<div class="section">
 		<h3>评分</h3>
+		<div class="rating">
+			<a href="javascript:;" rank="1"><img src="<?php echo IMAGE_HOME.'/star_d.png'?>" id="star1" alt="" /></a>
+			<a href="javascript:;" rank="2"><img src="<?php echo IMAGE_HOME.'/star_d.png'?>" id="star2" alt="" /></a>
+			<a href="javascript:;" rank="3"><img src="<?php echo IMAGE_HOME.'/star_d.png'?>" id="star3" alt="" /></a>
+			<a href="javascript:;" rank="4"><img src="<?php echo IMAGE_HOME.'/star_d.png'?>" id="star4" alt="" /></a>
+			<a href="javascript:;" rank="5"><img src="<?php echo IMAGE_HOME.'/star_d.png'?>" id="star5" alt="" /></a>
+			
+			
+		</div>
+		
 		<div>
 			<select>
 				<option value="">评分</option>
@@ -42,3 +52,10 @@
 	</div><!--end for section-->
 	
 </div><!--end for main-content-->
+
+
+<script type="text/javascript">
+	scoreEventInit();
+	
+	
+</script>

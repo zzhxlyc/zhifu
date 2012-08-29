@@ -1,3 +1,63 @@
+function scoreEventInit(){
+	var score=$('input[name=score]').val();
+	if(score.length==0){
+		$('.rating a').mouseover(function(){
+			var rank=$(this).attr('rank');
+			for(var i=1;i<=5;i++){
+				if(i<=rank){
+					$('#star'+i).attr('src',window.IMAGE_HOME+'/star.png');
+					
+				}else{
+					$('#star'+i).attr('src',window.IMAGE_HOME+'/star_d.png');
+					
+				}
+			}
+		
+			
+			
+		}).mouseout(function(){
+			var newscore=$('input[name=score]').val();
+			if(newscore.length!=0){
+				for(var j=1;j<=5;j++){
+					if(j<=newscore){
+						$('#star'+j).attr('src',window.IMAGE_HOME+'/star.png');
+
+					}else{
+						$('#star'+j).attr('src',window.IMAGE_HOME+'/star_d.png');
+
+					}
+				}
+				
+			}
+			
+			
+		});
+		$('.rating a').click(function(){
+			var rank=$(this).attr('rank');
+			
+			$('input[name=score]').val(rank);
+			
+		});
+		
+		
+	}else{
+	
+		for(var k=1;k<=5;k++){
+			if(k<=score){
+				$('#star'+k).attr('src',window.IMAGE_HOME+'/star.png');
+
+			}else{
+				$('#star'+k).attr('src',window.IMAGE_HOME+'/star_d.png');
+
+			}
+		}
+		
+		
+		
+	}
+	
+}
+
 function commentReplyEvent(){
 	
 		var object = $("#object").val();
