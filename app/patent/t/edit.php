@@ -79,7 +79,7 @@
 	<?php if($patent->image){?>
 	<div class="row">
 		<label for="">图像</label>
-		<img alt="" src="<?php img($patent->image)?>">
+		<img alt="" src="<?php img($patent->image)?>" width="300" height="180">
 	</div>
 	<?php }?>
 

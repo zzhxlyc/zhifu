@@ -1,5 +1,6 @@
 
 <form action="" method="post" <?php $HTML->file_form_need()?> >
+<div class="edit-left">
 
 <div class="row">
 	<label for="name">专利名称</label>
@@ -65,23 +66,27 @@
 	<input type="hidden" name="new_tag" />
 	<input type="hidden" name="old_tag" />
 
+</div>	<!--end for edit-left-->
+<div class="edit-right">
 
+	<?php if($patent->image){?>
+	<div class="row">
+		<label for="">图像</label>
+		<img alt="" src="<?php img($patent->image)?>">
+	</div>
+	<?php }?>
+
+	<div class="row">
+		<label for="">修改图像</label>
+		<input type="file" name="image" />
+		<span class="error"><?php echo $errors['image']?></span>
+	</div>
+	
+</div>	<!--end for edit-right-->
+	
 <div class="row">
 	<label for="">详细描述</label><span class="error"><?php echo $errors['description']?></span><br/><br/>
 	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $patent->description?></textarea>
-</div>
-
-<?php if($patent->image){?>
-<div class="row">
-	<label for="">图像</label>
-	<img alt="" src="<?php img($patent->image)?>">
-</div>
-<?php }?>
-
-<div class="row">
-	<label for="">修改图像</label>
-	<input type="file" name="image" />
-	<span class="error"><?php echo $errors['image']?></span>
 </div>
 
 <?php if($patent->file){?>
