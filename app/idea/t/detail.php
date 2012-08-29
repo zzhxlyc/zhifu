@@ -9,7 +9,6 @@
 			<?php if(is_company($User) && $User->id == $Idea->company){?>
 			<a href="<?php echo $home.'/edit?id='.$Idea->id?>" class="edit">编辑</a>
 			<?php }?>
-			
 		</h3>
 		<div class="content status clearfix">
 			<div class="status-item <?php $HTML->current($Idea->status, 0)?>">竞标中</div>
@@ -64,25 +63,5 @@
 	<?php comment_div($comments, $links, $Idea, BelongType::IDEA, $User)?>
 	
 </div><!--end for main-content-->
-
-<script type="text/javascript">
-<!--
-$(".idea_finish").click(function (){
-	var idea = $("#object").val();
-	$.ajax({
-		type: "POST",
-		url: window.ROOT_URL + "/idea/finish",
-		data: "idea="+idea,
-		success: function(msg){
-			if(msg == '0'){
-				alert('success');
-			}
-			else{
-				alert(msg);
-			}
-		}
-	});
-});
-</script>
 
 <?php comment_js()?>

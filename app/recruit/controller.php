@@ -7,7 +7,7 @@ class RecruitController extends AppController {
 	public function before(){
 		$this->set('home', RECRUIT_HOME);
 		parent::before();
-		$need_login = array();	// either
+		$need_login = array('show', 'add', 'edit');	// either
 		$need_company = array();
 		$need_expert = array();
 		$this->login_check($need_login, $need_company, $need_expert);
@@ -75,11 +75,15 @@ class RecruitController extends AppController {
 	public function edit(){
 		$data = $this->get_data();
 		$id = get_id($data);
+		$User = $this->get('User');
 		$has_error = true;
 		if($id){
 			$recruit = $this->Recruit->get($id);
 			if($recruit){
-				$has_error = false;
+				if($User->id == $recruit->belong 
+						&& $User->get_type() == $recruit->type){
+					$has_error = false;
+				}
 			}
 		}
 		if($has_error){

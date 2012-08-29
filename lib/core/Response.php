@@ -168,14 +168,27 @@ class Response{
 		$this->_cookies[$options['name']] = $options;
 	}
 	
-	public function redirect_404(){
+	public function render_403(){
+		$_403_file = VIEW_DIR.'/error/403.php';
+		$this->view->set_template_direct($_403_file);
+	}
+	
+	public function render_404(){
 		$_404_file = VIEW_DIR.'/error/404.php';
 		$this->view->set_template_direct($_404_file);
 	}
 	
-	public function redirect_500(){
+	public function render_500(){
 		$_500_file = VIEW_DIR.'/error/500.php';
 		$this->view->set_template_direct($_500_file);
+	}
+	
+	public function redirect_404(){
+		$this->render_404();
+	}
+	
+	public function redirect_500(){
+		$this->render_500();
 	}
 	
 	public function redirect($url){

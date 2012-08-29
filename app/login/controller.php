@@ -74,14 +74,10 @@ class LoginController extends AppController {
 	public function forget(){
 		if($this->request->post){
 			$post = $this->request->post;
-			$type = $post['type'];
-			$email = trim($post['email']);
+			$user = trim($post['user']);
 			$captcha = trim($post['captcha']);
-			if(empty($type)){
-				$errors['type'] = '类型为空';
-			}
-			if(empty($email)){
-				$errors['email'] = '邮件为空';
+			if(empty($user)){
+				$errors['user'] = '用户名为空';
 			}
 			if(empty($captcha)){
 				$errors['captcha'] = '验证码为空';
@@ -90,40 +86,26 @@ class LoginController extends AppController {
 				$errors['captcha'] = '验证码错误';
 			}
 			if(count($errors) == 0){
-				$cond = array('email'=>$email);
-				$data = array();
-				$data['code'] = $this->ResetCode->get_reset_code();
-				$data['time'] = TIMESTAMP;
-				if($type == BelongType::COMPANY){
-					$Company = $this->Company->get_row($cond);
-					if($Company){
-						$data['type'] = BelongType::COMPANY;
-						$data['user'] = $Company->id;
-						if(send_forget_email($Company->name, $data['code'])){
-							$this->ResetCode->save($data);
-							$this->redirect('succ');
-						}
-					}
-				}
-				else if($type == BelongType::EXPERT){
-					$Expert = $this->Expert->get_row($cond);
-					if($Expert){
-						$data['type'] = BelongType::EXPERT;
-						$data['user'] = $Expert->id;
-						if(send_forget_email($Expert->name, $data['code'])){
-							$this->ResetCode->save($data);
-							$this->redirect('succ');
-						}
+				$U = $this->find_user_by_name($user);
+				if($U){
+					$code = $this->ResetCode->get_reset_code();
+					$email = $U->email;
+					if(send_pswd_reset_email($email, $U->name, $code)){
+						$data = array();
+						$data['code'] = $code;
+						$data['time'] = TIMESTAMP;
+						$data['type'] = $U->get_type();
+						$data['user'] = $U->id;
+						$this->ResetCode->save($data);
+						$this->redirect('succ');
 					}
 				}
 				else{
-					$errors['type'] = '类型错误';
+					$errors['user'] = '无此用户';
 				}
-				$errors['email'] = '无此注册邮箱';
 			}
 			$this->set('$errors', $errors);
-			$this->set('$email', $email);
-			$this->set('$type', $type);
+			$this->set('$user', $user);
 		}
 	}
 	
@@ -133,6 +115,7 @@ class LoginController extends AppController {
 		if($this->request->post){
 			$post = $this->request->post;
 			$code = $post['code'];
+			$this->set('$code', $code);
 			$pswd = $post['pswd'];
 			$pswd2 = $post['pswd2'];
 			$errors = array();

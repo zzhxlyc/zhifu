@@ -7,9 +7,9 @@ class PatentController extends AppController {
 	public function before(){
 		$this->set('home', PATENT_HOME);
 		parent::before();
-		$need_login = array();	// either
-		$need_company = array();
-		$need_expert = array();
+		$need_login = array('detail');	// either
+		$need_company = array('submit');
+		$need_expert = array('add', 'edit');
 		$this->login_check($need_login, $need_company, $need_expert);
 	}
 	

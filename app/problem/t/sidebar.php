@@ -8,6 +8,8 @@
 		<?php if(isset($Problem->province)){?>
 		<p>地区：<?php output_pcd($Problem)?></p>
 		<?php }?>
+		<p>发布时间：<?php echo get_date($Idea->time)?></p>
+		<p>最后修改时间：<?php echo get_date($Idea->lastmodify)?></p>
 		<?php if(isset($Problem->deadline)){?>
 		<p><?php output_deadline($Problem->deadline)?></p>
 		<?php }?>
@@ -30,4 +32,38 @@
 		</div>
 	</div>
 	
+	<?php if(is_company_object($User, $Problem)){?>
+	<div class="side-section">
+		<div class="title">操作</div>
+		<div class="content">
+		<?php if($Problem->status < 2){?>
+			<a href="javascript:void(0)" class="problem_finish">结束竞标</a>
+		<?php }?>
+		</div>
+	</div>
+	<?php }?>
+	
 </div><!--end for sidebar-->
+
+<?php if(is_company_object($User, $Problem)){?>
+<script type="text/javascript">
+<!--
+$(".problem_finish").click(function (){
+	var problem = $("#object").val();
+	$.ajax({
+		type: "POST",
+		url: window.ROOT_URL + "/problem/finish",
+		data: "problem="+problem,
+		success: function(msg){
+			if(msg == '0'){
+				alert('已成功结束');
+				$(".problem_finish").hide();
+			}
+			else{
+				alert(msg);
+			}
+		}
+	});
+});
+</script>
+<?php }?>

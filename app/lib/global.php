@@ -157,3 +157,21 @@ function is_admin($o){
 	}
 	return false;
 }
+
+function is_company_object($u, $o){
+	if($u && $o){
+		if($u->id == $o->company && $u->get_type() == BelongType::COMPANY){
+			return true;
+		}
+	}
+	return false;
+}
+
+function is_expert_object($u, $o){
+	if($u && $o){
+		if($u->id == $o->expert && $u->get_type() == BelongType::EXPERT){
+			return true;
+		}
+	}
+	return false;
+}

@@ -8,9 +8,9 @@ class ProblemController extends AppController {
 	public function before(){
 		$this->set('home', PROBLEM_HOME);
 		parent::before();
-		$need_login = array();	// either
-		$need_company = array();
-		$need_expert = array();
+		$need_login = array('detail', 'item');	// either
+		$need_company = array('add', 'edit', 'choose', 'finish');
+		$need_expert = array('submit', 'itemedit');
 		$this->login_check($need_login, $need_company, $need_expert);
 	}
 	
@@ -122,6 +122,7 @@ class ProblemController extends AppController {
 				$new_tag = $post['new_tag'];
 				unset($post['old_tag'], $post['new_tag']);
 				$post['time'] = DATETIME;
+				$post['lastmodify'] = DATETIME;
 				$post['status'] = 0;
 				$this->Problem->escape($post);
 				$id = $this->Problem->save($post);
@@ -145,8 +146,7 @@ class ProblemController extends AppController {
 		$has_error = true;
 		if($id){
 			$Problem = $this->Problem->get($id);
-//			if($Problem && $Problem->company == $User->id){
-			if($Problem){
+			if(is_company_object($User, $Problem)){
 				$has_error = false;
 			}
 		}
@@ -175,6 +175,7 @@ class ProblemController extends AppController {
 				if($post['file'] && $Problem->file){
 					FileSystem::remove($Problem->file);
 				}
+				$post['lastmodify'] = DATETIME;
 				$this->Problem->escape($post);
 				$this->Problem->save($post);
 				$this->redirect('edit?succ&id='.$id);
@@ -224,6 +225,9 @@ class ProblemController extends AppController {
 		$this->show_tags($Problem);
 		$this->show_categorys($Problem);
 		
+		if($Problem->status > 1 || is_expire($Problem->deadline)){
+			$this->set('closed', true);
+		}
 		$cond = array('problem'=>$id);
 		$solutions = $this->Solution->get_list($cond);
 		$this->set('$solutions', $solutions);
@@ -240,7 +244,10 @@ class ProblemController extends AppController {
 			if($Problem){
 				$Item = $this->Solution->get($item);
 				if($Item){
-					$has_error = false;
+					if(is_company_object($User, $Problem) ||
+							is_expert_object($User, $Item)){
+						$has_error = false;
+					}
 				}
 			}
 		}
@@ -252,6 +259,10 @@ class ProblemController extends AppController {
 		$this->set('$Problem', $Problem);
 		$this->show_tags($Problem);
 		$this->set('$Item', $Item);
+		
+		$cond = array('problem'=>$Problem->id, 'status'=>1);
+		$count = $this->Solution->count($cond);
+		$this->set('choosed', $count > 0);
 	}
 	
 	public function itemedit(){
@@ -264,7 +275,7 @@ class ProblemController extends AppController {
 			$Problem = $this->Problem->get($problem);
 			if($Problem){
 				$Item = $this->Solution->get($item);
-				if($Item){
+				if($Item && is_expert_object($User, $Item)){
 					$has_error = false;
 				}
 			}
@@ -274,7 +285,7 @@ class ProblemController extends AppController {
 			return;
 		}
 		
-		if($this->request->post && $Problem->status <= 2){
+		if($this->request->post && $Problem->status <= 1){
 			$post = $this->request->post;
 			$post['id'] = $item;
 			unset($post['problem'], $post['item']);
@@ -287,7 +298,7 @@ class ProblemController extends AppController {
 			}
 			$this->set('errors', $errors);
 		}
-		if($Problem->status == 3 || is_expire($Problem->deadline)){
+		if($Problem->status > 1 || is_expire($Problem->deadline)){
 			$this->set('closed', true);
 		}
 		$this->set('$Item', $Item);
@@ -305,7 +316,7 @@ class ProblemController extends AppController {
 			$Problem = $this->Problem->get($problem);
 			if($Problem){
 				$Item = $this->Solution->get($item);
-				if($Item){
+				if($Item && is_company_object($User, $Problem)){
 					$has_error = false;
 				}
 			}
@@ -316,11 +327,56 @@ class ProblemController extends AppController {
 		}
 		
 		if($this->request->post && $Problem->status <= 2){
-			$data = array('id'=>$item, 'status'=>1);
-			$this->Solution->save($data);
-			$this->redirect('detail?id='.$problem);
+			$type = $data['type'];
+			if($type == 0){
+				$cond = array('problem'=>$Problem->id, 'status'=>1);
+				$count = $this->Solution->count($cond);
+				if($count == 0){
+					$data = array('id'=>$item, 'status'=>1);
+					$this->Solution->save($data);
+					$this->redirect('detail?id='.$problem);
+				}
+			}
+			else if($type == 1){
+				$data = array('id'=>$item, 'status'=>0);
+				$this->Solution->save($data);
+				$this->redirect('detail?id='.$problem);
+			}
 		}
 		$this->redirect('item?problem='.$problem.'&item='.$item);
+	}
+	
+	public function finish(){
+		$data = $this->get_data();
+		$id = intval($data['problem']);
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Problem = $this->Problem->get($id);
+			if($Problem && is_company_object($User, $Problem)){
+				if($Problem->status < 2){
+					$has_error = false;
+				}
+			}
+		}
+		if($has_error){
+			echo 'error';
+			return;
+		}
+		
+		$this->layout('ajax');
+		if($this->request->post){
+			$cond = array('problem'=>$Problem->id, 'status'=>1);
+			$count = $this->Solution->count($cond);
+			if($count == 1){
+				$data = array('id'=>$id, 'status'=>2);
+				$this->Problem->save($data);
+				echo 0;
+			}
+			else{
+				echo '还没有选择竞标';
+			}
+		}
 	}
 	
 }

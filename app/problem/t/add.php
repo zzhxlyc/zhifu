@@ -23,7 +23,7 @@
 
 	<div class="row">
 		<label for="">难题名称</label>
-		<input class="text wide" type="text" name="title" value="<?php echo $problem->title?>" />
+		<input class="text" size="60" type="text" name="title" value="<?php echo $problem->title?>" />
 		<span class="error"><?php echo $errors['title']?></span>
 	</div>
 	

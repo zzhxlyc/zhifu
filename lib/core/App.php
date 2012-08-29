@@ -20,7 +20,7 @@ class App{
 	}
 	
 	public static function load_util($module){
-		if(in_array($module, self::$modules)){
+		if(array_key_exists($module, self::$modules)){
 			$file = CORE_UTIL_DIR.'/'.self::$modules[$module];
 			self::_load($file);
 		}

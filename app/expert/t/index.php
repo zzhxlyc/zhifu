@@ -41,10 +41,9 @@
 		<div class="right">
 			<div class="price-deadline">
 				<p>邮件：<?php echo $o->email?></p>
-				<p>参与项目总额：<span class="num"><?php echo $o->budget?></span>元</p>
 				<p>综合评价：<span class="num"><?php output_score($o)?></span></p>
 			</div>
-			<a href="<?php echo $home.'/'?>" class="btn">向他咨询</a>
+			<a href="<?php echo $home.'/profile?id='.$o->id.'#comments'?>" class="btn">向他咨询</a>
 		</div><!--end for right-->
 	</div><!--end for item-->
 	<?php 

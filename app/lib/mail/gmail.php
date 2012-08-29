@@ -5,9 +5,10 @@ function send_gmail($subject, $body, $to, $to_name){
 	$mail = new PHPMailer();
 	$body = eregi_replace('[\]','',$body);
 	$mail->IsSMTP(); 						   // telling the class to use SMTP
-	$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
+	$mail->SMTPDebug  = 0;                     // enables SMTP debug information (for testing)
 	                                           // 1 = errors and messages
 	                                           // 2 = messages only
+	$mail->CharSet    = 'UTF-8';
 	$mail->SMTPAuth   = true;                  // enable SMTP authentication
 	$mail->SMTPSecure = 'ssl';                 // sets the prefix to the servier
 	$mail->Host       = 'smtp.gmail.com';      // sets GMAIL as the SMTP server

@@ -1,14 +1,8 @@
 <form action="" method="post" >
 <div class="row">
-	<label for="">邮件</label>
-	<input class="text" type="text" name="email" value="<?php echo $email?>" />
-	<span class="error"><?php echo $errors['email']?></span>
-</div>
-<div class="row">
-	<label for="type">用户类型</label>
-	<input type="radio" name="type" value="Company" <?php $HTML->checked($type, 'Company')?>/> 公司
-	<input type="radio" name="type" value="Expert" <?php $HTML->checked($type, 'Expert')?>/> 专家
-	<span class="error"><?php echo $errors['type']?></span>
+	<label for="">登录名</label>
+	<input class="text" type="text" name="user" value="<?php echo $user?>" />
+	<span class="error"><?php echo $errors['user']?></span>
 </div>
 <div class="row">
 	<label for="">验证码</label>

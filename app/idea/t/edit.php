@@ -140,7 +140,7 @@
 	<input type="hidden" name="subcat" value="<?php echo $idea->subcat?>" />
 	<?php echo $HTML->hidden('id', $idea->id)?>
 	<input type="submit" value="修改" class="btn fl">
-	<a href="<?php echo $home?>" class="back-btn">返回</a>
+	<a href="<?php echo $home.'/detail?id='.$idea->id?>" class="back-btn">返回</a>
 </div>
 
 </form>

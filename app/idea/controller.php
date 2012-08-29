@@ -8,9 +8,9 @@ class IdeaController extends AppController {
 	public function before(){
 		$this->set('home', IDEA_HOME);
 		parent::before();
-		$need_login = array();	// either
-		$need_company = array();
-		$need_expert = array();
+		$need_login = array('detail', 'item');	// either
+		$need_company = array('add', 'edit', 'choose', 'finish');
+		$need_expert = array('submit', 'itemedit');
 		$this->login_check($need_login, $need_company, $need_expert);
 	}
 	
@@ -65,7 +65,7 @@ class IdeaController extends AppController {
 		$tag_list = $this->TagItem->get_most($tag_list);
 		$this->set('$tags', $tag_list);
 		
-		$cond = array('expert'=>$id);
+		$cond = array('idea'=>$id);
 		$items = $this->IdeaItem->get_list($cond);
 		if(count($items) > 0){
 			$expert_ids = get_attrs($items, 'expert');
@@ -111,6 +111,7 @@ class IdeaController extends AppController {
 				$new_tag = $post['new_tag'];
 				unset($post['old_tag'], $post['new_tag']);
 				$post['time'] = DATETIME;
+				$post['lastmodify'] = DATETIME;
 				$post['status'] = 0;
 				$this->Idea->escape($post);
 				$id = $this->Idea->save($post);
@@ -131,13 +132,12 @@ class IdeaController extends AppController {
 		$has_error = true;
 		if($id){
 			$Idea = $this->Idea->get($id);
-//			if($Idea && $User->is_company() && $Idea->company == $User->id){
-			if($Idea){
+			if(is_company_object($User, $Idea)){
 				$has_error = false;
 			}
 		}
 		if($has_error){
-			$this->response->redirect_404();
+			$this->response->render_403();
 			return;
 		}
 		
@@ -162,6 +162,7 @@ class IdeaController extends AppController {
 				if($post['file'] && $Idea->file){
 					FileSystem::remove($Idea->file);
 				}
+				$post['lastmodify'] = DATETIME;
 				$this->Idea->escape($post);
 				$this->Idea->save($post);
 				$this->redirect('edit?succ&id='.$id);
@@ -225,7 +226,10 @@ class IdeaController extends AppController {
 			if($Idea){
 				$Item = $this->IdeaItem->get($item);
 				if($Item){
-					$has_error = false;
+					if(is_company_object($User, $Idea) ||
+						is_expert_object($User, $Item)){
+						$has_error = false;
+					}
 				}
 			}
 		}
@@ -249,7 +253,7 @@ class IdeaController extends AppController {
 			$Idea = $this->Idea->get($idea);
 			if($Idea){
 				$Item = $this->IdeaItem->get($item);
-				if($Item){
+				if($Item && is_expert_object($User, $Item)){
 					$has_error = false;
 				}
 			}
@@ -290,7 +294,7 @@ class IdeaController extends AppController {
 			$Idea = $this->Idea->get($idea);
 			if($Idea){
 				$Item = $this->IdeaItem->get($item);
-				if($Item){
+				if($Item && is_company_object($User, $Idea)){
 					$has_error = false;
 				}
 			}
@@ -340,8 +344,10 @@ class IdeaController extends AppController {
 		$has_error = true;
 		if($id){
 			$Idea = $this->Idea->get($id);
-			if($Idea && $User->is_expert()){
-				$has_error = false;
+			if($Idea && is_company_object($User, $Idea)){
+				if($Idea->status < 2){
+					$has_error = false;
+				}
 			}
 		}
 		if($has_error){

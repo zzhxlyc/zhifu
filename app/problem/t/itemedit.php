@@ -2,6 +2,12 @@
 
 <div class="main-content">
 
+	<?php 
+		if($closed){
+	?>
+	<p>已停止提交</p>
+	<a href="<?php echo $home.'/detail?id='.$Problem->id?>" class="back-btn">返回</a>
+	<?php }else{?>
 	<div class="section">
 		<h3>编辑难题解决方案</h3>
 		<div class="content line-list">
@@ -24,6 +30,6 @@
 			</form>
 		</div><!--end for list-->
 	</div><!--end for section-->	
-	
+	<?php }?>
 	
 </div><!--end for main-content-->

@@ -35,6 +35,8 @@
 </div>
 <div class="row">
 	<input type="hidden" name="available" />
+	<?php if($User->id == $recruit->belong && $User->get_type() == $recruit->type){?>
 	<input type="button" value="修改" class="btn fl" onclick="location.href='<?php echo $home.'/edit?id='.$recruit->id?>'">
+	<?php }?>
 	<a href="<?php echo $home?>" class="back-btn">返回</a>
 </div>	

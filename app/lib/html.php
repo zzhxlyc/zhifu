@@ -2,7 +2,7 @@
 
 function comment_div($comments, $links, $object, $type, $User){
 ?>
-	<div class="section comment-section">
+	<div class="section comment-section" id="comments">
 		<h3>留言</h3>
 		<div class="content">
 			<div class="comment-begin"></div>
@@ -11,7 +11,8 @@ function comment_div($comments, $links, $object, $type, $User){
 				<div class="comment-meta">
 					<a class="author" href="<?php echo get_author_link($comment)?>"><?php echo $comment->author?></a>
 					<span class="comment-time"><?php echo $comment->time?></span>
-					<?php if($User && $User->id != $comment->user){?>
+					<?php if($User && ($User->id != $comment->user ||
+							$User->get_type() != $comment->user_type)){?>
 					<span class="op">
 						<a href="javascript:void(0)">回复</a>
 					</span>
