@@ -89,6 +89,8 @@ float: right;
 	font-size: 13px;
 	font-weight: bold;
 	color: white;
+	border:0;
+	cursor:pointer;
 }
 
 .btn:hover {
