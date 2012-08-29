@@ -6,6 +6,8 @@
 ?>
 <h2>用户中心</h2>
 <form action="<?php echo $home.'/edit'?>" method="post" <?php $HTML->file_form_need()?>>
+<div class="edit-left">
+
 <div class="row">
 	<label for="name">企业名</label>
 	<input size="50" type="text" class="text" name="name" value="<?php echo $company->name?>" />
@@ -58,19 +60,24 @@
 	}
 	?>
 </div>
+
+</div>	<!--end for edit-left-->
+<div class="edit-right">
 	
+	<div class="row">
+		<label for="name">头像</label>
+		<input type="file" name="image" />
+		<?php if($company->image){?>
+		<img src="<?php img($company->image)?>" />
+		<?php }?>
+	</div>
+
+</div>	<!--end for edit-right-->
+		
 <div class="row">
 	<label for="name">描述</label><br/><br/>
 	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $company->description?></textarea>
 	<span class="error"><?php echo $errors['description']?></span>
-</div>
-
-<div class="row">
-	<label for="name">头像</label>
-	<input type="file" name="image" />
-	<?php if($company->image){?>
-	<img src="<?php img($company->image)?>" />
-	<?php }?>
 </div>
 
 <div class="row">

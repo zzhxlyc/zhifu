@@ -20,6 +20,7 @@
 		<input type="hidden" name="city" value="<?php echo $problem->city?>" />
 		<input type="hidden" name="district" value="<?php echo $problem->district?>" />
 	</div>
+	<div class="edit-left">
 
 	<div class="row">
 		<label for="">难题名称</label>
@@ -90,6 +91,14 @@
 		<input type="hidden" name="old_tag" />
 	</div>
 
+</div>	<!--end for edit-left-->
+<div class="edit-right">
+	<div class="row">
+		<label for="">图像</label>
+		<input type="file" name="image" />
+		<span class="error"><?php echo $errors['image']?></span>
+	</div>
+</div>	<!--end for edit-right-->
 
 
 	<div class="row">
@@ -97,11 +106,7 @@
 		<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $problem->description?></textarea>
 	</div>
 	
-	<div class="row">
-		<label for="">图像</label>
-		<input type="file" name="image" />
-		<span class="error"><?php echo $errors['image']?></span>
-	</div>
+
 
 	<div class="row">
 		<label for="">附件</label>
