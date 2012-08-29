@@ -80,6 +80,24 @@ class ProblemController extends AppController {
 		
 		$page = get_page($get);
 		$this->add_comments($Problem, $page);
+		
+		if(is_expire($Problem->deadline)){
+			$data = array('id'=>$Problem->id);
+			if($Problem->status == 0){
+				$data['status'] = 4;
+			}
+			else if($Problem->status == 1){
+				if(count($solutions) == 0){
+					$data['status'] = 4;
+				}
+				else{
+					
+				}
+			}
+			if(isset($data['status'])){
+				$this->Problem->save($data);
+			}
+		}
 	}
 	
 	private function add_data($Problem = null){
@@ -346,6 +364,32 @@ class ProblemController extends AppController {
 		$this->redirect('item?problem='.$problem.'&item='.$item);
 	}
 	
+	public function start(){
+		$data = $this->get_data();
+		$id = intval($data['problem']);
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Problem = $this->Problem->get($id);
+			if($Problem && is_company_object($User, $Problem)){
+				if($Problem->status == 0){
+					$has_error = false;
+				}
+			}
+		}
+		if($has_error){
+			echo 'error';
+			return;
+		}
+		
+		$this->layout('ajax');
+		if($this->request->post){
+			$data = array('id'=>$id, 'status'=>1);
+			$this->Problem->save($data);
+			echo 0;
+		}
+	}
+	
 	public function finish(){
 		$data = $this->get_data();
 		$id = intval($data['problem']);
@@ -354,7 +398,7 @@ class ProblemController extends AppController {
 		if($id){
 			$Problem = $this->Problem->get($id);
 			if($Problem && is_company_object($User, $Problem)){
-				if($Problem->status < 2){
+				if($Problem->status == 1){
 					$has_error = false;
 				}
 			}

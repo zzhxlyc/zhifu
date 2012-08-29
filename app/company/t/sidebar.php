@@ -7,7 +7,7 @@
 		<p>邮件：<?php echo $Company->email?></p>
 		<p>电话：<?php echo $Company->phone?></p>
 		<p>网址：<?php echo $Company->url?></p>
-		<p>参与项目金额：<?php output_money($Company->budget)?>万元</p>
+		<!-- <p>参与项目金额：<?php output_money($Company->budget)?>万元</p> -->
 		<p>综合评价：<?php echo output_score($Company)?></p>
 	</div><!--end for detail-profile-->
 	

@@ -80,6 +80,24 @@ class IdeaController extends AppController {
 		
 		$page = get_page($get);
 		$this->add_comments($Idea, $page);
+		
+		if(is_expire($Idea->deadline)){
+			$data = array('id'=>$Idea->id);
+			if($Idea->status == 0){
+				$data['status'] = 4;
+			}
+			else if($Idea->status == 1){
+				if(count($items) == 0){
+					$data['status'] = 4;
+				}
+				else{
+					
+				}
+			}
+			if(isset($data['status'])){
+				$this->Idea->save($data);
+			}
+		}
 	}
 	
 	private function add_data($Idea = null){

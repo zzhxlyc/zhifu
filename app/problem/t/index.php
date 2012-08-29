@@ -40,9 +40,7 @@
 			<div class="content"><?php output_desc($o->description)?></div>						
 			<div class="status clearfix">
 				<div class="title">状态:</div>
-				<div class="status-item <?php $HTML->current(0, $o->status)?>">竞标中</div>
-				<div class="status-item <?php $HTML->current(1, $o->status)?>">专家会诊</div>
-				<div class="status-item last <?php $HTML->current(2, $o->status)?>">已完成</div>
+				<div class="status-item last current"><?php echo $o->get_status()?></div>
 			</div>
 		</div><!--end for middle-->
 

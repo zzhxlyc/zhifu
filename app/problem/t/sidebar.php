@@ -5,7 +5,7 @@
 			alt="<?php echo $Problem->title?>" width="180" height="135"/>
 		<p><?php echo $Problem->title?></p>
 		<p>金额：<span class="price"><?php output_money($Problem->budget)?>万元</span></p>
-		<?php if(isset($Problem->province)){?>
+		<?php if(!empty($Problem->province)){?>
 		<p>地区：<?php output_pcd($Problem)?></p>
 		<?php }?>
 		<p>发布时间：<?php echo get_date($Idea->time)?></p>
@@ -36,7 +36,10 @@
 	<div class="side-section">
 		<div class="title">操作</div>
 		<div class="content">
-		<?php if($Problem->status < 2){?>
+		<?php if($Problem->status == 0){?>
+			<a href="javascript:void(0)" class="problem_start">开始竞标</a>
+		<?php }?>
+		<?php if($Problem->status == 1){?>
 			<a href="javascript:void(0)" class="problem_finish">结束竞标</a>
 		<?php }?>
 		</div>
@@ -48,6 +51,22 @@
 <?php if(is_company_object($User, $Problem)){?>
 <script type="text/javascript">
 <!--
+$(".problem_start").click(function (){
+	var problem = $("#object").val();
+	$.ajax({
+		type: "POST",
+		url: window.ROOT_URL + "/problem/start",
+		data: "problem="+problem,
+		success: function(msg){
+			if(msg == '0'){
+				location.href = window.ROOT_URL + "/problem/detail?id=" + problem;
+			}
+			else{
+				alert(msg);
+			}
+		}
+	});
+});
 $(".problem_finish").click(function (){
 	var problem = $("#object").val();
 	$.ajax({
@@ -56,8 +75,7 @@ $(".problem_finish").click(function (){
 		data: "problem="+problem,
 		success: function(msg){
 			if(msg == '0'){
-				alert('已成功结束');
-				$(".problem_finish").hide();
+				location.href = window.ROOT_URL + "/problem/detail?id=" + problem;
 			}
 			else{
 				alert(msg);

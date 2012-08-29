@@ -34,9 +34,22 @@ class Problem extends AppModel{
 		return parent::format($format_array);
 	}
 	
-	public static function get_status($status){
+	public function get_status(){
+		$status = $this->status;
 		if($status == 0){
+			return '发布蓝图';
+		}
+		else if($status == 1){
 			return '竞标中';
+		}
+		else if($status == 2){
+			return '付款中';
+		}
+		else if($status == 3){
+			return '交付互评';
+		}
+		else if($status == 4){
+			return '已关闭';
 		}
 	}
 	
