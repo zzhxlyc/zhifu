@@ -32,7 +32,7 @@
 		</div>
 	</div>
 	
-	<?php if(is_company_object($User, $Problem)){?>
+	<?php if(is_company_object($User, $Problem) || $solver){?>
 	<div class="side-section">
 		<div class="title">操作</div>
 		<div class="content">
@@ -42,7 +42,9 @@
 		<?php if($Problem->status == 1){?>
 			<a href="javascript:void(0)" class="problem_finish">结束竞标</a>
 		<?php }?>
+		<?php if($Problem->status >= 2 || $solver){?>
 		<a href="<?php echo $home.'/score?id='.$Problem->id?>">评分</a>
+		<?php }?>
 		</div>
 	</div>
 	<?php }?>

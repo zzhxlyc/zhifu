@@ -8,7 +8,7 @@ class ProblemController extends AppController {
 	public function before(){
 		$this->set('home', PROBLEM_HOME);
 		parent::before();
-		$need_login = array('detail', 'item');	// either
+		$need_login = array('item', 'score');	// either
 		$need_company = array('add', 'edit', 'choose', 'finish');
 		$need_expert = array('submit', 'itemedit');
 		$this->login_check($need_login, $need_company, $need_expert);
@@ -71,6 +71,14 @@ class ProblemController extends AppController {
 			$expert_ids = get_attrs($solutions, 'expert');
 			$cond = array('id in'=>$expert_ids);
 			$experts = $this->Expert->get_list($cond);
+			
+			if($Problem->status > 1){
+				foreach($solutions as $solution){
+					if($solution->status == 1){
+						$this->set('Solver', $solution);
+					}
+				}
+			}
 		}
 		else{
 			$experts = array();
@@ -96,6 +104,16 @@ class ProblemController extends AppController {
 			}
 			if(isset($data['status'])){
 				$this->Problem->save($data);
+			}
+		}
+		
+		$User = $this->get('User');
+		if($User->is_expert()){
+			foreach($solutions as $solution){
+				if($solution->status == 1 && $solution->expert == $User->id){
+					$this->set('solver', true);
+					break;
+				}
 			}
 		}
 	}
@@ -449,6 +467,24 @@ class ProblemController extends AppController {
 		if($this->request->post){
 			$post = $this->request->post;
 			$score = intval($post['score']);
+			if($User->is_company() && intval($Item->c_score) == 0){
+				$d = array('id'=>$Item->id, 'c_score'=>$score);
+				$this->Solution->save($d);
+				$d = array('id'=>$Item->expert, 
+							'rate_total eq'=>"`rate_total` + $score", 
+							'rate_num eq'=>'`rate_num` + 1');
+				$this->Expert->save($d);
+				$this->redirect('score?id='.$Problem->id);
+			}
+			else if($User->is_expert() && intval($Item->e_score) == 0){
+				$d = array('id'=>$Item->id, 'e_score'=>$score);
+				$this->Solution->save($d);
+				$d = array('id'=>$Problem->company, 
+							'rate_total eq'=>"`rate_total` + $score", 
+							'rate_num eq'=>'`rate_num` + 1');
+				$this->Company->save($d);
+				$this->redirect('score?id='.$Problem->id);
+			}
 		}
 		$this->set('$Problem', $Problem);
 		$this->show_tags($Problem);
@@ -457,12 +493,12 @@ class ProblemController extends AppController {
 		if($User->is_company()){
 			$Expert = $this->Expert->get($Item->expert);
 			$this->set('$Expert', $Expert);
-			$this->set('score', $item->c_score);
+			$this->set('score', $Item->c_score);
 		}
 		else{
 			$Company = $this->Company->get($Problem->company);
 			$this->set('$Company', $Company);
-			$this->set('score', $item->e_score);
+			$this->set('score', $Item->e_score);
 		}
 	}
 	

@@ -71,6 +71,24 @@ class IdeaController extends AppController {
 			$expert_ids = get_attrs($items, 'expert');
 			$cond = array('id in'=>$expert_ids);
 			$experts = $this->Expert->get_list($cond);
+			
+			if($Idea->status >= 2){
+				$one_list = $two_list = $three_list = array();
+				foreach($items as $item){
+					if($item->status == 1){
+						$one_list[] = $item;
+					}
+					else if($item->status == 2){
+						$two_list[] = $item;
+					}
+					else if($item->status == 3){
+						$three_list[] = $item;
+					}
+				}
+				$this->set('$one_list', $one_list);
+				$this->set('$two_list', $two_list);
+				$this->set('$three_list', $three_list);
+			}
 		}
 		else{
 			$experts = array();
@@ -96,6 +114,16 @@ class IdeaController extends AppController {
 			}
 			if(isset($data['status'])){
 				$this->Idea->save($data);
+			}
+		}
+		
+		$User = $this->get('User');
+		if($User->is_expert()){
+			foreach($items as $item){
+				if($item->status >= 1 && $item->expert == $User->id){
+					$this->set('solver', true);
+					break;
+				}
 			}
 		}
 	}
@@ -259,6 +287,16 @@ class IdeaController extends AppController {
 		$this->set('$Idea', $Idea);
 		$this->show_tags($Idea);
 		$this->set('$Item', $Item);
+		
+		if($User->is_company()){
+			$Expert = $this->Expert->get($Item->expert);
+			$this->set('$Expert', $Expert);
+			$this->set('score', $Item->c_score);
+		}
+		else{
+			$Company = $this->Company->get($Idea->company);
+			$this->set('$Company', $Company);
+		}
 	}
 	
 	public function itemedit(){
@@ -378,6 +416,81 @@ class IdeaController extends AppController {
 			$data = array('id'=>$id, 'status'=>2);
 			$this->Idea->save($data);
 			echo 0;
+		}
+	}
+	
+	public function score(){
+		$data = $this->get_data();
+		$id = intval($data['id']);
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Idea = $this->Idea->get($id);
+			if($Idea){
+				$cond = array('idea'=>$id, 'status >='=>1);
+				$Items = $this->IdeaItem->get_list($cond);
+				if($Items){
+					if(is_company_object($User, $Idea)){
+						$has_error = false;
+					}
+					else{
+						$Item = Null;
+						foreach($Items as $Itm){
+							if($Itm->expert == $User->id){
+								$Item = $Itm;
+								$has_error = false;
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		if($this->request->post){
+			$post = $this->request->post;
+			$score = intval($post['score']);
+			if($User->is_company() && intval($Item->c_score) == 0){
+				$itemid = $data['itemid'];
+				$Item = $this->IdeaItem->get($itemid);
+				if($Item && $Item->idea == $Idea->id && $Item->status >= 1){
+					$d = array('id'=>$Item->id, 'c_score'=>$score);
+					$this->IdeaItem->save($d);
+					$d = array('id'=>$Item->expert, 
+								'rate_total eq'=>"`rate_total` + $score", 
+								'rate_num eq'=>'`rate_num` + 1');
+					$this->Expert->save($d);
+					$this->redirect("item?idea=$Idea->id&item=$Item->id");
+				}
+			}
+			else if($User->is_expert() && intval($Item->e_score) == 0){
+				$update = array('e_score'=>$score);
+				$where = array('idea'=>$Idea->id, 'expert'=>$User->id, 'status >'=>0);
+				$this->IdeaItem->update($update, $where);
+				$d = array('id'=>$Idea->company, 
+							'rate_total eq'=>"`rate_total` + $score", 
+							'rate_num eq'=>'`rate_num` + 1');
+				$this->Company->save($d);
+				$this->redirect('score?id='.$Idea->id);
+			}
+		}
+		$this->set('$Idea', $Idea);
+		$this->show_tags($Idea);
+		$this->set('$Item', $Item);
+		
+		if($User->is_company()){
+			$Expert = $this->Expert->get($Item->expert);
+			$this->set('$Expert', $Expert);
+			$this->set('score', $Item->c_score);
+		}
+		else{
+			$Company = $this->Company->get($Idea->company);
+			$this->set('$Company', $Company);
+			$this->set('score', $Item->e_score);
 		}
 	}
 	

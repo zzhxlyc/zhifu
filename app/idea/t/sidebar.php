@@ -32,12 +32,15 @@
 		</div>
 	</div>
 	
-	<?php if(is_company_object($User, $Idea)){?>
+	<?php if(is_company_object($User, $Idea) || $solver){?>
 	<div class="side-section">
 		<div class="title">操作</div>
 		<div class="content">
 		<?php if($Idea->status < 2){?>
 			<a href="javascript:void(0)" class="idea_finish">结束评奖</a>
+		<?php }?>
+		<?php if($solver){?>
+		<a href="<?php echo $home.'/score?id='.$Idea->id?>">评分</a>
 		<?php }?>
 		</div>
 	</div>

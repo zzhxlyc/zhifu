@@ -5,22 +5,13 @@
 	<div class="section">
 		<h3>中标方案：<?php echo $Item->title?></h3>
 		<div class="content line-list">
-			<?php echo $Item->description?>
+			<?php echo $Item->content?>
 		</div><!--end for list-->
 	</div><!--end for section-->
-	
-	<?php if($User->is_company()){?>
-	<div class="section">
-		<h3>难题中标者：<?php echo $Expert->name?></h3>
-		<div class="content line-list">
-			<?php echo $Expert->description?>
-		</div><!--end for list-->
-	</div><!--end for section-->
-	<?php }?>
 	
 	<?php if($User->is_expert()){?>
 	<div class="section">
-		<h3>难题发起者：<?php echo $Company->name?></h3>
+		<h3>创意发起者：<?php echo $Company->name?></h3>
 		<div class="content line-list">
 			<?php echo $Company->description?>
 		</div><!--end for list-->
@@ -39,13 +30,13 @@
 		
 		<div>
 			<form action="<?php echo $home.'/score'?>" method="post">
-				<input type="hidden" name="id" value="<?php echo $Problem->id?>" />
+				<input type="hidden" name="id" value="<?php echo $Idea->id?>" />
 				<input type="hidden" name="score" value="<?php echo $score?>" />
 				<?php if(!$score){?>
 				<input type="submit" value="提交" class="btn fl" />
 				<?php }?>
 			</form>
-			<a href="<?php echo $home.'/detail?id='.$Problem->id?>" class="back-btn">返回</a>
+			<a href="<?php echo $home.'/detail?id='.$Idea->id?>" class="back-btn">返回</a>
 		</div>
 	</div><!--end for section-->
 	

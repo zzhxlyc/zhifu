@@ -3,10 +3,10 @@
 <div class="main-content">
 	<div class="section">
 		<h3>创意状态
-			<?php if(is_expert($User)){?>
+			<?php if(is_expert($User) && $Idea->status == 0){?>
 			<a href="<?php echo $home.'/submit?id='.$Idea->id?>" class="join-btn btn">我有创意</a>
 			<?php }?>
-			<?php if(is_company($User) && $User->id == $Idea->company){?>
+			<?php if(is_company($User) && $User->id == $Idea->company && $Idea->status == 0){?>
 			<a href="<?php echo $home.'/edit?id='.$Idea->id?>" class="edit">编辑</a>
 			<?php }?>
 		</h3>
@@ -17,7 +17,56 @@
 		</div>
 	</div><!--end for section-->
 
-
+	<?php if($Idea->status >= 2){?>
+	<div class="section">
+		<?php 
+			$array = array('一等奖'=>$one_list, '二等奖'=>$two_list, '三等奖'=>$three_list);
+			foreach($array as $title => $list){
+				if($list && count($list) > 0){
+		?>
+		<h3><?php echo $title?></h3>
+		<div class="content line-list">
+			<?php 
+				foreach($list as $item){
+					$expert = $experts[$item->expert];
+			?>
+			<div class="item clearfix">
+				<div class="pic">
+					<a target="_blank" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
+					<img src="<?php img($expert->image)?>" alt="<?php echo $expert->name?>"
+						 width="100" height="100"/>
+					</a>
+					<span class="name">
+						<a target="_blank" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
+						<?php echo $expert->name?>
+						</a>
+						<?php if(is_company_object($User, $Idea)){?>
+						<br/>
+						<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
+						给专家评分
+						</a>
+						<?php }?>
+						<?php if(is_expert_object($User, $item)){?>
+						<br/>
+						<a href="<?php echo $home.'/score?id='.$Idea->id?>">给企业评分</a>
+						<?php }?>
+					</span>
+				</div>
+				<div class="des">
+					<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
+					<?php echo $item->title?>
+					</a>
+					<?php echo $item->content?>
+				</div>
+			</div><!--end for item-->
+			<?php }?>
+		</div><!--end for list-->
+		<?php 
+				}
+			}
+		?>
+	</div><!--end for section-->
+	<?php }?>
 
 	<div class="section">
 		<h3>竞标专家（<?php echo count($items)?>）</h3>
@@ -42,6 +91,7 @@
 					<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
 					<?php echo $item->title?>
 					</a>
+					<?php echo $item->content?>
 				</div>
 			</div><!--end for item-->
 			<?php }?>
