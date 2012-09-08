@@ -108,13 +108,20 @@ $(document).ready(function(){
 	$("input[name=pswd2]").focusout(function(){
 		var pwd=$("input[name=pswd]").val();
 		var pwd2=$(this).val();
-		if(pwd2!=pwd){
+		if(pwd2.length==0){
 			$(this).addClass('error');
-			$(this).next().html('密码不一致');
+			$(this).next().html('确认密码不能为空');
 		}else{
-			$(this).removeClass('error');
-			$(this).next().html('');
+			if(pwd2!=pwd){
+				$(this).addClass('error');
+				$(this).next().html('密码不一致');
+			}else{
+				$(this).removeClass('error');
+				$(this).next().html('');
+			}
+			
 		}
+		
 		
 		
 	});

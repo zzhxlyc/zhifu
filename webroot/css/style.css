@@ -1078,6 +1078,15 @@ display:none;
 	border:1px solid red;
 }
 
+.register span.error{
+	line-height: 19px;
+	background: url(../images/miss_pic.jpg) no-repeat 5px 3px;
+	background-color: #FFEAEA;
+	display: inline-block;
+	padding: 0 4px 0 24px;
+}
+
+
 .register .pwd-level{
 width:220px;
 margin:10px 0 0 90px;
