@@ -1061,5 +1061,40 @@ display:none;
 	width:400px;
 	float:left;
 }
+/************注册**************/
+.register .row label{
+	width:80px;
+	padding-right:10px;
+	text-align: right;
+}
 
+.register input.text{
+	border:1px solid #ddd;
+	width:200px;
+}
+
+
+.register input.error{
+	border:1px solid red;
+}
+
+.register .pwd-level{
+width:220px;
+margin:10px 0 0 90px;
+}
+
+
+.register .pwd-level span{
+	display:block;
+	float:left;
+	background-color:#FFD099;
+	padding:2px 26px;
+	border:1px solid #fff;
+	color:#fff;
+}
+
+
+.register .pwd-level span.current{
+	background-color:#F60;
+}
 
