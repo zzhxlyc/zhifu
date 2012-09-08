@@ -33,14 +33,14 @@
 		<input class="text" type="text" name="email" value="<?php echo $email?>" />
 		<span class="error"><?php echo $errors['email']?></span>
 	</div>
-	<div class="row">
+	<div class="row captcha">
 		<label for="">验证码</label>
 		<input class="text" type="text" name="captcha" />
-		<img alt="验证码" src="<?php echo ROOT_URL.'/captcha'?>">
+		<img alt="验证码" src="<?php echo ROOT_URL.'/captcha'?>" >
 		<span class="error"><?php echo $errors['captcha']?></span>
 	</div>
 	<div class="row">
-		<input type="submit" value="注册" />
+		<input type="submit" class="submit btn" value="注册" />
 	</div>
 	</form>
 	

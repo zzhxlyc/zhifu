@@ -668,7 +668,7 @@ font-size:13px;
 .row{
 padding-bottom:15px;	
 clear:both;
-font-size:13px;
+font-size:12px;
 
 }
 
@@ -1097,4 +1097,13 @@ margin:10px 0 0 90px;
 .register .pwd-level span.current{
 	background-color:#F60;
 }
+.register .captcha label{
+	padding-top:50px;
+}
+
+.register input.submit{
+margin:10px 0 0 90px;
+}
+
+
 
