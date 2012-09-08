@@ -118,6 +118,44 @@ $(document).ready(function(){
 		
 		
 	});
+	$("input[name=email]").focusin(function(){
+       	 
+
+    });
+	$("input[name=email]").focusout(function(){
+		var email=$("input[name=email]").val();
+		if(email.length==0){
+			$(this).addClass('error');
+			$(this).next().html('邮箱不能为空');
+		}else{
+			if(isEmail(email)){
+				$(this).removeClass('error');
+				$(this).next().html('');	
+			}
+			
+			else{
+				$(this).addClass('error');
+				$(this).next().html('邮箱格式不正确');
+			}
+		
+		}
+		
+		
+	});
+	
+	
+	function isEmail(email){
+		var pattern = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+		chkFlag = pattern.test(email);
+		if(chkFlag){
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	
 });	
 	
