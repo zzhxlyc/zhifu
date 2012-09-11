@@ -89,9 +89,6 @@
 </div>
 
 <div class="row">
-	<?php if($company->verified == 0){?>
-	<input type="submit" value="审核通过" />
-	<?php }?>
 	<input type="submit" value="保存"  class="btn" />
 	<?php echo $HTML->hidden('id', $company->id)?>
 </div>

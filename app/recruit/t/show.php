@@ -8,10 +8,23 @@
 	<label for="name">状态</label>
 	<?php echo $recruit->get_status()?>
 </div>
+<div class="tag row">
+	<label for="">擅长领域</label>
+	<?php 
+		if(is_array($tag_list)){
+			foreach($tag_list as $tag){
+	?>
+	<a class="old" count="<?php echo $tag->count?>" tagid="<?php echo $tag->id?>" id="tag_<?php echo $tag->id?>"><?php echo $tag->name?></a>
+	<?php 
+			}
+		}
+	?>
+</div>
 <div class="row">
 	<label for="des">描述：</label>
 	<?php echo $recruit->description?>
 </div>
+
 <div class="row clearfix">
 	<label for="available">时间：</label>
 	<div class="choose-time no-margin">
@@ -33,6 +46,7 @@
 	</div>
 	<span class="error"><?php echo $errors['available']?></span>
 </div>
+
 <div class="row">
 	<input type="hidden" name="available" />
 	<?php if($User->id == $recruit->belong && $User->get_type() == $recruit->type){?>

@@ -41,6 +41,7 @@ class Router{
 	
 	public function find($prefix, $url){
 //		print_r($this->map);
+//		echo "prefix:$prefix url:$url";
 		if($url == '') $url = '/';
 		if(array_key_exists($prefix, $this->map)){
 			if(array_key_exists($url, $this->map[$prefix])){

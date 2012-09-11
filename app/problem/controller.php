@@ -108,7 +108,7 @@ class ProblemController extends AppController {
 		}
 		
 		$User = $this->get('User');
-		if($User->is_expert()){
+		if(is_expert($User)){
 			foreach($solutions as $solution){
 				if($solution->status == 1 && $solution->expert == $User->id){
 					$this->set('solver', true);
@@ -247,6 +247,11 @@ class ProblemController extends AppController {
 			$Solution = $this->set_model($post, new Solution());
 			$errors = $this->Solution->check($Solution);
 			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
+			}
+			if(count($errors) == 0){
 				$post['status'] = 0;
 				$post['time'] = DATETIME;
 				unset($post['id']);
@@ -328,6 +333,14 @@ class ProblemController extends AppController {
 			$Item = $this->set_model($post, $Item);
 			$errors = $this->Solution->check($Item);
 			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
+			}
+			if(count($errors) == 0){
+				if($post['file'] && $Item->file){
+					FileSystem::remove($Item->file);
+				}
 				$this->Solution->escape($post);
 				$this->Solution->save($post);
 				$this->redirect('item?problem='.$problem.'&item='.$item);

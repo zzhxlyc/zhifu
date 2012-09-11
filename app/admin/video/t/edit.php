@@ -15,6 +15,13 @@
 	</td>
 </tr>
 <tr>
+	<td>简介</td>
+	<td>
+		<textarea cols="90" rows="10" name="desc" class="text"><?php echo $video->desc?></textarea>
+		<span class="error"><?php echo $errors['desc']?></span>
+	</td>
+</tr>
+<tr>
 	<td>网址</td>
 	<td>
 		<input size="100" type="text" name="url" value="<?php echo $video->url?>" />

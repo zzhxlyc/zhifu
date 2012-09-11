@@ -12,6 +12,12 @@
 		<div class="content line-list">
 			<?php echo $Item->content?>
 		</div><!--end for list-->
+		<?php if($Item->file){?>
+		<div class="row">
+			<label for="">附件</label>
+			<a target="_blank" href="<?php echo UPLOAD_HOME.'/'.$Item->file?>">下载</a>
+		</div>
+		<?php }?>
 		<div>
 			<?php if(is_expert_object($User, $Item) && $Idea->status == 0){?>
 			<a href="<?php echo $home."/itemedit?idea=$Idea->id&item=$Item->id"?>">编辑</a>

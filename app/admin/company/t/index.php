@@ -3,6 +3,7 @@
 <table class="normal-table" cellspacing="0" cellpadding="0">
 	<tr class="top">
 		<td width="30">选择</td>
+		<td width="100">用户名</td>
 		<td>企业名称</td>
 		<td width="90">注册时间</td>
 		<td width="150">邮箱</td>
@@ -18,6 +19,7 @@
 	?>
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
+		<td><?php echo $o->username?></td>
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->name?></a></td>
 		<td><?php echo get_date($o->time)?></td>
 		<td><?php echo $o->email?></td>

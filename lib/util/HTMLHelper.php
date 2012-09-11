@@ -46,15 +46,32 @@ class HTMLHelper{
 		}
 	}
 	
-	public function if_current($cond){
+	public function if_current($cond, $class = true){
 		if($cond){
-			echo 'class="current"';
+			if($class){
+				echo 'class="current"';
+			}
+			else{
+				echo 'current';
+			}
+		}
+	}
+	
+	public function if_checked($cond){
+		if($cond){
+			echo 'checked="checked"';
 		}
 	}
 	
 	public function checked($now, $value){
 		if($now == $value){
 			echo 'checked="checked"';
+		}
+	}
+	
+	public function if_selected($cond){
+		if($cond){
+			echo 'selected="selected"';
 		}
 	}
 	

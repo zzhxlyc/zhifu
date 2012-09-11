@@ -8,9 +8,9 @@ class ExpertController extends AppController {
 	public function before(){
 		$this->set('home', EXPERT_HOME);
 		parent::before();
-		$need_login = array();	// either
+		$need_login = array('profile');	// either
 		$need_company = array();
-		$need_expert = array('profile', 'edit');
+		$need_expert = array('edit');
 		$this->login_check($need_login, $need_company, $need_expert);
 	}
 	

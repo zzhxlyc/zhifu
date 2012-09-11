@@ -46,7 +46,7 @@ class Request{
 	protected function _url(){
 		$uri = $_SERVER['REQUEST_URI'];
 		$base = $this->base;
-		if (strlen($base) > 0 && strpos($uri, $base) === 0) {
+		if ($base !== '/' && strpos($uri, $base) === 0) {
 			$uri = substr($uri, strlen($base));
 		}
 		if (strpos($uri, '?') !== false) {

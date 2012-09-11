@@ -6,35 +6,38 @@ class Recruit extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'description', 'belong', 'type', 'available'),
+			'need' => array('title', 'description', 'belong', 'type'),
 			'length' => array('title'=>250),
 			'int' => array('belong'),
 			'word'=> array(),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		
-		$array = array();
-		$a = get_value($data, 'available');
-		$ret = explode(' ', $a);
-		if(count($ret) == 7){
-			for($i = 0;$i < 7;$i++){
-				$r = $ret[$i];
-				$rr = explode('-', $r);
-				if(count($rr) == 3){
-					array_map('intval', $rr);
-					$array[] = implode('-', $rr);
+		$type = get_value($data, 'type');
+		if($type == BelongType::EXPERT){
+			$array = array();
+			$a = get_value($data, 'available');
+			$ret = explode(' ', $a);
+			if(count($ret) == 7){
+				for($i = 0;$i < 7;$i++){
+					$r = $ret[$i];
+					$rr = explode('-', $r);
+					if(count($rr) == 3){
+						array_map('intval', $rr);
+						$array[] = implode('-', $rr);
+					}
+					else{
+						$errors['available'] = '选择日期有误';
+						break;
+					}
 				}
-				else{
-					$errors['available'] = '选择日期有误';
-					break;
+				if(!isset($errors['available'])){
+					set_value($data, 'available', implode(' ', $array));
 				}
 			}
-			if(!isset($errors['available'])){
-				set_value($data, 'available', implode(' ', $array));
+			else{
+				$errors['available'] = '选择日期有误';
 			}
-		}
-		else{
-			$errors['available'] = '选择日期有误';
 		}
 		return $errors;
 	}

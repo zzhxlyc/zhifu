@@ -47,7 +47,7 @@
 		<div class="right">
 			<div class="price-deadline">
 				<?php if($o->budget){?>
-				<p>出价：<span class="num"><?php echo $o->budget?></span>元</p>
+				<p>出价：<span class="num"><?php echo $o->budget?></span>万元</p>
 				<?php }?>
 				<?php output_deadline($o->deadline)?>
 			</div>

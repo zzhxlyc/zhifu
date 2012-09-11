@@ -18,6 +18,9 @@
 					<?php echo $title?>
 				</a>
 			</div>
+			<div class="des">
+				<?php echo get_date($o->time)?> 点击 ：<?php echo intval($o->click)?>
+			</div>
 		</div>
 
 <?php 
@@ -52,6 +55,9 @@
 				<a target="_blank" href="<?php echo $home.'/url?id='.$o->id?>">
 					<?php echo $title?>
 				</a>
+			</div>
+			<div class="des">
+				<?php echo get_date($o->time)?> 点击 ：<?php echo intval($o->click)?>
 			</div>
 		</div>
 <?php 

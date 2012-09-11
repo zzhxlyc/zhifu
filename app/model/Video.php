@@ -9,7 +9,7 @@ class Video extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('title', 'url', 'belong' ,'type'),
-			'length' => array('title'=>250, 'url'=>250),
+			'length' => array('title'=>250, 'url'=>250, 'desc'=>500),
 			'int' => array('belong'),
 			'word'=> array('title'),
 		);
@@ -19,7 +19,7 @@ class Video extends AppModel{
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title'),
+			'string'=>array('title', 'desc'),
 			'url'=>array('url'),
 			'html'=>array()
 		);
