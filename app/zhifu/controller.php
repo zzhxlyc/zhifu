@@ -65,6 +65,7 @@ class ZhifuController extends AppController {
 				$data['rate_total'] = 0;
 				$data['rate_num'] = 0;
 				$data['budget'] = 0;
+				$data['verified'] = 0;
 				$cond = array('username'=>$user);
 				if($type == BelongType::COMPANY){
 					$Company = $this->Company->get_row($cond);
