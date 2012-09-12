@@ -3,4 +3,5 @@
 .buildpath
 README.md
 webroot/upload/*
+!webroot/upload/index.php
 conf/*
