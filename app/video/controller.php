@@ -64,6 +64,7 @@ class VideoController extends AppController {
 			$errors = $this->Video->check($post);
 			if(count($errors) == 0){
 				$post['time'] = DATETIME;
+				$post['click'] = 0;
 				$image = Video::get_image($post['url']);
 				if($image){
 					$post['image'] = $image;
