@@ -15,6 +15,9 @@ class MysqlDAO {
 	
 	private static function _get_table_name($table){
 		$db_name = self::_get_db_name();
+		if(defined('DB_TABLE_PREFIX')){
+			$table = DB_TABLE_PREFIX.$table;
+		}
 		return "`$db_name`.`$table`";
 	}
 	
