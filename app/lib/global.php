@@ -158,19 +158,29 @@ function is_admin($o){
 	return false;
 }
 
-function is_company_object($u, $o){
+function is_company_object($u, $o, $check_type = true){
 	if($u && $o){
-		if($u->id == $o->company && $u->get_type() == BelongType::COMPANY){
-			return true;
+		if($u->id == $o->company){
+			if($check_type && $u->get_type() == BelongType::COMPANY){
+				return true;
+			}
+			else{
+				return true;
+			}
 		}
 	}
 	return false;
 }
 
-function is_expert_object($u, $o){
+function is_expert_object($u, $o, $check_type = true){
 	if($u && $o){
-		if($u->id == $o->expert && $u->get_type() == BelongType::EXPERT){
-			return true;
+		if($u->id == $o->expert){
+			if($check_type && $u->get_type() == BelongType::EXPERT){
+				return true;
+			}
+			else{
+				return true;
+			}
 		}
 	}
 	return false;

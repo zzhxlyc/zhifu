@@ -10,7 +10,7 @@
 </div>
 <div class="row">
 	<label for="desc">简介</label>
-	<textarea name="desc" class="text"><?php echo $video->desc?></textarea>
+	<textarea name="desc" class="text" style="height: 50px"><?php echo $video->desc?></textarea>
 	<span class="error"><?php echo $errors['desc']?></span>
 </div>
 <div class="row">

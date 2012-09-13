@@ -7,6 +7,11 @@
 	?>
 	<p>已停止提交</p>
 	<a href="<?php echo $home.'/detail?id='.$Problem->id?>" class="back-btn">返回</a>
+	<?php 
+		}else if($Problem->status == 0){
+	?>
+	<p>还未开始提交</p>
+	<a href="<?php echo $home.'/detail?id='.$Problem->id?>" class="back-btn">返回</a>
 	<?php }else{?>
 	<div class="section">
 		<h3>解决难题</h3>

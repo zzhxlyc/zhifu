@@ -43,7 +43,7 @@ class Problem extends AppModel{
 			return '竞标中';
 		}
 		else if($status == 2){
-			return '付款中';
+			return '选定合作专家';
 		}
 		else if($status == 3){
 			return '交付互评';

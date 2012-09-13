@@ -100,6 +100,15 @@ class ExpertController extends AppController {
 		$Expert->patent_budget = 0;
 	}
 	
+	public function myself(){
+		$User = $this->get('User');
+		$Expert = $User;
+		$this->set('expert', $Expert);
+		
+		$this->add_tags($Expert);
+		$this->add_common_tags();
+	}
+	
 	public function edit(){
 		$User = $this->get('User');
 		$Expert = $User;

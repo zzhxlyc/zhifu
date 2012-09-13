@@ -28,10 +28,10 @@
 		<?php }?>
 		
 		<ul class="main-nav">
-			<li><a href="<?php echo PROBLEM_HOME?>" <?php head_tab1()?>>企业难题</a></li>
+			<li><a href="<?php echo PROBLEM_HOME?>" <?php head_tab1()?>>技术难题</a></li>
 			<li><a href="<?php echo IDEA_HOME?>" <?php head_tab2()?>>创意悬赏</a></li>
 			<li><a href="<?php echo PATENT_HOME?>" <?php head_tab3()?>>科技成果</a></li>
-			<li><a href="<?php echo RECRUIT_HOME?>" <?php head_tab4()?>>兼职顾问</a></li>
+			<li><a href="<?php echo RECRUIT_HOME?>" <?php head_tab4()?>>兼职/顾问</a></li>
 			<li><a href="<?php echo EXPERT_HOME?>" <?php head_tab5()?>>领域专家</a></li>
 			<li><a href="<?php echo VIDEO_HOME?>" <?php head_tab6()?>>视频</a></li>
 			<li><a href="<?php echo TOPIC_HOME?>" <?php head_tab7()?>>话题</a></li>

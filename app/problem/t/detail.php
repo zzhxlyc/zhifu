@@ -13,7 +13,7 @@
 		<div class="content status clearfix">
 			<div class="status-item <?php $HTML->current($Problem->status, 0)?>">发布蓝图</div>
 			<div class="status-item <?php $HTML->current($Problem->status, 1)?>">竞标中</div>
-			<div class="status-item <?php $HTML->current($Problem->status, 2)?>">付款</div>
+			<div class="status-item <?php $HTML->current($Problem->status, 2)?>">选定合作专家</div>
 			<div class="status-item last  <?php $HTML->current($Problem->status, 3)?>">交付互评</div>
 		</div>
 	</div><!--end for section-->
@@ -77,9 +77,16 @@
 					</span>
 				</div>
 				<div class="des">
+					<?php if(is_expert_object($User, $solution)){?>
 					<a href="<?php echo $home."/item?problem=$Problem->id&item=$solution->id"?>">
 					<?php echo $solution->title?>
 					</a>
+					<?php 
+						}else{
+							echo $solution->title;
+						}
+					?>
+					
 					<?php echo $solution->description?>
 				</div>
 			</div><!--end for item-->

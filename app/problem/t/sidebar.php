@@ -32,7 +32,7 @@
 		</div>
 	</div>
 	
-	<?php if(is_company_object($User, $Problem) || $solver){?>
+	<?php if(is_company_object($User, $Problem, false) || $solver){?>
 	<div class="side-section">
 		<div class="title">操作</div>
 		<div class="content">

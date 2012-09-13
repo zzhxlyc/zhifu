@@ -73,6 +73,15 @@ class CompanyController extends AppController {
 		$this->add_comments($Company, $page);
 	}
 	
+	public function myself(){
+		$User = $this->get('User');
+		$Company = $User;
+		$this->set('company', $Company);
+		
+		$this->add_tags($Company);
+		$this->add_common_tags();
+	}
+	
 	public function edit(){
 		$User = $this->get('User');
 		$Company = $User;

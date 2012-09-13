@@ -122,10 +122,10 @@ class ZhifuController extends AppController {
 		$User = $this->get('User');
 		if($User){
 			if($User->is_company()){
-				$this->redirect('edit', 'company');
+				$this->redirect('myself', 'company');
 			}
 			else if($User->is_expert()){
-				$this->redirect('edit', 'expert');
+				$this->redirect('myself', 'expert');
 			}
 			else{
 				$this->redirect('login', '');

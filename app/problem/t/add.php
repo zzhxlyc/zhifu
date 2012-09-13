@@ -41,7 +41,7 @@
 	</div>
 	
 	<div class="row">
-		<label for="">地区</label>
+		<label for="">面向地区</label>
 		<div class="province_city"></div>
 	</div>	
 	
@@ -94,7 +94,7 @@
 </div>	<!--end for edit-left-->
 <div class="edit-right">
 	<div class="row">
-		<label for="">图像</label>
+		<label for="">上传图片</label>
 		<input type="file" name="image" />
 		<span class="error"><?php echo $errors['image']?></span>
 	</div>

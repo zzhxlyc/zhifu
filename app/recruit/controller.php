@@ -17,12 +17,21 @@ class RecruitController extends AppController {
 		$get = $this->request->get;
 		$page = $get['page'];
 		$type = $get['type'];
+		$fromday = $get['fromday'];
 		$cond = array();
 		if($type == 'zhaopin'){
 			$cond['type'] = BelongType::COMPANY;
 		}
 		else if($type == 'qiuzhi'){
 			$cond['type'] = BelongType::EXPERT;
+		}
+		if($fromday == '3days'){
+			$from_ts = TIMESTAMP - 3600 * 24 * 3;
+			$cond['time >='] = date('Y-m-d H:i:s', $from_ts);
+		}
+		else if($fromday == 'week'){
+			$from_ts = TIMESTAMP - 3600 * 24 * 7;
+			$cond['time >='] = date('Y-m-d H:i:s', $from_ts);
 		}
 		$limit = 10;
 		$order = array('time'=>'DESC');
