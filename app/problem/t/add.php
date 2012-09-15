@@ -53,13 +53,13 @@
 	</div>
 	<div class="row">
 		<label for="deadline">截止日期</label>
-		<input size="20" type="text" name="deadline" class="datepicker" value="<?php echo get_date($problem->deadline)?>" readonly="readonly" />
+		<input size="20" type="text" name="deadline" class="datepicker text" value="<?php echo get_date($problem->deadline)?>" readonly="readonly" />
 		<span class="error"><?php echo $errors['deadline']?></span>
 	</div>
 
 	<div class="row">
 		<label for="tag">领域标签</label>
-		<input size="20" type="text" value="" id="new-tag" /> 
+		<input size="20" type="text" value="" class="text" id="new-tag" /> 
 		<a href="javascript:;" id="add-tag">添加</a>
 	</div>	
 

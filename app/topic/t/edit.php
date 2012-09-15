@@ -8,8 +8,8 @@
 </div>
 <?php }?>
 <div class="row">
-	<label for="des">内容：</label>
-	<textarea name="content" class="text" ><?php echo $topic->content?></textarea>
+	<label for="des">内容：</label><br /><br />
+	<textarea name="content" class="ckeditor text" ><?php echo $topic->content?></textarea>
 	<span class="error"><?php echo $errors['content']?></span>
 </div>
 
