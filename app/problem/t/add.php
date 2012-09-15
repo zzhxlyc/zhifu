@@ -11,6 +11,22 @@
 
 <h2>发布技术难题</h2>
 
+<div class="row always-show">
+	<label for="">手机</label>
+	<input size="20" type="text" name="" class="text" value=""/>
+	
+</div>
+<div class="row always-show">
+	<label for="">电话</label>
+	<input size="20" type="text" name="" class="text" value=""/>
+	
+</div>
+<div class="row always-show">
+	<label for="">邮箱</label>
+	<input size="20" type="text" name="" class="text" value=""/>
+	
+</div>
+
 <div class="add-problem">
 
 	<div>
@@ -90,6 +106,8 @@
 		<input type="hidden" name="new_tag" />
 		<input type="hidden" name="old_tag" />
 	</div>
+	
+
 
 </div>	<!--end for edit-left-->
 <div class="edit-right">

@@ -140,9 +140,13 @@ right: 0;
 top: 10px;
 color: #fff;
 }
+.top-nav li{
+float:left;
+position:relative;
 
+}
 
-.top-nav a {
+.top-nav li a {
 font-size: 13px;
 font-family: '微软雅黑','黑体';
 line-height: 35px;
@@ -150,17 +154,34 @@ text-align: center;
 color: white;
 padding: 0 5px;
 }
-.top-nav .addbox{
+
+.top-nav a.add-content {
+position:relative;
+}
+.top-nav li ul{
 position:absolute;
-top:35px;	
-right:-999em;
+top:25px;	
+left: -999em;
 background:#fff;
-display:none;
 border:1px solid #999;
+width:70px;
+color:#259;
+padding:5px;
 }
-.top-nav a.add-content:hover .addbox{
-right:0;	
+.top-nav li ul li{
+height:25px;
 }
+.top-nav li ul li a{
+color:#259;
+line-height: 25px;
+
+}
+
+.top-nav li:hover ul {
+	left: auto;
+	 z-index: 300;
+}
+
 
 
 .top-nav .addbox li{

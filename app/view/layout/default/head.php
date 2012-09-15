@@ -2,29 +2,34 @@
 	<div class="header">
 		<h1 class="logo"><a href="#">知富网</a></h1>
 		<?php if(isset($User)){?>
-		<div class="top-nav">
-			<a href="<?php echo ROOT_URL?>">首页</a>|
-			<a href="<?php echo ROOT_URL.'/home'?>">个人主页</a>|
-			<!-- <a href="<?php echo ROOT_URL.'/feed'?>">我的订阅</a>| -->
-			<a href="<?php echo ROOT_URL.'/setting'?>">用户中心</a>|
-			<a href="#" class="add-content">
-				<?php if($User->is_company()){?>
-					<a href="<?php echo PROBLEM_HOME.'/add'?>">发布难题</a>
-					<a href="<?php echo IDEA_HOME.'/add'?>">创意悬赏</a>
-				<?php }?>
-				<?php if($User->is_expert()){?>
-					<a href="<?php echo PATENT_HOME.'/add'?>">发布科技成果</a>
-				<?php }?>
-					<a href="<?php echo VIDEO_HOME.'/add'?>">发布视频</a>
-			</a>|
-			<a href="<?php echo ROOT_URL.'/logout'?>">注销</a>
-		</div>
+		<ul class="top-nav">
+			<li><a href="<?php echo ROOT_URL?>">首页</a>|</li>
+			<li><a href="<?php echo ROOT_URL.'/home'?>">个人主页</a>|</li>
+		<!--	<li><a href="<?php echo ROOT_URL.'/feed'?>">我的订阅</a>|</li>-->
+			<li><a href="<?php echo ROOT_URL.'/setting'?>">用户中心</a>|</li>
+			<li><a href="">发布</a>|
+				<ul class="sub-nav">
+					<?php if($User->is_company()){?>
+						<li><a href="<?php echo PROBLEM_HOME.'/add'?>">发布难题</a></li>
+						<li><a href="<?php echo IDEA_HOME.'/add'?>">创意悬赏</a></li>
+					<?php }?>
+					<?php if($User->is_expert()){?>
+						<li><a href="<?php echo PATENT_HOME.'/add'?>">发布科技成果</a></li>
+					<?php }?>
+						<li><a href="<?php echo VIDEO_HOME.'/add'?>">发布视频</a></li>
+				</ul>
+				
+			</li>
+			<li><a href="<?php echo ROOT_URL.'/logout'?>">注销</a></li>
+			
+			
+		</ul>
 		<?php }else{?>
-		<div class="top-nav">
-			<a href="<?php echo ROOT_URL?>">首页</a>|
-			<a href="<?php echo ROOT_URL.'/register'?>">注册</a>|
-			<a href="<?php echo ROOT_URL.'/login'?>">登陆</a>
-		</div>
+		<ul class="top-nav">
+			<li><a href="<?php echo ROOT_URL?>">首页</a></li>
+			<li><a href="<?php echo ROOT_URL.'/register'?>">注册</a></li>
+			<li><a href="<?php echo ROOT_URL.'/login'?>">登陆</a></li>
+		</ul>
 		<?php }?>
 		
 		<ul class="main-nav">
