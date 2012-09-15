@@ -17,11 +17,16 @@ class ManageController extends AdminBaseController {
 	public function base(){
 		if($this->request->post){
 			$post = $this->request->post;
-			$data = array();
+			$data = unserialize(Option::find('ADMIN_MANAGE_BASE'));
 			$errors = array();
 			$files = $this->request->file;
 			$path = $this->do_file('logo', $errors, $files);
-			if($path){$data['logo'] = $path;}
+			if(!empty($path)){
+				if($data['logo']){
+					FileSystem::remove($data['logo']);
+				}
+				$data['logo'] = $path;
+			}
 			$data['title'] = esc_text($post['title']);
 			$data['slogan'] = esc_text($post['slogan']);
 			Option::persist('ADMIN_MANAGE_BASE', serialize($data));

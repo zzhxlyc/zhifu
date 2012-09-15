@@ -68,7 +68,7 @@
 		<label for="name">头像</label>
 		<input type="file" name="image" />
 		<?php if($company->image){?>
-		<img src="<?php img($company->image)?>" />
+		<img width="250" src="<?php img($company->image)?>" />
 		<?php }?>
 	</div>
 
@@ -89,9 +89,6 @@
 </div>
 
 <div class="row">
-	<?php if($company->verified == 0){?>
-	<input type="submit" value="审核通过" />
-	<?php }?>
 	<input type="submit" value="保存"  class="btn" />
 	<?php echo $HTML->hidden('id', $company->id)?>
 </div>

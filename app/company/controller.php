@@ -8,8 +8,8 @@ class CompanyController extends AppController {
 	public function before(){
 		$this->set('home', COMPANY_HOME);
 		parent::before();
-		$need_login = array();	// either
-		$need_company = array('profile', 'edit');
+		$need_login = array('profile');	// either
+		$need_company = array('edit');
 		$need_expert = array();
 		$this->login_check($need_login, $need_company, $need_expert);
 	}
@@ -71,6 +71,15 @@ class CompanyController extends AppController {
 		
 		$page = get_page($get);
 		$this->add_comments($Company, $page);
+	}
+	
+	public function myself(){
+		$User = $this->get('User');
+		$Company = $User;
+		$this->set('company', $Company);
+		
+		$this->add_tags($Company);
+		$this->add_common_tags();
 	}
 	
 	public function edit(){

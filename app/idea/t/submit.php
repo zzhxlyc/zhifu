@@ -11,7 +11,7 @@
 	<div class="section">
 		<h3>提交创意</h3>
 		<div class="content line-list">
-			<form action="" method="post">
+			<form action="" method="post" <?php $HTML->file_form_need()?>>
 <div class="row">
 	<label for="name">创意</label>
 	<input size="70" type="text" name="title" value="<?php echo $Item->title?>" />
@@ -20,6 +20,11 @@
 <div class="row">
 	<label for="">详细描述</label><span class="error"><?php echo $errors['content']?></span><br/><br/>
 	<textarea class="ckeditor" name="content" rows="10" cols="80"><?php echo $Item->content?></textarea>
+</div>
+<div class="row">
+	<label for="">附件</label>
+	<input type="file" name="file" />
+	<span class="error"><?php echo $errors['file']?></span>
 </div>
 <div class="row">
 	<input type="submit" value="提交" class="btn fl">

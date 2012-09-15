@@ -65,6 +65,7 @@ class ZhifuController extends AppController {
 				$data['rate_total'] = 0;
 				$data['rate_num'] = 0;
 				$data['budget'] = 0;
+				$data['verified'] = 0;
 				$cond = array('username'=>$user);
 				if($type == BelongType::COMPANY){
 					$Company = $this->Company->get_row($cond);
@@ -121,10 +122,10 @@ class ZhifuController extends AppController {
 		$User = $this->get('User');
 		if($User){
 			if($User->is_company()){
-				$this->redirect('edit', 'company');
+				$this->redirect('myself', 'company');
 			}
 			else if($User->is_expert()){
-				$this->redirect('edit', 'expert');
+				$this->redirect('myself', 'expert');
 			}
 			else{
 				$this->redirect('login', '');

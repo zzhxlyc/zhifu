@@ -42,13 +42,12 @@ class LoginController extends AppController {
 			if(count($errors) == 0){
 				$pswd = md5($pswd);
 				$cond = array('username'=>$user, 'password'=>$pswd);
-				$cond = array('id'=>1);
+//				$cond = array('id'=>1);
 				if($type == BelongType::COMPANY){
 					$Company = $this->Company->get_row($cond);
 					if($Company){
 						$cookie = $this->get_cookie(BelongType::COMPANY, $Company);
 						$this->response->set_cookie(COOKIE_U, $cookie);
-//						$this->redirect('index', 'company');
 						$this->redirect('/');
 					}
 				}
@@ -69,6 +68,11 @@ class LoginController extends AppController {
 			$this->set('type', $type);
 			$this->set('errors', $errors);
 		}
+	}
+	
+	public function loginout(){
+		$this->response->set_cookie(COOKIE_U, '');
+		$this->redirect('/', null);
 	}
 	
 	public function forget(){

@@ -9,7 +9,7 @@
 
 <form action="" method="post" <?php $HTML->file_form_need()?>>
 
-<h2>发布企业技术难题</h2>
+<h2>发布技术难题</h2>
 
 <div class="add-problem">
 
@@ -24,7 +24,7 @@
 
 	<div class="row">
 		<label for="">难题名称</label>
-		<input class="text" size="60" type="text" name="title" value="<?php echo $problem->title?>" />
+		<input class="text" size="55" type="text" name="title" value="<?php echo $problem->title?>" />
 		<span class="error"><?php echo $errors['title']?></span>
 	</div>
 	
@@ -41,7 +41,7 @@
 	</div>
 	
 	<div class="row">
-		<label for="">地区</label>
+		<label for="">面向地区</label>
 		<div class="province_city"></div>
 	</div>	
 	
@@ -94,7 +94,7 @@
 </div>	<!--end for edit-left-->
 <div class="edit-right">
 	<div class="row">
-		<label for="">图像</label>
+		<label for="">上传图片</label>
 		<input type="file" name="image" />
 		<span class="error"><?php echo $errors['image']?></span>
 	</div>

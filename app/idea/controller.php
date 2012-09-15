@@ -244,6 +244,11 @@ class IdeaController extends AppController {
 			$IdeaItem = $this->set_model($post, new IdeaItem());
 			$errors = $this->IdeaItem->check($IdeaItem);
 			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
+			}
+			if(count($errors) == 0){
 				$post['status'] = 0;
 				$post['time'] = DATETIME;
 				unset($post['id']);
@@ -326,6 +331,14 @@ class IdeaController extends AppController {
 			$Item = $this->set_model($post, $Item);
 			$errors = $this->IdeaItem->check($Item);
 			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
+			}
+			if(count($errors) == 0){
+				if($post['file'] && $Item->file){
+					FileSystem::remove($Item->file);
+				}
 				$this->IdeaItem->escape($post);
 				$this->IdeaItem->save($post);
 				$this->redirect('item?idea='.$idea.'&item='.$item);

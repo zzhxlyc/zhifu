@@ -53,9 +53,16 @@
 					</span>
 				</div>
 				<div class="des">
+					<?php if(is_expert_object($User, $item)){?>
 					<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
 					<?php echo $item->title?>
 					</a>
+					<?php 
+						}else{
+							echo $item->title;
+						}
+					?>
+					
 					<?php echo $item->content?>
 				</div>
 			</div><!--end for item-->

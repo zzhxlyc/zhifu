@@ -8,6 +8,7 @@ class BelongType {
 	const PROBLEM = 'Problem';
 	const PATENT = 'Patent';
 	const IDEA = 'Idea';
+	const RECRUIT = 'Recruit';
 	
 	public static function value_of($const){
 		$const = ucfirst(strtolower($const));
@@ -44,6 +45,7 @@ class BelongType {
 			'Patent'=>self::PATENT,
 			'Idea'=>self::IDEA,
 			'Admin'=>self::ADMIN,
+			'Recruit'=>self::RECRUIT,
 		);
 		foreach($array as $class => $type){
 			if(is_a($o, $class)){

@@ -22,7 +22,7 @@
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
 		<td><?php echo $o->author?></td>
 		<td><?php echo $o->time?></td>
-		<td><?php echo Problem::get_status($o->status)?></td>
+		<td><?php echo $o->get_status()?></td>
 		<td><?php echo $o->budget?></td>
 		<td class="operate">
 			<a target="_blank" href="<?php echo ADMIN_SOLUTION_HOME.'/index?pid='.$o->id?>">查看竞标</a>

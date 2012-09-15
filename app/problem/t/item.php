@@ -10,6 +10,12 @@
 		<div class="content line-list">
 			<?php echo $Item->description?>
 		</div><!--end for list-->
+		<?php if($Item->file){?>
+		<div class="row">
+			<label for="">附件</label>
+			<a target="_blank" href="<?php echo UPLOAD_HOME.'/'.$Item->file?>">下载</a>
+		</div>
+		<?php }?>
 		<?php if(is_expert_object($User, $Item)){?>
 		<div>
 			<input type="button" value="修改" class="btn fl" 

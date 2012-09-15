@@ -89,7 +89,7 @@ class ProblemController extends AppController {
 		$page = get_page($get);
 		$this->add_comments($Problem, $page);
 		
-		if(is_expire($Problem->deadline)){
+		if($Problem->deadline && is_expire($Problem->deadline)){
 			$data = array('id'=>$Problem->id);
 			if($Problem->status == 0){
 				$data['status'] = 4;
@@ -108,7 +108,7 @@ class ProblemController extends AppController {
 		}
 		
 		$User = $this->get('User');
-		if($User->is_expert()){
+		if(is_expert($User)){
 			foreach($solutions as $solution){
 				if($solution->status == 1 && $solution->expert == $User->id){
 					$this->set('solver', true);
@@ -247,6 +247,12 @@ class ProblemController extends AppController {
 			$Solution = $this->set_model($post, new Solution());
 			$errors = $this->Solution->check($Solution);
 			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
+			}
+			p($path);
+			if(count($errors) == 0){
 				$post['status'] = 0;
 				$post['time'] = DATETIME;
 				unset($post['id']);
@@ -261,7 +267,7 @@ class ProblemController extends AppController {
 		$this->show_tags($Problem);
 		$this->show_categorys($Problem);
 		
-		if($Problem->status > 1 || is_expire($Problem->deadline)){
+		if($Problem->status > 1 || ($Problem->deadline && is_expire($Problem->deadline))){
 			$this->set('closed', true);
 		}
 		$cond = array('problem'=>$id);
@@ -281,7 +287,7 @@ class ProblemController extends AppController {
 				$Item = $this->Solution->get($item);
 				if($Item){
 					if(is_company_object($User, $Problem) ||
-							is_expert_object($User, $Item)){
+							is_expert_object($User, $Item, false)){
 						$has_error = false;
 					}
 				}
@@ -328,6 +334,15 @@ class ProblemController extends AppController {
 			$Item = $this->set_model($post, $Item);
 			$errors = $this->Solution->check($Item);
 			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('file', $errors, $files);
+				if($path){$post['file'] = $path;}
+			}
+			if(count($errors) == 0){
+				if($post['file'] && $Item->file){
+					FileSystem::remove($Item->file);
+				}
+				p($post);
 				$this->Solution->escape($post);
 				$this->Solution->save($post);
 				$this->redirect('item?problem='.$problem.'&item='.$item);
