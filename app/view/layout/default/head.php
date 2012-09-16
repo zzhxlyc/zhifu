@@ -1,6 +1,6 @@
 <div class="header_wrap">
 	<div class="header">
-		<h1 class="logo"><a href="#">知富网</a></h1>
+		<h1 class="logo"><a href="#"><img src="<?php echo ROOT_URL.'/images/logo.jpg'?>" alt="" /></a></h1>
 		<?php if(isset($User)){?>
 		<ul class="top-nav">
 			<li><a href="<?php echo ROOT_URL?>">首页</a>|</li>

@@ -124,14 +124,13 @@ z-index:999;
 width: 408px;
 overflow: hidden;
 height: 82px;
-background: url(../images/logo.jpg) no-repeat 0 15px;
-text-indent: -9999em;
 }
 
 .header_wrap .header .logo a {
 width: 408px;
-height: 82px;
+height: 67px;
 display: block;
+margin-top:15px;
 }
 
 .top-nav {
