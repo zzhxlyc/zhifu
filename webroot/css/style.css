@@ -175,21 +175,17 @@ color:#259;
 line-height: 25px;
 
 }
+.top-nav li ul li a:hover{
+text-decoration: underline;
+}
 
-.top-nav li:hover ul {
+.top-nav li.hovered ul {
 	left: auto;
 	 z-index: 300;
 }
 
 
 
-.top-nav .addbox li{
-height:30px;	
-}
-.top-nav .addbox li a{
-padding:2px 15px;
-color:#333;	
-}
 
 .main-nav {
 padding-top: 1px;
@@ -471,10 +467,13 @@ margin-top:20px;
 
 .list .item{
 	padding-bottom:10px;
-	padding-top:20px;
+	padding:20px 10px 10px 10px;
 	border-bottom:1px dashed #999;
 }
 
+.list .hovered{
+	background-color:#f8f8f8;
+}
 
 .list .item .pic {
 float:left;	
@@ -503,6 +502,7 @@ padding-bottom:10px;
 }
 
 .list .item .price-deadline {
+	height: 70px;
 	width:150px;
 	font-size:13px;
 	margin-right: 10px;
@@ -819,7 +819,6 @@ margin-top: 0;
 	float:left;
 height:120px;
 border-bottom:0;
-padding-right:20px;
 }
 .section .list .item .pic{
 	float:none;
@@ -897,7 +896,6 @@ padding-top:4px;
 
 .new-video .list .item,.hot-video .list .item {
 height: 150px;
-padding-right:22px;
 }
 
 .hot-video {

@@ -14,9 +14,9 @@
 						<li><a href="<?php echo IDEA_HOME.'/add'?>">创意悬赏</a></li>
 					<?php }?>
 					<?php if($User->is_expert()){?>
-						<li><a href="<?php echo PATENT_HOME.'/add'?>">发布科技成果</a></li>
+						<li><a href="<?php echo PATENT_HOME.'/add'?>">科技成果</a></li>
 					<?php }?>
-						<li><a href="<?php echo VIDEO_HOME.'/add'?>">发布视频</a></li>
+						<li><a href="<?php echo VIDEO_HOME.'/add'?>">视频</a></li>
 				</ul>
 				
 			</li>

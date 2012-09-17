@@ -1,3 +1,24 @@
+$(document).ready(function(){
+
+	$(".list .item").hover(
+	  function () {
+	    $(this).addClass("hovered");
+	  },
+	  function () {
+	    $(this).removeClass("hovered");
+	  }
+	);
+	$(".top-nav li").hover(
+	  function () {
+	    $(this).addClass("hovered");
+	  },
+	  function () {
+	    $(this).removeClass("hovered");
+	  }
+	);
+
+});
+
 function scoreEventInit(){
 	var score=$('input[name=score]').val();
 	if(score.length==0){
