@@ -51,7 +51,12 @@
 				<?php }else{?>
 				<p>出价：<span class="num">面议</span></p>
 				<?php }?>
+				<p>所在地区：<span>杭州</span></p>
+				
+				<p>发布日期：<span>2012-3-2</span></p>
+				
 				<?php output_deadline($o->deadline)?>
+				
 			</div>
 			<?php if(is_expert($User)){?>
 			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">我要竞标</a>

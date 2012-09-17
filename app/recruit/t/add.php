@@ -9,7 +9,7 @@
 </div>
 <div class="row">
 	<label for="tag">擅长领域</label>
-	<input size="20" type="text" value="" id="new-tag" /> 
+	<input size="20" type="text" class="text" value="" id="new-tag" /> 
 	<a href="javascript:;" id="add-tag">添加</a>
 </div>	
 <div class="tag row">

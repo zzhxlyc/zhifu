@@ -7,26 +7,46 @@
 	<a href="<?php echo $home.'/add'?>" class="job-btn btn">我要发布</a>
 </div>
 
+
+
 <div class="list job">
+	<table>
+			<tr class="top">
+				<td width="20%">职位名称</td>
+				<td width="20%">公司名称</td>
+				<td width="20%">招聘人数</td>
+				<td width="20%">性别</td>
+				<td width="20%">发布时间</td>				
+								
+			</tr>
+	
+	
 	<?php 
 		if(is_array($list)){
 			foreach($list as $o){
 	?>
-	<div class="item clearfix">
-		<div class="middle">
+	
+		<tr>
+			<td>ee</td>
+			<td>ee</td>
+			<td>ee</td>
+			<td>ee</td>
+			<td>ee</td>
+		</tr>
+		<!--<div class="middle">
 			<h3 class="title">
-				<a href="<?php echo $home.'/show?id='.$o->id?>"><?php echo $o->title?></a>
+				<a href="<?php //echo $home.'/show?id='.$o->id?>"><?php echo $o->title?></a>
 			</h3>
-			<div class="content"><?php output_desc($o->description)?></div>						
-			<div class="time"><?php echo $o->get_status()?></div>	
+			<div class="content"><?php //output_desc($o->description)?></div>						
+			<div class="time"><?php //echo $o->get_status()?></div>	
 
-		</div><!--end for middle-->
+		</div>-->
 		
-	</div><!--end for item-->
 	<?php 
 			}
 		}
 	?>
+		</table>
 </div>
 
 <div class="page-wrapper">
