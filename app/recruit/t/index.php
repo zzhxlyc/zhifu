@@ -12,11 +12,11 @@
 <div class="list job">
 	<table>
 			<tr class="top">
-				<td width="20%">职位名称</td>
-				<td width="20%">公司名称</td>
-				<td width="20%">招聘人数</td>
-				<td width="20%">性别</td>
-				<td width="20%">发布时间</td>				
+				<th width="20%">职位名称</th>
+				<th width="20%">公司名称</th>
+				<th width="20%">招聘人数</th>
+				<th width="20%">性别</th>
+				<th width="20%">发布时间</th>				
 								
 			</tr>
 	

@@ -16,6 +16,14 @@ $(document).ready(function(){
 	    $(this).removeClass("hovered");
 	  }
 	);
+	$(".job table tr[class!=top]").hover(
+	  function () {
+	    $(this).addClass("hovered");
+	  },
+	  function () {
+	    $(this).removeClass("hovered");
+	  }
+	);
 
 });
 

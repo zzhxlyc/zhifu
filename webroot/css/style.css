@@ -678,14 +678,15 @@ color: #fc7d39;
 .job table{
 width:100%;
 }
-.job table td{
+.job table td,.job table th{
 	border-bottom: 1px dashed #DDD;
 	padding: 5px 3px 5px 0;
 	word-wrap: break-word;
 	word-break: break-word;
 }
-.job table tr.top td{
+.job table tr.top th{
 	font-size:13px;
+	text-align:left;
 }
 
 .job table td a{
