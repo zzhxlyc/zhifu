@@ -27,7 +27,7 @@ class Problem extends AppModel{
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title'),
+			'string'=>array('title', 'phone', 'mobile'),
 			'url'=>array(),
 			'html'=>array('description')
 		);
