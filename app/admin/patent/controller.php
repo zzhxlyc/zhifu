@@ -2,7 +2,7 @@
 
 class PatentController extends AdminBaseController {
 	
-	public $models = array('Patent', 'Category', 'Log', 'Tag', 'TagItem');
+	public $models = array('Patent', 'Category', 'Log', 'Tag', 'TagItem', 'Comment');
 	public $no_session = array();
 	
 	public function before(){
@@ -79,6 +79,31 @@ class PatentController extends AdminBaseController {
 		}
 		$this->set('patent', $Patent);
 		$this->set_data($Patent);
+	}
+	
+	public function comment(){
+		$get = $this->request->get;
+		$page = $get['page'];
+		$pid = intval($get['pid']);
+		$limit = 10;
+		$cond = array('type'=>BelongType::PATENT, 'object'=>$pid);
+		$all = $this->Comment->count($cond);
+		$pager = new Pager($all, $page, $limit);
+		$list = $this->Comment->get_page($cond, array('time'=>'DESC'), 
+											$pager->now(), $limit);
+		$page_list = $pager->get_page_links($this->get('home').'/comment?pid='.$pid.'&');
+		$this->set('list', $list);
+		$this->set('$page_list', $page_list);
+		$this->set('pid', $pid);
+	}
+	
+	public function deletecomm(){
+		$data = $this->get_data();
+		$id = $data['id'];
+		$pid = $data['pid'];
+		$cond = array('type'=>BelongType::PATENT, 'object'=>$pid, 'id in'=>$id);
+		$this->Comment->delete_all($cond);
+		$this->redirect('comment?pid='.$pid);
 	}
 	
 }

@@ -24,7 +24,7 @@
 <tr>
 	<td>发起用户</td>
 	<td><?php echo BelongType::to_string($message->from_type)?> ：
-		<?php echo $message->from_author?></td>
+		<?php echo $message->from_name?></td>
 </tr>
 <tr>
 	<td>目标用户</td>

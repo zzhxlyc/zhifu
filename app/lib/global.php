@@ -89,7 +89,7 @@ function output_pcd($o){
 }
 
 function output_deadline($datetime){
-	if($datetime){
+	if($datetime && $datetime != '0000-00-00'){
 		if(!is_expire($datetime)){
 			echo '<p>截止日期：<span class="date">'.$datetime.'</span></p>';
 		}
@@ -130,6 +130,9 @@ function get_author_link($id, $type){
 }
 
 function is_expire($datetime, $addend = false){
+	if($datetime == '0000-00-00'){
+		return false;
+	}
 	if($addend){
 		$datetime .= '23:59:59';
 	}
@@ -158,29 +161,19 @@ function is_admin($o){
 	return false;
 }
 
-function is_company_object($u, $o, $check_type = true){
+function is_company_object($u, $o){
 	if($u && $o){
-		if($u->id == $o->company){
-			if($check_type && $u->get_type() == BelongType::COMPANY){
-				return true;
-			}
-			else{
-				return true;
-			}
+		if($u->id == $o->company && $u->get_type() == BelongType::COMPANY){
+			return true;
 		}
 	}
 	return false;
 }
 
-function is_expert_object($u, $o, $check_type = true){
+function is_expert_object($u, $o){
 	if($u && $o){
-		if($u->id == $o->expert){
-			if($check_type && $u->get_type() == BelongType::EXPERT){
-				return true;
-			}
-			else{
-				return true;
-			}
+		if($u->id == $o->expert && $u->get_type() == BelongType::EXPERT){
+			return true;
 		}
 	}
 	return false;

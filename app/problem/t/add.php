@@ -11,20 +11,28 @@
 
 <h2>发布技术难题</h2>
 
+<div class="row">
+	<label for="">难题名称</label>
+	<input class="text" size="55" type="text" name="title" value="<?php echo $problem->title?>" />
+	<span class="error"><?php echo $errors['title']?></span>
+</div>
+
 <div class="row always-show">
-	<label for="">手机</label>
-	<input size="20" type="text" name="" class="text" value=""/>
+	<label for="">电话</label>
+	<input size="20" type="text" name="phone" class="text" value="<?php echo $problem->phone?>"/>
+	<span class="error"><?php echo $errors['phone']?></span>
 	
 </div>
 <div class="row always-show">
-	<label for="">电话</label>
-	<input size="20" type="text" name="" class="text" value=""/>
+	<label for="">手机</label>
+	<input size="20" type="text" name="mobile" class="text" value="<?php echo $problem->mobile?>"/>
+	<span class="error"><?php echo $errors['mobile']?></span>
 	
 </div>
 <div class="row always-show">
 	<label for="">邮箱</label>
-	<input size="20" type="text" name="" class="text" value=""/>
-	
+	<input size="20" type="text" name="email" class="text" value="<?php echo $problem->email?>"/>
+	<span class="error"><?php echo $errors['email']?></span>
 </div>
 
 <div class="add-problem">
@@ -38,12 +46,6 @@
 	</div>
 	<div class="edit-left">
 
-	<div class="row">
-		<label for="">难题名称</label>
-		<input class="text" size="55" type="text" name="title" value="<?php echo $problem->title?>" />
-		<span class="error"><?php echo $errors['title']?></span>
-	</div>
-	
 	<div class="row">
 		<label for="cat">所属行业</label>
 		<select name="cat">
@@ -135,11 +137,6 @@
 </div><!--end for add-problem-->
 
 <div class="add-simple-problem">
-	<div class="row">
-		<label for="">难题名称</label>
-		<input class="text wide" type="text" name="t" value="" />
-		<span class="error"><?php echo $errors['title']?></span>
-	</div>
 	<div class="row">
 		<label for="desc">简单描述</label>
 		<textarea name="desc" class="text"><?php echo $recruit->description?></textarea>

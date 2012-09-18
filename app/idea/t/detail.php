@@ -13,7 +13,7 @@
 		<div class="content status clearfix">
 			<div class="status-item <?php $HTML->current($Idea->status, 0)?>">竞标中</div>
 			<div class="status-item <?php $HTML->current($Idea->status, 1)?>">评奖中</div>
-			<div class="status-item last  <?php $HTML->current($Idea->status, 2)?>">结束</div>
+			<div class="status-item last  <?php $HTML->current($Idea->status, 2)?>">交付互评</div>
 		</div>
 	</div><!--end for section-->
 

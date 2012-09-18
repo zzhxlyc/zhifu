@@ -9,7 +9,7 @@ class IdeaItem extends AppModel{
 			'need' => array('idea', 'expert', 'title', 'content'),
 			'length' => array('title'=>250),
 			'int' => array('idea', 'expert'),
-			'word'=> array('title', 'content'),
+			'word'=> array('title', 'content', 'c_comment', 'e_comment'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		return $errors;
@@ -17,7 +17,7 @@ class IdeaItem extends AppModel{
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title'),
+			'string'=>array('title', 'c_comment', 'e_comment'),
 			'url'=>array(),
 			'html'=>array('content')
 		);

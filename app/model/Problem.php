@@ -6,13 +6,22 @@ class Problem extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'company', 'description'),
-			'length' => array('title'=>250),
+			'need' => array('title', 'company', 'description', 'phone', 'mobile', 'email'),
+			'length' => array('title'=>250, 'phone'=>20, 'mobile'=>20, 'email'=>250),
 			'int' => array('company', 'cat', 'subcat'),
 			'number' => array('budget'),
+			'email' => array('email'),
 			'word'=> array('title', 'description'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
+		$phone = get_value($data, 'phone');
+		$mobile = get_value($data, 'mobile');
+		if(empty($errors['phone']) && intval($phone) == 0){
+			$errors['phone'] = '电话格式有误';
+		}
+		if(empty($errors['mobile']) && intval($mobile) == 0){
+			$errors['mobile'] = '手机格式有误';
+		}
 		return $errors;
 	}
 	
@@ -48,7 +57,7 @@ class Problem extends AppModel{
 		else if($status == 3){
 			return '交付互评';
 		}
-		else if($status == 4){
+		if($this->closed == 1){
 			return '已关闭';
 		}
 	}

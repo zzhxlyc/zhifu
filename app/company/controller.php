@@ -91,12 +91,12 @@ class CompanyController extends AppController {
 			$post = $this->request->post;
 			$new_Company = $this->set_model($post, $Company);
 			$errors = $this->Company->check($new_Company);
-			if(count($errors) == 0 && $post['name'] != $User->name){
-				$U = $this->find_user_by_name($post['name'], $User->id);
-				if($U){
-					$errors['name'] = '此用户名已被使用';
-				}
-			}
+//			if(count($errors) == 0 && $post['name'] != $User->name){
+//				$U = $this->find_user_by_name($post['name'], $User->id);
+//				if($U){
+//					$errors['name'] = '此用户名已被使用';
+//				}
+//			}
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
@@ -122,6 +122,42 @@ class CompanyController extends AppController {
 		}
 		$this->add_tags($Company);
 		$this->add_common_tags();
+	}
+	
+	public function pswd(){
+		$User = $this->get('User');
+		$Company = $User;
+		
+		if($this->request->post){
+			$post = $this->request->post;
+			$password = $post['password'];
+			$password1 = $post['password1'];
+			$password2 = $post['password2'];
+			$errors = array();
+			if(strlen($password) == 0){
+				$errors['password'] = '不能为空';
+			}
+			else if(md5($password) != $User->password){
+				$errors['password'] = '密码错误';
+			}
+			if(strlen($password1) == 0){
+				$errors['password1'] = '不能为空';
+			}
+			if(strlen($password2) == 0){
+				$errors['password2'] = '不能为空';
+			}
+			else if($password1 != $password2){
+				$errors['password2'] = '密码不一致';
+			}
+			if(count($errors) == 0){
+				$new_pswd = md5($password1);
+				$data = array('id'=>$User->id, 'password'=>$new_pswd);
+				$this->Company->save($data);
+				$this->redirect('pswd?succ');
+			}
+			$this->set('errors', $errors);
+			$this->set('company', $new_Company);
+		}
 	}
 	
 	

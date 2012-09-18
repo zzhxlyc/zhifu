@@ -19,7 +19,6 @@ class LoginController extends AppController {
 	public function login(){
 		if($this->request->post){
 			$post = $this->request->post;
-			$type = $post['type'];
 			$user = trim($post['user']);
 			$pswd = trim($post['pswd']);
 			$captcha = trim($post['captcha']);
@@ -30,42 +29,30 @@ class LoginController extends AppController {
 			if(strlen($pswd) == 0){
 				$errors['pswd'] = '密码为空';
 			}
-			if(empty($type)){
-				$errors['type'] = '类型为空';
-			}
 			if(empty($captcha)){
 				$errors['captcha'] = '验证码为空';
 			}
-			else if($captcha != $this->session->get('captcha')){
-				$errors['captcha'] = '验证码错误';
-			}
+//			else if($captcha != $this->session->get('captcha')){
+//				$errors['captcha'] = '验证码错误';
+//			}
 			if(count($errors) == 0){
 				$pswd = md5($pswd);
-				$cond = array('username'=>$user, 'password'=>$pswd);
-//				$cond = array('id'=>1);
-				if($type == BelongType::COMPANY){
-					$Company = $this->Company->get_row($cond);
-					if($Company){
-						$cookie = $this->get_cookie(BelongType::COMPANY, $Company);
+				$User = $this->find_user($user);
+				if($User){
+					if($User->password == $pswd){
+						if($User->is_company()){
+							$cookie = $this->get_cookie(BelongType::COMPANY, $User);
+						}
+						if($User->is_expert()){
+							$cookie = $this->get_cookie(BelongType::EXPERT, $User);
+						}
 						$this->response->set_cookie(COOKIE_U, $cookie);
 						$this->redirect('/');
 					}
-				}
-				else if($type == BelongType::EXPERT){
-					$Expert = $this->Expert->get_row($cond);
-					if($Expert){
-						$cookie = $this->get_cookie(BelongType::EXPERT, $Expert);
-						$this->response->set_cookie(COOKIE_U, $cookie);
-						$this->redirect('/');
-					}
-				}
-				else{
-					$errors['type'] = '类型错误';
 				}
 				$errors['pswd'] = '用户名或密码错误';
 			}
 			$this->set('username', $user);
-			$this->set('type', $type);
 			$this->set('errors', $errors);
 		}
 	}

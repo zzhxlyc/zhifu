@@ -3,6 +3,7 @@
 		output_error($error);
 	}
 	else{
+		output_edit_succ();
 ?>
 <h2>用户中心</h2>
 <form action="<?php echo $home.'/edit'?>" method="post" <?php $HTML->file_form_need()?>>
@@ -90,7 +91,6 @@
 
 <div class="row">
 	<input type="submit" value="保存"  class="btn" />
-	<?php echo $HTML->hidden('id', $company->id)?>
 </div>
 </form>
 

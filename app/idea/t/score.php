@@ -29,13 +29,17 @@
 		</div>
 		
 		<div>
+			<?php if(!$score){?>
 			<form action="<?php echo $home.'/score'?>" method="post">
 				<input type="hidden" name="id" value="<?php echo $Idea->id?>" />
 				<input type="hidden" name="score" value="<?php echo $score?>" />
-				<?php if(!$score){?>
+				<textarea rows="5" cols="60" name="comment"></textarea>
 				<input type="submit" value="提交" class="btn fl" />
-				<?php }?>
 			</form>
+			<?php }else{?>
+			<p>评论：<?php echo $comment?></p>
+			<input type="hidden" name="score" value="<?php echo $score?>" />
+			<?php }?>
 			<a href="<?php echo $home.'/detail?id='.$Idea->id?>" class="back-btn">返回</a>
 		</div>
 	</div><!--end for section-->

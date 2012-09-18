@@ -52,6 +52,11 @@ class Log extends AppModel{
 		return $admin;
 	}
 	
+	public function save($array){
+		$array['ip'] = IP;
+		parent::save($array);
+	}
+	
 	public function action_login($admin_or_id){
 		$admin = $this->get_admin($admin_or_id);
 		$action = sprintf('管理员 %s 登陆', $admin->user);

@@ -19,7 +19,6 @@ class ProblemController extends AppController {
 		$page = $get['page'];
 		$ord = $get['order'];
 		$limit = 10;
-		$condition = array();
 		$order = array();
 		if($ord == 'time'){
 			$order['time'] = 'DESC';
@@ -33,6 +32,7 @@ class ProblemController extends AppController {
 		else{
 			$order['id'] = 'DESC';
 		}
+		$condition = array('verify'=>1);
 		$all = $this->Problem->count($condition);
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Problem->get_page($condition, $order, $pager->now(), $limit);
@@ -47,7 +47,7 @@ class ProblemController extends AppController {
 		$has_error = true;
 		if($id){
 			$Problem = $this->Problem->get($id);
-			if($Problem){
+			if($Problem && $Problem->verify == 1){
 				$has_error = false;
 			}
 		}
@@ -83,6 +83,7 @@ class ProblemController extends AppController {
 		else{
 			$experts = array();
 		}
+		$this->set_category($Problem);
 		$this->set('$experts', get_map_by_id($experts));
 		$this->set('$solutions', $solutions);
 		
@@ -90,21 +91,8 @@ class ProblemController extends AppController {
 		$this->add_comments($Problem, $page);
 		
 		if($Problem->deadline && is_expire($Problem->deadline)){
-			$data = array('id'=>$Problem->id);
-			if($Problem->status == 0){
-				$data['status'] = 4;
-			}
-			else if($Problem->status == 1){
-				if(count($solutions) == 0){
-					$data['status'] = 4;
-				}
-				else{
-					
-				}
-			}
-			if(isset($data['status'])){
-				$this->Problem->save($data);
-			}
+			$data = array('id'=>$Problem->id, 'closed'=>1);
+			$this->Problem->save($data);
 		}
 		
 		$User = $this->get('User');
@@ -118,11 +106,21 @@ class ProblemController extends AppController {
 		}
 	}
 	
+	private function set_category($Problem){
+		$cat_array = $this->get('cat_array');
+		if(!$cat_array){
+			$cat_array = $this->Category->get_category();
+		}
+		$Problem->catname = $cat_array[$Problem->cat]['name'];
+		$Problem->subcatname = $cat_array[$Problem->cat]['c'][$Problem->subcat]['name'];
+	}
+	
 	private function add_data($Problem = null){
 		$cat_array = $this->Category->get_category();
 		$this->set('cat_array', $cat_array);
 		if($Problem){
-			$this->add_tag_data($Problem->id, BelongType::PROBLEM);
+			$this->add_tags($Problem);
+			$this->set_category($Problem);
 		}
 		$this->add_common_tags();
 	}
@@ -130,20 +128,24 @@ class ProblemController extends AppController {
 	public function add(){
 		if($this->request->post){
 			$post = $this->request->post;
+			$post['verify'] = 1;
+			$post['status'] = 1;
 			if($post['type'] == '1'){
-				$data = array('title'=>$post['t'], 'description'=>$post['desc']);
-				$post = $data;
+				$post['description'] = $post['desc'];
+				$post['verify'] = 0;
+				$post['status'] = 0;
 				$this->set('type', 1);
 			}
 			if(isset($post['deadline']) && empty($post['deadline'])){
 				unset($post['deadline']);
 			}
 			if(isset($post['type'])){
-				unset($post['type'], $post['t'], $post['desc']);
+				unset($post['type'], $post['desc']);
 			}
 			$User = $this->get('User');
 			$post['company'] = $User->id;
 			$post['author'] = $User->name;
+			$post['username'] = $User->username;
 			$Problem = $this->set_model($post, $Problem);
 			$errors = $this->Problem->check($Problem);
 			if(count($errors) == 0){
@@ -157,13 +159,18 @@ class ProblemController extends AppController {
 				$old_tag = $post['old_tag'];
 				$new_tag = $post['new_tag'];
 				unset($post['old_tag'], $post['new_tag']);
+				$post['closed'] = 0;
 				$post['time'] = DATETIME;
 				$post['lastmodify'] = DATETIME;
-				$post['status'] = 0;
 				$this->Problem->escape($post);
 				$id = $this->Problem->save($post);
 				$this->do_tag($id, BelongType::PROBLEM, $old_tag, $new_tag);
-				$this->redirect('detail?id='.$id);
+				if($post['verify'] == 1){
+					$this->redirect('detail?id='.$id);
+				}
+				else{
+					$this->redirect('index');
+				}
 			}
 			$problem = $this->set_model($post, new Problem());
 			$this->set('$problem', $problem);
@@ -182,7 +189,7 @@ class ProblemController extends AppController {
 		$has_error = true;
 		if($id){
 			$Problem = $this->Problem->get($id);
-			if(is_company_object($User, $Problem)){
+			if($Problem && is_company_object($User, $Problem)){
 				$has_error = false;
 			}
 		}
@@ -229,7 +236,7 @@ class ProblemController extends AppController {
 		$has_error = true;
 		if($id){
 			$Problem = $this->Problem->get($id);
-			if($Problem && $User->is_expert()){
+			if($Problem && $Problem->verify == 1 && $User->is_expert()){
 				$has_error = false;
 			}
 		}
@@ -241,6 +248,7 @@ class ProblemController extends AppController {
 		if($this->request->post){
 			$post = $this->request->post;
 			$post['expert'] = $User->id;
+			$post['username'] = $User->username;
 			$post['author'] = $User->name;
 			$post['problem'] = $Problem->id;
 			$post['pname'] = $Problem->title;
@@ -251,7 +259,6 @@ class ProblemController extends AppController {
 				$path = $this->do_file('file', $errors, $files);
 				if($path){$post['file'] = $path;}
 			}
-			p($path);
 			if(count($errors) == 0){
 				$post['status'] = 0;
 				$post['time'] = DATETIME;
@@ -264,6 +271,7 @@ class ProblemController extends AppController {
 			$this->set('errors', $errors);
 		}
 		$this->set('$Problem', $Problem);
+		$this->set_category($Problem);
 		$this->show_tags($Problem);
 		$this->show_categorys($Problem);
 		
@@ -283,7 +291,7 @@ class ProblemController extends AppController {
 		$has_error = true;
 		if($problem && $item){
 			$Problem = $this->Problem->get($problem);
-			if($Problem){
+			if($Problem && $Problem->verify == 1){
 				$Item = $this->Solution->get($item);
 				if($Item){
 					if(is_company_object($User, $Problem) ||
@@ -299,6 +307,7 @@ class ProblemController extends AppController {
 		}
 		
 		$this->set('$Problem', $Problem);
+		$this->set_category($Problem);
 		$this->show_tags($Problem);
 		$this->set('$Item', $Item);
 		
@@ -315,7 +324,7 @@ class ProblemController extends AppController {
 		$has_error = true;
 		if($problem && $item){
 			$Problem = $this->Problem->get($problem);
-			if($Problem){
+			if($Problem && $Problem->verify == 1){
 				$Item = $this->Solution->get($item);
 				if($Item && is_expert_object($User, $Item)){
 					$has_error = false;
@@ -342,7 +351,6 @@ class ProblemController extends AppController {
 				if($post['file'] && $Item->file){
 					FileSystem::remove($Item->file);
 				}
-				p($post);
 				$this->Solution->escape($post);
 				$this->Solution->save($post);
 				$this->redirect('item?problem='.$problem.'&item='.$item);
@@ -354,6 +362,7 @@ class ProblemController extends AppController {
 		}
 		$this->set('$Item', $Item);
 		$this->set('$Problem', $Problem);
+		$this->set_category($Problem);
 		$this->show_tags($Problem);
 	}
 	
@@ -365,7 +374,7 @@ class ProblemController extends AppController {
 		$has_error = true;
 		if($problem && $item){
 			$Problem = $this->Problem->get($problem);
-			if($Problem){
+			if($Problem && $Problem->verify == 1){
 				$Item = $this->Solution->get($item);
 				if($Item && is_company_object($User, $Problem)){
 					$has_error = false;
@@ -397,41 +406,16 @@ class ProblemController extends AppController {
 		$this->redirect('item?problem='.$problem.'&item='.$item);
 	}
 	
-	public function start(){
+	//完成 选定合作专家 状态, 进入 交付互评 阶段
+	public function done(){
 		$data = $this->get_data();
 		$id = intval($data['problem']);
 		$User = $this->get('User');
 		$has_error = true;
 		if($id){
 			$Problem = $this->Problem->get($id);
-			if($Problem && is_company_object($User, $Problem)){
-				if($Problem->status == 0){
-					$has_error = false;
-				}
-			}
-		}
-		if($has_error){
-			echo 'error';
-			return;
-		}
-		
-		$this->layout('ajax');
-		if($this->request->post){
-			$data = array('id'=>$id, 'status'=>1);
-			$this->Problem->save($data);
-			echo 0;
-		}
-	}
-	
-	public function finish(){
-		$data = $this->get_data();
-		$id = intval($data['problem']);
-		$User = $this->get('User');
-		$has_error = true;
-		if($id){
-			$Problem = $this->Problem->get($id);
-			if($Problem && is_company_object($User, $Problem)){
-				if($Problem->status == 1){
+			if($Problem && $Problem->verify == 1 && is_company_object($User, $Problem)){
+				if($Problem->status == 2){
 					$has_error = false;
 				}
 			}
@@ -446,12 +430,46 @@ class ProblemController extends AppController {
 			$cond = array('problem'=>$Problem->id, 'status'=>1);
 			$count = $this->Solution->count($cond);
 			if($count == 1){
+				$data = array('id'=>$id, 'status'=>3);
+				$this->Problem->save($data);
+				echo 0;
+			}
+			else{
+				echo '还没有选择中标方案';
+			}
+		}
+	}
+	
+	//停止提交, 进入 选定合作专家 状态
+	public function finish(){
+		$data = $this->get_data();
+		$id = intval($data['problem']);
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Problem = $this->Problem->get($id);
+			if($Problem && $Problem->verify == 1 && is_company_object($User, $Problem)){
+				if($Problem->status == 1){
+					$has_error = false;
+				}
+			}
+		}
+		if($has_error){
+			echo 'error';
+			return;
+		}
+		
+		$this->layout('ajax');
+		if($this->request->post){
+			$cond = array('problem'=>$Problem->id);
+			$count = $this->Solution->count($cond);
+			if($count > 0){
 				$data = array('id'=>$id, 'status'=>2);
 				$this->Problem->save($data);
 				echo 0;
 			}
 			else{
-				echo '还没有选择竞标';
+				echo '还没有方案提交';
 			}
 		}
 	}
@@ -463,7 +481,7 @@ class ProblemController extends AppController {
 		$has_error = true;
 		if($id){
 			$Problem = $this->Problem->get($id);
-			if($Problem){
+			if($Problem && $Problem->verify == 1){
 				$cond = array('problem'=>$id, 'status'=>1);
 				$Item = $this->Solution->get_row($cond);
 				if($Item){
@@ -482,23 +500,26 @@ class ProblemController extends AppController {
 		if($this->request->post){
 			$post = $this->request->post;
 			$score = intval($post['score']);
-			if($User->is_company() && intval($Item->c_score) == 0){
-				$d = array('id'=>$Item->id, 'c_score'=>$score);
-				$this->Solution->save($d);
-				$d = array('id'=>$Item->expert, 
-							'rate_total eq'=>"`rate_total` + $score", 
-							'rate_num eq'=>'`rate_num` + 1');
-				$this->Expert->save($d);
-				$this->redirect('score?id='.$Problem->id);
-			}
-			else if($User->is_expert() && intval($Item->e_score) == 0){
-				$d = array('id'=>$Item->id, 'e_score'=>$score);
-				$this->Solution->save($d);
-				$d = array('id'=>$Problem->company, 
-							'rate_total eq'=>"`rate_total` + $score", 
-							'rate_num eq'=>'`rate_num` + 1');
-				$this->Company->save($d);
-				$this->redirect('score?id='.$Problem->id);
+			$comment = $post['comment'];
+			if(strlen($comment) <= 250){
+				if($User->is_company() && intval($Item->c_score) == 0){
+						$d = array('id'=>$Item->id, 'c_score'=>$score, 'c_comment'=>$comment);
+						$this->Solution->save($d);
+						$d = array('id'=>$Item->expert, 
+									'rate_total eq'=>"`rate_total` + $score", 
+									'rate_num eq'=>'`rate_num` + 1');
+						$this->Expert->save($d);
+						$this->redirect('score?id='.$Problem->id);
+				}
+				else if($User->is_expert() && intval($Item->e_score) == 0){
+					$d = array('id'=>$Item->id, 'e_score'=>$score, 'e_comment'=>$comment);
+					$this->Solution->save($d);
+					$d = array('id'=>$Problem->company, 
+								'rate_total eq'=>"`rate_total` + $score", 
+								'rate_num eq'=>'`rate_num` + 1');
+					$this->Company->save($d);
+					$this->redirect('score?id='.$Problem->id);
+				}
 			}
 		}
 		$this->set('$Problem', $Problem);
@@ -509,11 +530,13 @@ class ProblemController extends AppController {
 			$Expert = $this->Expert->get($Item->expert);
 			$this->set('$Expert', $Expert);
 			$this->set('score', $Item->c_score);
+			$this->set('comment', $Item->c_comment);
 		}
 		else{
 			$Company = $this->Company->get($Problem->company);
 			$this->set('$Company', $Company);
 			$this->set('score', $Item->e_score);
+			$this->set('comment', $Item->e_comment);
 		}
 	}
 	

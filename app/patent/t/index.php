@@ -18,7 +18,7 @@
 	<?php 
 		if(is_array($list)){
 			foreach($list as $o){
-				$desc = strip_tags($o->description);
+				$desc = subString(strip_tags($o->description), 150);
 	?>
 	<div class="item clearfix">
 		<div class="pic">

@@ -24,7 +24,7 @@
 	?>
 	<div class="section">
 		<h3>中标专家
-			<?php if($Problem->status >= 2){
+			<?php if($Problem->status == 3){
 					if(is_company_object($User, $Problem)){
 			?>
 			<a href="<?php echo $home.'/score?id='.$Problem->id?>" class="edit">给中标专家评分</a>
@@ -47,10 +47,19 @@
 					</span>
 				</div>
 				<div class="des">
+					<?php 
+						if(is_company_object($User, $Problem) 
+								|| is_expert_object($User, $Solver)){
+					?>
 					<a href="<?php echo $home."/item?problem=$Problem->id&item=$Solver->id"?>">
 					<?php echo $Solver->title?>
 					</a>
-					<?php echo $Solver->description?>
+					<?php 
+						}else{
+							echo $Solver->title;
+						}
+					?>
+					<p><?php output_desc($Solver->description)?></p>
 				</div>
 			</div><!--end for item-->
 		</div><!--end for list-->
@@ -77,7 +86,10 @@
 					</span>
 				</div>
 				<div class="des">
-					<?php if(is_expert_object($User, $solution)){?>
+					<?php 
+						if(is_company_object($User, $Problem, false) 
+								|| is_expert_object($User, $solution, false)){
+					?>
 					<a href="<?php echo $home."/item?problem=$Problem->id&item=$solution->id"?>">
 					<?php echo $solution->title?>
 					</a>
@@ -86,8 +98,7 @@
 							echo $solution->title;
 						}
 					?>
-					
-					<?php echo $solution->description?>
+					<p><?php output_desc($Solver->description)?></p>
 				</div>
 			</div><!--end for item-->
 			<?php }?>

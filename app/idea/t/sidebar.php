@@ -36,8 +36,11 @@
 	<div class="side-section">
 		<div class="title">操作</div>
 		<div class="content">
-		<?php if($Idea->status < 2){?>
-			<a href="javascript:void(0)" class="idea_finish">结束评奖</a>
+		<?php if($Idea->status == 0){?>
+			<a href="javascript:void(0)" class="idea_finish">结束提交</a>
+		<?php }?>
+		<?php if($Idea->status == 1){?>
+			<a href="javascript:void(0)" class="idea_done">结束评奖</a>
 		<?php }?>
 		<?php if($solver){?>
 		<a href="<?php echo $home.'/score?id='.$Idea->id?>">评分</a>
@@ -60,7 +63,24 @@ $(".idea_finish").click(function (){
 		data: "idea="+idea,
 		success: function(msg){
 			if(msg == '0'){
-				alert('已成功结束');
+				alert('已成功结束提交');
+				$(".idea_finish").hide();
+			}
+			else{
+				alert(msg);
+			}
+		}
+	});
+});
+$(".idea_done").click(function (){
+	var idea = $("#object").val();
+	$.ajax({
+		type: "POST",
+		url: window.ROOT_URL + "/idea/done",
+		data: "idea="+idea,
+		success: function(msg){
+			if(msg == '0'){
+				alert('已成功结束评奖');
 				$(".idea_finish").hide();
 			}
 			else{

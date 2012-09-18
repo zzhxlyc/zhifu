@@ -58,6 +58,12 @@ class MessageController extends AppController {
 			return;
 		}
 		
+		$User = $this->get('User');
+		if($User->id == $Message->to && $User->get_type() == $Message->to_type){
+			$d = array('id'=>$id, 'read'=>1);
+			$this->Message->save($d);
+		}
+		
 		$this->set('$Message', $Message);
 	}
 	
@@ -69,21 +75,14 @@ class MessageController extends AppController {
 			$User = $this->get('User');
 			$data['from'] = $User->id;
 			$data['from_type'] = $User->get_type();
+			$data['from_name'] = $User->username;
 			$data['from_author'] = $User->name;
-			$cond = array('name'=>$user);
-			$Company = $this->Company->get_row($cond);
-			if($Company){
-				$data['to'] = $Company->id;
-				$data['to_type'] = BelongType::COMPANY;
-				$data['to_name'] = $Company->name;
-			}
-			else{
-				$Expert = $this->Expert->get_row($cond);
-				if($Expert){
-					$data['to'] = $Expert->id;
-					$data['to_type'] = BelongType::EXPERT;
-					$data['to_name'] = $Expert->name;
-				}
+			$U = $this->find_user($user);
+			if($U){
+				$data['to'] = $U->id;
+				$data['to_type'] = $U->get_type();
+				$data['to_name'] = $U->username;
+				$data['to_author'] = $U->name;
 			}
 			$errors = $this->Message->check($data);
 			if(!isset($data['to'])){

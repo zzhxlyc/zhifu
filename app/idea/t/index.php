@@ -28,6 +28,7 @@
 	<?php 
 		if(is_array($list)){
 			foreach($list as $o){
+				$desc = subString(strip_tags($o->description), 150);
 	?>
 	<div class="item clearfix">
 		<div class="pic">
@@ -37,12 +38,12 @@
 		</div><!--end for pic-->
 		<div class="middle">
 			<h3 class="title"><a href="<?php echo $home.'/detail?id='.$o->id?>"><?php echo $o->title?></a></h3>
-			<div class="content"><?php output_desc($o->description)?></div>						
+			<div class="content"><?php echo $desc?></div>						
 			<div class="status clearfix">
 				<div class="title">状态：</div>
 				<div class="status-item <?php $HTML->current($o->status, 0)?>">竞标中</div>
 				<div class="status-item <?php $HTML->current($o->status, 1)?>">评奖中</div>
-				<div class="status-item last  <?php $HTML->current($o->status, 2)?>">结束</div>
+				<div class="status-item last  <?php $HTML->current($o->status, 2)?>">交付互评</div>
 			</div>
 		</div><!--end for middle-->
 

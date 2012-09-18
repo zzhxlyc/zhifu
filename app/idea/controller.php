@@ -99,22 +99,9 @@ class IdeaController extends AppController {
 		$page = get_page($get);
 		$this->add_comments($Idea, $page);
 		
-		if(is_expire($Idea->deadline)){
-			$data = array('id'=>$Idea->id);
-			if($Idea->status == 0){
-				$data['status'] = 4;
-			}
-			else if($Idea->status == 1){
-				if(count($items) == 0){
-					$data['status'] = 4;
-				}
-				else{
-					
-				}
-			}
-			if(isset($data['status'])){
-				$this->Idea->save($data);
-			}
+		if($Idea->deadline && is_expire($Idea->deadline)){
+			$data = array('id'=>$Idea->id, 'closed'=>1);
+			$this->Idea->save($data);
 		}
 		
 		$User = $this->get('User');
@@ -159,6 +146,7 @@ class IdeaController extends AppController {
 				$post['time'] = DATETIME;
 				$post['lastmodify'] = DATETIME;
 				$post['status'] = 0;
+				$post['closed'] = 0;
 				$this->Idea->escape($post);
 				$id = $this->Idea->save($post);
 				$this->do_tag($id, BelongType::IDEA, $old_tag, $new_tag);
@@ -238,6 +226,7 @@ class IdeaController extends AppController {
 		if($this->request->post && $Idea->status == 0){
 			$post = $this->request->post;
 			$post['expert'] = $User->id;
+			$post['username'] = $User->username;
 			$post['author'] = $User->name;
 			$post['idea'] = $Idea->id;
 			$post['pname'] = $Idea->title;
@@ -292,11 +281,11 @@ class IdeaController extends AppController {
 		$this->set('$Idea', $Idea);
 		$this->show_tags($Idea);
 		$this->set('$Item', $Item);
-		
 		if($User->is_company()){
 			$Expert = $this->Expert->get($Item->expert);
 			$this->set('$Expert', $Expert);
 			$this->set('score', $Item->c_score);
+			$this->set('comment', $Item->c_comment);
 		}
 		else{
 			$Company = $this->Company->get($Idea->company);
@@ -361,7 +350,7 @@ class IdeaController extends AppController {
 		$has_error = true;
 		if($idea && $item){
 			$Idea = $this->Idea->get($idea);
-			if($Idea){
+			if($Idea && $Idea->status == 1){
 				$Item = $this->IdeaItem->get($item);
 				if($Item && is_company_object($User, $Idea)){
 					$has_error = false;
@@ -396,8 +385,6 @@ class IdeaController extends AppController {
 			if(empty($error)){
 				$data = array('id'=>$item, 'status'=>$prize);
 				$this->IdeaItem->save($data);
-				$data = array('id'=>$idea, 'status'=>1);
-				$this->Idea->save($data);
 				echo 0;
 			}
 			else{
@@ -414,7 +401,40 @@ class IdeaController extends AppController {
 		if($id){
 			$Idea = $this->Idea->get($id);
 			if($Idea && is_company_object($User, $Idea)){
-				if($Idea->status < 2){
+				if($Idea->status == 0){
+					$has_error = false;
+				}
+			}
+		}
+		if($has_error){
+			echo 'error';
+			return;
+		}
+		
+		$this->layout('ajax');
+		if($this->request->post){
+			$cond = array('idea'=>$id);
+			$count = $this->IdeaItem->count($cond);
+			if($count > 0){
+				$data = array('id'=>$id, 'status'=>1);
+				$this->Idea->save($data);
+				echo 0;
+			}
+			else{
+				echo '还没有任何方案提交';
+			}
+		}
+	}
+	
+	public function done(){
+		$data = $this->get_data();
+		$id = intval($data['idea']);
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$Idea = $this->Idea->get($id);
+			if($Idea && is_company_object($User, $Idea)){
+				if($Idea->status == 1){
 					$has_error = false;
 				}
 			}
@@ -467,28 +487,31 @@ class IdeaController extends AppController {
 		if($this->request->post){
 			$post = $this->request->post;
 			$score = intval($post['score']);
-			if($User->is_company() && intval($Item->c_score) == 0){
-				$itemid = $data['itemid'];
-				$Item = $this->IdeaItem->get($itemid);
-				if($Item && $Item->idea == $Idea->id && $Item->status >= 1){
-					$d = array('id'=>$Item->id, 'c_score'=>$score);
-					$this->IdeaItem->save($d);
-					$d = array('id'=>$Item->expert, 
+			$comment = $post['comment'];
+			if(strlen($comment) < 250){
+				if($User->is_company() && intval($Item->c_score) == 0){
+					$itemid = $data['itemid'];
+					$Item = $this->IdeaItem->get($itemid);
+					if($Item && $Item->idea == $Idea->id && $Item->status >= 1){
+						$d = array('id'=>$Item->id, 'c_score'=>$score, 'c_comment'=>$comment);
+						$this->IdeaItem->save($d);
+						$d = array('id'=>$Item->expert, 
+									'rate_total eq'=>"`rate_total` + $score", 
+									'rate_num eq'=>'`rate_num` + 1');
+						$this->Expert->save($d);
+						$this->redirect("item?idea=$Idea->id&item=$Item->id");
+					}
+				}
+				else if($User->is_expert() && intval($Item->e_score) == 0){
+					$update = array('e_score'=>$score, 'e_comment'=>$comment);
+					$where = array('idea'=>$Idea->id, 'expert'=>$User->id, 'status >'=>0);
+					$this->IdeaItem->update($update, $where);
+					$d = array('id'=>$Idea->company, 
 								'rate_total eq'=>"`rate_total` + $score", 
 								'rate_num eq'=>'`rate_num` + 1');
-					$this->Expert->save($d);
-					$this->redirect("item?idea=$Idea->id&item=$Item->id");
+					$this->Company->save($d);
+					$this->redirect('score?id='.$Idea->id);
 				}
-			}
-			else if($User->is_expert() && intval($Item->e_score) == 0){
-				$update = array('e_score'=>$score);
-				$where = array('idea'=>$Idea->id, 'expert'=>$User->id, 'status >'=>0);
-				$this->IdeaItem->update($update, $where);
-				$d = array('id'=>$Idea->company, 
-							'rate_total eq'=>"`rate_total` + $score", 
-							'rate_num eq'=>'`rate_num` + 1');
-				$this->Company->save($d);
-				$this->redirect('score?id='.$Idea->id);
 			}
 		}
 		$this->set('$Idea', $Idea);
@@ -499,11 +522,13 @@ class IdeaController extends AppController {
 			$Expert = $this->Expert->get($Item->expert);
 			$this->set('$Expert', $Expert);
 			$this->set('score', $Item->c_score);
+			$this->set('comment', $Item->c_comment);
 		}
 		else{
 			$Company = $this->Company->get($Idea->company);
 			$this->set('$Company', $Company);
 			$this->set('score', $Item->e_score);
+			$this->set('comment', $Item->e_comment);
 		}
 	}
 	

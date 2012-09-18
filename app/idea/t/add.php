@@ -6,7 +6,7 @@
 
 <div class="row">
 	<label for="">名称</label>
-	<input class="text" size="60" type="text" name="title" value="<?php echo $idea->title?>" />
+	<input class="text" size="50" type="text" name="title" value="<?php echo $idea->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 

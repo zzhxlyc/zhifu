@@ -22,7 +22,7 @@
 			<?php if(is_expert_object($User, $Item) && $Idea->status == 0){?>
 			<a href="<?php echo $home."/itemedit?idea=$Idea->id&item=$Item->id"?>">编辑</a>
 			<?php }?>
-			<?php if(is_company_object($User, $Idea) && $Idea->status < 2){?>
+			<?php if(is_company_object($User, $Idea) && $Idea->status == 1){?>
 			<select class="idea_prize_choose">
 				<option value="">设置奖项</option>
 				<option value="1">采纳为一等奖</option>
@@ -44,7 +44,7 @@
 	</div><!--end for section-->
 	<?php }?>
 	
-	<?php if($Item->status >= 1 && is_company_object($User, $Idea)){?>
+	<?php if($Idea->status == 2 && is_company_object($User, $Idea)){?>
 	<div class="section">
 		<h3>给中标者评分</h3>
 		<div class="rating">
@@ -56,14 +56,18 @@
 		</div>
 		
 		<div>
+			<?php if(!$score){?>
 			<form action="<?php echo $home.'/score'?>" method="post">
 				<input type="hidden" name="id" value="<?php echo $Idea->id?>" />
 				<input type="hidden" name="itemid" value="<?php echo $Item->id?>" />
 				<input type="hidden" name="score" value="<?php echo $score?>" />
-				<?php if(!$score){?>
+				<textarea rows="5" cols="60" name="comment"></textarea>
 				<input type="submit" value="提交" class="btn fl" />
-				<?php }?>
 			</form>
+			<?php }else{?>
+			<input type="hidden" name="score" value="<?php echo $score?>" />
+			<p>评论：<?php echo $comment?></p>
+			<?php }?>
 		</div>
 	</div><!--end for section-->
 	<?php }?>
@@ -79,7 +83,6 @@
 <?php if(is_company_object($User, $Idea)){?>
 <script type="text/javascript">
 <!--
-scoreEventInit();
 
 $(".idea_prize_choose").change(function (){
 	var prize = this.value;
@@ -101,6 +104,8 @@ $(".idea_prize_choose").change(function (){
 		});
 	}
 });
+
+scoreEventInit();
 //-->
 </script>
 <?php }?>

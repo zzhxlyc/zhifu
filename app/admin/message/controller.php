@@ -32,14 +32,16 @@ class MessageController extends AdminBaseController {
 				$errors['to_name'] = '发送用户不能为空';
 			}
 			if(count($errors) == 0){
-				$user = $this->find_user_by_name($post['to_name']);
-				if($user > 0){
-					$post['to'] = $user->id;
-					$post['to_type'] = $user->get_type();
+				$User = $this->find_user($post['to_name']);
+				if($User){
+					$post['to'] = $User->id;
+					$post['to_type'] = $User->get_type();
+					$post['to_author'] = $User->name;
 					$post['read'] = 0;
 					$post['from'] = $Admin->id;
 					$post['from_type'] = BelongType::ADMIN;
-					$post['from_author'] = $Admin->get_name();
+					$post['from_name'] = $Admin->user;
+					$post['from_author'] = '管理员';
 					$errors = $this->Message->check($post);
 					if(count($errors) == 0){
 						$post['time'] = DATETIME;

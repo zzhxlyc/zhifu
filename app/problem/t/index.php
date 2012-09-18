@@ -51,9 +51,11 @@
 				<?php }else{?>
 				<p>出价：<span class="num">面议</span></p>
 				<?php }?>
-				<p>所在地区：<span>杭州</span></p>
+				<?php if($o->city){?>
+				<p>地区：<span><?php output_pcd($o);?></span></p>
+				<?php }?>
 				
-				<p>发布日期：<span>2012-3-2</span></p>
+				<p>发布日期：<span><?php echo get_date($o->time)?></span></p>
 				
 				<?php output_deadline($o->deadline)?>
 				

@@ -14,6 +14,24 @@
 	<span class="error"><?php echo $errors['title']?></span>
 </div>	
 <div class="row">
+	<label for="">电话</label>
+	<input size="20" type="text" name="phone" class="text" value="<?php echo $problem->phone?>"/>
+	<span class="error"><?php echo $errors['phone']?></span>
+	
+</div>
+<div class="row">
+	<label for="">手机</label>
+	<input size="20" type="text" name="mobile" class="text" value="<?php echo $problem->mobile?>"/>
+	<span class="error"><?php echo $errors['mobile']?></span>
+	
+</div>
+<div class="row">
+	<label for="">邮箱</label>
+	<input size="20" type="text" name="email" class="text" value="<?php echo $problem->email?>"/>
+	<span class="error"><?php echo $errors['email']?></span>
+</div>
+
+<div class="row">
 	<label for="cat">所属行业</label>
 	
 	<select name="cat">

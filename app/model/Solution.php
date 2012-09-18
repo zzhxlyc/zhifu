@@ -9,7 +9,7 @@ class Solution extends AppModel{
 			'need' => array('title', 'problem', 'expert', 'description'),
 			'length' => array('title'=>250),
 			'int' => array('problem', 'expert'),
-			'word'=> array('title', 'description'),
+			'word'=> array('title', 'description', 'c_comment', 'e_comment'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		return $errors;
@@ -17,7 +17,7 @@ class Solution extends AppModel{
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title'),
+			'string'=>array('title', 'c_comment', 'e_comment'),
 			'url'=>array(),
 			'html'=>array('description')
 		);

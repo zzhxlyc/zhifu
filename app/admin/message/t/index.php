@@ -19,7 +19,7 @@
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
-		<td><?php echo $o->from_author?>（<?php echo BelongType::to_string($o->from_type)?>）</td>
+		<td><?php echo $o->from_name?>（<?php echo BelongType::to_string($o->from_type)?>）</td>
 		<td><?php echo $o->to_name?>（<?php echo BelongType::to_string($o->to_type)?>）</td>
 		<td class="operate">
 			<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>

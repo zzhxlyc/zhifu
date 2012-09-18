@@ -5,8 +5,9 @@
 		<td width="30">选择</td>
 		<td>日志</td>
 		<td width="140">时间</td>
-		<td width="60">等级</td>
-		<td width="60">操作</td>
+		<td width="100">IP</td>
+		<td width="50">等级</td>
+		<td width="50">操作</td>
 	</tr>
 	<?php 
 		$i = 0;
@@ -19,6 +20,7 @@
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
 		<td><?php echo $o->action?></td>
 		<td><?php echo $o->time?></td>
+		<td><?php echo $o->ip?></td>
 		<td><?php echo $o->get_type()?></td>
 		<td class="operate">
 			<a href="<?php echo $home.'/delete?id='.$o->id?>">删除</a>
