@@ -226,7 +226,7 @@ var catList = {<?php
 $(document).ready(function($){
 	
 	tagEventInit();
-	catEventInitNormal();
+	catEventInit();
 	
 	
 });	

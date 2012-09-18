@@ -148,6 +148,6 @@ var catList = {<?php
 $(document).ready(function($){
 	dateEventInit();
 	tagEventInit();
-	catEventInitNormal();
+	catEventInit();
 });	
 </script>
