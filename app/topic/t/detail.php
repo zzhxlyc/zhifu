@@ -54,16 +54,16 @@
 
 <script type="text/javascript">
 <!--
-
-
-$('.quote').click(function(){
+function quoteEvent(){
 	var author=$(this).parent().parent().find('.author').text();
 	var time=$(this).parent().parent().find('.time').text();
 	
 	var authorComment=$(this).parent().parent().parent().parent().find('p').text();
 	$('#content').val('<blockquote>以下是引用<a href="javascript:;">'+author+'</a>在'+time+'的回复<p>'+authorComment+'</p></blockquote>');
 	
-});
+}
+
+$('.quote').click(quoteEvent);
 
 function check_content(content){
 	if(content == ''){
@@ -88,8 +88,8 @@ function reply(){
 				html.push('<div class="item clearfix">');
 				html.push('<div class="comment-content">')
 				html.push('<div class="comment-meta">');
-				html.push('<span class="time">'+msg.time+'</span> <a class="author" href="#">'+msg.name+'</a>');
-				html.push('<span class="op"><a href="javascript:;" class="quote">引用</a><a href="javascript:void(0)">编辑</a></span>');
+				html.push('<span class="time">'+msg.time+'</span> <a class="author" target="_blank" href="'+window.ROOT_URL+'/'+msg.type+'/profile?id='+msg.uid+'">'+msg.name+'</a>');
+				html.push('<span class="op"><a href="javascript:;" class="quote">引用</a><a href="'+window.ROOT_URL+'/topic/edit?id='+msg.id+'">编辑</a></span>');
 				html.push('</span></div>');
 				html.push('<p>'+content+'</p>');
 				html.push('</div>');
@@ -99,7 +99,7 @@ function reply(){
 				
 				
 				$('.comment-list').append(html);
-				
+				$('.quote').click(quoteEvent);
 				
 				
 			}
