@@ -43,6 +43,7 @@ class AjaxController extends AppController {
 				$User = $this->get('User');
 				$post['user'] = $User->id;
 				$post['author'] = $User->name;
+				$post['username'] = $User->username;
 				$post['user_type'] = $User->get_type();
 				$errors = $this->Comment->check($post);
 				if(count($errors) == 0){

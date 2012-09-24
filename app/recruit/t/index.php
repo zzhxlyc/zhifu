@@ -36,12 +36,7 @@
 			<td><?php output_identity($o->identity)?></td>
 			<td><?php echo $o->num?></td>
 			<td><?php echo $o->area?></td>
-			<td>
-				<?php echo $o->username?>
-				<?php if($o->author){?>
-				（<?php echo $o->author?>）
-				<?php }?>
-			</td>
+			<td><?php output_username($o, 2)?></td>
 			<td><?php echo $o->time?></td>
 		</tr>
 	<?php 

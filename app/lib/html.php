@@ -12,7 +12,7 @@ function comment_div($comments, $links, $object, $type, $User){
 			?>
 			<div class="item">
 				<div class="comment-meta">
-					<a class="author" href="<?php echo get_author_link($comment)?>"><?php echo $comment->author?></a>
+					<a class="author" href="<?php echo get_author_link($comment->user, $comment->user_type)?>"><?php output_username($comment)?></a>
 					<span class="comment-time"><?php echo $comment->time?></span>
 					<?php if($User && ($User->id != $comment->user ||
 							$User->get_type() != $comment->user_type)){?>

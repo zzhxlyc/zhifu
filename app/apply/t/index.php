@@ -24,9 +24,7 @@
 				<th>性别</th>
 				<th>发布者</th>
 				<th>发布时间</th>				
-								
 			</tr>
-	
 	
 	<?php 
 		if(is_array($list)){
@@ -37,12 +35,7 @@
 			<td><?php output_identity($o->identity)?></td>
 			<td><?php echo $o->area?></td>
 			<td><?php output_sex($o->sex)?></td>
-			<td>
-				<?php echo $o->username?>
-				<?php if($o->author){?>
-				（<?php echo $o->author?>）
-				<?php }?>
-			</td>
+			<td><?php output_username($o, 2)?></td>
 			<td><?php echo $o->time?></td>
 		</tr>
 	<?php 

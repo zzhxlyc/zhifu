@@ -3,7 +3,7 @@
 	<div class="topic-meta">
 		<span class="time"><?php echo $topic->time?></span>
 		<span class="author">来自：
-			<a href="<?php echo $topic->get_author_link()?>"><?php echo $topic->author?></a>
+			<a href="<?php echo $topic->get_author_link()?>"><?php output_username($topic)?></a>
 		</span>
 		<span class="op">
 			<?php if($User && $User->id == $topic->belong && $User->get_type() == $topic->type){?>
@@ -21,7 +21,7 @@
 				<div class="comment-meta">
 					<span class="time"><?php echo $o->time?> </span>
 					
-					<a href="<?php echo $o->get_author_link()?>" class="author"><?php echo $o->author?></a>
+					<a href="<?php echo $o->get_author_link()?>" class="author"><?php output_username($o)?></a>
 					<span class="op">
 						<?php if($User){?>
 						<a href="javascript:;" class="quote">引用</a>

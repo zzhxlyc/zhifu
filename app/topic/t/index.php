@@ -14,7 +14,7 @@
 		?>
 		<tr>
 			<td><a href="<?php echo $home.'/detail?id='.$o->id?>"><?php echo $o->title?></a></td>
-			<td><?php echo $o->author?></td>
+			<td><?php output_username($o)?></td>
 			<td><?php echo $o->comments?></td>
 			<td><?php echo $o->time?></td>					
 		</tr>

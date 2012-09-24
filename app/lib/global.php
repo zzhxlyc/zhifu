@@ -159,6 +159,23 @@ function output_sex($sex){
 	}
 }
 
+function output_username($o, $type = 1){
+	if($type == 1){
+		if($o->author){
+			echo $o->author;
+		}
+		else if($o->username){
+			echo $o->username;
+		}
+	}
+	else if($type == 2){
+		echo $o->username;
+		if($o->author){
+			echo '（'.$o->author.'）';
+		}
+	}
+}
+
 function get_author_link($id, $type){
 	if($type == BelongType::EXPERT){
 		return EXPERT_HOME.'/profile?id='.$id;
