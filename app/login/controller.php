@@ -29,9 +29,9 @@ class LoginController extends AppController {
 			if(strlen($pswd) == 0){
 				$errors['pswd'] = '密码为空';
 			}
-			if(empty($captcha)){
-				$errors['captcha'] = '验证码为空';
-			}
+//			if(empty($captcha)){
+//				$errors['captcha'] = '验证码为空';
+//			}
 //			else if($captcha != $this->session->get('captcha')){
 //				$errors['captcha'] = '验证码错误';
 //			}

@@ -6,7 +6,10 @@ function comment_div($comments, $links, $object, $type, $User){
 		<h3>留言</h3>
 		<div class="content">
 			<div class="comment-begin"></div>
-			<?php foreach($comments as $comment){ ?>
+			<?php 
+				if(is_array($comments)){
+				foreach($comments as $comment){
+			?>
 			<div class="item">
 				<div class="comment-meta">
 					<a class="author" href="<?php echo get_author_link($comment)?>"><?php echo $comment->author?></a>
@@ -20,7 +23,9 @@ function comment_div($comments, $links, $object, $type, $User){
 				</div>
 				<p><?php echo $comment->content?></p>
 			</div><!--end for item-->
-			<?php }?>
+			<?php }
+				}
+			?>
 			
 			<?php if(count($links) > 3){?>
 			<div class="page-wrapper">

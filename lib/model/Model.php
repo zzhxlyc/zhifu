@@ -69,6 +69,12 @@ class Model extends MysqlDAO {
 			}
 		}
 		if($length_check){
+			foreach($data as $field => $value){
+				$v = $this->_check_get_value($data, $field);
+				if(empty($error[$field]) && utf8_strlen($v) > 250){
+					$error[$field] = "不能超过250个字符";
+				}
+			}
 			foreach($length_check as $field => $length){
 				$v = $this->_check_get_value($data, $field);
 				if(empty($error[$field]) && utf8_strlen($v) > $length){

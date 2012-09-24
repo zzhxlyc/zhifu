@@ -117,6 +117,48 @@ function output_score($o){
 	}
 }
 
+function output_identity($identity){
+	$s = intval($identity);
+	if($s == 1){
+		echo '领域专家';
+	}
+	else if($s == 2){
+		echo '社会人才';
+	}
+	else if($s == 3){
+		echo '在校学生';
+	}
+	else if($s == 4){
+		echo '不限';
+	}
+}
+
+function output_degree($degree){
+	$s = intval($degree);
+	if($s == 1){
+		echo '专科';
+	}
+	else if($s == 2){
+		echo '本科';
+	}
+	else if($s == 3){
+		echo '研究生';
+	}
+	else if($s == 4){
+		echo '不限';
+	}
+}
+
+function output_sex($sex){
+	$s = intval($sex);
+	if($s == 1){
+		echo '男';
+	}
+	else if($s == 2){
+		echo '女';
+	}
+}
+
 function get_author_link($id, $type){
 	if($type == BelongType::EXPERT){
 		return EXPERT_HOME.'/profile?id='.$id;

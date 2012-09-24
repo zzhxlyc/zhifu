@@ -22,7 +22,6 @@
 
 <div class="row">
 	<input type="submit" class="btn fl" value="发布" />
-	<!-- <a href="<?php echo $home?>" class="back-btn">返回</a> -->
 </div>
 
 

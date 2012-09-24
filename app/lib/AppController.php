@@ -48,6 +48,13 @@ class AppController extends Controller{
 		if($this->is_set('home')){
 			$this->set('index_page', $this->get('home').'/index');
 		}
+		$base = unserialize(Option::find('ADMIN_MANAGE_BASE'));
+		if($base['logo']){
+			$this->set('LOGO', UPLOAD_HOME.'/'.$base['logo']);
+		}
+		else{
+			$this->set('LOGO', IMAGE_HOME.'/logo.jpg');
+		}
 	}
 	
 	public function login_check($need_login, $need_company, $need_expert){
@@ -194,6 +201,7 @@ class AppController extends Controller{
 			BelongType::PROBLEM => PROBLEM_HOME."/detail?id=$id&",
 			BelongType::PATENT => PATENT_HOME."/detail?id=$id&",
 			BelongType::IDEA => IDEA_HOME."/detail?id=$id&",
+			BelongType::VIDEO => VIDEO_HOME."/show?id=$id&",
 		);
 		$links = $pager->get_page_links($array[$type]);
 		if($set){

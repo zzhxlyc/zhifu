@@ -1,7 +1,7 @@
 <div class="filter clearfix">
 	<div class="order">
-		<a href="<?php echo $home?>" <?php $HTML->if_current($request->get_module() == 'recruit')?>>招聘</a>
-		<a href="<?php echo ROOT_URL.'/apply'?>" <?php $HTML->if_current($request->get_module() == 'apply')?>>求职</a>
+		<a href="<?php echo RECRUIT_HOME?>" <?php $HTML->if_current($request->get_module() == 'recruit')?>>招聘</a>
+		<a href="<?php echo $home?>" <?php $HTML->if_current($request->get_module() == 'apply')?>>求职</a>
 		<form action="" method="get">
 		<select name="fromday" onchange="this.form.submit()">
 			<option value="" <?php $HTML->selected($_GET['fromday'], '')?>>全部时间</option>
@@ -18,11 +18,12 @@
 	<table>
 			<tr class="top">
 				<th>职位名称</th>
-				<th>招聘对象</th>
-				<th>招聘人数</th>
-				<th>招聘地区</th>
+				<th>我的身份</th>
+				<th>求职区域</th>
+				<th>性别</th>
 				<th>发布者</th>
 				<th>发布时间</th>				
+								
 			</tr>
 	
 	
@@ -33,8 +34,8 @@
 		<tr>
 			<td><a href="<?php echo $home.'/show?id='.$o->id?>"><?php echo $o->title?></a></td>
 			<td><?php output_identity($o->identity)?></td>
-			<td><?php echo $o->num?></td>
 			<td><?php echo $o->area?></td>
+			<td><?php output_sex($o->sex)?></td>
 			<td>
 				<?php echo $o->username?>
 				<?php if($o->author){?>

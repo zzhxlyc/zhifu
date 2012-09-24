@@ -9,12 +9,12 @@
 ?>
 		<div class="item">
 			<div class="pic">
-				<a target="_blank" href="<?php echo $home.'/url?id='.$o->id?>">
+				<a target="_blank" href="<?php echo $home.'/show?id='.$o->id?>">
 					<img src="<?php img($o->image, $o->default_image())?>" alt="" width="160" height="120"/>
 				</a>
 			</div>
 			<div class="des">
-				<a target="_blank" href="<?php echo $home.'/url?id='.$o->id?>">
+				<a target="_blank" href="<?php echo $home.'/show?id='.$o->id?>">
 					<?php echo $title?>
 				</a>
 			</div>
@@ -47,12 +47,12 @@
 ?>
 		<div class="item">
 			<div class="pic">
-				<a target="_blank" href="<?php echo $home.'/url?id='.$o->id?>">
+				<a target="_blank" href="<?php echo $home.'/show?id='.$o->id?>">
 					<img src="<?php img($o->image, $o->default_image())?>" alt="" width="160" height="120"/>
 				</a>
 			</div>
 			<div class="des">
-				<a target="_blank" href="<?php echo $home.'/url?id='.$o->id?>">
+				<a target="_blank" href="<?php echo $home.'/show?id='.$o->id?>">
 					<?php echo $title?>
 				</a>
 			</div>

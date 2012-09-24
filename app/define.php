@@ -46,5 +46,6 @@ define('VIDEO_HOME', ROOT_URL.'/video');
 define('TOPIC_HOME', ROOT_URL.'/topic');
 define('ARTICLE_HOME', ROOT_URL.'/article');
 define('RECRUIT_HOME', ROOT_URL.'/recruit');
+define('APPLY_HOME', ROOT_URL.'/apply');
 define('MESSAGE_HOME', ROOT_URL.'/message');
 

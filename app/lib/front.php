@@ -23,7 +23,7 @@ function head_tab3(){
 }
 function head_tab4(){
 	global $request;
-	$array = array('recruit');
+	$array = array('recruit', 'apply');
 	if(in_array($request->get_module(), $array)){
 		echo 'class="current"';
 	}

@@ -1,11 +1,11 @@
 <?php
 
-class RecruitController extends AppController {
+class ApplyController extends AppController {
 	
-	public $models = array('Recruit', 'Tag', 'TagItem');
+	public $models = array('Apply');
 	
 	public function before(){
-		$this->set('home', RECRUIT_HOME);
+		$this->set('home', APPLY_HOME);
 		parent::before();
 		$need_login = array('show', 'add', 'edit');	// either
 		$need_company = array();
@@ -19,12 +19,6 @@ class RecruitController extends AppController {
 		$type = $get['type'];
 		$fromday = $get['fromday'];
 		$cond = array();
-		if($type == 'zhaopin'){
-			$cond['type'] = BelongType::COMPANY;
-		}
-		else if($type == 'qiuzhi'){
-			$cond['type'] = BelongType::EXPERT;
-		}
 		if($fromday == '3days'){
 			$from_ts = TIMESTAMP - 3600 * 24 * 3;
 			$cond['time >='] = date('Y-m-d H:i:s', $from_ts);
@@ -35,9 +29,9 @@ class RecruitController extends AppController {
 		}
 		$limit = 10;
 		$order = array('time'=>'DESC');
-		$all = $this->Recruit->count($cond);
+		$all = $this->Apply->count($cond);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Recruit->get_page($cond, $order, $pager->now(), $limit);
+		$list = $this->Apply->get_page($cond, $order, $pager->now(), $limit);
 		$links = $pager->get_page_links($this->get('home').'/index?');
 		$this->set('list', $list);
 		$this->set('links', $links);
@@ -48,8 +42,8 @@ class RecruitController extends AppController {
 		$id = get_id($get);
 		$has_error = true;
 		if($id){
-			$recruit = $this->Recruit->get($id);
-			if($recruit){
+			$apply = $this->Apply->get($id);
+			if($apply){
 				$has_error = false;
 			}
 		}
@@ -58,7 +52,8 @@ class RecruitController extends AppController {
 			return;
 		}
 		
-		$this->set('$recruit', $recruit);
+		$apply->do_available();
+		$this->set('$apply', $apply);
 	}
 	
 	public function add(){
@@ -69,20 +64,16 @@ class RecruitController extends AppController {
 			$post['type'] = $User->get_type();
 			$post['username'] = $User->username;
 			$post['author'] = $User->name;
-			$recruit = $this->set_model($post);
-			$errors = $this->Recruit->check($post);
+			$apply = $this->set_model($post);
+			$errors = $this->Apply->check($post);
 			if(count($errors) == 0){
-//				$old_tag = $post['old_tag'];
-//				$new_tag = $post['new_tag'];
-//				unset($post['old_tag'], $post['new_tag']);
 				$post['status'] = 1;
 				$post['time'] = DATETIME;
-				$this->Recruit->escape($post);
-				$id = $this->Recruit->save($post);
-//				$this->do_tag($id, BelongType::RECRUIT, $old_tag, $new_tag);
+				$this->Apply->escape($post);
+				$id = $this->Apply->save($post);
 				$this->redirect('show?id='.$id);
 			}
-			$this->set('$recruit', $recruit);
+			$this->set('$apply', $apply);
 			$this->set('$errors', $errors);
 		}
 	}
@@ -93,10 +84,10 @@ class RecruitController extends AppController {
 		$User = $this->get('User');
 		$has_error = true;
 		if($id){
-			$recruit = $this->Recruit->get($id);
-			if($recruit){
-				if($User->id == $recruit->belong 
-						&& $User->get_type() == $recruit->type){
+			$apply = $this->Apply->get($id);
+			if($apply){
+				if($User->id == $apply->belong 
+						&& $User->get_type() == $apply->type){
 					$has_error = false;
 				}
 			}
@@ -108,22 +99,21 @@ class RecruitController extends AppController {
 		
 		if($this->request->post){
 			$post = $this->request->post;
-			$recruit = $this->set_model($post, $recruit);
-			$errors = $this->Recruit->check($recruit);
+			$apply = $this->set_model($post, $apply);
+			$errors = $this->Apply->check($apply);
 			if(count($errors) == 0){
 //				$old_tag = $post['old_tag'];
 //				$new_tag = $post['new_tag'];
 //				unset($post['old_tag'], $post['new_tag']);
-				$this->Recruit->escape($post);
-				$this->Recruit->save($post);
+				$this->Apply->escape($post);
+				$this->Apply->save($post);
 //				$this->do_tag($id, BelongType::RECRUIT, $old_tag, $new_tag);
 				$this->redirect('edit?succ&id='.$id);
 			}
 			$this->set('errors', $errors);
 		}
-//		$recruit->do_available();
-//		$this->add_tag_data($recruit->id, BelongType::RECRUIT);
-		$this->set('$recruit', $recruit);
+		$apply->do_available();
+		$this->set('$apply', $apply);
 	}
 	
 	

@@ -6,39 +6,13 @@ class Recruit extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'description', 'belong', 'type'),
-			'length' => array('title'=>250),
-			'int' => array('belong'),
+			'need' => array('title'),
+			'length' => array('title'=>250, 'description'=>1000),
+			'int' => array('num', 'identity', 'degree', 'age', 'eatroom'),
+			'number' => array('pay'),
 			'word'=> array(),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
-		
-		$type = get_value($data, 'type');
-		if($type == BelongType::EXPERT){
-			$array = array();
-			$a = get_value($data, 'available');
-			$ret = explode(' ', $a);
-			if(count($ret) == 7){
-				for($i = 0;$i < 7;$i++){
-					$r = $ret[$i];
-					$rr = explode('-', $r);
-					if(count($rr) == 3){
-						array_map('intval', $rr);
-						$array[] = implode('-', $rr);
-					}
-					else{
-						$errors['available'] = '选择日期有误';
-						break;
-					}
-				}
-				if(!isset($errors['available'])){
-					set_value($data, 'available', implode(' ', $array));
-				}
-			}
-			else{
-				$errors['available'] = '选择日期有误';
-			}
-		}
 		return $errors;
 	}
 	
@@ -57,16 +31,6 @@ class Recruit extends AppModel{
 		}
 		else{
 			return '已关闭';
-		}
-	}
-	
-	public function do_available(){
-		$available = $this->available;
-		$this->days = array();
-		$days = explode(' ', $available);
-		foreach($days as $day){
-			$day = trim($day);
-			$this->days[] = explode('-', $day);
 		}
 	}
 

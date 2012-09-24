@@ -1,6 +1,10 @@
 <div class="header_wrap">
 	<div class="header">
-		<h1 class="logo"><a href="#"><img src="<?php echo ROOT_URL.'/images/logo.jpg'?>" alt="" /></a></h1>
+		<h1 class="logo">
+			<a href="<?php echo ROOT_URL?>">
+				<img src="<?php echo $LOGO?>" alt="知富网" title="<?php echo WEB_TITLE?>" />
+			</a>
+		</h1>
 		<?php if(isset($User)){?>
 		<ul class="top-nav">
 			<li><a href="<?php echo ROOT_URL?>">首页</a>|</li>

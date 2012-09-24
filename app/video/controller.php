@@ -4,7 +4,7 @@ include(LIB_UTIL_DIR.'/DateCrossUtil.php');
 
 class VideoController extends AppController {
 	
-	public $models = array('Video');
+	public $models = array('Video', 'Comment');
 	
 	public function before(){
 		$this->set('home', VIDEO_HOME);
@@ -60,14 +60,18 @@ class VideoController extends AppController {
 			$User = $this->get('User');
 			$post['belong'] = $User->id;
 			$post['type'] = $User->get_type();
+			$post['username'] = $User->username;
 			$post['author'] = $User->name;
 			$errors = $this->Video->check($post);
 			if(count($errors) == 0){
 				$post['time'] = DATETIME;
 				$post['click'] = 0;
-				$image = Video::get_image($post['url']);
-				if($image){
-					$post['image'] = $image;
+				if(strpos($post['url'], 'youku.com') !== false){
+					$data = VideoUrlParser::parse($post['url']);
+					if($data){
+						$post['image'] = $data['img'];
+						$post['url'] = $data['swf'];
+					}
 				}
 				$this->Video->escape($post);
 				$this->Video->save($post);
@@ -82,5 +86,26 @@ class VideoController extends AppController {
 	}
 	
 	public function add_succ(){}
+	
+	public function show(){
+		$get = $this->request->get;
+		$id = get_id($get);
+		$has_error = true;
+		if($id){
+			$video = $this->Video->get($id);
+			if($video){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		$video->click_up();
+		$page = get_page($get);
+		$this->add_comments($video, $page);
+		$this->set('video', $video);
+	}
 	
 }
