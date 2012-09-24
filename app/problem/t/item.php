@@ -23,7 +23,8 @@
 		</div>
 		<?php }?>
 		<?php 
-			if(is_company_object($User, $Problem) && (!$choosed || $Item->status == 1)){
+			if(is_company_object($User, $Problem) && (!$choosed || $Item->status == 1)
+					&& $Problem->status == 2){
 				if($Item->status == 0){
 					$submit = '选择';
 					$type = 0;

@@ -54,7 +54,7 @@
 				<?php }?>
 				<?php output_deadline($o->deadline)?>
 			</div>
-			<?php if(is_expert($User)){?>
+			<?php if(is_expert($User) && $o->status == 0){?>
 			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">我有创意</a>
 			<?php }?>
 		</div><!--end for right-->

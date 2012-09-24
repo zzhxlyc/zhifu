@@ -60,7 +60,7 @@
 				<?php output_deadline($o->deadline)?>
 				
 			</div>
-			<?php if(is_expert($User)){?>
+			<?php if(is_expert($User) && $o->status == 1){?>
 			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">我要竞标</a>
 			<?php }?>
 		</div><!--end for right-->
