@@ -91,12 +91,6 @@ class CompanyController extends AppController {
 			$post = $this->request->post;
 			$new_Company = $this->set_model($post, $Company);
 			$errors = $this->Company->check($new_Company);
-//			if(count($errors) == 0 && $post['name'] != $User->name){
-//				$U = $this->find_user_by_name($post['name'], $User->id);
-//				if($U){
-//					$errors['name'] = '此用户名已被使用';
-//				}
-//			}
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
@@ -113,6 +107,7 @@ class CompanyController extends AppController {
 				if($post['license'] && $Company->license){
 					FileSystem::remove($Company->license);
 				}
+				$post['id'] = $User->id;
 				$this->Company->escape($post);
 				$this->Company->save($post);
 				$this->redirect('edit?succ');

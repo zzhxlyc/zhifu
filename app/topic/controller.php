@@ -34,7 +34,7 @@ class TopicController extends AppController {
 		$limit = 10;
 		$page = $get['page'];
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Topic->get_page($cond, array('time'=>'DESC'), 
+		$list = $this->Topic->get_page($cond, array('time'=>'ASC'), 
 										$pager->now(), $limit);
 		$links = $pager->get_page_links($this->get('home')."/detail?id=$id&");
 		$this->set('list', $list);
@@ -124,10 +124,12 @@ class TopicController extends AppController {
 		}
 		$this->layout('ajax');
 		
+		$User = $this->get('User');
 		$post['title'] = '';
-		$post['belong'] = 1;
-		$post['type'] = BelongType::EXPERT;
-		$post['author'] = 'aaa';
+		$post['belong'] = $User->id;
+		$post['type'] = $User->get_type();
+		$post['username'] = $User->username;
+		$post['author'] = $User->name;
 		$errors = $this->Topic->check($post);
 		if(count($errors) == 0){
 			$post['comments'] = 0;
@@ -135,7 +137,9 @@ class TopicController extends AppController {
 			$this->Topic->escape($post);
 			$id = $this->Topic->save($post);
 			$this->Topic->comment_plus($parent);
-			echo $id;
+			$array = array('id'=>$id, 'username'=>$post['username'], 
+						'name'=>$post['author'], 'time'=>$post['time']);
+			echo json_encode($array);
 		}
 		else{
 			echo 0;

@@ -32,6 +32,7 @@
 
 <input type="submit" value="批量删除" />
 <a href="<?php echo $home.'/add'?>">添加标签</a>
+<a href="<?php echo $home.'/build'?>">生成最热标签</a>
 </form>
 
 <div class="page-nav">

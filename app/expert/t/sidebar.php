@@ -22,7 +22,7 @@
 	<div class="side-section">
 		<div class="title"><h4>操作</h4></div>
 		<div class="content">
-			<a target="_blank" href="<?php echo MESSAGE_HOME.'/send?user='.$Expert->name?>">发送站内信</a>
+			<a target="_blank" href="<?php echo MESSAGE_HOME.'/send?user='.$Expert->username?>">发送站内信</a>
 		</div>
 	</div><!--end for tag-->
 	

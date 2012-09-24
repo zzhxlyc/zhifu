@@ -16,7 +16,7 @@
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 <div class="row">
-	<label for="">内容</label>
+	<label for="content">内容</label>
 	<textarea name="content" class="text" rows="10" cols="80"><?php echo $message->content?></textarea>
 	<span class="error"><?php echo $errors['content']?></span>
 </div>

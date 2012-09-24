@@ -97,14 +97,13 @@ class TagController extends AdminBaseController {
 	}
 	
 	public function build(){
-		if($this->request->post){
-			$tag_list = $this->Tag->get_list(array(), array('count'=>'DESC'), 5);
-			$array = array();
-			foreach($tag_list as $tag){
-				$array[] = array('id'=>$tag->id, 'name'=>$tag->name, 'count'=>$tag->count);
-			}
-			Option::persist('MOST_COMMON_TAGS', serialize($array));
+		$tag_list = $this->Tag->get_list(array(), array('count'=>'DESC'), 5);
+		$array = array();
+		foreach($tag_list as $tag){
+			$array[] = array('id'=>$tag->id, 'name'=>$tag->name, 'count'=>$tag->count);
 		}
+		Option::persist('MOST_COMMON_TAGS', serialize($array));
+		$this->redirect('index');
 	}
 	
 }

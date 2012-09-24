@@ -3,7 +3,9 @@
 		output_error($error, $home);
 	}
 	else{
+		output_edit_succ();
 ?>
+<h2>用户中心</h2>
 <form action="<?php echo $home.'/edit?id='.$expert->id?>" method="post" <?php $HTML->file_form_need()?>>
 <div class="row">
 	<label for="name">姓名</label>
@@ -83,7 +85,8 @@
 </div>
 
 <div class="row">
-	<input type="submit" value="保存" />
+	<input type="submit" value="保存"  class="btn" />
+	<a href="<?php echo $home.'/myself'?>">返回</a>
 	<?php echo $HTML->hidden('id', $expert->id)?>
 </div>
 </form>

@@ -140,6 +140,7 @@ class ExpertController extends AppController {
 				if($post['license'] && $Expert->license){
 					FileSystem::remove($Expert->license);
 				}
+				$post['id'] = $User->id;
 				$this->Expert->escape($post);
 				$this->Expert->save($post);
 				$this->redirect('edit?succ');
