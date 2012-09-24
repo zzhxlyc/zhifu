@@ -288,6 +288,8 @@ function dateEventInit(){
 		var district=$('input[name=district]').val();
 		
 		$(".province_city").province_city_county(province,city,district); 
+		$(".province_city2").province_city_county(province,city,district); 
+		$(".province_city3").province_city_county(province,city,district); 
 	}
 	
 	
