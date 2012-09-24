@@ -26,7 +26,8 @@
 						<?php if($User){?>
 						<a href="javascript:;" class="quote">引用</a>
 						<?php }?>
-						<?php if($User && $User->id == $topic->belong){?>
+						<?php if($User && $User->get_type() == $o->type
+								 && $User->id == $o->belong){?>
 						<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
 						<?php }?>
 					</span>

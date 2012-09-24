@@ -137,8 +137,9 @@ class TopicController extends AppController {
 			$this->Topic->escape($post);
 			$id = $this->Topic->save($post);
 			$this->Topic->comment_plus($parent);
-			$array = array('id'=>$id, 'username'=>$post['username'], 
-						'name'=>$post['author'], 'time'=>$post['time']);
+			$array = array('id'=>$id, 'uid'=>$post['belong'], 'username'=>$post['username'], 
+						'type'=>strtolower($post['type']),'name'=>$post['author'], 
+						'time'=>$post['time']);
 			echo json_encode($array);
 		}
 		else{

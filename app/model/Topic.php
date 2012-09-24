@@ -35,7 +35,7 @@ class Topic extends AppModel{
 	
 	public function get_author_link(){
 		if($this->type == BelongType::COMPANY){
-			return COMPANY_HOME.'/detail?id='.$this->belong;
+			return COMPANY_HOME.'/profile?id='.$this->belong;
 		}
 		else if($this->type == BelongType::EXPERT){
 			return EXPERT_HOME.'/profile?id='.$this->belong;
