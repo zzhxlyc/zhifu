@@ -10,7 +10,7 @@
 	<div class="row captcha">
 		<label for="">验证码</label>
 		<input class="text" type="text" name="captcha" />
-		<img alt="验证码" src="<?php echo ROOT_URL.'/captcha'?>">
+		<img alt="验证码" src="<?php echo ROOT_URL.'/captcha'?>" onclick="this.src='<?php echo ROOT_URL.'/captcha'?>'" style="cursor:pointer">
 		<span class="error"><?php echo $errors['captcha']?></span>
 	</div>
 	<div class="row">

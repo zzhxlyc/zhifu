@@ -5,7 +5,7 @@
  * 								'module'=>'folder_name',
  * 								'prefix'=>'/'));
  */
-$router->add('/', array('C'=>'ProblemController', 'M'=>'index'));
+$router->add('/', array('C'=>'ZhifuController', 'M'=>'index'));
 $router->add('/login', array('C'=>'LoginController', 'M'=>'login'));
 $router->add('/logout', array('C'=>'LoginController', 'M'=>'loginout'));
 $router->add('/reset', array('C'=>'LoginController', 'M'=>'reset'));

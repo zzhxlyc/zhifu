@@ -10,6 +10,10 @@ class ZhifuController extends AppController {
 		parent::before();
 	}
 	
+	public function index(){
+		
+	}
+	
 	public function captcha(){
 		$captcha = new SimpleCaptcha();
 		$this->set('$captcha', $captcha);
