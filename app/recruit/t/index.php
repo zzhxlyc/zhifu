@@ -1,7 +1,5 @@
 <div class="filter clearfix">
 	<div class="order">
-		<a href="<?php echo $home?>" <?php $HTML->if_current($request->get_module() == 'recruit')?>>招聘</a>
-		<a href="<?php echo ROOT_URL.'/apply'?>" <?php $HTML->if_current($request->get_module() == 'apply')?>>求职</a>
 		<form action="" method="get">
 		<select name="fromday" onchange="this.form.submit()">
 			<option value="" <?php $HTML->selected($_GET['fromday'], '')?>>全部时间</option>
@@ -9,6 +7,9 @@
 			<option value="week" <?php $HTML->selected($_GET['fromday'], 'week')?>>一周以内</option>
 		</select>
 		</form>
+		<a href="<?php echo $home?>" <?php $HTML->if_current($request->get_module() == 'recruit')?>>招聘</a>
+		<a href="<?php echo ROOT_URL.'/apply'?>" <?php $HTML->if_current($request->get_module() == 'apply')?>>求职</a>
+		
 	</div>
 	<a href="<?php echo APPLY_HOME.'/add'?>" class="job-btn btn">发布求职</a>
 	<a href="<?php echo RECRUIT_HOME.'/add'?>" class="job-btn btn">发布招聘</a>

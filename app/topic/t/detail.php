@@ -79,6 +79,7 @@ function reply(){
 			type: "POST",
 			url: window.ROOT_URL + '/topic/reply',
 			data: "content="+content+"&parent="+parent,
+			dataType: 'json',
 			success: function(msg){
 				$("#content").val('');
 				var html=[];
@@ -86,7 +87,7 @@ function reply(){
 				html.push('<div class="item clearfix">');
 				html.push('<div class="comment-content">')
 				html.push('<div class="comment-meta">');
-				html.push('<span class="time">时间</span> <a class="author" href="#">'+'作者名'+'</a>');
+				html.push('<span class="time">'+msg.time+'</span> <a class="author" href="#">'+msg.name+'</a>');
 				html.push('<span class="op"><a href="javascript:;" class="quote">引用</a><a href="javascript:void(0)">编辑</a></span>');
 				html.push('</span></div>');
 				html.push('<p>'+content+'</p>');
