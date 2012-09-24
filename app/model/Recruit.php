@@ -10,7 +10,7 @@ class Recruit extends AppModel{
 			'length' => array('title'=>250, 'description'=>1000),
 			'int' => array('num', 'identity', 'degree', 'age', 'eatroom'),
 			'number' => array('pay'),
-			'word'=> array(),
+			'word'=> array('title', 'description', 'specialty', 'area'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		return $errors;
@@ -18,7 +18,7 @@ class Recruit extends AppModel{
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title', 'description'),
+			'string'=>array('title', 'description', 'specialty', 'area'),
 			'url'=>array(),
 			'html'=>array()
 		);

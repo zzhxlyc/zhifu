@@ -1,12 +1,12 @@
 <?php
 
-class RecruitController extends AdminBaseController {
+class ApplyController extends AdminBaseController {
 	
-	public $models = array('Recruit', 'Log');
+	public $models = array('Apply', 'Log');
 	public $no_session = array();
 	
 	public function before(){
-		$this->set('home', ADMIN_RECRUIT_HOME);
+		$this->set('home', ADMIN_APPLY_HOME);
 		parent::before();
 	}
 	
@@ -15,11 +15,11 @@ class RecruitController extends AdminBaseController {
 		$page = $get['page'];
 		$limit = 10;
 		$cond = array();
-		$all = $this->Recruit->count($cond);
+		$all = $this->Apply->count($cond);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Recruit->get_page($cond, array('id'=>'DESC'), 
+		$list = $this->Apply->get_page($cond, array('id'=>'DESC'), 
 											$pager->now(), $limit);
-		$page_list = $pager->get_page_links(ADMIN_RECRUIT_HOME.'/index?');
+		$page_list = $pager->get_page_links(ADMIN_APPLY_HOME.'/index?');
 		$this->set('list', $list);
 		$this->set('$page_list', $page_list);
 	}
@@ -39,8 +39,8 @@ class RecruitController extends AdminBaseController {
 		$id = $data['id'];
 		$has_error = true;
 		if($id){
-			$Recruit = $this->Recruit->get($id);
-			if($Recruit){
+			$Apply = $this->Apply->get($id);
+			if($Apply){
 				$has_error = false;
 			}
 		}
@@ -51,19 +51,19 @@ class RecruitController extends AdminBaseController {
 		
 		if($this->request->post){
 			$post = $this->request->post;
-			$Recruit = $this->set_model($post, $Recruit);
-			$errors = $this->Recruit->check($Recruit);
+			$Apply = $this->set_model($post, $Apply);
+			$errors = $this->Apply->check($Apply);
 			if(count($errors) == 0){
-				$this->Recruit->escape($post);
-				$this->Recruit->save($post);
+				$this->Apply->escape($post);
+				$this->Apply->save($post);
 				$this->response->redirect('edit?succ&id='.$id);
 			}
 			else{
 				$this->set('errors', $errors);
 			}
 		}
-		$this->set('recruit', $Recruit);
-//		$this->add_data($Recruit);
+		$this->set('apply', $Apply);
+		$this->add_data($Apply);
 	}
 	
 }

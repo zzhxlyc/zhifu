@@ -8,6 +8,8 @@
 		<?php echo left_tab_current('patent')?>><span>专利管理</span></a></li>
 	<li><a href="<?php echo ADMIN_RECRUIT_HOME?>" 
 		<?php echo left_tab_current('recruit')?>><span>招聘管理</span></a></li>
+	<li><a href="<?php echo ADMIN_APPLY_HOME?>" 
+		<?php echo left_tab_current('apply')?>><span>求职管理</span></a></li>
 	<li><a href="<?php echo ADMIN_VIDEO_HOME?>" 
 		<?php echo left_tab_current('video')?>><span>视频管理</span></a></li>
 	<li><a href="<?php echo ADMIN_ARTICLE_HOME?>" 

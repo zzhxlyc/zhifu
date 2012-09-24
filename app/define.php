@@ -30,6 +30,7 @@ define('ADMIN_PATENT_HOME', ADMIN_HOME.'/patent');
 define('ADMIN_PROBLEM_HOME', ADMIN_HOME.'/problem');
 define('ADMIN_TOPIC_HOME', ADMIN_HOME.'/topic');
 define('ADMIN_RECRUIT_HOME', ADMIN_HOME.'/recruit');
+define('ADMIN_APPLY_HOME', ADMIN_HOME.'/apply');
 define('ADMIN_PAY_HOME', ADMIN_HOME.'/pay');
 define('ADMIN_MANAGE_HOME', ADMIN_HOME.'/manage');
 define('ADMIN_SOLUTION_HOME', ADMIN_HOME.'/solution');

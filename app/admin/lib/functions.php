@@ -29,7 +29,7 @@ function left_tab_current($module, $method = Null){
 
 function if_tab1_current(){
 	global $request;
-	$array = array('problem', 'idea', 'patent', 'recruit', 'video', 'article',
+	$array = array('problem', 'idea', 'patent', 'recruit', 'apply', 'video', 'article',
 					'topic', 'message', 'category', 'tag');
 	if(in_array($request->get_module(), $array)){
 		echo 'class="current"';

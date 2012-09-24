@@ -8,9 +8,9 @@ class Apply extends AppModel{
 		$check_arrays = array(
 			'need' => array('title', 'name'),
 			'length' => array('description'=>1000),
-			'int' => array('num', 'identity', 'education', 'mobile', 'year'),
+			'int' => array('num', 'identity', 'education', 'mobile', 'year', 'age'),
 			'email' => array('email'),
-			'word'=> array(),
+			'word'=> array('title', 'name', 'description', 'address', 'area', 'evaluate'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		
@@ -39,7 +39,7 @@ class Apply extends AppModel{
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title', 'description'),
+			'string'=>array('title', 'name', 'description', 'address', 'area', 'evaluatere'),
 			'url'=>array(),
 			'html'=>array()
 		);
