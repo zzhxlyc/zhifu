@@ -64,8 +64,10 @@ function array_to_map($list, $field = 'id'){
 //$list是一个obj的list，obj带id属性
 function get_map_by_id($list){
 	$ret = array();
-	foreach($list as $obj){
-		$ret[$obj->id] = $obj;
+	if($list){
+		foreach($list as $obj){
+			$ret[$obj->id] = $obj;
+		}
 	}
 	return $ret;
 }

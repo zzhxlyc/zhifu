@@ -52,5 +52,119 @@ class Patent extends AppModel{
 	public static function default_image(){
 		return IMAGE_HOME.'/default.jpg';
 	}
+	
+	public function app_tostring(){
+		$s = $this->app;
+		if($s == 1){
+			return '高新技术';
+		}
+		else if($s == 2){
+			return '可产业化';
+		}
+		else if($s == 3){
+			return '小本创业';
+		}
+		else if($s == 4){
+			return '社会公益';
+		}
+		else if($s == 5){
+			return '民间秘方';
+		}
+		else{
+			return '';
+		}
+	}
+	
+	public function skill_tostring(){
+		$s = $this->skill;
+		if($s == 1){
+			return '构想阶段';
+		}
+		else if($s == 2){
+			return '图纸阶段';
+		}
+		else if($s == 3){
+			return '成功案例';
+		}
+		else if($s == 4){
+			return '批量推广';
+		}
+		else if($s == 5){
+			return '研发成功';
+		}
+		else{
+			return '';
+		}
+	}
+	
+	public function kind_tostring(){
+		$s = $this->kind;
+		if($s == 1){
+			return '发明';
+		}
+		else if($s == 2){
+			return '外观';
+		}
+		else if($s == 3){
+			return '未申请专利';
+		}
+		else{
+			return '';
+		}
+	}
+	
+	public function example_tostring(){
+		$s = $this->example;
+		if($s == 1){
+			return '无';
+		}
+		else if($s == 2){
+			return '有';
+		}
+		else if($s == 3){
+			return '正在制作';
+		}
+		else{
+			return '';
+		}
+	}
+	
+	public function transfer_tostring(){
+		$s = $this->transfer;
+		if($s == 1){
+			return '完全转让';
+		}
+		else if($s == 2){
+			return '许可转让';
+		}
+		else if($s == 3){
+			return '合作生产';
+		}
+		else if($s == 4){
+			return '接受投资';
+		}
+		else{
+			return '';
+		}
+	}
+	
+	public function owner_tostring(){
+		$s = $this->owner;
+		if($s == 1){
+			return '个人';
+		}
+		else if($s == 2){
+			return '企业';
+		}
+		else if($s == 3){
+			return '科研单位';
+		}
+		else if($s == 4){
+			return '大专院校';
+		}
+		else{
+			return '';
+		}
+	}
 
 }

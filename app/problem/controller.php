@@ -83,7 +83,7 @@ class ProblemController extends AppController {
 		else{
 			$experts = array();
 		}
-		$this->set_category($Problem);
+		$this->show_categorys($Problem);
 		$this->set('$experts', get_map_by_id($experts));
 		$this->set('$solutions', $solutions);
 		
@@ -111,8 +111,8 @@ class ProblemController extends AppController {
 		if(!$cat_array){
 			$cat_array = $this->Category->get_category();
 		}
-		$Problem->catname = $cat_array[$Problem->cat]['name'];
-		$Problem->subcatname = $cat_array[$Problem->cat]['c'][$Problem->subcat]['name'];
+		$Problem->cat_name = $cat_array[$Problem->cat]['name'];
+		$Problem->subcat_name = $cat_array[$Problem->cat]['c'][$Problem->subcat]['name'];
 	}
 	
 	private function add_data($Problem = null){
@@ -524,6 +524,7 @@ class ProblemController extends AppController {
 		}
 		$this->set('$Problem', $Problem);
 		$this->show_tags($Problem);
+		$this->show_categorys($Problem);
 		$this->set('$Item', $Item);
 		
 		if($User->is_company()){

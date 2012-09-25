@@ -7,7 +7,7 @@ class Article extends AppModel {
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('title', 'content', 'admin'),
-			'length' => array('title'=>250),
+			'length' => array('content'=>65535),
 			'int' => array('admin'),
 			'word'=> array('title', 'content'),
 		);

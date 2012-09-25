@@ -5,8 +5,8 @@
 			alt="<?php echo $Problem->title?>" width="180" height="135"/>
 		<p><?php echo $Problem->title?></p>
 		<p>金额：<span class="price"><?php output_money($Problem->budget)?>万元</span></p>
-		<?php if(!empty($Problem->catname)){?>
-		<p>类别：<?php echo $Problem->catname?> <?php echo $Problem->subcatname?></p>
+		<?php if(!empty($Problem->cat_name)){?>
+		<p>类别：<?php echo $Problem->cat_name?> <?php echo $Problem->subcat_name?></p>
 		<?php }?>
 		<?php if(!empty($Problem->province)){?>
 		<p>地区：<?php output_pcd($Problem)?></p>

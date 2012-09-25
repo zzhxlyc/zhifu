@@ -4,6 +4,9 @@
 		<img src="<?php img($Idea->image, $Idea->default_image())?>" alt="<?php echo $Idea->title?>" width="180" height="135"/>
 		<p><?php echo $Idea->title?></p>
 		<p>金额：<span class="price"><?php output_money($Idea->budget)?>万元</span></p>
+		<?php if(!empty($Idea->cat_name)){?>
+		<p>类别：<?php echo $Idea->cat_name?> <?php echo $Idea->subcat_name?></p>
+		<?php }?>
 		<p>发布时间：<?php echo get_date($Idea->time)?></p>
 		<p>最后修改时间：<?php echo get_date($Idea->lastmodify)?></p>
 		<?php if(isset($Idea->deadline)){?>

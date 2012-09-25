@@ -7,8 +7,8 @@ class PatentController extends AppController {
 	public function before(){
 		$this->set('home', PATENT_HOME);
 		parent::before();
-		$need_login = array('detail');	// either
-		$need_company = array('submit');
+		$need_login = array('detail', 'submit');	// either
+		$need_company = array();
 		$need_expert = array('add', 'edit');
 		$this->login_check($need_login, $need_company, $need_expert);
 	}
@@ -60,6 +60,7 @@ class PatentController extends AppController {
 				$new_tag = $post['new_tag'];
 				unset($post['old_tag'], $post['new_tag']);
 				$post['time'] = DATETIME;
+				$post['lastmodify'] = DATETIME;
 				$this->Patent->escape($post);
 				$id = $this->Patent->save($post);
 				$this->do_tag($id, BelongType::PATENT, $old_tag, $new_tag);
@@ -99,26 +100,49 @@ class PatentController extends AppController {
 		
 		$this->set('$Patent', $Patent);
 		
-//		$Expert = $this->Expert->get($Patent->expert);
-//		$this->set('$Expert', $Expert);
-		
-		$tag_list = $this->add_tag_data($id, BelongType::PATENT, false);
+		$tag_list = $this->add_tags($Patent, false);
 		$tag_list = $this->TagItem->get_most($tag_list);
 		$this->set('$tags', $tag_list);
 		
 		$cond = array('patent'=>$id);
-		$deals = $this->Deal->get_list($cond);
+		$deals = $this->Deal->get_list($cond, array('time'=>'DESC'));
 		if(count($deals) > 0){
-			$company_ids = get_attrs($deals, 'company');
-			$cond = array('id in'=>$company_ids);
-			$companys = $this->Company->get_list($cond);
+			$expert_ids = $company_ids = array();
+			foreach($deals as $deal){
+				if($deal->type == BelongType::EXPERT){
+					$expert_ids[] = $deal->belong;
+				}
+				else if($deal->type == BelongType::COMPANY){
+					$company_ids[] = $deal->belong;
+				}
+			}
+			if(count($expert_ids) > 0){
+				$cond = array('id in'=>$expert_ids);
+				$experts = $this->Expert->get_list($cond);
+			}
+			if(count($company_ids) > 0){
+				$cond = array('id in'=>$company_ids);
+				$companys = $this->Company->get_list($cond);
+			}
+			$experts = get_map_by_id($experts);
+			$companys = get_map_by_id($companys);
+			$buyers = array();
+			foreach($deals as $deal){
+				if($deal->type == BelongType::EXPERT){
+					$buyers[$deal->id] = $experts[$deal->belong];
+				}
+				else if($deal->type == BelongType::COMPANY){
+					$buyers[$deal->id] = $companys[$deal->belong];
+				}
+			}
 		}
 		else{
-			$companys = array();
+			$buyers = array();
 		}
-		$this->set('$companys', get_map_by_id($companys));
+		$this->set('$buyers', $buyers);
 		$this->set('$deals', $deals);
 		
+		$this->show_categorys($Patent);
 		$page = get_page($get);
 		$this->add_comments($Patent, $page);
 	}
@@ -178,7 +202,7 @@ class PatentController extends AppController {
 		$has_error = true;
 		if($id){
 			$Patent = $this->Patent->get($id);
-			if($Patent && $User->is_company()){
+			if($Patent){
 				$has_error = false;
 			}
 		}
@@ -188,13 +212,20 @@ class PatentController extends AppController {
 		}
 		
 		if($this->request->post){
-			$cond = array('patent'=>$id, 'company'=>$User->id);
+			$cond = array('patent'=>$id, 'belong'=>$User->id, 'type'=>$User->get_type());
 			$count = $this->Deal->count($cond);
 			if($count == 0){
+				if($User->get_type() == BelongType::EXPERT){
+					if($Patent->expert == $User->id){
+						$this->redirect('detail?id='.$id);
+					}
+				}
 				$data = array();
 				$data['patent'] = $id;
 				$data['pname'] = $Patent->title;
-				$data['company'] = $User->id;
+				$data['belong'] = $User->id;
+				$data['type'] = $User->get_type();
+				$data['username'] = $User->username;
 				$data['author'] = $User->name;
 				$data['time'] = DATETIME;
 				$this->Deal->save($data);

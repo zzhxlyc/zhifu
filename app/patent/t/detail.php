@@ -19,25 +19,25 @@
 	</div><!--end for section-->
 
 	<div class="section">
-		<h3>购买企业（<?php echo count($deals)?>）</h3>
+		<h3>购买用户（<?php echo count($deals)?>）</h3>
 		<div class="content line-list">
 			<?php 
 				foreach($deals as $deal){
-					$company = $companys[$deal->company];
+					$buyer = $buyers[$deal->id];
 			?>
 			<div class="item clearfix">
 				<div class="pic">
-					<a target="_blank" href="<?php echo COMPANY_HOME.'/profile?id='.$company->id?>">
-					<img src="<?php img($company->image)?>" alt="<?php echo $company->name?>"
+					<a target="_blank" href="<?php echo get_author_link($buyer->id, $buyer->get_type())?>">
+					<img src="<?php img($buyer->image, $buyer->default_image())?>" alt="<?php echo $buyer->name?>"
 						 width="100" height="100"/>
 					</a>
 					<span class="name">
-						<a target="_blank" href="<?php echo COMPANY_HOME.'/profile?id='.$company->id?>">
-						<?php echo $company->name?>
+						<a target="_blank" href="<?php echo get_author_link($buyer->id, $buyer->get_type())?>">
+						<?php output_username($buyer)?>
 						</a>
 					</span>
 				</div>
-				<div class="des"><?php output_desc($company->description)?></div>
+				<div class="des">购买时间：<?php echo $deal->time?></div>
 			</div><!--end for item-->
 			<?php }?>
 		</div><!--end for list-->

@@ -98,6 +98,7 @@ class IdeaController extends AppController {
 		
 		$page = get_page($get);
 		$this->add_comments($Idea, $page);
+		$this->show_categorys($Idea);
 		
 		if($Idea->deadline && is_expire($Idea->deadline)){
 			$data = array('id'=>$Idea->id, 'closed'=>1);
