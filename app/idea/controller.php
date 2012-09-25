@@ -155,6 +155,7 @@ class IdeaController extends AppController {
 			}
 			$idea = $this->set_model($post);
 			$this->set('$idea', $idea);
+			p($idea);
 			$this->set('errors', $errors);
 		}
 		$this->add_data();

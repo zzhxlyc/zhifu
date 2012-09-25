@@ -192,7 +192,6 @@
 
 <div class="row">
 	<input type="submit" value="保存" class="btn" />
-	<a href="<?php echo $home?>">返回</a>
 </div>
 
 </form>

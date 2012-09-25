@@ -51,6 +51,9 @@ class AjaxController extends AppController {
 					$id = $this->Comment->save($post);
 					$ret['succ'] = 1;
 					$ret['id'] = $id;
+					$ret['uid'] = $User->id;
+					$ret['type'] = strtolower($User->get_type());
+					$ret['username'] = $User->username;
 					$ret['name'] = $User->name;
 					$ret['time'] = DATETIME;
 				}

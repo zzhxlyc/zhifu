@@ -57,10 +57,10 @@ class CompanyController extends AppController {
 		$problems = $this->Problem->get_list($cond, array('lastmodify'=>'DESC'));
 		$this->set('$problems', $problems);
 		
-		$cond = array('company'=>$id);
+		$cond = array('belong'=>$id, 'type'=>BelongType::COMPANY);
 		$deals = $this->Deal->get_list($cond);
 		if(count($deals) > 0){
-			$patent_ids = get_attrs($deals, 'patent');
+			$patent_ids = get_attrs($deals, 'belong');
 			$cond = array('id in'=>$patent_ids);
 			$patents = $this->Patent->get_list($cond, array('lastmodify'=>'DESC'));
 		}
