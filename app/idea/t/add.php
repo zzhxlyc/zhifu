@@ -3,7 +3,10 @@
 
 <h2>发布创意悬赏</h2>
 <div class="edit-left">
-
+<div>
+	<input type="hidden" name="cat" value="<?php echo $idea->cat?>" />
+	<input type="hidden" name="subcat" value="<?php echo $idea->subcat?>" />
+</div>
 <div class="row">
 	<label for="">名称</label>
 	<input class="text" size="50" type="text" name="title" value="<?php echo $idea->title?>" />
@@ -116,8 +119,7 @@
 </div>
 
 <div class="row">
-	<input type="hidden" name="cat" value="<?php echo $idea->cat?>" />
-	<input type="hidden" name="subcat" value="<?php echo $idea->subcat?>" />
+	
 	<input type="submit" value="发布" class="btn fl">
 	<!-- <a href="<?php echo $home?>" class="back-btn">返回</a> -->
 </div>

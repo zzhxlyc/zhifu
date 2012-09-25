@@ -88,7 +88,7 @@ function reply(){
 				html.push('<div class="item clearfix">');
 				html.push('<div class="comment-content">')
 				html.push('<div class="comment-meta">');
-				html.push('<span class="time">'+msg.time+'</span> <a class="author" target="_blank" href="'+window.ROOT_URL+'/'+msg.type+'/profile?id='+msg.uid+'">'+msg.name+'</a>');
+				html.push('<span class="time">'+msg.time+'</span> <a class="author" target="_blank" href="'+window.ROOT_URL+'/'+msg.type+'/profile?id='+msg.uid+'">'+(msg.name.length==0?msg.username:msg.name)+'</a>');
 				html.push('<span class="op"><a href="javascript:;" class="quote">引用</a><a href="'+window.ROOT_URL+'/topic/edit?id='+msg.id+'">编辑</a></span>');
 				html.push('</span></div>');
 				html.push('<p>'+content+'</p>');

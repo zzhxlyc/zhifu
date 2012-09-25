@@ -4,37 +4,37 @@
 
 <div class="row">
 	<label for="name">专利名称</label>
-	<input size="50" type="text" name="title" value="<?php echo $patent->title?>" />
+	<input size="50" type="text" class="text" name="title" value="<?php echo $patent->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 
 <div class="row">
 	<label for="name">专利号</label>
-	<input size="50" type="text" name="pid" value="<?php echo $patent->pid?>" />
+	<input size="50" type="text" class="text" name="pid" value="<?php echo $patent->pid?>" />
 	<span class="error"><?php echo $errors['pid']?></span>
 </div>
 
 <div class="row">
 	<label for="name">电话</label>
-	<input size="50" type="text" name="phone" value="<?php echo $patent->phone?>" />
+	<input size="50" type="text" class="text" name="phone" value="<?php echo $patent->phone?>" />
 	<span class="error"><?php echo $errors['phone']?></span>
 </div>
 
 <div class="row">
 	<label for="name">移动电话</label>
-	<input size="50" type="text" name="mobile" value="<?php echo $patent->mobile?>" />
+	<input size="50" type="text" class="text" name="mobile" value="<?php echo $patent->mobile?>" />
 	<span class="error"><?php echo $errors['mobile']?></span>
 </div>
 
 <div class="row">
 	<label for="name">邮箱</label>
-	<input size="50" type="text" name="email" value="<?php echo $patent->email?>" />
+	<input size="50" type="text" class="text" name="email" value="<?php echo $patent->email?>" />
 	<span class="error"><?php echo $errors['email']?></span>
 </div>
 
 <div class="row">
 	<label for="name">价格</label>
-	<input size="10" type="text" name="budget" value="<?php echo $patent->budget?>" /> 万元
+	<input size="10" type="text" class="text" name="budget" value="<?php echo $patent->budget?>" /> 万元
 	<span class="error"><?php echo $errors['budget']?></span>
 </div>
 
@@ -52,7 +52,7 @@
 
 <div class="row">
 	<label for="tag">领域标签</label>
-	<input size="20" type="text" value="" id="new-tag" /> 
+	<input size="20" type="text" class="text" value="" id="new-tag" /> 
 	<a href="javascript:;" id="add-tag">添加</a>
 </div>	
 
@@ -86,7 +86,7 @@
 	
 <div class="row">
 	<label for="name">相关网站</label>
-	<input size="60" type="text" name="url" value="<?php echo $patent->url?>" />
+	<input size="60" type="text" class="text" name="url" value="<?php echo $patent->url?>" />
 	<span class="error"><?php echo $errors['url']?></span>
 </div>
 

@@ -90,8 +90,8 @@
 </div>
 
 <div class="row">
-	<input type="submit" value="修改" class="btn" />
-	<a href="<?php echo $home.'/myself'?>">返回</a>
+	<input type="submit" value="修改" class="btn fl" />
+	<a href="<?php echo $home.'/myself'?>" class="back-btn">返回</a>
 </div>
 </form>
 

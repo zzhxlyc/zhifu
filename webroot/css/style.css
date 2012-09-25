@@ -457,7 +457,7 @@ background:url(../images/ss.jpg) no-repeat;
 .filter .job-btn{
 float:right;	
 margin-top:10px;
-
+margin-left:10px;
 }
 
 
@@ -1170,5 +1170,7 @@ padding-top:10px;
 padding-left:10px;
 }
 
-
+.rating{
+	margin:10px 0;
+}
 

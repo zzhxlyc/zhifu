@@ -43,13 +43,17 @@
 				<input type="hidden" name="id" value="<?php echo $Problem->id?>" />
 				<input type="hidden" name="score" value="<?php echo $score?>" />
 				<textarea rows="5" cols="60" name="comment"></textarea>
-				<input type="submit" value="提交" class="btn fl" />
+				<div>
+					<input type="submit" value="提交" class="btn fl" />
+					<a href="<?php echo $home.'/detail?id='.$Problem->id?>" class="back-btn">返回</a>
+				</div>
+				
+				
 			</form>
 			<?php }else{?>
 			<input type="hidden" name="score" value="<?php echo $score?>" />
 			<p>评论：<?php echo $comment?></p>
 			<?php }?>
-			<a href="<?php echo $home.'/detail?id='.$Problem->id?>" class="back-btn">返回</a>
 		</div>
 	</div><!--end for section-->
 	

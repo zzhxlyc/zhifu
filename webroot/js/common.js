@@ -105,7 +105,7 @@ function commentReplyEvent(){
 						var html=[];
 						html.push('<div class="item">');
 						html.push('<div class="comment-meta">');
-						html.push('<a class="author" href="#">'+msg.name+'</a>');
+						html.push('<a class="author" href="'+window.ROOT_URL+'/'+msg.type+'/profile?id='+msg.uid+'">'+(msg.name.length==0?msg.username:msg.name)+'</a>');
 						html.push('<span class="comment-time">'+msg.time+'</span>');
 //						html.push('<span class="op"><a href="javascript:void(0)">回复</a></span>');
 						html.push('</span></div>');

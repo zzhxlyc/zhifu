@@ -7,39 +7,41 @@
 ?>
 <h2>用户中心</h2>
 <form action="<?php echo $home.'/edit?id='.$expert->id?>" method="post" <?php $HTML->file_form_need()?>>
+	<div class="edit-left">
+	
 <div class="row">
 	<label for="name">姓名</label>
-	<input size="50" type="text" name="name" value="<?php echo $expert->name?>" />
+	<input size="50" type="text" class="text" name="name" value="<?php echo $expert->name?>" />
 	<span class="error"><?php echo $errors['name']?></span>
 </div>
 <div class="row">
 	<label for="name">邮箱</label>
-	<input size="50" type="text" name="email" value="<?php echo $expert->email?>" />
+	<input size="50" type="text" class="text"  name="email" value="<?php echo $expert->email?>" />
 	<span class="error"><?php echo $errors['email']?></span>
 </div>
 <div class="row">
 	<label for="name">电话</label>
-	<input size="50" type="text" name="phone" value="<?php echo $expert->phone?>" />
+	<input size="50" type="text" class="text"  name="phone" value="<?php echo $expert->phone?>" />
 	<span class="error"><?php echo $errors['phone']?></span>
 </div>
 <div class="row">
 	<label for="name">网址</label>
-	<input size="50" type="text" name="url" value="<?php echo $expert->url?>" />
+	<input size="50" type="text" class="text"  name="url" value="<?php echo $expert->url?>" />
 	<span class="error"><?php echo $errors['url']?></span>
 </div>
 <div class="row">
 	<label for="name">职业</label>
-	<input size="50" type="text" name="job" value="<?php echo $expert->job?>" />
+	<input size="50" type="text" class="text"  name="job" value="<?php echo $expert->job?>" />
 	<span class="error"><?php echo $errors['job']?></span>
 </div>
 <div class="row">
 	<label for="name">工作单位</label>
-	<input size="50" type="text" name="workplace" value="<?php echo $expert->workplace?>" />
+	<input size="50" type="text" class="text"  name="workplace" value="<?php echo $expert->workplace?>" />
 	<span class="error"><?php echo $errors['workplace']?></span>
 </div>
 <div class="row">
 	<label for="tag">领域标签</label>
-	<input size="20" type="text" value="" id="new-tag" /> 
+	<input size="20" type="text" class="text"  value="" id="new-tag" /> 
 	<a href="javascript:;" id="add-tag">添加</a>
 </div>	
 
@@ -70,11 +72,9 @@
 	?>
 </div>
 	
-<div class="row">
-	<label for="name">描述</label><br/><br/>
-	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $expert->description?></textarea>
-	<span class="error"><?php echo $errors['description']?></span>
-</div>
+
+</div>	<!--end for edit-left-->
+<div class="edit-right">
 
 <div class="row">
 	<label for="name">头像</label>
@@ -83,10 +83,15 @@
 	<img width="250" src="<?php img($expert->image)?>" />
 	<?php }?>
 </div>
-
+</div>	<!--end for edit-right-->
 <div class="row">
-	<input type="submit" value="保存"  class="btn" />
-	<a href="<?php echo $home.'/myself'?>">返回</a>
+	<label for="name">描述</label><br/><br/>
+	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $expert->description?></textarea>
+	<span class="error"><?php echo $errors['description']?></span>
+</div>
+<div class="row">
+	<input type="submit" value="保存"  class="btn fl" />
+	<a href="<?php echo $home.'/myself'?>" class="back-btn">返回</a>
 	<?php echo $HTML->hidden('id', $expert->id)?>
 </div>
 </form>

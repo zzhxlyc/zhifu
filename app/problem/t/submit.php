@@ -19,7 +19,7 @@
 			<form action="" method="post" <?php $HTML->file_form_need()?>>
 <div class="row">
 	<label for="name">方案</label>
-	<input size="70" type="text" name="title" value="<?php echo $solution->title?>" />
+	<input size="70" class="text" type="text" name="title" value="<?php echo $solution->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 <div class="row">
