@@ -3,7 +3,7 @@
 	<div class="topic-meta">
 		<span class="time"><?php echo $topic->time?></span>
 		<span class="author">来自：
-			<a href="<?php echo $topic->get_author_link()?>"><?php output_username($topic)?></a>
+			<a href="<?php echo $topic->get_author_link()?>"><?php echo $topic->username?></a>
 		</span>
 		<span class="op">
 			<?php if($User && $User->id == $topic->belong && $User->get_type() == $topic->type){?>
@@ -21,7 +21,7 @@
 				<div class="comment-meta">
 					<span class="time"><?php echo $o->time?> </span>
 					
-					<a href="<?php echo $o->get_author_link()?>" class="author"><?php output_username($o)?></a>
+					<a href="<?php echo $o->get_author_link()?>" class="author"><?php echo $o->username?></a>
 					<span class="op">
 						<?php if($User){?>
 						<a href="javascript:;" class="quote">引用</a>
@@ -88,7 +88,7 @@ function reply(){
 				html.push('<div class="item clearfix">');
 				html.push('<div class="comment-content">')
 				html.push('<div class="comment-meta">');
-				html.push('<span class="time">'+msg.time+'</span> <a class="author" target="_blank" href="'+window.ROOT_URL+'/'+msg.type+'/profile?id='+msg.uid+'">'+(msg.name.length==0?msg.username:msg.name)+'</a>');
+				html.push('<span class="time">'+msg.time+'</span> <a class="author" target="_blank" href="'+window.ROOT_URL+'/'+msg.type+'/profile?id='+msg.uid+'">'+(msg.name.length==0?msg.username:msg.username)+'</a>');
 				html.push('<span class="op"><a href="javascript:;" class="quote">引用</a><a href="'+window.ROOT_URL+'/topic/edit?id='+msg.id+'">编辑</a></span>');
 				html.push('</span></div>');
 				html.push('<p>'+content+'</p>');

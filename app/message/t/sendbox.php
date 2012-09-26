@@ -24,6 +24,9 @@
 	?>
 	<div class="item clearfix">
 		<div class="middle">
+			发送给：<a href="<?php echo get_author_link($o->to, $o->to_type)?>">
+					<?php echo $o->to_name?></a>
+			<?php echo $o->time?>
 			<a href="<?php echo $home.'/detail?id='.$o->id?>">
 				<h3 class="title"><?php echo $o->title?></h3>
 			</a>

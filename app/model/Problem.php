@@ -7,7 +7,7 @@ class Problem extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('title', 'company', 'description', 'phone', 'mobile', 'email'),
-			'length' => array('title'=>250, 'phone'=>20, 'mobile'=>20, 'email'=>250),
+			'length' => array('phone'=>20, 'mobile'=>20, 'description'=>1000),
 			'int' => array('company', 'cat', 'subcat'),
 			'number' => array('budget'),
 			'email' => array('email'),

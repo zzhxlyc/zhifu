@@ -184,7 +184,7 @@ function get_author_link($id, $type){
 		return COMPANY_HOME.'/profile?id='.$id;
 	}
 	else{
-		return '#';
+		return '';
 	}
 }
 

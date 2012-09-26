@@ -18,12 +18,12 @@ class MessageController extends AppController {
 		$page = $get['page'];
 		$limit = 10;
 		$User = $this->get('User');
-		$condition = array('to'=>$User->id);
+		$cond = array('to'=>$User->id, 'to_type'=>$User->get_type());
 		$order = array('time'=>'DESC');
-		$all = $this->Message->count($condition);
+		$all = $this->Message->count($cond);
 		$pager = new Pager($all, $page, $limit);
-		$list = $this->Message->get_page($condition, $order, $pager->now(), $limit);
-		$links = $pager->get_page_links(MESSAGE_HOME.'/index?');
+		$list = $this->Message->get_page($cond, $order, $pager->now(), $limit);
+		$links = $pager->get_page_links(MESSAGE_HOME.'?');
 		$this->set('list', $list);
 		$this->set('links', $links);
 	}
@@ -88,7 +88,8 @@ class MessageController extends AppController {
 			if(!isset($data['to'])){
 				$errors['user'] = '用户不存在';
 			}
-			else if($data['to'] == $data['from']){
+			else if($data['to'] == $data['from'] &&
+					$data['to_type'] == $data['from_type']){
 				$errors['user'] = '不能发送给自己';
 			}
 			if(count($errors) == 0){
@@ -110,6 +111,14 @@ class MessageController extends AppController {
 				$this->set('user', $user);
 			}
 		}
+	}
+	
+	public function unreadcount(){
+		$this->layout('ajax');
+		$User = $this->get('User');
+		$cond = array('to'=>$User->id, 'to_type'=>$User->get_type(), 'read'=>0);
+		$count = $this->Message->count($cond);
+		echo $count;
 	}
 	
 }

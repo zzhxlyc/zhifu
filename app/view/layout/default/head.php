@@ -10,7 +10,8 @@
 			<li><a href="<?php echo ROOT_URL?>">首页</a>|</li>
 			<li><a href="<?php echo ROOT_URL.'/home'?>">个人主页</a>|</li>
 		<!--	<li><a href="<?php echo ROOT_URL.'/feed'?>">我的订阅</a>|</li>-->
-			<li><a href="<?php echo ROOT_URL.'/setting'?>">用户中心</a>|</li>
+			<li><a href="<?php echo ROOT_URL.'/setting'?>">用户中心<?php if(empty($User->name)){?><font color="green">(完善资料)</font><?php }?></a>|</li>
+			<li><a href="<?php echo ROOT_URL.'/message'?>">站内信</a><span id="unread_message"></span>|</li>
 			<li><a href="">发布</a>|
 				<ul class="sub-nav">
 					<?php if($User->is_company()){?>

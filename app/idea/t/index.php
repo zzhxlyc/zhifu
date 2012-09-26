@@ -41,9 +41,7 @@
 			<div class="content"><?php echo $desc?></div>						
 			<div class="status clearfix">
 				<div class="title">状态：</div>
-				<div class="status-item <?php $HTML->current($o->status, 0)?>">竞标中</div>
-				<div class="status-item <?php $HTML->current($o->status, 1)?>">评奖中</div>
-				<div class="status-item last  <?php $HTML->current($o->status, 2)?>">交付互评</div>
+				<div class="status-item last current"><?php echo $o->get_status()?></div>
 			</div>
 		</div><!--end for middle-->
 

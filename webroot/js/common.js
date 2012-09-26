@@ -24,6 +24,18 @@ $(document).ready(function(){
 	    $(this).removeClass("hovered");
 	  }
 	);
+	$.ajax({
+		type: "GET",
+		url: window.ROOT_URL + '/message/unreadcount',
+		data: "",
+		success: function(msg){
+			var count = parseInt(msg);
+			var html = '<a href="'+window.ROOT_URL+'/message">';
+			html += "(" + count + ")";
+			html += "</a>";
+			$("#unread_message").html(html);
+		}
+	});
 
 });
 

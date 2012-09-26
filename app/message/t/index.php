@@ -30,8 +30,15 @@
 	?>
 	<div class="item clearfix">
 		<div class="middle">
+			来自：<a href="<?php echo get_author_link($o->from, $o->from_type)?>">
+					<?php echo $o->from_name?></a>
+			<?php echo $o->time?>
 			<a href="<?php echo $home.'/detail?id='.$o->id?>">
+				<?php if($o->read == 1){?>
 				<h3 class="title"><?php echo $o->title?></h3>
+				<?php }else{?>
+				<h3 class="title"><font color="red"><?php echo $o->title?></font></h3>
+				<?php }?>
 			</a>
 			<div class="content"><?php output_desc($o->content)?></div>						
 		</div><!--end for middle-->

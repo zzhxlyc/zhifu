@@ -19,7 +19,7 @@
 		<td class="operate">
 			<a href="<?php echo $home.'/sub?id='.$o->id?>">查看二级行业</a>
 			<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
-			<a href="<?php echo $home.'/delete?p=1&id='.$o->id?>">删除</a>
+			<a href="<?php echo $home.'/delete?c=1&id='.$o->id?>">删除</a>
 		</td>
 	</tr>
 	<?php 

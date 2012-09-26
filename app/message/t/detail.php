@@ -13,7 +13,7 @@
 					<?php }?>
 				</a>
 			</div>
-			<div class="row">
+			<!-- <div class="row">
 				<label for="name">收信人</label>
 				<a href="<?php echo get_author_link($Message->to, $Message->to_type)?>">
 					<?php echo $Message->to_name?>
@@ -21,6 +21,10 @@
 					（<?php echo $Message->to_author?>）
 					<?php }?>
 				</a>
+			</div> -->
+			<div class="row">
+				<label for="name">发送时间</label>
+				<?php echo $Message->time?>
 			</div>
 			<div class="row">
 				<label for="name">标题</label>

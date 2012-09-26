@@ -224,7 +224,7 @@ class CategoryController extends AdminBaseController {
 		}
 		if($has_children){
 			if(count($id_array) > 0){
-				$this->Topic->delete_all(array('parent in'=>$id_array));
+				$this->Category->delete_all(array('parent in'=>$id_array));
 			}
 		}
 		parent::delete();

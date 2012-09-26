@@ -7,7 +7,7 @@ class Patent extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('title', 'expert', 'pid', 'description', 'phone', 'mobile', 'email'),
-			'length' => array('title'=>250, 'pid'=>250, 'phone'=>20, 'mobile'=>20, 'email'=>100, 'url'=>250),
+			'length' => array('description'=>1000, 'pid'=>250, 'phone'=>20, 'mobile'=>20, 'email'=>200, 'url'=>250),
 			'int' => array('expert', 'cat', 'subcat', 'app', 'skill', 'example', 'kind', 'transfer', 'owner'),
 			'number' => array('budget'),
 			'email' => array('email'), 

@@ -7,7 +7,7 @@ class Message extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('title', 'content'),
-			'length' => array('title'=>250),
+			'length' => array('title'=>250, 'content'=>500),
 			'int' => array(),
 			'word' => array('title', 'content')
 		);

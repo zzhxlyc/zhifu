@@ -7,7 +7,7 @@ class Idea extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('title', 'company', 'budget', 'description'),
-			'length' => array('title'=>250),
+			'length' => array('description'=>1000),
 			'int' => array('one', 'two', 'three'),
 			'number' => array('budget', 'one_m', 'two_m', 'three_m'),
 			'word'=> array('title', 'description'),
@@ -29,9 +29,22 @@ class Idea extends AppModel{
 		return IMAGE_HOME.'/default.jpg';
 	}
 	
-	public static function get_status($status){
+	public function get_status(){
+		$status = $this->status;
 		if($status == 0){
 			return '竞标中';
+		}
+		else if($status == 1){
+			return '评奖中';
+		}
+		else if($status == 2){
+			return '发放奖金';
+		}
+		else if($status == 3){
+			return '结束';
+		}
+		else{
+			return '';
 		}
 	}
 
