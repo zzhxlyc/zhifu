@@ -4,7 +4,7 @@ include(LIB_UTIL_DIR.'/DateCrossUtil.php');
 
 class VideoController extends AppController {
 	
-	public $models = array('Video', 'Comment');
+	public $models = array('Video', 'Comment', 'Tag', 'TagItem');
 	
 	public function before(){
 		$this->set('home', VIDEO_HOME);
@@ -73,8 +73,12 @@ class VideoController extends AppController {
 						$post['url'] = $data['swf'];
 					}
 				}
+				$old_tag = $post['old_tag'];
+				$new_tag = $post['new_tag'];
+				unset($post['old_tag'], $post['new_tag']);
 				$this->Video->escape($post);
-				$this->Video->save($post);
+				$id = $this->Video->save($post);
+				$this->do_tag($id, BelongType::VIDEO, $old_tag, $new_tag);
 				$this->redirect('add_succ');
 			}
 			else{
@@ -83,6 +87,7 @@ class VideoController extends AppController {
 				$this->set('video', $video);
 			}
 		}
+		$this->add_common_tags();
 	}
 	
 	public function add_succ(){}
@@ -106,6 +111,7 @@ class VideoController extends AppController {
 		$page = get_page($get);
 		$this->add_comments($video, $page);
 		$this->set('video', $video);
+		$this->add_tags($video);
 	}
 	
 }

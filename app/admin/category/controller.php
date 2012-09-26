@@ -84,6 +84,44 @@ class CategoryController extends AdminBaseController {
 		$list = $this->Category->get_list(array('parent'=>0), array('id'=>'ASC'));
 		$this->set('list', $list);
 	}
+	
+	public function addsubs(){
+		if($this->request->post){
+			$post = $this->request->post;
+			$names = esc_text(trim($post['names']));
+			$errors = array();
+			if(strlen($names) > 0){
+				$name_list = explode(',', $names);
+				if(count($name_list) === 0){
+					$errors['names'] = '无有效值';
+				}
+			}
+			else{
+				$errors['names'] = '为空';
+			}
+			if(empty($post['parent'])){
+				$errors['parent'] = '未选择';
+			}
+			$admin = get_admin_session($this->session);
+			if(count($errors) == 0){
+				foreach($name_list as $name){
+					$data = array('name'=>trim($name), 'parent'=>intval($post['parent']));
+					$this->Category->escape($data);
+					$this->Category->save($data);
+				}
+				$this->Log->action_category_add($admin, $names);
+				$this->redirect('index');
+			}
+			else{
+				$category = $this->set_model($post);
+				$this->set('errors', $errors);
+				$this->set('$names', $names);
+				$this->set('parent', $post['parent']);
+			}
+		}
+		$list = $this->Category->get_list(array('parent'=>0), array('id'=>'ASC'));
+		$this->set('list', $list);
+	}
 
 	public function edit(){
 		if($this->request->post){
@@ -185,7 +223,9 @@ class CategoryController extends AdminBaseController {
 			$has_children = true;
 		}
 		if($has_children){
-			$this->Topic->delete_all(array('parent in'=>$id_array));
+			if(count($id_array) > 0){
+				$this->Topic->delete_all(array('parent in'=>$id_array));
+			}
 		}
 		parent::delete();
 	}

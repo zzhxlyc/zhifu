@@ -31,6 +31,7 @@
 <input type="hidden" name="c" value="1" />
 <a href="<?php echo $home.'/add'?>">添加一级行业</a>
 <a href="<?php echo $home.'/addsub'?>">添加二级行业</a>
+<a href="<?php echo $home.'/addsubs'?>">批量添加二级行业</a>
 </form>
 
 <div class="page-nav">
