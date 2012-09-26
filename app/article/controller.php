@@ -55,6 +55,7 @@ class ArticleController extends AppController {
 			return;
 		}
 		
+		$Article->click_up();
 		$this->set('$Article', $Article);
 	}
 	

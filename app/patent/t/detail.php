@@ -1,6 +1,7 @@
 <?php include('sidebar.php');?>
 
 <div class="main-content">
+	<!-- 
 	<div class="section">
 		<h3>项目状态
 			<?php if(is_company($User)){?>
@@ -12,11 +13,9 @@
 			
 		</h3>
 		<div class="content status clearfix">
-			<div class="status-item <?php $HTML->current($Patent->status, 0)?>">审核中</div>
-			<div class="status-item last <?php $HTML->current($Patent->status, 1)?>">有效</div>
-			
 		</div>
-	</div><!--end for section-->
+	</div>
+	 -->
 
 	<div class="section">
 		<h3>购买用户（<?php echo count($deals)?>）</h3>

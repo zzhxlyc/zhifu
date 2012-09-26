@@ -37,6 +37,8 @@ class ArticleController extends AdminBaseController {
 			}
 			if(count($errors) == 0){
 				$post['time'] = DATETIME;
+				$post['lastmodify'] = DATETIME;
+				$post['click'] = 0;
 				$image = preg_image($post['content']);
 				if($image){
 					$post['image'] = $image;

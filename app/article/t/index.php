@@ -10,11 +10,11 @@
 </div><!--end for cat-wrapper-->
 
 <div class="filter clearfix">
+	<!-- 
 	<div class="order">
 		<label for="">排序:</label>
 		<a href="<?php echo $home.'/index?order=time'?>" <?php $HTML->if_current($_GET['order'] == 'time')?>>发布时间</a>
 	</div>
-	<!-- 
 	<div class="search">
 		<input type="text" class="text">
 		<input type="button" class="btn">

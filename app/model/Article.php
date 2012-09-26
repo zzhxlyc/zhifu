@@ -36,5 +36,9 @@ class Article extends AppModel {
 	public static function default_image(){
 		return IMAGE_HOME.'/default.jpg';
 	}
+	
+	public function click_up(){
+		$this->update(array('click eq'=>'click + 1'), array('id'=>$this->id));
+	}
 
 }

@@ -33,11 +33,6 @@
 				</a>
 			</h3>
 			<div class="content"><?php echo $desc?></div>						
-			<div class="status clearfix">
-				<div class="title">状态:</div>
-				<div class="status-item <?php $HTML->current(0, $o->status)?>">审核中</div>
-				<div class="status-item last <?php $HTML->current(1, $o->status)?>">正常</div>
-			</div>
 		</div><!--end for middle-->
 
 		<div class="right">
