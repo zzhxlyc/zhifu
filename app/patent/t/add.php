@@ -33,7 +33,7 @@
 </div>
 
 <div class="row">
-	<label for="name">价格</label>
+	<label for="name">转让费</label>
 	<input size="10" type="text" class="text" name="budget" value="<?php echo $patent->budget?>" /> 万元
 	<span class="error"><?php echo $errors['budget']?></span>
 </div>
@@ -122,7 +122,8 @@
 		<option value="">请选择</option>
 		<option value="1" <?php $HTML->selected(1, $patent->kind)?>>发明</option>
 		<option value="2" <?php $HTML->selected(2, $patent->kind)?>>外观</option>
-		<option value="3" <?php $HTML->selected(3, $patent->kind)?>>未申请专利</option>
+		<option value="3" <?php $HTML->selected(2, $patent->kind)?>>实用新型</option>
+		<option value="4" <?php $HTML->selected(3, $patent->kind)?>>未申请专利</option>
 	</select>
 	<span class="error"><?php echo $errors['kind']?></span>
 </div>

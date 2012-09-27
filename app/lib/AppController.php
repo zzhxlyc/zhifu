@@ -55,6 +55,12 @@ class AppController extends Controller{
 		else{
 			$this->set('LOGO', IMAGE_HOME.'/logo.jpg');
 		}
+		if(!empty($base['title'])){
+			$this->view->title = $base['title'];
+		}
+		if(!empty($base['slogan'])){
+			$this->set('SLOGAN', $base['slogan']);
+		}
 	}
 	
 	public function login_check($need_login, $need_company, $need_expert){
@@ -94,6 +100,22 @@ class AppController extends Controller{
 		else{
 			return $this->request->get;
 		}
+	}
+	
+	protected function find_user_by_email($email, $not_eq_id = Null){
+		$cond = array('email'=>esc_text($email));
+		if($not_eq_id){
+			$cond['id !='] = $not_eq_id;
+		}
+		$Company = $this->Company->get_row($cond);
+		if($Company){
+			return $Company;
+		}
+		$Expert = $this->Expert->get_row($cond);
+		if($Expert){
+			return $Expert;
+		}
+		return false;
 	}
 	
 	protected function find_user($user, $not_eq_id = Null){

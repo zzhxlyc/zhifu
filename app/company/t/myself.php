@@ -8,8 +8,12 @@
 <div class="edit-left">
 
 <div class="row">
-	<label for="name">企业名</label>
+	<label for="name">企业名称</label>
 	<?php echo $company->name?>
+</div>
+<div class="row">
+	<label for="name">联系人</label>
+	<?php echo $company->contact?>
 </div>
 <div class="row">
 	<label for="name">邮箱</label>
@@ -38,7 +42,7 @@
 </div>
 
 <div class="row">
-	<label for="name">描述</label><br/><br/>
+	<label for="name">公司简介</label><br/><br/>
 	<?php echo $company->description?>
 </div>
 

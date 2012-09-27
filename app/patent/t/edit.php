@@ -129,7 +129,8 @@
 				<option value="">请选择</option>
 				<option value="1" <?php $HTML->selected(1, $patent->kind)?>>发明</option>
 				<option value="2" <?php $HTML->selected(2, $patent->kind)?>>外观</option>
-				<option value="3" <?php $HTML->selected(3, $patent->kind)?>>未申请专利</option>
+				<option value="3" <?php $HTML->selected(2, $patent->kind)?>>实用新型</option>
+				<option value="4" <?php $HTML->selected(3, $patent->kind)?>>未申请专利</option>
 			</select>
 			<span class="error"><?php echo $errors['kind']?></span>
 		</div>

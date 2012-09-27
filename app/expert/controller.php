@@ -118,12 +118,10 @@ class ExpertController extends AppController {
 			$post = $this->request->post;
 			$new_Expert = $this->set_model($post, $Expert);
 			$errors = $this->Expert->check($new_Expert);
-//			if(count($errors) == 0 && $post['name'] != $User->name){
-//				$U = $this->find_user_by_name($post['name'], $User->id);
-//				if($U){
-//					$errors['name'] = '此用户名已被使用';
-//				}
-//			}
+			if(empty($errors['email']) 
+					&& $this->find_user_by_email($post['email'], $User->id)){
+				$errors['email'] = '已被使用';
+			}
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);

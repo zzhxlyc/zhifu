@@ -85,7 +85,7 @@
 </div>
 </div>	<!--end for edit-right-->
 <div class="row">
-	<label for="name">描述</label><br/><br/>
+	<label for="name">自我介绍</label><br/><br/>
 	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $expert->description?></textarea>
 	<span class="error"><?php echo $errors['description']?></span>
 </div>

@@ -38,8 +38,9 @@
 		<div class="right">
 			<div class="price-deadline">
 				<?php if($o->budget){?>
-				<p>出价：<span class="num"><?php echo $o->budget?></span>万元</p>
+				<p>转让费：<span class="num"><?php echo $o->budget?></span>万元</p>
 				<?php }?>
+				<p>发布时间：<?php echo get_date($o->time)?></p>
 			</div>
 			<?php if($User && ($User->get_type() != BelongType::EXPERT || $User->id != $o->expert)){?>
 			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">我要购买</a>

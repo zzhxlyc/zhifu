@@ -10,9 +10,14 @@
 <div class="edit-left">
 
 <div class="row">
-	<label for="name">企业名</label>
+	<label for="name">企业名称</label>
 	<input size="50" type="text" class="text" name="name" value="<?php echo $company->name?>" />
 	<span class="error"><?php echo $errors['name']?></span>
+</div>
+<div class="row">
+	<label for="name">联系人</label>
+	<input size="50" type="text" class="text" name="contact" value="<?php echo $company->contact?>" />
+	<span class="error"><?php echo $errors['contact']?></span>
 </div>
 <div class="row">
 	<label for="name">邮箱</label>
@@ -76,7 +81,7 @@
 </div>	<!--end for edit-right-->
 		
 <div class="row">
-	<label for="name">描述</label><br/><br/>
+	<label for="name">公司简介</label><br/><br/>
 	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $company->description?></textarea>
 	<span class="error"><?php echo $errors['description']?></span>
 </div>

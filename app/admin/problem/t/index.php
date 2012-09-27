@@ -25,7 +25,7 @@
 				<a href="<?php echo $home.'/verify?id='.$o->id?>"><font color="red">审核</font></a>
 			<?php }?>
 		</td>
-		<td><?php echo $o->username?></td>
+		<td><a target="_blank" href="<?php echo get_author_link($o->company, BelongType::COMPANY)?>"><?php echo $o->username?></a></td>
 		<td><?php echo $o->get_status()?></td>
 		<td><?php echo $o->budget?></td>
 		<td><?php echo $o->time?></td>

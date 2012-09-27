@@ -91,6 +91,10 @@ class CompanyController extends AppController {
 			$post = $this->request->post;
 			$new_Company = $this->set_model($post, $Company);
 			$errors = $this->Company->check($new_Company);
+			if(empty($errors['email']) 
+					&& $this->find_user_by_email($post['email'], $User->id)){
+				$errors['email'] = '已被使用';
+			}
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);

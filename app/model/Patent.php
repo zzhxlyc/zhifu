@@ -106,6 +106,9 @@ class Patent extends AppModel{
 			return '外观';
 		}
 		else if($s == 3){
+			return '实用新型';
+		}
+		else if($s == 4){
 			return '未申请专利';
 		}
 		else{

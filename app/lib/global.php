@@ -176,6 +176,19 @@ function output_username($o, $type = 1){
 	}
 }
 
+function get_user_link($o){
+	$type = $o->get_type();
+	if($type == BelongType::EXPERT){
+		return EXPERT_HOME.'/profile?id='.$id;
+	}
+	else if($type == BelongType::COMPANY){
+		return COMPANY_HOME.'/profile?id='.$id;
+	}
+	else{
+		return '';
+	}
+}
+
 function get_author_link($id, $type){
 	if($type == BelongType::EXPERT){
 		return EXPERT_HOME.'/profile?id='.$id;

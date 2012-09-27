@@ -6,6 +6,21 @@
 		type="application/x-shockwave-flash" />
 </div>
 
+<div class="row">
+	<label for="desc">发布者</label>
+	<a target="_blank" href="<?php echo get_author_link($video->belong, $video->type)?>"><?php echo $video->username?></a>
+</div>
+
+<div class="row">
+	<label for="desc">发布时间</label>
+	<?php echo $video->time?>
+</div>
+
+<div class="row">
+	<label for="desc">点击次数</label>
+	<?php echo $video->click?>
+</div>
+
 <div class="tag row">
 	<label for="">标签</label>
 	<?php 

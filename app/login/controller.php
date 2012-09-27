@@ -19,7 +19,7 @@ class LoginController extends AppController {
 	public function login(){
 		if($this->request->post){
 			$post = $this->request->post;
-			$user = trim($post['user']);
+			$user = trim(esc_text($post['user']));
 			$pswd = trim($post['pswd']);
 			$captcha = trim($post['captcha']);
 			$errors = array();

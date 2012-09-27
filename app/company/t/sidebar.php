@@ -3,6 +3,7 @@
 		<img src="<?php img($Company->image, $Company->default_image())?>" alt="<?php echo $Company->name?>" width="200" height="150"/>
 	</div>
 	<div class="detail-profile">
+		<p>用户名：<?php echo $Company->username?></p>
 		<p>姓名：<?php echo $Company->name?></p>
 		<p>邮件：<?php echo $Company->email?></p>
 		<p>电话：<?php echo $Company->phone?></p>

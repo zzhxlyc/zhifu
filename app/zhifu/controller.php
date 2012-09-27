@@ -32,11 +32,11 @@ class ZhifuController extends AppController {
 		if($this->request->post){
 			$post = $this->request->post;
 			$type = $post['type'];
-			$user = trim($post['user']);
+			$user = trim(esc_text($post['user']));
 			$pswd = trim($post['pswd']);
 			$pswd2 = trim($post['pswd2']);
-			$email = trim($post['email']);
-			$mobile = trim($post['mobile']);
+			$email = trim(esc_text($post['email']));
+			$mobile = trim(esc_text($post['mobile']));
 			$captcha = trim($post['captcha']);
 			$agree = trim($post['agree']);
 			$errors = array();
@@ -68,10 +68,13 @@ class ZhifuController extends AppController {
 				 $errors['mobile'] = '手机格式有误';
 			}
 			if(strlen($email) == 0){
-				$errors['email'] = '邮件为空';
+				$errors['email'] = '邮箱为空';
 			}
 			else if(!StringUtils::check_email($email)){
-				$errors['email'] = '邮件不符合规范';
+				$errors['email'] = '邮箱不符合规范';
+			}
+			else if($this->find_user_by_email($email) !== false){
+				$errors['email'] = '此邮箱已被使用';
 			}
 			if(empty($captcha)){
 				$errors['captcha'] = '验证码为空';
@@ -87,6 +90,7 @@ class ZhifuController extends AppController {
 				$data['username'] = $user;
 				$data['password'] = md5($pswd);
 				$data['email'] = $email;
+				$data['mobile'] = $mobile;
 				$data['time'] = DATETIME;
 				$data['rate_total'] = 0;
 				$data['rate_num'] = 0;

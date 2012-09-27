@@ -20,10 +20,10 @@
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
-		<td><?php echo $o->username?></td>
+		<td><a target="_blank" href="<?php echo get_author_link($o->company, BelongType::COMPANY)?>"><?php echo $o->username?></a></td>
 		<td><?php echo $o->time?></td>
 		<td><?php echo $o->budget?></td>
-		<td><?php echo Idea::get_status($o->status)?></td>
+		<td><?php echo $o->get_status()?></td>
 		<td class="operate">
 			<a target="_blank" href="<?php echo ADMIN_IDEAITEM_HOME.'/index?pid='.$o->id?>">查看竞标</a>
 			<a href="<?php echo $home.'/comment?pid='.$o->id?>">回复</a>

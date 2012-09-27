@@ -45,7 +45,7 @@
 </div>
 	
 <div class="row">
-	<label for="name">描述</label><br/><br/>
+	<label for="name">自我介绍</label><br/><br/>
 	<?php echo $expert->description?>
 </div>
 

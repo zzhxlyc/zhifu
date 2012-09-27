@@ -3,6 +3,7 @@
 		<img src="<?php img($Expert->image, $Expert->default_image())?>" alt="<?php echo $Expert->name?>" width="200" height="150"/>
 	</div>
 	<div class="detail-profile">
+		<p>用户名：<?php echo $Expert->username?></p>
 		<p>姓名：<?php echo $Expert->name?></p>
 		<p>所在单位：<?php echo $Expert->workplace?></p>
 		<p>职称：<?php echo $Expert->job?></p>

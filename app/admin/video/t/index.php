@@ -4,6 +4,7 @@
 	<tr class="top">
 		<td width="30">选择</td>
 		<td>标题</td>
+		<td width="100">发布人</td>
 		<td width="140">日期</td>
 		<td width="100">操作</td>
 	</tr>
@@ -17,6 +18,7 @@
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
+		<td><a target="_blank" href="<?php echo get_author_link($o->belong, $o->type)?>"><?php echo $o->username?></a></td>
 		<td><?php echo $o->time?></td>
 		<td class="operate">
 			<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
