@@ -1,6 +1,11 @@
 <h2>兼职/顾问信息</h2>
 
 <div class="row">
+	<label for="title">发布者</label>
+	<a target="_blank" href="<?php echo get_author_link($recruit->belong, $recruit->type)?>"><?php output_username($recruit, 2)?></a>
+</div>
+
+<div class="row">
 	<label for="title">职位名称</label>
 	<?php echo $recruit->title?>
 </div>

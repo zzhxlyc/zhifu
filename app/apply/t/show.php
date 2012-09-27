@@ -1,6 +1,11 @@
 <h2>求职信息</h2>
 
 <div class="row">
+	<label for="title">发布者</label>
+	<a target="_blank" href="<?php echo get_author_link($apply->belong, $apply->type)?>"><?php output_username($apply, 2)?></a>
+</div>
+
+<div class="row">
 	<label for="title">职位名称</label>
 	<?php echo $apply->title?>
 </div>

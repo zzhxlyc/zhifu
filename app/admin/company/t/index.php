@@ -19,7 +19,7 @@
 	?>
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
-		<td><?php echo $o->username?></td>
+		<td><a target="_blank" href="<?php echo get_author_link($o->id, BelongType::COMPANY)?>"><?php echo $o->username?></a></td>
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->name?></a></td>
 		<td><?php echo get_date($o->time)?></td>
 		<td><?php echo $o->email?></td>

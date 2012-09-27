@@ -36,7 +36,7 @@
 			<td><?php output_identity($o->identity)?></td>
 			<td><?php echo $o->num?></td>
 			<td><?php echo $o->area?></td>
-			<td><a href="<?php echo get_author_link($o->id, $o->type)?>"><?php echo $o->username?></a></td>
+			<td><a target="_blank" href="<?php echo get_author_link($o->belong, $o->type)?>"><?php echo $o->username?></a></td>
 			<td><?php echo $o->time?></td>
 		</tr>
 	<?php 

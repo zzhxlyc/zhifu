@@ -19,8 +19,8 @@
 	?>
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
-		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->username?></a></td>
-		<td><?php echo $o->name?></td>
+		<td><a target="_blank" href="<?php echo get_author_link($o->id, BelongType::EXPERT)?>"><?php echo $o->username?></a></td>
+		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->name?></a></td>
 		<td><?php echo get_date($o->time)?></td>
 		<td><?php echo $o->email?></td>
 		<td><?php echo $o->status()?></td>

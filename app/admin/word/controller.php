@@ -91,9 +91,11 @@ class WordController extends AdminBaseController {
 	public function delete(){
 		parent::delete();
 		$this->build();
+		$this->layout('default');
 	}
 	
 	public function build(){
+		$this->layout('ajax');
 		$words = $this->Word->build();
 	}
 	

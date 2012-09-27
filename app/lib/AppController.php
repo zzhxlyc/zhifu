@@ -8,8 +8,33 @@ class AppController extends Controller{
 		parent::load_model();
 	}
 	
+	public function daemon(){
+		$cron = Option::find_array('CRON');
+		$updated = false;
+		if(!$cron){
+			$updated = true;
+			$cron = array(TIMESTAMP => array('action'=>'build_common_tag'));
+		}
+		foreach($cron as $time => $array){
+			if($time <= TIMESTAMP){
+				$action = $array['action'];
+				if($action == 'build_common_tag'){
+					$url = ADMIN_HOME.'/word/build';
+					async_http_get($url);
+				}
+				unset($cron[$time]);
+				$cron[TIMESTAMP + 24 * 2600] = array('action'=>'build_common_tag');
+				$updated = true;
+			}
+		}
+		if($updated){
+			Option::persist_array('CRON', $cron);
+		}
+	}
+	
 	public function before(){
 		$this->load_session();
+		$this->daemon();
 		$cookies = $this->request->cookie;
 		if(isset($cookies[COOKIE_U])){
 			$cookie = $cookies[COOKIE_U];

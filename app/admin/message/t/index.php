@@ -19,8 +19,8 @@
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
 		<td><a href="<?php echo $home.'/edit?id='.$o->id?>"><?php echo $o->title?></a></td>
-		<td><?php echo $o->from_name?>（<?php echo BelongType::to_string($o->from_type)?>）</td>
-		<td><?php echo $o->to_name?>（<?php echo BelongType::to_string($o->to_type)?>）</td>
+		<td><a target="_blank" href="<?php echo get_author_link($o->from, $o->from_type)?>"><?php echo $o->from_name?></a>（<?php echo BelongType::to_string($o->from_type)?>）</td>
+		<td><a target="_blank" href="<?php echo get_author_link($o->to, $o->to_type)?>"><?php echo $o->to_name?></a>（<?php echo BelongType::to_string($o->to_type)?>）</td>
 		<td class="operate">
 			<a href="<?php echo $home.'/edit?id='.$o->id?>">编辑</a>
 			<a href="<?php echo $home.'/delete?p=1&id='.$o->id?>">删除</a>

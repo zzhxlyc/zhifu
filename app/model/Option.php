@@ -12,15 +12,23 @@ class Option extends Model{
 		return self::$option;
 	}
 	
+	public static function persist_array($key, $value){
+		self::persist($key, serialize($value));
+	}
+	
 	public static function persist($key, $value){
 		$option = self::get_instance();
-			$count = $option->count(array('key'=>$key));
+		$count = $option->count(array('key'=>$key));
 		if($count == 0){
 			$option->save(array('key'=>$key, 'value'=>$value));
 		}
 		else{
 			$option->update(array('value'=>$value), array('key'=>$key));
 		}
+	}
+	
+	public static function find_array($key){
+		return unserialize(self::find($key));
 	}
 	
 	public static function find($key){

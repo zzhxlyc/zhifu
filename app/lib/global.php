@@ -250,3 +250,4 @@ function is_expert_object($u, $o){
 	}
 	return false;
 }
+
