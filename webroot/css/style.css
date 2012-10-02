@@ -1174,3 +1174,88 @@ padding-left:10px;
 	margin:10px 0;
 }
 
+/************index**************/
+.index .more{
+float:right;
+padding:3px;	
+}
+.index .more a{
+padding:3px;	
+}
+.index .more a:hover{
+color:#fff;
+background:#259;	
+}
+.index .left-content,.index .right-content{
+float:left;	
+}
+.index .left-content{
+margin-right:20px;	
+}
+.idea-wrapper,.problem-wrapper{
+	width:640px;
+}
+.idea-wrapper h3{
+
+}
+.idea-wrapper .item,.problem-wrapper .item{
+width:300px;
+float:left;
+border-bottom:0;
+}
+.idea-wrapper .item p,.problem-wrapper .item p{
+	line-height:20px;
+}
+.index .video-wrapper{
+
+	width:260px;
+	float:left;
+}
+.video-wrapper .item{
+	padding:10px;
+	width:100px;
+	float:left;
+}
+.video-wrapper .item .pic{
+	padding:0;
+}
+
+.video-wrapper .item .title{
+	text-align:center;
+}
+
+.job-wrapper{
+	width:100%;
+}
+.job-wrapper table{
+	width:100%;
+}
+
+
+.patent-wrapper{
+margin-top:30px;	
+}
+
+.patent-wrapper .item{
+width:280px;
+float:left;	
+}
+
+
+.patent-wrapper .item .title{
+padding-right:10px;	
+}
+
+
+.case-wrapper{
+margin-top:30px;	
+}
+
+.case-wrapper .item{
+width:280px;
+float:left;	
+}
+
+
+
+
