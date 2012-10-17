@@ -133,6 +133,7 @@
 	<label for="">修改附件</label>
 	<input type="file" name="file" />
 	<span class="error"><?php echo $errors['file']?></span>
+	<span>附件最大20M</span>
 </div>
 
 <div class="row">

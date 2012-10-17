@@ -25,6 +25,7 @@
 	<label for="">附件</label>
 	<input type="file" name="file" />
 	<span class="error"><?php echo $errors['file']?></span>
+	<span>附件最大20M</span>
 </div>
 <div class="row">
 	<input type="submit" value="提交" class="btn fl">

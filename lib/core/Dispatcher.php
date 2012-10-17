@@ -149,7 +149,19 @@ class Dispatcher{
 			$controller->render();
 			return $controller;
 		}
-		return null;
+		else if(class_exists('AppController')){
+			$class = new ReflectionClass('AppController');
+			$controller = $class->newInstance($this->request, 
+												$this->response, 
+												$this->view);
+			$controller->before();
+			$controller->after();
+			$controller->render();
+			return $controller;
+		}
+		else{
+			return null;
+		}
 	}
 	
 }

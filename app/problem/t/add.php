@@ -43,6 +43,9 @@
 		<input type="hidden" name="province" value="<?php echo $problem->province?>" />
 		<input type="hidden" name="city" value="<?php echo $problem->city?>" />
 		<input type="hidden" name="district" value="<?php echo $problem->district?>" />
+		<input type="hidden" name="province2" value="<?php echo $problem->province2?>" />
+		<input type="hidden" name="city2" value="<?php echo $problem->city2?>" />
+		<input type="hidden" name="district2" value="<?php echo $problem->district2?>" />
 	</div>
 	<div class="edit-left">
 
@@ -59,10 +62,14 @@
 	</div>
 	
 	<div class="row">
+		<label for="">所在地区</label>
+		<div class="province_city"></div>
+	</div>
+	
+	<div class="row">
 		<label for="">面向地区</label>
 		<div class="province_city"></div>
-	</div>	
-	
+	</div>
 	
 	<div class="row">
 		<label for="budget">预算</label>
@@ -132,6 +139,7 @@
 		<label for="">附件</label>
 		<input type="file" name="file" />
 		<span class="error"><?php echo $errors['file']?></span>
+		<span>附件最大20M</span>
 	</div>
 
 </div><!--end for add-problem-->

@@ -18,6 +18,15 @@
 	<input class="text wide"  type="text" name="url" value="<?php echo $video->url?>" />
 	<span class="error"><?php echo $errors['url']?></span>
 </div>
+<div class="row">
+	<label for="desc"></label>
+	优酷的视频直接填写html地址即可，也不用填封面图片
+</div>
+<div class="row">
+	<label for="">封面图</label>
+	<input class="text wide"  type="text" name="image" value="<?php echo $video->image?>" />
+	<span class="error"><?php echo $errors['image']?></span>
+</div>
 
 <div class="row">
 	<label for="tag">领域标签</label>

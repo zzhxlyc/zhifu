@@ -69,7 +69,9 @@ class VideoController extends AppController {
 				if(strpos($post['url'], 'youku.com') !== false){
 					$data = VideoUrlParser::parse($post['url']);
 					if($data){
-						$post['image'] = $data['img'];
+						$img = FileSystem::gen_upload_path();
+						FileSystem::save_url_file($data['img'], $img);
+						$post['image'] = $img;
 						$post['url'] = $data['swf'];
 					}
 				}

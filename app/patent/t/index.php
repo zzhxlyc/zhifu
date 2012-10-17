@@ -42,8 +42,8 @@
 				<?php }?>
 				<p>发布时间：<?php echo get_date($o->time)?></p>
 			</div>
-			<?php if($User && ($User->get_type() != BelongType::EXPERT || $User->id != $o->expert)){?>
-			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">我要购买</a>
+			<?php if($User && !in_array($o->id, $buyed_patents)){?>
+			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">有意向购买</a>
 			<?php }?>
 		</div><!--end for right-->
 	</div><!--end for item-->

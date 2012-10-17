@@ -4,6 +4,7 @@
 			<a href="<?php echo ROOT_URL?>">
 				<img src="<?php echo $LOGO?>" alt="知富网" title="<?php echo WEB_TITLE?>" />
 			</a>
+			<span><?php echo $SLOGAN?></span>
 		</h1>
 		<?php if(isset($User)){?>
 		<ul class="top-nav">

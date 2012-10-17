@@ -2,7 +2,7 @@
 
 class RecruitController extends AppController {
 	
-	public $models = array('Recruit', 'Tag', 'TagItem');
+	public $models = array('Recruit', 'RecruitItem', 'Tag', 'TagItem');
 	
 	public function before(){
 		$this->set('home', RECRUIT_HOME);
@@ -46,6 +46,7 @@ class RecruitController extends AppController {
 	public function show(){
 		$get = $this->request->get;
 		$id = get_id($get);
+		$User = $this->get('User');
 		$has_error = true;
 		if($id){
 			$recruit = $this->Recruit->get($id);
@@ -59,6 +60,12 @@ class RecruitController extends AppController {
 		}
 		
 		$this->set('$recruit', $recruit);
+		if(!is_company_object($User, $recruit)){
+			$cond = array('recruit'=>$recruit->id, 
+						'belong'=>$User->id, 'type'=>$User->get_type());
+			$item = $this->RecruitItem->get_row($cond);
+			$this->set('$item', $item);
+		}
 	}
 	
 	public function add(){
@@ -126,5 +133,171 @@ class RecruitController extends AppController {
 		$this->set('$recruit', $recruit);
 	}
 	
+	public function item(){
+		$data = $this->get_data();
+		$id = get_id($data);
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$item = $this->RecruitItem->get($id);
+			if($item){
+				if($item->belong == $User->id 
+						&& $item->type == $User->get_type()){
+					$has_error = false;
+				}
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		$recruit = $this->Recruit->get($item->recruit);
+		$U = $this->get_user($recruit->belong, $recruit->type);
+		$this->set('$publisher', $U);
+		$this->set('$item', $item);
+		$this->set('$recruit', $recruit);
+	}
+	
+	public function apply(){
+		$data = $this->get_data();
+		$id = get_id($data);
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$recruit = $this->Recruit->get($id);
+			if($recruit){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		if($this->request->post){
+			$post = $this->request->post;
+			unset($post['id']);
+			$files = $this->request->file;
+			$path = $this->do_file('resume', $errors, $files);
+			if($path){$post['resume'] = $path;}
+			$errors = $this->RecruitItem->check($post);
+			if(count($errors) == 0){
+				$this->set_belong($post, $User);
+				$post['recruit'] = $recruit->id;
+				$post['time'] = DATETIME;
+				$id = $this->RecruitItem->save($post);
+				$this->redirect('item?succ&id='.$id);
+			}
+			$item = $this->set_model($post, new RecruitItem());
+			$this->set('$item', $item);
+			$this->set('errors', $errors);
+		}
+		$U = $this->get_user($recruit->belong, $recruit->type);
+		$this->set('$publisher', $U);
+		$this->set('$recruit', $recruit);
+	}
+	
+	public function itemedit(){
+		$data = $this->get_data();
+		$id = get_id($data);
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$item = $this->RecruitItem->get($id);
+			if($item){
+				if($item->belong == $User->id 
+						&& $item->type == $User->get_type()){
+					$has_error = false;
+				}
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		if($this->request->post){
+			$post = $this->request->post;
+			$item = $this->set_model($post, $item);
+			$errors = $this->RecruitItem->check($item);
+			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('resume', $errors, $files);
+				if($path){$post['resume'] = $path;}
+			}
+			if(count($errors) == 0){
+				if($post['resume'] && $item->resume){
+					FileSystem::remove($item->resume);
+				}
+				$this->RecruitItem->save($post);
+				$this->redirect('itemedit?succ&id='.$id);
+			}
+		}
+		$recruit = $this->Recruit->get($item->recruit);
+		$U = $this->get_user($recruit->belong, $recruit->type);
+		$this->set('$publisher', $U);
+		$this->set('$item', $item);
+		$this->set('$recruit', $recruit);
+	}
+	
+	public function result(){
+		$data = $this->get_data();
+		$id = get_id($data);
+		$User = $this->get('User');
+		$has_error = true;
+		if($id){
+			$recruit = $this->Recruit->get($id);
+			if($recruit && is_company_object($User, $recruit)){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->response->redirect_404();
+			return;
+		}
+		
+		$get = $this->request->get;
+		$page = $get['page'];
+		$limit = 10;
+		$cond = array('recruit'=>$id);
+		$order = array('time'=>'DESC');
+		$all = $this->RecruitItem->count($cond);
+		$pager = new Pager($all, $page, $limit);
+		$list = $this->RecruitItem->get_page($cond, $order, $pager->now(), $limit);
+		$this->set('$recruit', $recruit);
+		$this->set('$list', $list);
+		$links = $pager->get_page_links($this->get('home')."/result?id=$id&");
+		$this->set('links', $links);
+	}
+	
+	public function resume(){
+		$get = $this->request->get;
+		$item_id = $get['item'];
+		$User = $this->get('User');
+		$has_error = true;
+		if($item_id){
+			$item = $this->RecruitItem->get($item_id);
+			if($item){
+				if(is_his_object($User, $item)){
+					$has_error = false;
+				}
+				else{
+					$recruit = $this->Recruit->get($item->recruit);
+					if($recruit && is_company_object($User, $recruit)){
+						$has_error = false;
+					}
+				}
+			}
+		}
+		if($has_error){
+			$message = '无权下载';
+			$this->redirect_error($message);
+			return;
+		}
+		
+		$path = UPLOAD_HOME.'/'.$item->resume;
+		header("Location: $path");
+		exit;
+	}
 	
 }

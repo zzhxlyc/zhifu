@@ -1,9 +1,7 @@
 
-<div class="video_video">
-	<embed src="<?php echo $video->url?>" 
-		allowfullscreen="false" quality="high" width="600" height="500" 
-		align="middle" allowscriptaccess="always" 
-		type="application/x-shockwave-flash" />
+<div class="row">
+	<label for="desc"></label>
+	<h3><?php echo $video->title?></h3>
 </div>
 
 <div class="row">
@@ -32,6 +30,13 @@
 		}
 	}
 	?>
+</div>
+
+<div class="video_video">
+	<embed src="<?php echo $video->url?>" 
+		allowfullscreen="false" quality="high" width="600" height="500" 
+		align="middle" allowscriptaccess="always" 
+		type="application/x-shockwave-flash" />
 </div>
 
 <?php comment_div($comments, $links, $video, BelongType::VIDEO, $User)?>

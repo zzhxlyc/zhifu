@@ -179,15 +179,16 @@
 
 <?php if($patent->file){?>
 <div class="row">
-	<label for="">附件</label>
+	<label for="">已上传的附件</label>
 	<a target="_blank" href="<?php echo UPLOAD_HOME."/$patent->file"?>">点击下载</a>
 </div>
 <?php }?>
 
 <div class="row">
-	<label for="">修改附件</label>
+	<label for="">附件</label>
 	<input type="file" name="file" />
 	<span class="error"><?php echo $errors['file']?></span>
+	<span>附件最大20M</span>
 </div>
 
 

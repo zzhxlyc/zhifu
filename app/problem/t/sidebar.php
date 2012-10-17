@@ -9,7 +9,10 @@
 		<p>类别：<?php echo $Problem->cat_name?> <?php echo $Problem->subcat_name?></p>
 		<?php }?>
 		<?php if(!empty($Problem->province)){?>
-		<p>地区：<?php output_pcd($Problem)?></p>
+		<p>所在地区：<?php output_pcd($Problem)?></p>
+		<?php }?>
+		<?php if(!empty($Problem->province2)){?>
+		<p>面向地区：<?php output_pcd2($Problem)?></p>
 		<?php }?>
 		<p>发布时间：<?php echo get_date($Problem->time)?></p>
 		<p>最后修改时间：<?php echo get_date($Problem->lastmodify)?></p>

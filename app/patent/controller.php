@@ -36,6 +36,12 @@ class PatentController extends AppController {
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Patent->get_page($condition, $order, $pager->now(), $limit);
 		$links = $pager->get_page_links($this->get('home').'/index?');
+		$User = $this->get('User');
+		if($User){
+			$cond = array('belong' => $User->id, 'type' => $User->get_type());
+			$deals = $this->Deal->get_list($cond);
+			$this->set('buyed_patents', get_attrs($deals, 'patent'));
+		}
 		$this->set('list', $list);
 		$this->set('links', $links);
 	}
@@ -51,6 +57,7 @@ class PatentController extends AppController {
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
+				$this->resize_upload_image($path);
 				if($path){$post['image'] = $path;}
 				$path = $this->do_file('file', $errors, $files);
 				if($path){$post['file'] = $path;}
@@ -171,6 +178,7 @@ class PatentController extends AppController {
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
+				$this->resize_upload_image($path);
 				if($path){$post['image'] = $path;}
 				$path = $this->do_file('file', $errors, $files);
 				if($path){$post['file'] = $path;}
@@ -211,9 +219,9 @@ class PatentController extends AppController {
 			return;
 		}
 		
+		$cond = array('patent'=>$id, 'belong'=>$User->id, 'type'=>$User->get_type());
+		$count = $this->Deal->count($cond);
 		if($this->request->post){
-			$cond = array('patent'=>$id, 'belong'=>$User->id, 'type'=>$User->get_type());
-			$count = $this->Deal->count($cond);
 			if($count == 0){
 				if($User->get_type() == BelongType::EXPERT){
 					if($Patent->expert == $User->id){
@@ -232,9 +240,9 @@ class PatentController extends AppController {
 			}
 			$this->redirect('detail?id='.$id);
 		}
+		$this->set('buyed', $count == 1);
 		$this->set('$Patent', $Patent);
 		$this->show_tags($Patent);
-//		$this->show_categorys($Patent);
 	}
 	
 	

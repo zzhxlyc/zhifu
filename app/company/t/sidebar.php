@@ -4,7 +4,8 @@
 	</div>
 	<div class="detail-profile">
 		<p>用户名：<?php echo $Company->username?></p>
-		<p>姓名：<?php echo $Company->name?></p>
+		<p>公司名：<?php echo $Company->name?></p>
+		<p>联系人：<?php echo $Company->contact?></p>
 		<p>邮件：<?php echo $Company->email?></p>
 		<p>电话：<?php echo $Company->phone?></p>
 		<p>网址：<?php echo $Company->url?></p>

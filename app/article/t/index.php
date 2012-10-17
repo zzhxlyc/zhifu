@@ -9,8 +9,8 @@
 	 -->
 </div><!--end for cat-wrapper-->
 
-<div class="filter clearfix">
 	<!-- 
+<div class="filter clearfix">
 	<div class="order">
 		<label for="">排序:</label>
 		<a href="<?php echo $home.'/index?order=time'?>" <?php $HTML->if_current($_GET['order'] == 'time')?>>发布时间</a>
@@ -19,9 +19,9 @@
 		<input type="text" class="text">
 		<input type="button" class="btn">
 	</div>
-	 -->
 
-</div><!--end for filter-->
+</div>
+	 -->
 
 <div class="list">
 	<?php 
@@ -29,15 +29,11 @@
 			foreach($list as $o){
 	?>
 	<div class="item clearfix">
-		<div class="pic">
-			<a href="<?php echo ARTICLE_HOME.'/detail?id='.$o->id?>">
-			<img src="<?php img($o->image, $o->default_image())?>" width="200" height="150"  alt="<?php echo $o->title?>">
-			</a>
-		</div><!--end for pic-->
 		<div class="middle">
 			<a href="<?php echo ARTICLE_HOME.'/detail?id='.$o->id?>">
 				<h3 class="title"><?php echo $o->title?></h3>
 			</a>
+			<span><?php echo $o->time?></span>
 			<div class="content"><?php output_desc($o->content)?></div>						
 		</div><!--end for middle-->
 	</div><!--end for item-->

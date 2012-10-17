@@ -125,6 +125,7 @@ class ExpertController extends AppController {
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
+				$this->resize_upload_image($path);
 				if($path){$post['image'] = $path;}
 				$path = $this->do_file('license', $errors, $files);
 				if($path){$post['license'] = $path;}

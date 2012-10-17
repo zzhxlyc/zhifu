@@ -14,7 +14,10 @@ function get_user_type($user){
 }
 
 function img($image, $default = ''){
-	if(!empty($image) && file_exists(UPLOAD_DIR.'/'.$image)){
+	if(StringUtils::start_with($image, 'http')){
+		echo $image;
+	}
+	else if(!empty($image) && file_exists(UPLOAD_DIR.'/'.$image)){
 		echo UPLOAD_HOME.'/'.$image;
 	}
 	else{
@@ -88,6 +91,10 @@ function output_pcd($o){
 	echo "$o->province$o->city$o->district";
 }
 
+function output_pcd2($o){
+	echo "$o->province2$o->city2$o->district2";
+}
+
 function output_deadline($datetime){
 	if($datetime && $datetime != '0000-00-00'){
 		if(!is_expire($datetime)){
@@ -102,9 +109,12 @@ function output_deadline($datetime){
 	}
 }
 
-function output_edit_succ(){
+function output_edit_succ($message = ''){
+	if($message == ''){
+		$message = '修改成功';
+	}
 	if(isset($_GET['succ'])){
-		echo '<div class="success-notice">修改成功</div>';
+		echo '<div class="success-notice">'.$message.'</div>';
 	}
 }
 
@@ -161,12 +171,7 @@ function output_sex($sex){
 
 function output_username($o, $type = 1){
 	if($type == 1){
-		if($o->author){
-			echo $o->author;
-		}
-		else if($o->username){
-			echo $o->username;
-		}
+		echo $o->username;
 	}
 	else if($type == 2){
 		echo $o->username;
@@ -179,10 +184,10 @@ function output_username($o, $type = 1){
 function get_user_link($o){
 	$type = $o->get_type();
 	if($type == BelongType::EXPERT){
-		return EXPERT_HOME.'/profile?id='.$id;
+		return EXPERT_HOME.'/profile?id='.$o->id;
 	}
 	else if($type == BelongType::COMPANY){
-		return COMPANY_HOME.'/profile?id='.$id;
+		return COMPANY_HOME.'/profile?id='.$o->id;
 	}
 	else{
 		return '';
@@ -197,7 +202,7 @@ function get_author_link($id, $type){
 		return COMPANY_HOME.'/profile?id='.$id;
 	}
 	else{
-		return '';
+		return '#';
 	}
 }
 
@@ -233,9 +238,29 @@ function is_admin($o){
 	return false;
 }
 
-function is_company_object($u, $o){
+function is_his_object($u, $o){
+	$oid = $o->belong;
+	$otype = $o->type;
 	if($u && $o){
-		if($u->id == $o->company && $u->get_type() == BelongType::COMPANY){
+		if($u->id == $oid && $u->get_type() == $otype){
+			return true;
+		}
+	}
+	return false;
+}
+
+function is_company_object($u, $o){
+	if(isset($o->company)){
+		$oid = $o->company;
+	}
+	else if(isset($o->belong)){
+		$oid = $o->belong;
+	}
+	else{
+		return false;
+	}
+	if($u && $o){
+		if($u->id == $oid && $u->get_type() == BelongType::COMPANY){
 			return true;
 		}
 	}
@@ -243,8 +268,17 @@ function is_company_object($u, $o){
 }
 
 function is_expert_object($u, $o){
+	if(isset($o->expert)){
+		$oid = $o->expert;
+	}
+	else if(isset($o->belong)){
+		$oid = $o->belong;
+	}
+	else{
+		return false;
+	}
 	if($u && $o){
-		if($u->id == $o->expert && $u->get_type() == BelongType::EXPERT){
+		if($u->id == $oid && $u->get_type() == BelongType::EXPERT){
 			return true;
 		}
 	}

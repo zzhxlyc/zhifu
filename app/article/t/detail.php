@@ -1,15 +1,10 @@
-<div class="sidebar">
-
-	<div class="detail-profile">
-		<img src="<?php img($Article->image, $Article->default_image())?>" alt="<?php echo $Article->title?>" width="180" height="150"/>
-	</div><!--end for detail-profile-->
-	
-</div><!--end for sidebar-->
 
 <div class="main-content">
 	
 	<div class="section">
 		<h3><?php echo $Article->title?></h3>
+		<span>发布人：管理员</span>
+		<span>发布时间：<?php echo $Article->time?></span>
 		<div class="content">
 			<?php echo $Article->content?>
 		</div>

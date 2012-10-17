@@ -1,9 +1,14 @@
 <?php
 
+include(LIB_UTIL_DIR.'/ImageUtil.php');
+
 class AppController extends Controller{
 	
 	public function load_model(){
 		$t = array('Company', 'Expert', 'Admin');
+		if(!isset($this->models)){
+			$this->models = array();
+		}
 		$this->models = array_merge($this->models, $t);
 		parent::load_model();
 	}
@@ -127,6 +132,11 @@ class AppController extends Controller{
 		}
 	}
 	
+	protected function redirect_error($message){
+		$this->set('error_message', $message);
+		$this->response->redirect_message($message);
+	}
+	
 	protected function find_user_by_email($email, $not_eq_id = Null){
 		$cond = array('email'=>esc_text($email));
 		if($not_eq_id){
@@ -173,6 +183,16 @@ class AppController extends Controller{
 			return $Expert;
 		}
 		return false;
+	}
+	
+	protected function get_user($id, $type){
+		$cond = array('id'=>intval($id));
+		if($type == BelongType::COMPANY){
+			return $this->Company->get_row($cond);
+		}
+		else if($type == BelongType::EXPERT){
+			return $this->Expert->get_row($cond);
+		}
 	}
 	
 	protected function add_categorys(){
@@ -265,7 +285,8 @@ class AppController extends Controller{
 			$model = ucfirst($this->request->get_module());
 		}
 		$file = $files[$name];
-		if($file && is_uploaded_file($file['tmp_name'])){
+		$max_size = 20 * 1024 * 1024;
+		if($file && is_uploaded_file($file['tmp_name']) && $file['size'] < $max_size){
 			if(isset($this->{$model})){
 				$error = $this->{$model}->check_file($file);
 			}
@@ -349,6 +370,21 @@ class AppController extends Controller{
 			}
 			$this->Tag->plus($plus_tag_array);
 		}
+	}
+	
+	protected function set_belong(&$post, &$User){
+		$post['belong'] = $User->id;
+		$post['username'] = $User->username;
+		$post['type'] = $User->get_type();
+		$post['author'] = $User->name;
+	}
+	
+	protected function resize_upload_image($path, $width = 200, $height = 150){
+		$file = UPLOAD_DIR.'/'.$path;
+		$new_file = $file;
+//		$new_file = dirname($file).'/200_'.basename($file);
+		$Image = new ImageUtil();
+		$Image->param($file)->thumb($new_file, $width, $height, 1);
 	}
 	
 }
