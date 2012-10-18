@@ -3,7 +3,7 @@
 	<h2>注册</h2>
 	<form action="" method="post" >
 	<div class="row">
-		<label for="">登录名*</label>
+		<label for="">用户名*</label>
 		<input class="text" type="text" name="user" value="<?php echo $username?>" />
 		<span class="error"><?php echo $errors['user']?></span>
 		须大于3位小于20位的英文加数字，不能有特殊符号

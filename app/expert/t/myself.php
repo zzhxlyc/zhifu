@@ -4,7 +4,8 @@
 	}
 	else{
 ?>
-<h2>用户中心 <a href="<?php echo EXPERT_HOME.'/edit'?>">编辑</a></h2>
+<h2>用户中心 <a href="<?php echo EXPERT_HOME.'/edit'?>">编辑</a>
+ <a href="<?php echo COMPANY_HOME.'/pswd'?>">修改密码</a></h2>
 <div class="edit-left">
 <div class="row">
 	<label for="name">姓名</label>

@@ -46,9 +46,7 @@ class TopicController extends AppController {
 			$post = $this->request->post;
 			$User = $this->get('User');
 			$post['parent'] = 0;
-			$post['belong'] = $User->id;
-			$post['type'] = $User->get_type();
-			$post['author'] = $User->name;
+			$this->set_belong($post, $User);
 			$errors = $this->Topic->check($post);
 			if(trim($post['title']) == ''){
 				$errors['title'] = '不能为空';

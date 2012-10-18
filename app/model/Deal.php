@@ -6,10 +6,10 @@ class Deal extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('patent', 'company'),
-			'length' => array(),
-			'int' => array('patent', 'company'),
-			'word'=> array(),
+			'need' => array('name', 'phone'),
+			'length' => array('phone'=>20, 'note'=>1000),
+			'int' => array('patent', 'company', 'phone'),
+			'word'=> array('name', 'note', 'price'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		return $errors;
@@ -17,7 +17,7 @@ class Deal extends AppModel{
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array(),
+			'string'=>array('name', 'note', 'price'),
 			'url'=>array(),
 			'html'=>array()
 		);

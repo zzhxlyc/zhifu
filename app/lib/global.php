@@ -115,6 +115,10 @@ function output_edit_succ($message = ''){
 	}
 	if(isset($_GET['succ'])){
 		echo '<div class="success-notice">'.$message.'</div>';
+		return 1;
+	}
+	else{
+		return 0;
 	}
 }
 

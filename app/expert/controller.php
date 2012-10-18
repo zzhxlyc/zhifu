@@ -170,6 +170,9 @@ class ExpertController extends AppController {
 			if(strlen($password1) == 0){
 				$errors['password1'] = '不能为空';
 			}
+			else if(!$this->check_pswd($password1)){
+				$errors['password1'] = '密码不符合规范 ';
+			}
 			if(strlen($password2) == 0){
 				$errors['password2'] = '不能为空';
 			}

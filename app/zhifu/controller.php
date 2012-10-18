@@ -20,9 +20,9 @@ class ZhifuController extends AppController {
 		$this->layout('empty');
 	}
 	
-	private function check_pswd($pswd){
+	private function check_username($username){
 		$chars = "/^([a-zA-Z0-9]){3,20}\$/i";
-		if(preg_match($chars, $pswd)){
+		if(preg_match($chars, $username)){
 			return true;
 		}
 		return false;
@@ -41,7 +41,10 @@ class ZhifuController extends AppController {
 			$agree = trim($post['agree']);
 			$errors = array();
 			if(strlen($user) == 0){
-				$errors['user'] = '登录名为空';
+				$errors['user'] = '用户名为空';
+			}
+			else if(!$this->check_username($user)){
+				$errors['user'] = '用户名不符合规范 ';
 			}
 			else{
 				$this->set('username', $user);
@@ -66,6 +69,9 @@ class ZhifuController extends AppController {
 			}
 			else if(intval($mobile) == 0){
 				 $errors['mobile'] = '手机格式有误';
+			}
+			else{
+				$this->set('mobile', $mobile);
 			}
 			if(strlen($email) == 0){
 				$errors['email'] = '邮箱为空';
@@ -156,6 +162,24 @@ class ZhifuController extends AppController {
 			}
 			else if($User->is_expert()){
 				$this->redirect('myself', 'expert');
+			}
+			else{
+				$this->redirect('login', '');
+			}
+		}
+		else{
+			$this->redirect('login', '');
+		}
+	}
+	
+	public function pswd(){
+		$User = $this->get('User');
+		if($User){
+			if($User->is_company()){
+				$this->redirect('pswd', 'company');
+			}
+			else if($User->is_expert()){
+				$this->redirect('pswd', 'expert');
 			}
 			else{
 				$this->redirect('login', '');

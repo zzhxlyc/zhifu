@@ -11,7 +11,7 @@
 			<li><a href="<?php echo ROOT_URL?>">首页</a>|</li>
 			<li><a href="<?php echo ROOT_URL.'/home'?>">个人主页</a>|</li>
 		<!--	<li><a href="<?php echo ROOT_URL.'/feed'?>">我的订阅</a>|</li>-->
-			<li><a href="<?php echo ROOT_URL.'/setting'?>">用户中心<?php if(empty($User->name)){?><font color="green">(完善资料)</font><?php }?></a>|</li>
+			<li><a href="<?php echo ROOT_URL.'/setting'?>">用户中心<?php if(empty($User->name)){?><font color="red"><strong>(完善资料)</strong></font><?php }?></a>|</li>
 			<li><a href="<?php echo ROOT_URL.'/message'?>">站内信</a><span id="unread_message"></span>|</li>
 			<li><a href="">发布</a>|
 				<ul class="sub-nav">
@@ -44,7 +44,7 @@
 			<li><a href="<?php echo PATENT_HOME?>" <?php head_tab3()?>>科技成果</a></li>
 			<li><a href="<?php echo RECRUIT_HOME?>" <?php head_tab4()?>>兼职/顾问</a></li>
 			<li><a href="<?php echo EXPERT_HOME?>" <?php head_tab5()?>>领域专家</a></li>
-			<li><a href="<?php echo VIDEO_HOME?>" <?php head_tab6()?>>视频</a></li>
+			<li><a href="<?php echo VIDEO_HOME?>" <?php head_tab6()?>>科技视频</a></li>
 			<li><a href="<?php echo TOPIC_HOME?>" <?php head_tab7()?>>话题</a></li>
 			<li><a href="<?php echo ARTICLE_HOME?>" class="last<?php head_tab8()?>">案例展示</a></li>
 

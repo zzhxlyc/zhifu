@@ -15,9 +15,7 @@ class AdminBaseController extends AppController {
 			$this->set('User', $Admin);
 		}
 		$this->view->layout = 'admin';
-		if($this->is_set('home')){
-			$this->set('index_page', $this->get('home').'/index');
-		}
+		$this->set_global_param();
 	}
 	
 	protected function get_delete_ids($get, $post){

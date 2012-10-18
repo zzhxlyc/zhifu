@@ -35,14 +35,10 @@
 		<div class="content line-list">
 			<div class="item clearfix">
 				<div class="pic">
-					<a target="_blank" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
 					<img src="<?php img($expert->image)?>" alt="<?php echo '匿名'?>"
 						 width="100" height="100"/>
-					</a>
 					<span class="name">
-						<a target="_blank" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
 						<?php echo '匿名'?>
-						</a>
 					</span>
 				</div>
 				<div class="des">
@@ -71,26 +67,22 @@
 			?>
 			<div class="item clearfix">
 				<div class="pic">
-					<a target="_blank" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
 					<img src="<?php img($expert->image)?>" alt="<?php echo '匿名'?>"
 						 width="100" height="100"/>
-					</a>
 					<span class="name">
-						<a target="_blank" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
 						<?php echo '匿名'?>
-						</a>
 					</span>
 				</div>
 				<div class="des">
 					<p><?php echo $solution->title;?></p>
-					<p><?php output_desc($Solver->description)?></p>
+					<p><?php output_desc($solution->description)?></p>
 				</div>
 				<?php 
 					if(is_company_object($User, $Problem) 
 							|| is_expert_object($User, $solution)){
 				?>
 				<div class="des">
-					<a href="<?php echo $home."/item?problem=$Problem->id&item=$Solver->id"?>"><strong>查看此竞标方案</strong></a>
+					<a href="<?php echo $home."/item?problem=$Problem->id&item=$solution->id"?>"><strong>查看此竞标方案</strong></a>
 				</div>
 				<?php }?>
 			</div><!--end for item-->

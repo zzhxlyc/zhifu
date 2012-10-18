@@ -16,6 +16,18 @@
 		</div>
 	</div>
 	 -->
+	 
+	<div class="section">
+		<h3>专利介绍</h3>
+		<div class="content">
+			<?php echo $Patent->description?>
+		</div>
+		<div class="content">
+			<?php if($Patent->file){?>
+			附件：<a target="_blank" href="<?php echo UPLOAD_HOME."/$Patent->file"?>">点击下载</a>
+			<?php }?>
+		</div>
+	</div>	
 
 	<div class="section">
 		<h3>购买用户（<?php echo count($deals)?>）</h3>
@@ -36,23 +48,19 @@
 						</a>
 					</span>
 				</div>
-				<div class="des">购买时间：<?php echo $deal->time?></div>
+				<div class="des">
+					<p>购买时间：<?php echo $deal->time?></p>
+					<?php if(is_expert_object($User, $deal)){?>
+					<p>购买者：<?php echo $deal->name?></p>
+					<p>联系方式：<?php echo $deal->phone?></p>
+					<p>评估价格：<?php echo $deal->price?></p>
+					<p><?php echo $deal->note?></p>
+					<?php }?>
+				</div>
 			</div><!--end for item-->
 			<?php }?>
 		</div><!--end for list-->
 	</div><!--end for section-->	
-	
-	<div class="section">
-		<h3>专利介绍</h3>
-		<div class="content">
-			<?php echo $Patent->description?>
-		</div>
-		<div class="content">
-			<?php if($Patent->file){?>
-			附件：<a target="_blank" href="<?php echo UPLOAD_HOME."/$Patent->file"?>">点击下载</a>
-			<?php }?>
-		</div>
-	</div>	
 	
 	<?php comment_div($comments, $links, $Patent, BelongType::PATENT, $User)?>
 	

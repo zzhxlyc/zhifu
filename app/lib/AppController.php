@@ -75,6 +75,10 @@ class AppController extends Controller{
 				}
 			}
 		}
+		$this->set_global_param();
+	}
+	
+	protected function set_global_param(){
 		if($this->is_set('home')){
 			$this->set('index_page', $this->get('home').'/index');
 		}
@@ -130,6 +134,14 @@ class AppController extends Controller{
 		else{
 			return $this->request->get;
 		}
+	}
+	
+	protected function check_pswd($pswd){
+		$chars = "/^(.){6,16}\$/i";
+		if(preg_match($chars, $pswd)){
+			return true;
+		}
+		return false;
 	}
 	
 	protected function redirect_error($message){

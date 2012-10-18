@@ -42,7 +42,11 @@
 				<?php }?>
 				<p>发布时间：<?php echo get_date($o->time)?></p>
 			</div>
-			<?php if($User && !in_array($o->id, $buyed_patents)){?>
+			<?php if(is_expert_object($User, $o)){?>
+			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">查看购买</a>
+			<?php }else if($User && in_array($o->id, $buyed_patents)){?>
+			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">已购买</a>
+			<?php }else{?>
 			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">有意向购买</a>
 			<?php }?>
 		</div><!--end for right-->

@@ -222,23 +222,33 @@ class PatentController extends AppController {
 		$cond = array('patent'=>$id, 'belong'=>$User->id, 'type'=>$User->get_type());
 		$count = $this->Deal->count($cond);
 		if($this->request->post){
-			if($count == 0){
+			$post = $this->request->post;
+			if($count > 0){
+				$this->redirect('detail?id='.$id);
+			}
+			else{
 				if($User->get_type() == BelongType::EXPERT){
 					if($Patent->expert == $User->id){
 						$this->redirect('detail?id='.$id);
 					}
 				}
-				$data = array();
-				$data['patent'] = $id;
-				$data['pname'] = $Patent->title;
-				$data['belong'] = $User->id;
-				$data['type'] = $User->get_type();
-				$data['username'] = $User->username;
-				$data['author'] = $User->name;
-				$data['time'] = DATETIME;
-				$this->Deal->save($data);
+				$errors = $this->Deal->check($post);
+				if(count($errors) == 0){
+					$data = array();
+					$data['name'] = $post['name'];
+					$data['phone'] = $post['phone'];
+					$data['price'] = $post['price'];
+					$data['note'] = $post['note'];
+					$data['patent'] = $id;
+					$data['pname'] = $Patent->title;
+					$this->set_belong($data, $User);
+					$data['time'] = DATETIME;
+					$this->Deal->save($data);
+					$this->redirect('submit?succ&id='.$id);
+				}
+				$this->set('errors', $errors);
+				$this->set('deal', $this->set_model($post, new Deal()));
 			}
-			$this->redirect('detail?id='.$id);
 		}
 		$this->set('buyed', $count == 1);
 		$this->set('$Patent', $Patent);

@@ -65,7 +65,7 @@ class LoginController extends AppController {
 	public function forget(){
 		if($this->request->post){
 			$post = $this->request->post;
-			$user = trim($post['user']);
+			$user = trim(esc_text($post['user']));
 			$captcha = trim($post['captcha']);
 			if(empty($user)){
 				$errors['user'] = '用户名为空';
@@ -77,11 +77,11 @@ class LoginController extends AppController {
 				$errors['captcha'] = '验证码错误';
 			}
 			if(count($errors) == 0){
-				$U = $this->find_user_by_name($user);
+				$U = $this->find_user($user);
 				if($U){
 					$code = $this->ResetCode->get_reset_code();
 					$email = $U->email;
-					if(send_pswd_reset_email($email, $U->name, $code)){
+					if(send_pswd_reset_email($email, $U->username, $code)){
 						$data = array();
 						$data['code'] = $code;
 						$data['time'] = TIMESTAMP;
