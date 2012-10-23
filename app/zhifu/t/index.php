@@ -2,7 +2,7 @@
 <div class="left-content">
 
 	<div class="idea-wrapper list clearfix">
-		<h3>创意悬赏</h3>
+		<span class="icon1"></span><h3>创意悬赏</h3>
 		<div class="item clearfix">
 			<div class="pic">
 				<img src="http://localhost/zhifu/images/default.jpg" width="100" height="75" alt="第一个创意悬赏">			
@@ -58,7 +58,7 @@
 	</div>
 	
 	<div class="problem-wrapper list">
-		<h3>技术难题</h3> 
+		<span class="icon2"></span><h3>技术难题</h3> 
 		<div class="item clearfix">
 			<div class="pic">
 				<img src="http://localhost/zhifu/images/default.jpg" width="100" height="75" alt="第一个创意悬赏">			
@@ -114,7 +114,7 @@
 </div>	<!--end for left-content-->
 <div class="right-content">
 	<div class="video-wrapper list ">
-		<h3>精彩视频</h3>
+		<span class="icon6"></span><h3>精彩视频</h3>
 		<div class="item clearfix">
 			<div class="pic">
 				<img src="http://localhost/zhifu/images/default.jpg" width="100" height="75" alt="第一个创意悬赏">			
@@ -152,7 +152,7 @@
 </div><!--end for right-content-->
 <div class="clear"></div>
 <div class="job-wrapper job list">
-	<h3>兼职顾问</h3>
+	<span class="icon3"></span><h3>兼职顾问</h3>
 	<table>
 		<tr class="top">
 			<th>类型</th>
@@ -193,7 +193,7 @@
 </div>
 	
 <div class="patent-wrapper list clearfix">
-	<h3>科技成果</h3>
+	<span class="icon4"></span><h3>科技成果</h3>
 	<div class="item">
 		<span class="title">名称</span><span class="cat">所在行业</span>
 	</div>
@@ -222,7 +222,7 @@
 
 
 <div class="case-wrapper list clearfix">
-	<h3>案例展示</h3>
+	<span class="icon5"></span><h3>案例展示</h3>
 	<div class="item clearfix">
 		<div class="pic">
 			<img src="http://localhost/zhifu/images/default.jpg" width="100" height="75" alt="第一个创意悬赏">			

@@ -1,7 +1,7 @@
 
 <div class="main-content">
 
-	<div class="section">
+	<div class="section message">
 		<h3>发送站内信</h3>
 		<div class="content line-list">
 			<form action="" method="post">

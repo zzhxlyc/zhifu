@@ -293,6 +293,7 @@ padding: 0 10px;
 padding-right: 0px;
 padding-left: 10px;
 }
+
 /****************************main wrapper**********************************/
 
 .wrapper {
@@ -374,7 +375,57 @@ height: 20px;
 overflow: hidden;
 float: left;
 }
-
+/*************************index***************************/
+.icon1{
+	display:block;
+	float:left;
+	width:20px;
+	height:24px;
+	background:url(../images/ico_small.png) no-repeat 0 -44px;
+	
+	
+}
+.icon2{
+	display:block;
+	float:left;
+	width:20px;
+	height:24px;
+	background:url(../images/ico_small.png) no-repeat 0 -270px;
+	
+	
+}
+.icon3{
+	display:block;
+	float:left;
+	width:20px;
+	height:24px;
+	background:url(../images/ico_small.png) no-repeat 0 -244px;
+	
+}
+.icon4{
+	display:block;
+	float:left;
+	width:20px;
+	height:24px;
+	background:url(../images/ico_small.png) no-repeat 0 -644px;
+	
+}
+.icon5{
+	display:block;
+	float:left;
+	width:20px;
+	height:24px;
+	background:url(../images/ico_small.png) no-repeat 0 -746px;
+	
+}
+.icon6{
+	display:block;
+	float:left;
+	width:20px;
+	height:24px;
+	background:url(../images/ico_small.png) no-repeat 0 -870px;
+	
+}
 /****************************排序搜索**********************************/
 .filter{
 	height: 43px;
@@ -1277,4 +1328,7 @@ float:left;
 	color:#999;
 }
 
-
+/*****站内信***/
+.message label{
+	width:40px;
+}
