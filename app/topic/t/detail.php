@@ -2,8 +2,7 @@
 	<h2><?php echo $topic->title?></h2>
 	<div class="topic-meta">
 		<span class="time"><?php echo $topic->time?></span>
-		<span class="author">来自：
-			<a href="<?php echo $topic->get_author_link()?>"><?php echo $topic->username?></a>
+		<span class="author">来自:<a href="<?php echo $topic->get_author_link()?>"><?php echo $topic->username?></a>
 		</span>
 		<span class="op">
 			<?php if($User && $User->id == $topic->belong && $User->get_type() == $topic->type){?>

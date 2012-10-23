@@ -68,7 +68,7 @@
 	
 	<div class="row">
 		<label for="">面向地区</label>
-		<div class="province_city"></div>
+		<div class="province_city2"></div>
 	</div>
 	
 	<div class="row">

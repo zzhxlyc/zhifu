@@ -29,13 +29,15 @@
 			foreach($list as $o){
 	?>
 	<div class="item clearfix">
-		<div class="middle">
 			<a href="<?php echo ARTICLE_HOME.'/detail?id='.$o->id?>">
 				<h3 class="title"><?php echo $o->title?></h3>
 			</a>
-			<span><?php echo $o->time?></span>
+			<div class="meta">
+				<span class="time"><?php echo $o->time?></span>
+				<span class="author">发布者:<?php echo $o->author?></span>
+			</div>
+			
 			<div class="content"><?php output_desc($o->content)?></div>						
-		</div><!--end for middle-->
 	</div><!--end for item-->
 	<?php 
 			}

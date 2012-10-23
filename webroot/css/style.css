@@ -494,9 +494,12 @@ padding-right:10px;
 font-size:14px;
 padding-bottom:10px;
 }
+.list .item .meta {
+padding-bottom:5px;
+}
 
-.list .item .content {
-	width:530px;
+.list .item .middle .content {
+	width:490px;
 	height:90px;
 }
 
@@ -787,6 +790,8 @@ height:123px;
 .sidebar{
 float:left;	
 width:200px;
+word-wrap:break-word;
+word-break:normal;
 }
 .detail-profile{
 background: #ECEFF5;
@@ -965,6 +970,14 @@ color:#fff;
 background-color:#369;
 
 }
+.topic-meta a{
+	padding:2px;
+}
+
+.topic-meta a:hover{
+	color:#fff;
+	background:#259;
+}
 
 .hot-topic-list{
 	width:260px;
@@ -1137,14 +1150,17 @@ display:none;
 	padding: 0 4px 0 24px;
 }
 
-
+.pwd-level{
+width:220px;
+margin:10px 0 0 100px;
+}
 .register .pwd-level{
 width:220px;
 margin:10px 0 0 90px;
 }
 
 
-.register .pwd-level span{
+.pwd-level span{
 	display:block;
 	float:left;
 	background-color:#FFD099;
@@ -1154,7 +1170,7 @@ margin:10px 0 0 90px;
 }
 
 
-.register .pwd-level span.current{
+.pwd-level span.current{
 	background-color:#F60;
 }
 .register .captcha label{
@@ -1256,6 +1272,9 @@ width:280px;
 float:left;	
 }
 
-
+.list span.time{
+	padding-right:10px;
+	color:#999;
+}
 
 
