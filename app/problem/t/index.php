@@ -1,14 +1,15 @@
-<div class="cat-wrapper">
 	<!-- 
+<div class="cat-wrapper">
 	<ul class="cat-nav">
 		<li><a href="#">所有分类</a></li>
 		<li><a href="#">光学</a></li>
 		<li><a href="#">计算机</a></li>
 		<li><a href="#">机械</a></li>
 	</ul>
+</div>
 	 -->
-</div><!--end for cat-wrapper-->
 
+<!-- 
 <div class="filter clearfix">
 	<div class="order">
 		<label for="">排序:</label>
@@ -16,13 +17,13 @@
 		<a href="<?php echo $home.'/index?order=deadline'?>" <?php $HTML->if_current($_GET['order'] == 'deadline')?>>截止时间</a>
 		<a href="<?php echo $home.'/index?order=budget'?>" <?php $HTML->if_current($_GET['order'] == 'budget')?>>任务金额</a>
 	</div>
-	<!-- 
+	
 	<div class="search">
 		<input type="text" class="text">
 		<input type="button" class="btn">
 	</div>
-	 -->
-</div><!--end for filter-->
+</div>
+-->
 
 <div class="list">
 	<?php 

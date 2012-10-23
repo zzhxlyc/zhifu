@@ -34,7 +34,7 @@
 			</a>
 			<div class="meta">
 				<span class="time"><?php echo $o->time?></span>
-				<span class="author">发布者:<?php echo $o->author?></span>
+				<span class="author">发布者：管理员</span>
 			</div>
 			
 			<div class="content"><?php output_desc($o->content)?></div>						

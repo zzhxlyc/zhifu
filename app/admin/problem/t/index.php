@@ -27,7 +27,7 @@
 		</td>
 		<td><a target="_blank" href="<?php echo get_author_link($o->company, BelongType::COMPANY)?>"><?php echo $o->username?></a></td>
 		<td><?php echo $o->get_status()?></td>
-		<td><?php echo $o->budget?></td>
+		<td><?php echo $o->budget?>万</td>
 		<td><?php echo $o->time?></td>
 		<td class="operate">
 			<a target="_blank" href="<?php echo ADMIN_SOLUTION_HOME.'/index?pid='.$o->id?>">查看竞标</a>

@@ -7,19 +7,18 @@
 	</ul> -->
 </div><!--end for cat-wrapper-->
 
+	<!-- 
 <div class="filter clearfix">
 	<div class="order">
 		<label for="">排序:</label>
 		<a href="<?php echo $home.'/index?order=budget'?>" <?php $HTML->if_current($_GET['order'] == 'budget')?>>任务金额</a>
 	</div>
-	<!-- 
 	<div class="search">
 		<input type="text" class="text">
 		<input type="button" class="btn">
 	</div>
+</div>
 	-->
-
-</div><!--end for filter-->
 
 <div class="list">
 	<?php 
