@@ -8,8 +8,8 @@ class ProblemController extends AppController {
 	public function before(){
 		$this->set('home', PROBLEM_HOME);
 		parent::before();
-		$need_login = array('item', 'score');	// either
-		$need_company = array('add', 'edit', 'choose', 'finish');
+		$need_login = array('detail', 'item', 'score');	// either
+		$need_company = array('add', 'edit', 'choose', 'finish', 'done');
 		$need_expert = array('submit', 'itemedit');
 		$this->login_check($need_login, $need_company, $need_expert);
 	}

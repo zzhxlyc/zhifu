@@ -32,7 +32,7 @@
 			</a>
 		</div><!--end for pic-->
 		<div class="middle">
-			<h3 class="title"><a href="<?php echo $home.'/profile?id='.$o->id?>"><?php echo $o->name?></a></h3>
+			<h3 class="title"><a href="<?php echo $home.'/profile?id='.$o->id?>"><?php output_username($o, 2)?></a></h3>
 			<div class="content"><?php output_desc($o->description)?></div>						
 			
 		</div><!--end for middle-->

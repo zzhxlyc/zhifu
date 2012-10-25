@@ -7,7 +7,7 @@ class TopicController extends AppController {
 	public function before(){
 		$this->set('home', TOPIC_HOME);
 		parent::before();
-		$need_login = array('add', 'edit', 'reply');	// either
+		$need_login = array('add', 'edit', 'reply', 'detail');	// either
 		$need_company = array();
 		$need_expert = array();
 		$this->login_check($need_login, $need_company, $need_expert);

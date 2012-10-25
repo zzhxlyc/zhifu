@@ -74,7 +74,7 @@
 		<label for="name">头像</label>
 		<input type="file" name="image" />
 		<?php if($company->image){?>
-		<img width="250" src="<?php img($company->image)?>" />
+		<img width="200" height="150" src="<?php img($company->image)?>" />
 		<?php }?>
 	</div>
 

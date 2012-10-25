@@ -13,6 +13,8 @@
 		<input size="60" type="text" class="text" name="title" value="<?php echo $problem->title?>" />
 		<span class="error"><?php echo $errors['title']?></span>
 	</div>	
+	
+	<!-- 
 	<div class="row">
 		<label for="">电话</label>
 		<input size="20" type="text" name="phone" class="text" value="<?php echo $problem->phone?>"/>
@@ -30,6 +32,9 @@
 		<input size="20" type="text" name="email" class="text" value="<?php echo $problem->email?>"/>
 		<span class="error"><?php echo $errors['email']?></span>
 	</div>
+	-->
+	
+	
 	<div class="row">
 		<label for="cat">所属行业</label>
 		<select name="cat">
@@ -43,6 +48,25 @@
 	</div>
 	
 	<div class="row">
+		<label for="">联系人姓名</label>
+		<input class="text" size="55" type="text" name="contact" value="<?php echo $problem->contact?>" />
+		<span class="error"><?php echo $errors['contact']?></span>
+	</div>
+	
+	<div class="row">
+		<label for="">联系方式</label>
+		<input class="text" size="55" type="text" name="phone" value="<?php echo $problem->phone?>" />
+		<span class="error"><?php echo $errors['phone']?></span>
+		<span>填入手机号或电话号码</span>
+	</div>
+	
+	<div class="row">
+		<label for="budget">预算</label>
+		<input size="20" type="text" class="text" name="budget" value="<?php echo $problem->budget?>" />万元
+		<span class="error"><?php echo $errors['budget']?></span>
+	</div>
+	
+	<div class="row">
 		<label for="">所在地区</label>
 		<div class="province_city"></div>
 	</div>
@@ -51,14 +75,6 @@
 		<label for="">面向地区</label>
 		<div class="province_city2"></div>
 	</div>	
-
-
-	<div class="row">
-		<label for="budget">预算</label>
-		<input size="20" type="text" class="text" name="budget" value="<?php echo $problem->budget?>" />万元
-		<span class="error"><?php echo $errors['budget']?></span>
-	</div>
-
 
 	<div class="row">
 		<label for="deadline">截止日期</label>

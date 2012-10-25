@@ -15,21 +15,10 @@
 </div>
 
 <div class="row">
-	<label for="name">电话</label>
-	<input size="50" type="text" class="text" name="phone" value="<?php echo $patent->phone?>" />
+	<label for="name">联系方式</label>
+	<input size="20" type="text" class="text" name="phone" value="<?php echo $patent->phone?>" />
 	<span class="error"><?php echo $errors['phone']?></span>
-</div>
-
-<div class="row">
-	<label for="name">移动电话</label>
-	<input size="50" type="text" class="text" name="mobile" value="<?php echo $patent->mobile?>" />
-	<span class="error"><?php echo $errors['mobile']?></span>
-</div>
-
-<div class="row">
-	<label for="name">邮箱</label>
-	<input size="50" type="text" class="text" name="email" value="<?php echo $patent->email?>" />
-	<span class="error"><?php echo $errors['email']?></span>
+	<span>请填入手机号或电话号码</span>
 </div>
 
 <div class="row">
@@ -138,10 +127,10 @@
 
 <div class="row">
 	<label for="name">转让方式</label>
-	<input type="radio" name="transfer" value="1" <?php $HTML->checked(1, $patent->transfer)?> /> 完全转让
-	<input type="radio" name="transfer" value="2" <?php $HTML->checked(2, $patent->transfer)?> /> 许可转让
-	<input type="radio" name="transfer" value="3" <?php $HTML->checked(3, $patent->transfer)?> /> 合作生产
-	<input type="radio" name="transfer" value="4" <?php $HTML->checked(4, $patent->transfer)?> /> 接受投资
+	<input type="checkbox" name="transfer[]" value="1" <?php $HTML->if_checked(($patent->transfer >> 1) & 1 == 1)?> /> 完全转让
+	<input type="checkbox" name="transfer[]" value="2" <?php $HTML->if_checked(($patent->transfer >> 2) & 1 == 1)?> /> 许可转让
+	<input type="checkbox" name="transfer[]" value="3" <?php $HTML->if_checked(($patent->transfer >> 3) & 1 == 1)?> /> 合作生产
+	<input type="checkbox" name="transfer[]" value="4" <?php $HTML->if_checked(($patent->transfer >> 4) & 1 == 1)?> /> 接受投资
 	<span class="error"><?php echo $errors['transfer']?></span>
 </div>
 

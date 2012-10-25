@@ -5,17 +5,11 @@
 </div>
 
 <div class="row">
-	<label for="desc">发布者</label>
-	<a target="_blank" href="<?php echo get_author_link($video->belong, $video->type)?>"><?php echo $video->username?></a>
-</div>
-
-<div class="row">
 	<label for="desc">发布时间</label>
 	<?php echo $video->time?>
-</div>
-
-<div class="row">
-	<label for="desc">点击次数</label>
+	<span>发布者</span>
+	<a target="_blank" href="<?php echo get_author_link($video->belong, $video->type)?>"><?php echo $video->username?></a>
+	<span>点击次数</span>
 	<?php echo $video->click?>
 </div>
 

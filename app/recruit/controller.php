@@ -7,7 +7,7 @@ class RecruitController extends AppController {
 	public function before(){
 		$this->set('home', RECRUIT_HOME);
 		parent::before();
-		$need_login = array('show', 'add', 'edit');	// either
+		$need_login = array('show', 'add', 'edit', 'apply', 'itemedit', 'result', 'resume');	// either
 		$need_company = array();
 		$need_expert = array();
 		$this->login_check($need_login, $need_company, $need_expert);

@@ -25,9 +25,9 @@
 			<?php if(is_company_object($User, $Idea) && $Idea->status == 1){?>
 			<select class="idea_prize_choose">
 				<option value="">设置奖项</option>
-				<option value="1">采纳为一等奖</option>
-				<option value="2">采纳为二等奖</option>
-				<option value="3">采纳为三等奖</option>
+				<option value="1" <?php $HTML->selected(1, $Item->status)?>>采纳为一等奖</option>
+				<option value="2" <?php $HTML->selected(2, $Item->status)?>>采纳为二等奖</option>
+				<option value="3" <?php $HTML->selected(3, $Item->status)?>>采纳为三等奖</option>
 			</select>
 			<?php }?>
 		</div>
@@ -37,7 +37,7 @@
 	
 	<?php if(is_company_object($User, $Idea)){?>
 	<div class="section">
-		<h3>创意提供者：<?php echo $Expert->name?></h3>
+		<h3>创意提供者：<a href="<?php echo get_user_link($Expert)?>"><?php echo $Expert->username?></a></h3>
 		<div class="content line-list">
 			<?php echo $Expert->description?>
 		</div><!--end for list-->
@@ -46,7 +46,7 @@
 	
 	<?php if($Idea->status == 2 && is_company_object($User, $Idea)){?>
 	<div class="section">
-		<h3>给中标者评分</h3>
+		<h3>给TA评分</h3>
 		<div class="rating">
 			<a href="javascript:;" rank="1"><img src="<?php echo IMAGE_HOME.'/star_d.png'?>" id="star1" alt="" /></a>
 			<a href="javascript:;" rank="2"><img src="<?php echo IMAGE_HOME.'/star_d.png'?>" id="star2" alt="" /></a>

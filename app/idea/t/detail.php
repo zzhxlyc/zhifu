@@ -39,12 +39,12 @@
 					</a>
 					<span class="name">
 						<a target="_blank" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
-						<?php echo $expert->name?>
+						<?php echo $expert->username?>
 						</a>
 						<?php if(is_company_object($User, $Idea)){?>
 						<br/>
 						<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
-						给专家评分
+						给TA评分
 						</a>
 						<?php }?>
 						<?php if(is_expert_object($User, $item)){?>
@@ -89,17 +89,25 @@
 					<img src="<?php img($expert->image)?>" alt="<?php echo $expert->name?>"
 						 width="100" height="100"/>
 					</a>
-					<span class="name">
-						<a target="_blank" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
-						<?php echo $expert->name?>
-						</a>
-					</span>
+					<?php 
+						if(is_expert_object($User, $item)){
+					?>
+					<span class="name"><?php echo $item->username?></span>
+					<?php }else{?>
+					<span class="name">匿名</span>
+					<?php }?>
 				</div>
 				<div class="des">
+					<?php 
+						if(is_company_object($User, $Idea) || is_expert_object($User, $item)){
+					?>
 					<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
 					<?php echo $item->title?>
 					</a>
-					<?php echo $item->content?>
+					<?php }else{?>
+					<?php echo $item->title?>
+					<?php }?>
+					<p><?php output_desc($item->content)?></p>
 				</div>
 			</div><!--end for item-->
 			<?php }?>

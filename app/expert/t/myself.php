@@ -57,7 +57,7 @@
 <div class="row">
 	<label for="name">头像</label>
 	<?php if($expert->image){?>
-	<img width="250" src="<?php img($expert->image)?>" />
+	<img width="200" height="150" src="<?php img($expert->image)?>" />
 	<?php }?>
 </div>
 

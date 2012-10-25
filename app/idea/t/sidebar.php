@@ -21,7 +21,7 @@
 		<div class="title">发起者</div>
 		<div class="content">
 			<p><a target="_blank" href="<?php echo COMPANY_HOME.'/profile?id='.$Company->id?>">
-				<?php echo $Company->name?></a></p>
+				<?php output_username($Idea, 2)?></a></p>
 		</div>
 		
 	</div><!--end for tag-->
@@ -67,7 +67,8 @@ $(".idea_finish").click(function (){
 		success: function(msg){
 			if(msg == '0'){
 				alert('已成功结束提交');
-				$(".idea_finish").hide();
+//				$(".idea_finish").hide();
+				location.href = window.ROOT_URL + '/idea/detail?id=' + idea;
 			}
 			else{
 				alert(msg);
@@ -84,7 +85,8 @@ $(".idea_done").click(function (){
 		success: function(msg){
 			if(msg == '0'){
 				alert('已成功结束评奖');
-				$(".idea_finish").hide();
+//				$(".idea_finish").hide();
+				location.href = window.ROOT_URL + '/idea/detail?id=' + idea;
 			}
 			else{
 				alert(msg);

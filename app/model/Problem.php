@@ -6,28 +6,20 @@ class Problem extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'company', 'description', 'phone', 'mobile', 'email'),
-			'length' => array('phone'=>20, 'mobile'=>20, 'description'=>1000),
-			'int' => array('company', 'cat', 'subcat'),
+			'need' => array('title', 'company', 'description', 'contact', 'phone'),
+			'length' => array('description'=>1000, 'phone'=>20),
+			'int' => array('company', 'cat', 'subcat', 'phone'),
 			'number' => array('budget'),
-			'email' => array('email'),
-			'word'=> array('title', 'description'),
+			'email' => array(),
+			'word'=> array('title', 'description', 'contact'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
-		$phone = get_value($data, 'phone');
-		$mobile = get_value($data, 'mobile');
-		if(empty($errors['phone']) && intval($phone) == 0){
-			$errors['phone'] = '电话格式有误';
-		}
-		if(empty($errors['mobile']) && intval($mobile) == 0){
-			$errors['mobile'] = '手机格式有误';
-		}
 		return $errors;
 	}
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title', 'phone', 'mobile'),
+			'string'=>array('title', 'contact', 'phone'),
 			'url'=>array(),
 			'html'=>array('description')
 		);

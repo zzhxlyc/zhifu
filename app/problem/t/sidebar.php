@@ -25,7 +25,7 @@
 		<div class="title">发起者</div>
 		<div class="content">
 			<a href="<?php echo COMPANY_HOME.'/profile?id='.$Problem->company?>">
-				<?php output_username($Problem)?></a>
+				<?php output_username($Problem, 2)?></a>
 		</div>
 	</div><!--end for tag-->
 	

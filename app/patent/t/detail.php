@@ -18,7 +18,11 @@
 	 -->
 	 
 	<div class="section">
-		<h3>专利介绍</h3>
+		<h3>专利介绍
+		<?php if(is_expert($User) && $User->id == $Patent->expert){?>
+			<a href="<?php echo $home.'/edit?id='.$Patent->id?>" class="edit">编辑</a>
+			<?php }?>
+		</h3>
 		<div class="content">
 			<?php echo $Patent->description?>
 		</div>
