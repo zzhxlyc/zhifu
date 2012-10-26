@@ -207,6 +207,6 @@ $(document).ready(function($){
 	dateEventInit();
 	provinceEventInit();	
 	tagEventInit();
-	catEventInit();
+	catEventInitNormal();
 });	
 </script>

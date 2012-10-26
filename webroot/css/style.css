@@ -180,7 +180,7 @@ text-decoration: underline;
 }
 
 .top-nav li.hovered ul {
-	left: auto;
+	left: 0;
 	 z-index: 300;
 }
 
@@ -770,11 +770,14 @@ font-size:12px;
 
 }
 
+.tag{
+	height:25px;
+}
+
 .row label{
 display:block;
 float:left;
 width:90px;	
-padding-top: 3px;
 font-weight:bold;
 text-align:right;
 padding-right:10px;
@@ -982,6 +985,17 @@ height: 150px;
 
 .hot-video {
 	margin-top:40px;
+}
+
+.meta{
+padding:10px 0;
+}
+.meta span{
+padding-right:10px;
+}
+
+.single-video{
+	margin-bottom:20px;
 }
 /************话题主页**************/
 .topic-list{
