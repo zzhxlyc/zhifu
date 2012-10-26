@@ -70,7 +70,6 @@
  
 <div class="add-problem">
 
-	<div class="edit-left">
 	
 	<div class="row">
 		<label for="">所在地区</label>
@@ -121,17 +120,13 @@
 		<input type="hidden" name="new_tag" />
 		<input type="hidden" name="old_tag" />
 	</div>
-	
-
-
-</div>	<!--end for edit-left-->
-<div class="edit-right">
 	<div class="row">
 		<label for="">上传图片</label>
 		<input type="file" name="image" />
 		<span class="error"><?php echo $errors['image']?></span>
 	</div>
-</div>	<!--end for edit-right-->
+
+
 
 
 	<div class="row">

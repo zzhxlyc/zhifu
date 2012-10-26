@@ -7,7 +7,7 @@
 			<a href="<?php echo $home.'/submit?id='.$Idea->id?>" class="join-btn btn">我有创意</a>
 			<?php }?>
 			<?php if(is_company($User) && $User->id == $Idea->company && $Idea->status == 0){?>
-			<a href="<?php echo $home.'/edit?id='.$Idea->id?>" class="edit">编辑</a>
+			<a href="<?php echo $home.'/edit?id='.$Idea->id?>" class="edit">编辑该创意</a>
 			<?php }?>
 		</h3>
 		<div class="content status clearfix">

@@ -1011,6 +1011,9 @@ padding-right:10px;
 	margin-bottom:10px;
 }
 
+h3 .btn{
+*margin-top:-30px;
+}
 
 .topic-list table{
 width:100%;

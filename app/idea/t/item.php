@@ -18,7 +18,7 @@
 			<a target="_blank" href="<?php echo UPLOAD_HOME.'/'.$Item->file?>">下载</a>
 		</div>
 		<?php }?>
-		<div>
+		<div class="content line-list">
 			<?php if(is_expert_object($User, $Item) && $Idea->status == 0){?>
 			<a href="<?php echo $home."/itemedit?idea=$Idea->id&item=$Item->id"?>">编辑</a>
 			<?php }?>
@@ -74,7 +74,7 @@
 	
 	<div class="section">
 		<div class="content line-list">
-			<a href="<?php echo $home.'/detail?id='.$Idea->id?>" class="back-btn">返回</a>
+			<a href="<?php echo $home.'/detail?id='.$Idea->id?>">返回创意页面</a>
 		</div><!--end for list-->
 	</div><!--end for section-->
 	
