@@ -104,7 +104,7 @@
 	<?php if($idea->image){?>
 	<div class="row">
 		<label for="">图像</label>
-		<img alt="" src="<?php img($idea->image)?>" width="300" height="180">
+		<img alt="" src="<?php img($idea->image)?>" width="200" height="150">
 	</div>
 	<?php }?>
 

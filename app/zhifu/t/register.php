@@ -9,7 +9,7 @@
 		须大于3位小于20位的英文加数字，不能有特殊符号
 	</div>
 	<div class="row">
-		<label for="">密码*</label>
+		<label for="">密码</label>
 		<input class="text" type="password" name="pswd" />
 		<span class="error"><?php echo $errors['pswd']?></span>
 		密码长度在6位到16位之间
@@ -20,24 +20,24 @@
 		</div>
 	</div>
 	<div class="row">
-		<label for="">确认密码*</label>
+		<label for="">确认密码</label>
 		<input class="text" type="password" name="pswd2" />
 		<span class="error"><?php echo $errors['pswd2']?></span>
 		请再输入一遍密码
 	</div>
 	<div class="row">
-		<label for="type">用户类型*</label>
+		<label for="type">用户类型</label>
 		<input type="radio" name="type" value="Company" <?php $HTML->checked($type, 'Company')?>/> 公司
 		<input type="radio" name="type" value="Expert" <?php $HTML->checked($type, 'Expert')?>/> 专家
 		<span class="error"><?php echo $errors['type']?></span>
 	</div>
 	<div class="row">
-		<label for="">手机*</label>
+		<label for="">手机</label>
 		<input class="text" type="text" name="mobile" value="<?php echo $mobile?>" />
 		<span class="error"><?php echo $errors['mobile']?></span>
 	</div>
 	<div class="row">
-		<label for="">邮件*</label>
+		<label for="">邮件</label>
 		<input class="text" type="text" name="email" value="<?php echo $email?>" />
 		<span class="error"><?php echo $errors['email']?></span>
 	</div>

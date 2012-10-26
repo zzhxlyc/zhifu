@@ -7,19 +7,18 @@
 	</ul> -->
 </div><!--end for cat-wrapper-->
 
+	<!-- 
 <div class="filter clearfix">
 	<div class="order">
 		<label for="">排序:</label>
 		<a href="<?php echo $home.'/index?order=budget'?>" <?php $HTML->if_current($_GET['order'] == 'budget')?>>任务金额</a>
 	</div>
-	<!-- 
 	<div class="search">
 		<input type="text" class="text">
 		<input type="button" class="btn">
 	</div>
+</div>
 	-->
-
-</div><!--end for filter-->
 
 <div class="list">
 	<?php 
@@ -33,7 +32,7 @@
 			</a>
 		</div><!--end for pic-->
 		<div class="middle">
-			<h3 class="title"><a href="<?php echo $home.'/profile?id='.$o->id?>"><?php echo $o->name?></a></h3>
+			<h3 class="title"><a href="<?php echo $home.'/profile?id='.$o->id?>"><?php output_username($o, 2)?></a></h3>
 			<div class="content"><?php output_desc($o->description)?></div>						
 			
 		</div><!--end for middle-->

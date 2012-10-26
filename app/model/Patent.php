@@ -6,28 +6,20 @@ class Patent extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'expert', 'pid', 'description', 'phone', 'mobile', 'email'),
-			'length' => array('description'=>1000, 'pid'=>250, 'phone'=>20, 'mobile'=>20, 'email'=>200, 'url'=>250),
-			'int' => array('expert', 'cat', 'subcat', 'app', 'skill', 'example', 'kind', 'transfer', 'owner'),
+			'need' => array('title', 'expert', 'pid', 'description', 'phone'),
+			'length' => array('description'=>1000, 'phone'=>20),
+			'int' => array('pid', 'phone', 'app', 'skill', 'example', 'kind', 'transfer', 'owner'),
 			'number' => array('budget'),
-			'email' => array('email'), 
+			'email' => array(), 
 			'word'=> array('title', 'description'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
-		$phone = get_value($data, 'phone');
-		$mobile = get_value($data, 'mobile');
-		if(empty($errors['phone']) && intval($phone) == 0){
-			$errors['phone'] = '电话格式有误';
-		}
-		if(empty($errors['mobile']) && intval($mobile) == 0){
-			$errors['mobile'] = '手机格式有误';
-		}
 		return $errors;
 	}
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title', 'pid', 'phone', 'mobile'),
+			'string'=>array('title', 'pid', 'phone'),
 			'url'=>array('url'),
 			'html'=>array('description')
 		);
@@ -134,21 +126,20 @@ class Patent extends AppModel{
 	
 	public function transfer_tostring(){
 		$s = $this->transfer;
-		if($s == 1){
-			return '完全转让';
+		$array = array();
+		if(($s >> 1) & 1 == 1){
+			$array[] = '完全转让';
 		}
-		else if($s == 2){
-			return '许可转让';
+		if(($s >> 2) & 1 == 1){
+			$array[] = '许可转让';
 		}
-		else if($s == 3){
-			return '合作生产';
+		if(($s >> 3) & 1 == 1){
+			$array[] = '合作生产';
 		}
-		else if($s == 4){
-			return '接受投资';
+		if(($s >> 4) & 1 == 1){
+			$array[] = '接受投资';
 		}
-		else{
-			return '';
-		}
+		return implode($array, '，');
 	}
 	
 	public function owner_tostring(){

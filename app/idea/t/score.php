@@ -11,7 +11,7 @@
 	
 	<?php if($User->is_expert()){?>
 	<div class="section">
-		<h3>创意发起者：<?php echo $Company->name?></h3>
+		<h3>创意发起者：<a href="<?php echo get_user_link($Company)?>"><?php echo $Company->username?></a></h3>
 		<div class="content line-list">
 			<?php echo $Company->description?>
 		</div><!--end for list-->

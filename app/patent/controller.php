@@ -46,12 +46,27 @@ class PatentController extends AppController {
 		$this->set('links', $links);
 	}
 	
+	private function get_transfer_value(&$post){
+		$t = 0;
+		if(is_array($post['transfer'])){
+			foreach($post['transfer'] as $v){
+				$v = intval($v);
+				if($v >= 1 && $v <= 4){
+					$t = $t | (1 << $v);
+				}
+			}
+		}
+		return $t;
+	}
+	
 	public function add(){
 		if($this->request->post){
 			$post = $this->request->post;
 			$User = $this->get('User');
 			$post['expert'] = $User->id;
+			$post['username'] = $User->username;
 			$post['author'] = $User->name;
+			$post['transfer'] = $this->get_transfer_value($post);
 			$Patent = $this->set_model($post, $Patent);
 			$errors = $this->Patent->check($Patent);
 			if(count($errors) == 0){
@@ -161,18 +176,18 @@ class PatentController extends AppController {
 		$has_error = true;
 		if($id){
 			$Patent = $this->Patent->get($id);
-//			if($Patent && $User->is_expert() && $Patent->expert == $User->id){
-			if($Patent){
+			if(is_expert_object($User, $Patent)){
 				$has_error = false;
 			}
 		}
 		if($has_error){
-			$this->response->redirect_404();
+			$this->redirect_error('您无权修改');
 			return;
 		}
 		
 		if($this->request->post){
 			$post = $this->request->post;
+			$post['transfer'] = get_transfer_value($post);
 			$Patent = $this->set_model($post, $Patent);
 			$errors = $this->Patent->check($Patent);
 			if(count($errors) == 0){

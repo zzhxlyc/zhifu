@@ -10,7 +10,7 @@ class ExpertController extends AppController {
 		parent::before();
 		$need_login = array('profile');	// either
 		$need_company = array();
-		$need_expert = array('edit');
+		$need_expert = array('edit', 'myself', 'pswd');
 		$this->login_check($need_login, $need_company, $need_expert);
 	}
 	

@@ -7,7 +7,7 @@ class MessageController extends AppController {
 	public function before(){
 		$this->set('home', MESSAGE_HOME);
 		parent::before();
-		$need_login = array('send', 'sendbox', 'detail', 'index');	// either
+		$need_login = array('send', 'sendbox', 'detail', 'index', 'unreadcount');	// either
 		$need_company = array();
 		$need_expert = array();
 		$this->login_check($need_login, $need_company, $need_expert);

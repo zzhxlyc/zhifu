@@ -91,7 +91,7 @@ class Model extends MysqlDAO {
 				if(empty($error[$field]) && strlen($v) > 0){
 					if($v != '0'){
 						$r = intval($v);
-						if($r == 0){
+						if("$r" != $v){
 							$error[$field] = "不是整数";
 							continue;
 						}

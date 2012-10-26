@@ -47,10 +47,10 @@
 </div>
 <div class="row">
 	<?php if($User->id == $recruit->belong && $User->get_type() == $recruit->type){?>
-	<input type="button" value="查看应聘" class="btn fl" onclick="location.href='<?php echo $home.'/result'?>'">
+	<input type="button" value="查看应聘" class="btn fl" onclick="location.href='<?php echo $home.'/result?id='.$recruit->id?>'">
 	<input type="button" value="修改" class="btn fl" onclick="location.href='<?php echo $home.'/edit?id='.$recruit->id?>'">
 	<?php }else if($item){?>
-	<input type="button" value="查看结果" class="btn fl" onclick="location.href='<?php echo $home.'/item?id='.$item->id?>'">
+	<input type="button" value="我的简历" class="btn fl" onclick="location.href='<?php echo $home.'/item?id='.$item->id?>'">
 	<?php }else{?>
 	<input type="button" value="提交简历" class="btn fl" onclick="location.href='<?php echo $home.'/apply?id='.$recruit->id?>'">
 	<?php }?>

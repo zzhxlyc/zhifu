@@ -3,13 +3,13 @@
 class IdeaController extends AppController {
 	
 	public $models = array('Idea', 'Tag', 'TagItem', 'IdeaItem', 
-								'Category', 'Comment');
+								'Category', 'Comment', 'Message');
 	
 	public function before(){
 		$this->set('home', IDEA_HOME);
 		parent::before();
-		$need_login = array('detail', 'item');	// either
-		$need_company = array('add', 'edit', 'choose', 'finish');
+		$need_login = array('detail', 'item', 'score');	// either
+		$need_company = array('add', 'edit', 'choose', 'finish', 'done');
 		$need_expert = array('submit', 'itemedit');
 		$this->login_check($need_login, $need_company, $need_expert);
 	}
@@ -130,6 +130,7 @@ class IdeaController extends AppController {
 			$post = $this->request->post;
 			$User = $this->get('User');
 			$post['company'] = $User->id;
+			$post['username'] = $User->username;
 			$post['author'] = $User->name;
 			$Idea = $this->set_model($post, $Idea);
 			$errors = $this->Idea->check($Idea);
@@ -156,7 +157,6 @@ class IdeaController extends AppController {
 			}
 			$idea = $this->set_model($post);
 			$this->set('$idea', $idea);
-			p($idea);
 			$this->set('errors', $errors);
 		}
 		$this->add_data();
@@ -278,7 +278,7 @@ class IdeaController extends AppController {
 			}
 		}
 		if($has_error){
-			$this->response->redirect_404();
+			$this->redirect_error('您无权查看此内容');
 			return;
 		}
 		
@@ -452,6 +452,18 @@ class IdeaController extends AppController {
 		if($this->request->post){
 			$data = array('id'=>$id, 'status'=>2);
 			$this->Idea->save($data);
+			$data = array();
+			$data['title'] = '有创意需要发放奖金';
+			$data['content'] = $this->get('home').'/detail?id='.$Idea->id;
+			$data['read'] = '0';
+			$data['from'] = $User->id;
+			$data['from_type'] = $User->get_type();
+			$data['from_name'] = $User->username;
+			$data['from_author'] = $User->name;
+			$data['to'] = 1;
+			$data['to_type'] = BelongType::ADMIN;
+			$data['time'] = DATETIME;
+			$this->Message->save($data);
 			echo 0;
 		}
 	}
