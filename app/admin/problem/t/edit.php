@@ -7,28 +7,22 @@
 ?>
 
 <form action="<?php echo $home.'/edit?id='.$problem->id?>" method="post" <?php $HTML->file_form_need()?> >
+
+<div>
+	<input type="hidden" name="cat" value="<?php echo $problem->cat?>" />
+	<input type="hidden" name="subcat" value="<?php echo $problem->subcat?>" />
+	<input type="hidden" name="province" value="<?php echo $problem->province?>" />
+	<input type="hidden" name="city" value="<?php echo $problem->city?>" />
+	<input type="hidden" name="district" value="<?php echo $problem->district?>" />
+	<input type="hidden" name="province2" value="<?php echo $problem->province2?>" />
+	<input type="hidden" name="city2" value="<?php echo $problem->city2?>" />
+	<input type="hidden" name="district2" value="<?php echo $problem->district2?>" />
+</div>
 	
 <div class="row">
 	<label for="name">难题名称</label>
-	<input size="50" type="text" name="title" value="<?php echo $problem->title?>" />
+	<input size="80" type="text" name="title" value="<?php echo $problem->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
-</div>	
-<div class="row">
-	<label for="">电话</label>
-	<input size="20" type="text" name="phone" class="text" value="<?php echo $problem->phone?>"/>
-	<span class="error"><?php echo $errors['phone']?></span>
-	
-</div>
-<div class="row">
-	<label for="">手机</label>
-	<input size="20" type="text" name="mobile" class="text" value="<?php echo $problem->mobile?>"/>
-	<span class="error"><?php echo $errors['mobile']?></span>
-	
-</div>
-<div class="row">
-	<label for="">邮箱</label>
-	<input size="20" type="text" name="email" class="text" value="<?php echo $problem->email?>"/>
-	<span class="error"><?php echo $errors['email']?></span>
 </div>
 
 <div class="row">
@@ -45,17 +39,33 @@
 </div>
 
 <div class="row">
-	<label for="">地区</label>
-	<div class="province_city"></div>
-</div>	
+	<label for="">联系人姓名</label>
+	<input class="text" size="55" type="text" name="contact" value="<?php echo $problem->contact?>" />
+	<span class="error"><?php echo $errors['contact']?></span>
+</div>
 
+<div class="row">
+	<label for="">联系方式</label>
+	<input class="text" size="55" type="text" name="phone" value="<?php echo $problem->phone?>" />
+	<span class="error"><?php echo $errors['phone']?></span>
+	<span>填入手机号或电话号码</span>
+</div>
 
 <div class="row">
 	<label for="budget">预算</label>
-	<input size="20" type="text" name="budget" value="<?php echo $problem->budget?>" />万元
+	<input size="20" type="text" class="text" name="budget" value="<?php echo $problem->budget?>" />万元
 	<span class="error"><?php echo $errors['budget']?></span>
 </div>
 
+<div class="row">
+	<label for="">所在地区</label>
+	<div class="province_city"></div>
+</div>
+
+<div class="row">
+	<label for="">面向地区</label>
+	<div class="province_city"></div>
+</div>
 
 <div class="row">
 	<label for="deadline">截止日期</label>
@@ -103,6 +113,20 @@
 </div>
 
 <div class="row">
+	<label for="">图片</label>
+	<?php if($problem->image){?>
+	<img src="<?php img($problem->image)?>" />
+	<?php }else{?>
+	还没有图片
+	<?php }?>
+</div>
+<div class="row">
+	<label for="">上传图片</label>
+	<input type="file" name="image" />
+	<span class="error"><?php echo $errors['image']?></span>
+</div>
+
+<div class="row">
 	<label for="">附件</label>
 	<?php if($problem->file){?>
 	<a target="_blank" href="<?php echo UPLOAD_HOME."/$problem->file"?>">点击下载</a>
@@ -124,14 +148,6 @@
 </div>
 
 </form>
-
-<div>
-	<input type="hidden" name="cat" value="<?php echo $problem->cat?>" />
-	<input type="hidden" name="subcat" value="<?php echo $problem->subcat?>" />
-	<input type="hidden" name="province" value="<?php echo $problem->province?>" />
-	<input type="hidden" name="city" value="<?php echo $problem->city?>" />
-	<input type="hidden" name="district" value="<?php echo $problem->district?>" />
-</div>
 
 <script type="text/javascript">
 <!--

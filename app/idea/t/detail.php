@@ -89,25 +89,22 @@
 					<img src="<?php img($expert->image)?>" alt="<?php echo $expert->name?>"
 						 width="100" height="100"/>
 					</a>
-					<?php 
-						if(is_expert_object($User, $item)){
-					?>
+					<a target="_blank" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
 					<span class="name"><?php echo $item->username?></span>
-					<?php }else{?>
-					<span class="name">匿名</span>
-					<?php }?>
+					</a>
 				</div>
 				<div class="des">
+					<h4><?php echo $item->title?></h4>
+					<p><?php output_desc($item->content)?></p>
 					<?php 
 						if(is_company_object($User, $Idea) || is_expert_object($User, $item)){
 					?>
-					<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
-					<?php echo $item->title?>
-					</a>
-					<?php }else{?>
-					<?php echo $item->title?>
+					<p>
+						<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
+						点击查看方案
+						</a>
+					</p>
 					<?php }?>
-					<p><?php output_desc($item->content)?></p>
 				</div>
 			</div><!--end for item-->
 			<?php }?>

@@ -34,7 +34,6 @@
 	?>
 </table>
 
-<input type="submit" value="批量删除" />
 </form>
 
 <div class="page-nav">

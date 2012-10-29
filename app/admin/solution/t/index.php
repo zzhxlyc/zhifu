@@ -20,7 +20,7 @@
 	<tr <?php echo $tr_class?>>
 		<td><input name="id[]" type="checkbox" value="<?php echo $o->id?>" /></td>
 		<td><a target="_blank" href="<?php echo ADMIN_PROBLEM_HOME.'/edit?id='.$o->problem?>"><?php echo $o->pname?></a></td>
-		<td><a target="_blank" href="<?php echo ADMIN_EXPERT_HOME.'/show?id='.$o->expert?>"><?php echo $o->author?></a></td>
+		<td><a target="_blank" href="<?php echo ADMIN_EXPERT_HOME.'/show?id='.$o->expert?>"><?php echo $o->username?></a></td>
 		<td><?php echo $o->get_status()?></td>
 		<td><?php echo $o->time?></td>
 		<td class="operate">
@@ -34,7 +34,6 @@
 	?>
 </table>
 
-<input type="submit" value="批量删除" />
 </form>
 
 <div class="page-nav">

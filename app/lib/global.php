@@ -210,6 +210,27 @@ function get_author_link($id, $type){
 	}
 }
 
+function output_author_link($o, $blank = 0){
+	output_author_link2($o->id, $o->get_type(), $o->username, $blank);
+}
+
+function output_author_link2($id, $type, $username, $blank = 0){
+	if($type == BelongType::EXPERT){
+		$href = EXPERT_HOME.'/profile?id='.$id;
+	}
+	else if($type == BelongType::COMPANY){
+		$href = COMPANY_HOME.'/profile?id='.$id;
+	}
+	else{
+		echo $username;
+		return;
+	}
+	if($blank == 1){
+		$target = 'target="_blank" ';
+	}
+	echo '<a '.$target.'href="'.$href.'">'.$username.'</a>';
+}
+
 function is_expire($datetime, $addend = false){
 	if($datetime == '0000-00-00'){
 		return false;

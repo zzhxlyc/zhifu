@@ -7,6 +7,18 @@
 ?>
 <h2>修改难题信息</h2>
 <form action="<?php echo $home.'/edit?id='.$problem->id?>" method="post" <?php $HTML->file_form_need()?> >
+
+<div>
+	<input type="hidden" name="cat" value="<?php echo $problem->cat?>" />
+	<input type="hidden" name="subcat" value="<?php echo $problem->subcat?>" />
+	<input type="hidden" name="province" value="<?php echo $problem->province?>" />
+	<input type="hidden" name="city" value="<?php echo $problem->city?>" />
+	<input type="hidden" name="district" value="<?php echo $problem->district?>" />
+	<input type="hidden" name="province2" value="<?php echo $problem->province2?>" />
+	<input type="hidden" name="city2" value="<?php echo $problem->city2?>" />
+	<input type="hidden" name="district2" value="<?php echo $problem->district2?>" />
+</div>
+
 <div class="edit-left">
 	<div class="row">
 		<label for="name">难题名称</label>
@@ -55,7 +67,7 @@
 	
 	<div class="row">
 		<label for="">联系方式</label>
-		<input class="text" size="55" type="text" name="phone" value="<?php echo $problem->phone?>" />
+		<input class="text" size="20" type="text" name="phone" value="<?php echo $problem->phone?>" />
 		<span class="error"><?php echo $errors['phone']?></span>
 		<span>填入手机号或电话号码</span>
 	</div>
@@ -122,7 +134,7 @@
 	<?php if($problem->image){?>
 	<div class="row">
 		<label for="">图像</label>
-		<img alt="" src="<?php img($problem->image)?>" width="300" height="180">
+		<img alt="" src="<?php img($problem->image)?>" width="200" height="150">
 	</div>
 	<?php }?>
 
@@ -166,17 +178,6 @@
 </div>
 
 </form>
-
-<div>
-	<input type="hidden" name="cat" value="<?php echo $problem->cat?>" />
-	<input type="hidden" name="subcat" value="<?php echo $problem->subcat?>" />
-	<input type="hidden" name="province" value="<?php echo $problem->province?>" />
-	<input type="hidden" name="city" value="<?php echo $problem->city?>" />
-	<input type="hidden" name="district" value="<?php echo $problem->district?>" />
-	<input type="hidden" name="province2" value="<?php echo $problem->province2?>" />
-	<input type="hidden" name="city2" value="<?php echo $problem->city2?>" />
-	<input type="hidden" name="district2" value="<?php echo $problem->district2?>" />
-</div>
 
 <script type="text/javascript">
 <!--

@@ -35,7 +35,7 @@
 		<div class="content line-list">
 			<div class="item clearfix">
 				<div class="pic">
-					<img src="<?php img($expert->image)?>" alt="<?php echo '匿名'?>"
+					<img src="<?php img($expert->default_image())?>" alt="<?php echo '匿名'?>"
 						 width="100" height="100"/>
 					<span class="name">
 						<?php echo '匿名'?>
@@ -67,7 +67,7 @@
 			?>
 			<div class="item clearfix">
 				<div class="pic">
-					<img src="<?php img($expert->image)?>" alt="<?php echo '匿名'?>"
+					<img src="<?php img($expert->default_image())?>" alt="<?php echo '匿名'?>"
 						 width="100" height="100"/>
 					<span class="name">
 						<?php echo '匿名'?>

@@ -22,14 +22,6 @@
 	</div><!--end for detail-profile-->
 	
 	<div class="side-section">
-		<div class="title">发起者</div>
-		<div class="content">
-			<a href="<?php echo COMPANY_HOME.'/profile?id='.$Problem->company?>">
-				<?php output_username($Problem, 2)?></a>
-		</div>
-	</div><!--end for tag-->
-	
-	<div class="side-section">
 		<div class="title">领域标签</div>
 		<div class="content">
 			<?php foreach($tags as $tag){?>

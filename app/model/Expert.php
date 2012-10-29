@@ -8,7 +8,7 @@ class Expert extends User {
 		$check_arrays = array(
 			'need' => array('name', 'verified', 'email'),
 			'length' => array('description'=>1000, 'phone'=>20),
-			'int' => array('verified', 'rate_total', 'rate_num'),
+			'int' => array('verified', 'rate_total', 'rate_num', 'phone'),
 			'email' => array('email'),
 			'word' => array('name', 'description', 'workplace', 'job')
 		);

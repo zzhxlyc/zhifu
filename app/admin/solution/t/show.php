@@ -12,7 +12,7 @@
 
 <div class="row">
 	<label for="name">专家</label>
-	<?php echo $expert->name?>
+	<a href="<?php echo get_user_link($expert)?>"><?php echo $expert->username?></a>
 </div>
 
 <div class="row">

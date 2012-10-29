@@ -43,7 +43,7 @@
 </div>
 
 <div class="row">
-	<label for="name">公司简介</label><br/><br/>
+	<label for="name">公司简介</label>
 	<?php echo $company->description?>
 </div>
 

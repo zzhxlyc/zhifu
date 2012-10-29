@@ -5,9 +5,11 @@
 	<div class="detail-profile">
 		<p>用户名：<?php echo $Expert->username?></p>
 		<p>姓名：<?php echo $Expert->name?></p>
+		<p>邮箱：<?php echo $Expert->email?></p>
+		<p>电话：<?php echo $Expert->phone?></p>
+		<p>网址：<?php echo $Expert->url?></p>
 		<p>所在单位：<?php echo $Expert->workplace?></p>
 		<p>职称：<?php echo $Expert->job?></p>
-		<p>参与项目金额：<?php output_money($Expert->budget)?></p>
 		<p>综合评价：<?php echo output_score($Expert)?></p>
 	</div><!--end for detail-profile-->
 	
@@ -23,7 +25,9 @@
 	<div class="side-section">
 		<div class="title"><h4>操作</h4></div>
 		<div class="content">
+			<?php if($User->id != $Expert->id || $User->get_type() != $Expert->get_type()){?>
 			<a target="_blank" href="<?php echo MESSAGE_HOME.'/send?user='.$Expert->username?>">发送站内信</a>
+			<?php }?>
 		</div>
 	</div><!--end for tag-->
 	

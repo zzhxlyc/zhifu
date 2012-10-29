@@ -1212,10 +1212,10 @@ display:none;
 
 .register span.error{
 	line-height: 19px;
-	background: url(../images/miss_pic.jpg) no-repeat 5px 3px;
+	/*background: url(../images/miss_pic.jpg) no-repeat 5px 3px;*/
 	background-color: #FFEAEA;
 	display: inline-block;
-	padding: 0 4px 0 24px;
+	padding: 0 4px 0 4px;
 }
 
 .pwd-level{

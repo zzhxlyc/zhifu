@@ -53,6 +53,7 @@ class ProblemController extends AdminBaseController {
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
+				$this->resize_upload_image($path);
 				if($path){$post['image'] = $path;}
 				$path = $this->do_file('file', $errors, $files);
 				if($path){$post['file'] = $path;}

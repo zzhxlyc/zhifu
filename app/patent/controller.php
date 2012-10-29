@@ -187,7 +187,7 @@ class PatentController extends AppController {
 		
 		if($this->request->post){
 			$post = $this->request->post;
-			$post['transfer'] = get_transfer_value($post);
+			$post['transfer'] = $this->get_transfer_value($post);
 			$Patent = $this->set_model($post, $Patent);
 			$errors = $this->Patent->check($Patent);
 			if(count($errors) == 0){

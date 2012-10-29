@@ -23,7 +23,7 @@ class SolutionController extends AdminBaseController {
 				$condition = array('problem'=>$pid);
 				$all = $this->Solution->count($condition);
 				$pager = new Pager($all, $page, $limit);
-				$list = $this->Solution->get_list($condition, $order, $pager->now(), $limit);
+				$list = $this->Solution->get_page($condition, $order, $pager->now(), $limit);
 				$page_list = $pager->get_page_links(ADMIN_SOLUTION_HOME."/index?pid=$pid&");
 				$this->set('list', $list);
 				$this->set('$problem', $problem);
@@ -36,7 +36,7 @@ class SolutionController extends AdminBaseController {
 				$condition = array('expert'=>$eid);
 				$all = $this->Solution->count($condition);
 				$pager = new Pager($all, $page, $limit);
-				$list = $this->Solution->get_list($condition, $order, $pager->now(), $limit);
+				$list = $this->Solution->get_page($condition, $order, $pager->now(), $limit);
 				$page_list = $pager->get_page_links(ADMIN_SOLUTION_HOME."/index?eid=$eid&");
 				$this->set('list', $list);
 				$this->set('$expert', $expert);

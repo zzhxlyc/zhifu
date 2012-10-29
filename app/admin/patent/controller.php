@@ -30,6 +30,19 @@ class PatentController extends AdminBaseController {
 		$this->add_common_tags();
 	}
 	
+	private function get_transfer_value(&$post){
+		$t = 0;
+		if(is_array($post['transfer'])){
+			foreach($post['transfer'] as $v){
+				$v = intval($v);
+				if($v >= 1 && $v <= 4){
+					$t = $t | (1 << $v);
+				}
+			}
+		}
+		return $t;
+	}
+	
 	public function edit(){
 		$data = $this->get_data();
 		$id = $data['id'];
@@ -47,12 +60,14 @@ class PatentController extends AdminBaseController {
 		
 		if($this->request->post){
 			$post = $this->request->post;
+			$post['transfer'] = $this->get_transfer_value($post);
 			$admin = get_admin_session($this->session);
 			$Patent = $this->set_model($post, $Patent);
 			$errors = $this->Patent->check($Patent);
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
+				$this->resize_upload_image($path);
 				if($path){$post['image'] = $path;}
 				$path = $this->do_file('file', $errors, $files);
 				if($path){$post['file'] = $path;}

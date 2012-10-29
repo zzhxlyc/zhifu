@@ -11,6 +11,17 @@
 
 <h2>发布技术难题</h2>
 
+<div>
+	<input type="hidden" name="cat" value="<?php echo $problem->cat?>" />
+	<input type="hidden" name="subcat" value="<?php echo $problem->subcat?>" />
+	<input type="hidden" name="province" value="<?php echo $problem->province?>" />
+	<input type="hidden" name="city" value="<?php echo $problem->city?>" />
+	<input type="hidden" name="district" value="<?php echo $problem->district?>" />
+	<input type="hidden" name="province2" value="<?php echo $problem->province2?>" />
+	<input type="hidden" name="city2" value="<?php echo $problem->city2?>" />
+	<input type="hidden" name="district2" value="<?php echo $problem->district2?>" />
+</div>
+
 <div class="row">
 	<label for="">难题名称</label>
 	<input class="text" size="55" type="text" name="title" value="<?php echo $problem->title?>" />
@@ -120,21 +131,17 @@
 		<input type="hidden" name="new_tag" />
 		<input type="hidden" name="old_tag" />
 	</div>
+	
 	<div class="row">
 		<label for="">上传图片</label>
 		<input type="file" name="image" />
 		<span class="error"><?php echo $errors['image']?></span>
 	</div>
 
-
-
-
 	<div class="row">
 		<label for="">详细描述</label><span class="error"><?php echo $errors['description']?></span><br/><br/>
 		<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $problem->description?></textarea>
 	</div>
-	
-
 
 	<div class="row">
 		<label for="">附件</label>
@@ -151,17 +158,6 @@
 		<textarea name="desc" class="text"><?php echo $recruit->description?></textarea>
 		<span class="error"><?php echo $errors['description']?></span>
 	</div>
-</div>
-
-<div>
-	<input type="hidden" name="cat" value="<?php echo $problem->cat?>" />
-	<input type="hidden" name="subcat" value="<?php echo $problem->subcat?>" />
-	<input type="hidden" name="province" value="<?php echo $problem->province?>" />
-	<input type="hidden" name="city" value="<?php echo $problem->city?>" />
-	<input type="hidden" name="district" value="<?php echo $problem->district?>" />
-	<input type="hidden" name="province2" value="<?php echo $problem->province2?>" />
-	<input type="hidden" name="city2" value="<?php echo $problem->city2?>" />
-	<input type="hidden" name="district2" value="<?php echo $problem->district2?>" />
 </div>
 
 <div class="row">
