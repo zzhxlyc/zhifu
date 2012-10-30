@@ -4,14 +4,32 @@ include(LIB_UTIL_DIR.'/captcha/Captcha.php');
 
 class ZhifuController extends AppController {
 	
-	public $models = array();
+	public $models = array('Problem', 'Idea', 'Article', 'Video', 'Patent', 
+							'Recruit', 'Apply', 'Tag', 'TagItem');
 	
 	public function before(){
 		parent::before();
 	}
 	
 	public function index(){
+		$order = array('id'=>'DESC');
+		$order_hot = array('click'=>'DESC');
+		$limit = 4;
+		$cond = array();
+		$problems = $this->Problem->get_list($cond, $order, $limit);
+//		$p_ids = get_ids($problems);
+		$ideas = $this->Idea->get_list($cond, $order, $limit);
+		$videos = $this->Video->get_list($cond, $order_hot, 6);
+		$recruits = $this->Recruit->get_list($cond, $order, $limit);
+		$patents = $this->Patent->get_list($cond, $order, 6);
+		$articles = $this->Article->get_list($cond, $order_hot, 3);
 		
+		$this->set('$problems', $problems);
+		$this->set('$ideas', $ideas);
+		$this->set('$videos', $videos);
+		$this->set('$recruits', $recruits);
+		$this->set('$patents', $patents);
+		$this->set('$articles', $articles);
 	}
 	
 	public function captcha(){
