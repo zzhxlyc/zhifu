@@ -17,11 +17,12 @@ $.fn.province_city_county = function(vprovince,vcity,vtown){
 	//_self.append("<select id='county' name='county'></select>");
 	
 	
-    _self.html('<select name="province" id="province"></select><span id="province_error" class="error"></span> <select name="city" id="city" ></select><span id="city_error" class="error"></span><select name="district" id="county"></select><span id="district_error" class="error"></span>');
+    _self.html('<select name="province" class="province"></select><span class="province_error" class="error"></span> <select name="city" class="city" ></select><span class="city_error" class="error"></span><select name="district" class="county"></select><span class="district_error" class="error"></span>');
 	//分别获取3个下拉框
 	var $sel1 = _self.find("select").eq(0);
 	var $sel2 = _self.find("select").eq(1);
 	var $sel3 = _self.find("select").eq(2);
+
 	//默认省级下拉
 	if(_self.data("province")){
 		$sel1.append("<option value='"+_self.data("province")[1]+"'>"+_self.data("province")[0]+"</option>");
@@ -66,13 +67,13 @@ $.fn.province_city_county = function(vprovince,vcity,vtown){
 				$sel3.append("<option value='"+_self.data("county")[1]+"'>"+_self.data("county")[0]+"</option>");
 			}
 		} else{
-			provinceValue = $('#province').val();
+			provinceValue = $sel1.val();
 			$.get(window.ROOT_URL+'/js/province_city.xml', function(data){
 				$(data).find('province[value="'+provinceValue+'"] > city').each(function(){
 					var $city = $(this);
 					$sel2.append("<option value='"+$city.attr('value')+"'>"+$city.attr('value')+"</option>");
 				});
-				cityValue = $("#city").val();
+				cityValue = $sel2.val();
 				$(data).find('city[value="'+cityValue+'"] > county').each(function(){
 					var $county = $(this);
 					$sel3.append("<option value='"+$county.attr('value')+"'>"+$county.attr('value')+"</option>");
@@ -96,7 +97,7 @@ $.fn.province_city_county = function(vprovince,vcity,vtown){
 	var index2 = "" ;
 	$sel2.change(function(){
 		$sel3[0].options.length=0;
-		var cityValue2 = $('#city').val();
+		var cityValue2 = $sel2.val();
 		$.get(window.ROOT_URL+'/js/province_city.xml', function(data){
 			$(data).find('city[value="'+cityValue2+'"] > county').each(function(){
 				var $county = $(this);

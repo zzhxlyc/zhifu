@@ -345,7 +345,9 @@ function dateEventInit(){
 	}
 	
 	function catEventInitNormal(){
-	
+		
+		var cat=$('input[name=cat]').val();
+		var subcat=$('input[name=subcat]').val();
 		//cat从初始化
 		var cathtml='';
 		$.each(catList, function(i, t) {
@@ -367,6 +369,24 @@ function dateEventInit(){
 			$('select[name=subcat]').append(subCatHtml);	
 
 		});
+		if(cat.length>0){
+		
+			
+			$('select[name=cat]').val(cat);	
+			var oldSubCatHtml='';
+			$.each(catList[cat].c, function(i, t) {
+				oldSubCatHtml+='<option value="'+t.id+'">'+t.name+'</option>';
+			});
+
+			$('select[name=subcat]').append(oldSubCatHtml);	
+			$('select[name=subcat]').val(subcat);
+			
+		}
+		
+		
+		
+	
+		
 	
 		
 	}

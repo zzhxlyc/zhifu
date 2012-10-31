@@ -189,7 +189,7 @@ var catList = {<?php
 </script>
 
 <script type="text/javascript">
-$(document).ready(function($){
+$(document).ready(function(){
 
 	if($("#type").val() == '1'){
 		$('.add-problem').hide();

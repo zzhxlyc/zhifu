@@ -90,7 +90,7 @@
 
 	<div class="row">
 		<label for="deadline">截止日期</label>
-		<input size="20" type="text" class="text" name="deadline" class="datepicker" value="<?php echo get_date($problem->deadline)?>" readonly="readonly" />
+		<input size="20" type="text"class="datepicker text" name="deadline"  value="<?php echo get_date($problem->deadline)?>" readonly="readonly" />
 		<span class="error"><?php echo $errors['deadline']?></span>
 	</div>
 

@@ -34,6 +34,7 @@
 				<input type="hidden" name="id" value="<?php echo $Idea->id?>" />
 				<input type="hidden" name="score" value="<?php echo $score?>" />
 				<textarea rows="5" cols="60" name="comment"></textarea>
+				<div class="clear"></div>
 				<input type="submit" value="提交" class="btn fl" />
 			</form>
 			<?php }else{?>
