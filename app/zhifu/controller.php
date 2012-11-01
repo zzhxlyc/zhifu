@@ -4,8 +4,9 @@ include(LIB_UTIL_DIR.'/captcha/Captcha.php');
 
 class ZhifuController extends AppController {
 	
-	public $models = array('Problem', 'Idea', 'Article', 'Video', 'Patent', 
-							'Recruit', 'Apply', 'Tag', 'TagItem');
+	public $models = array('Problem', 'Idea', 'IdeaItem', 'Article', 
+							'Video', 'Patent', 'Recruit', 'Apply', 
+							'Tag', 'TagItem');
 	
 	public function before(){
 		parent::before();
@@ -18,7 +19,21 @@ class ZhifuController extends AppController {
 		$cond = array();
 		$problems = $this->Problem->get_list($cond, $order, $limit);
 //		$p_ids = get_ids($problems);
+
 		$ideas = $this->Idea->get_list($cond, $order, $limit);
+		if(count($ideas) > 0){
+			foreach($ideas as $idea){
+				$idea->item_count = 0;
+			}
+			$indexs = id_to_index($ideas);
+			$i_ids = get_ids($ideas);
+			$i_items = $this->IdeaItem->get_list(array('idea in'=>$i_ids));
+			foreach($i_items as $item){
+				$idea = $ideas[$indexs[$item->idea]];
+				$idea->item_count = $idea->item_count + 1;
+			}
+		}
+		
 		$videos = $this->Video->get_list($cond, $order_hot, 6);
 		$recruits = $this->Recruit->get_list($cond, $order, $limit);
 		$patents = $this->Patent->get_list($cond, $order, 6);

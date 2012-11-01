@@ -74,7 +74,7 @@
 	
 	<div class="row">
 		<label for="budget">预算</label>
-		<input size="20" type="text" class="text" name="budget" value="<?php echo $problem->budget?>" />万元
+		<input size="20" type="text" class="text" name="budget" value="<?php output_money($problem->budget, 0)?>" />万元
 		<span class="error"><?php echo $errors['budget']?></span>
 	</div>
 	
@@ -133,13 +133,17 @@
 <div class="edit-right">
 	<?php if($problem->image){?>
 	<div class="row">
-		<label for="">图像</label>
+		<label for="image">图片</label>
 		<img alt="" src="<?php img($problem->image)?>" width="200" height="150">
 	</div>
 	<?php }?>
 
 	<div class="row">
-		<label for="">修改图像</label>
+		<?php if($problem->image){?>
+		<label for="image">修改图片</label>
+		<?php }else{?>
+		<label for="image">上传图片</label>
+		<?php }?>
 		<input type="file" name="image" /><br />
 		<span class="error"><?php echo $errors['image']?></span>
 	</div>	

@@ -32,7 +32,7 @@ class Idea extends AppModel{
 	public function get_status(){
 		$status = $this->status;
 		if($status == 0){
-			return '竞标中';
+			return '投稿中';
 		}
 		else if($status == 1){
 			return '评奖中';

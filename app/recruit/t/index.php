@@ -11,8 +11,12 @@
 		<a href="<?php echo ROOT_URL.'/apply'?>" <?php $HTML->if_current($request->get_module() == 'apply')?>>求职</a>
 		
 	</div>
+	<?php if(is_expert($User)){?>
 	<a href="<?php echo APPLY_HOME.'/add'?>" class="job-btn btn">发布求职</a>
+	<?php }?>
+	<?php if(is_company($User)){?>
 	<a href="<?php echo RECRUIT_HOME.'/add'?>" class="job-btn btn">发布招聘</a>
+	<?php }?>
 </div>
 
 <div class="list job">
@@ -21,8 +25,8 @@
 				<th>职位名称</th>
 				<th>招聘对象</th>
 				<th>招聘人数</th>
-				<th>招聘地区</th>
-				<th>发布者</th>
+				<th>工作地区</th>
+				<th>公司名称</th>
 				<th>发布时间</th>				
 			</tr>
 	
@@ -36,7 +40,9 @@
 			<td><?php output_identity($o->identity)?></td>
 			<td><?php echo $o->num?></td>
 			<td><?php echo $o->area?></td>
-			<td><a target="_blank" href="<?php echo get_author_link($o->belong, $o->type)?>"><?php echo $o->username?></a></td>
+			<td><a target="_blank" href="<?php echo get_author_link($o->belong, $o->type)?>">
+				<?php if($o->author){echo $o->author;}else{echo $o->username;}?>
+			</a></td>
 			<td><?php echo $o->time?></td>
 		</tr>
 	<?php 

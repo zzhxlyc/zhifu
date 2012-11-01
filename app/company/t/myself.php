@@ -25,6 +25,10 @@
 	<?php echo $company->phone?>
 </div>
 <div class="row">
+	<label for="name">手机</label>
+	<?php echo $company->mobile?>
+</div>
+<div class="row">
 	<label for="name">网址</label>
 	<?php echo $company->url?>
 </div>

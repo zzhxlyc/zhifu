@@ -35,11 +35,13 @@
 		<div class="content line-list">
 			<div class="item clearfix">
 				<div class="pic">
-					<img src="<?php img($expert->default_image())?>" alt="<?php echo '匿名'?>"
-						 width="100" height="100"/>
-					<span class="name">
-						<?php echo '匿名'?>
-					</span>
+					<?php if(is_expert_object($User, $Solver)){?>
+					<img src="<?php img($User->image, $expert->default_image())?>" width="100" height="100"/>
+					<span class="name"><?php echo $User->username?></span>
+					<?php }else{?>
+					<img src="<?php img($expert->default_image())?>" width="100" height="100"/>
+					<span class="name">匿名</span>
+					<?php }?>
 				</div>
 				<div class="des">
 					<p><?php echo $Solver->title;?></p>
@@ -67,11 +69,13 @@
 			?>
 			<div class="item clearfix">
 				<div class="pic">
-					<img src="<?php img($expert->default_image())?>" alt="<?php echo '匿名'?>"
-						 width="100" height="100"/>
-					<span class="name">
-						<?php echo '匿名'?>
-					</span>
+					<?php if(is_expert_object($User, $solution)){?>
+					<img src="<?php img($User->image, $expert->default_image())?>" width="100" height="100"/>
+					<span class="name"><?php echo $User->username?></span>
+					<?php }else{?>
+					<img src="<?php img($expert->default_image())?>" width="100" height="100"/>
+					<span class="name">匿名</span>
+					<?php }?>
 				</div>
 				<div class="des">
 					<p><?php echo $solution->title;?></p>

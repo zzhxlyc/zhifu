@@ -186,11 +186,19 @@ class RecruitController extends AppController {
 				$post['recruit'] = $recruit->id;
 				$post['time'] = DATETIME;
 				$id = $this->RecruitItem->save($post);
+				
+				$this->update_user_info($User, $post);
+				
 				$this->redirect('item?succ&id='.$id);
 			}
 			$item = $this->set_model($post, new RecruitItem());
 			$this->set('$item', $item);
 			$this->set('errors', $errors);
+		}
+		else{
+			$item = new RecruitItem();
+			$this->set_user_info($User, $item);
+			$this->set('$item', $item);
 		}
 		$U = $this->get_user($recruit->belong, $recruit->type);
 		$this->set('$publisher', $U);

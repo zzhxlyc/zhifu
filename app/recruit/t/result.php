@@ -36,3 +36,7 @@
 	<?php output_page_list($links);?>
 </div>
 
+<div class="row">
+	<a href="<?php echo $home.'/show?id='.$recruit->id?>">返回</a>
+</div>
+

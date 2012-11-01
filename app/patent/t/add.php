@@ -75,7 +75,7 @@
 	
 <div class="row">
 	<label for="name">相关网站</label>
-	<input size="60" type="text" class="text" name="url" value="<?php echo $patent->url?>" />
+	<input size="50" type="text" class="text" name="url" value="<?php echo $patent->url?>" />
 	<span class="error"><?php echo $errors['url']?></span>
 </div>
 
@@ -146,15 +146,8 @@
 </div>	<!--end for edit-left-->
 <div class="edit-right">
 
-	<?php if($patent->image){?>
 	<div class="row">
-		<label for="">图像</label>
-		<img alt="" src="<?php img($patent->image)?>">
-	</div>
-	<?php }?>
-
-	<div class="row">
-		<label for="">修改图像</label>
+		<label for="">上传图片</label>
 		<input type="file" name="image" />
 		<span class="error"><?php echo $errors['image']?></span>
 	</div>

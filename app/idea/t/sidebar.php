@@ -12,16 +12,22 @@
 		<?php if(isset($Idea->deadline)){?>
 		<p><?php output_deadline($Idea->deadline)?></p>
 		<?php }?>
+		<?php if($Idea->one){?>
 		<p>一等奖：<?php echo $Idea->one?>人 <span class="price"><?php output_money($Idea->one_m)?>万元</span></p>
+		<?php }?>
+		<?php if($Idea->two){?>
 		<p>二等奖：<?php echo $Idea->two?>人 <span class="price"><?php output_money($Idea->two_m)?>万元</span></p>
+		<?php }?>
+		<?php if($Idea->three){?>
 		<p>三等奖：<?php echo $Idea->three?>人 <span class="price"><?php output_money($Idea->three_m)?>万元</span></p>
+		<?php }?>
 	</div><!--end for detail-profile-->
 	
 	<div class="side-section">
 		<div class="title">发起者</div>
 		<div class="content">
 			<p><a target="_blank" href="<?php echo COMPANY_HOME.'/profile?id='.$Company->id?>">
-				<?php output_username($Idea, 2)?></a></p>
+				<?php output_username($Idea)?></a></p>
 		</div>
 		
 	</div><!--end for tag-->

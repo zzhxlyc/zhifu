@@ -7,8 +7,8 @@ class Company extends User {
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('name', 'verified', 'email'),
-			'length' => array('description'=>1000, 'phone'=>20, 'url'=>250),
-			'int' => array('verified', 'rate_total', 'rate_num'),
+			'length' => array('description'=>1000, 'phone'=>20, 'mobile'=>20, 'url'=>250),
+			'int' => array('phone', 'mobile'),
 			'email' => array('email'),
 			'word' => array('name', 'description', 'contact')
 		);

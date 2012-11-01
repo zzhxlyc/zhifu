@@ -78,12 +78,15 @@ function output_desc($desc, $length = 100){
 	echo subString($d, $length);
 }
 
-function output_money($money){
+function output_money($money, $zero = 1){
 	if($money){
 		echo $money;
 	}
-	else{
+	else if($zero == 1){
 		echo 0;
+	}
+	else{
+		echo '';
 	}
 }
 
@@ -243,7 +246,7 @@ function is_expire($datetime, $addend = false){
 }
 
 function is_company($o){
-	if($o && is_a($o, 'User') && $o->is_company()){
+	if($o && $o->is_company()){
 		return true;
 	}
 	return false;

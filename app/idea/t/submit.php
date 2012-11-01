@@ -9,11 +9,11 @@
 	<a href="<?php echo $home.'/detail?id='.$Idea->id?>" class="back-btn">返回</a>
 	<?php }else{?>
 	<div class="section">
-		<h3>提交创意</h3>
+		<h3>提交创意方案</h3>
 		<div class="content line-list">
 			<form action="" method="post" <?php $HTML->file_form_need()?>>
 <div class="row">
-	<label for="name">创意</label>
+	<label for="name">方案名称</label>
 	<input size="70" class="text" type="text" name="title" value="<?php echo $Item->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>

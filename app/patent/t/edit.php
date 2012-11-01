@@ -156,13 +156,17 @@
 
 	<?php if($patent->image){?>
 	<div class="row">
-		<label for="">图像</label>
+		<label for="">图片</label>
 		<img alt="" src="<?php img($patent->image)?>" width="200" height="150">
 	</div>
 	<?php }?>
 
 	<div class="row">
-		<label for="">修改图像</label>
+		<?php if($patent->image){?>
+		<label for="">修改图片</label>
+		<?php }else{?>
+		<label for="">上传图片</label>
+		<?php }?>
 		<input type="file" name="image" />
 		<span class="error"><?php echo $errors['image']?></span>
 	</div>

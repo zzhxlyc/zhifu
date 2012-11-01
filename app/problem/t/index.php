@@ -52,8 +52,8 @@
 				<?php }else{?>
 				<p>出价：<span class="num">面议</span></p>
 				<?php }?>
-				<?php if($o->city){?>
-				<p>地区：<span><?php output_pcd($o);?></span></p>
+				<?php if($o->city2){?>
+				<p>面向地区：<span><?php output_pcd2($o);?></span></p>
 				<?php }?>
 				
 				<p>发布日期：<span><?php echo get_date($o->time)?></span></p>

@@ -1,8 +1,12 @@
 <h2>发布招聘信息</h2>
 <div class="filter clearfix">
 	<div class="order">
+		<?php if(is_company($User)){?>
 		<a class="current">发布招聘信息</a>
+		<?php }?>
+		<?php if(is_expert($User)){?>
 		<a href="<?php echo APPLY_HOME.'/add'?>">发布求职信息</a>
+		<?php }?>
 	</div>
 </div><!--end for filter-->
 
@@ -32,7 +36,7 @@
 	<span class="error"><?php echo $errors['specialty']?></span>
 </div>
 <div class="row">
-	<label for="area">工作地点</label>
+	<label for="area">工作地区</label>
 	<input class="text wide" type="text" name="area" value="<?php echo $recruit->area?>" />
 	<span class="error"><?php echo $errors['area']?></span>
 </div>

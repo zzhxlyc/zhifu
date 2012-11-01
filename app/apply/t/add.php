@@ -1,8 +1,12 @@
 <h2>发布求职信息</h2>
 <div class="filter clearfix">
 	<div class="order">
+		<?php if(is_company($User)){?>
 		<a href="<?php echo RECRUIT_HOME.'/add'?>">发布招聘信息</a>
-		<a  class="current">发布求职信息</a>
+		<?php }?>
+		<?php if(is_expert($User)){?>
+		<a class="current">发布求职信息</a>
+		<?php }?>
 	</div>
 </div><!--end for filter-->
 

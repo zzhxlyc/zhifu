@@ -103,13 +103,17 @@
 
 	<?php if($idea->image){?>
 	<div class="row">
-		<label for="">图像</label>
+		<label for="">图片<</label>
 		<img alt="" src="<?php img($idea->image)?>" width="200" height="150">
 	</div>
 	<?php }?>
 
 	<div class="row">
-		<label for="">修改图像</label>
+		<?php if($idea->image){?>
+		<label for="image">修改图片</label>
+		<?php }else{?>
+		<label for="image">上传图片</label>
+		<?php }?>
 		<input type="file" name="image" /><br />
 		<span class="error"><?php echo $errors['image']?></span>
 	</div>

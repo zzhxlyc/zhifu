@@ -25,6 +25,11 @@
 	<span class="error"><?php echo $errors['phone']?></span>
 </div>
 <div class="row">
+	<label for="name">手机</label>
+	<input size="50" type="text" class="text"  name="mobile" value="<?php echo $expert->mobile?>" />
+	<span class="error"><?php echo $errors['mobile']?></span>
+</div>
+<div class="row">
 	<label for="name">网址</label>
 	<input size="50" type="text" class="text"  name="url" value="<?php echo $expert->url?>" />
 	<span class="error"><?php echo $errors['url']?></span>
@@ -77,7 +82,11 @@
 <div class="edit-right">
 
 <div class="row">
-	<label for="name">头像</label>
+	<?php if($expert->image){?>
+	<label for="">修改头像</label>
+	<?php }else{?>
+	<label for="">上传头像</label>
+	<?php }?>
 	<input type="file" name="image" />
 	<?php if($expert->image){?>
 	<img width="200" height="150" src="<?php img($expert->image)?>" />

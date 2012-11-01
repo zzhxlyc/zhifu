@@ -31,6 +31,15 @@ function get_attrs($list, $attr, $array = true){
 	}
 }
 
+function id_to_index($list){
+	$s = count($list);
+	$array = array();
+	for($i = 0;$i < $s;$i++){
+		$array[$list[$i]->id] = $i;
+	}
+	return $array;
+}
+
 function split_ids($ids, $split = ','){
 	if($ids){
 		$array = explode($split, $ids);
@@ -91,11 +100,11 @@ function sort_as_ids($list, $id_list){
 function get_date($time){
 	if(!empty($time)){
 		$ts = strtotime($time);
-		return date('Y-m-d', $ts);
+		if($ts > 0){
+			return date('Y-m-d', $ts);
+		}
 	}
-	else{
-		return '';
-	}
+	return '';
 }
 
 function get_page($data, $field = 'page'){

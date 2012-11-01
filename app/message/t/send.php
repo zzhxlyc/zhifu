@@ -23,7 +23,7 @@
 <div class="row">
 	<input type="submit" value="发送" class="btn fl">
 	<input type="hidden" name="id" value="<?php echo $Problem->id?>">
-	<a href="javascript:void(0)" onclick="window.close();" class="back-btn">关闭</a>
+	<a href="javascript:void(0)" onclick="history.back();" class="back-btn">返回</a>
 </div>
 			</form>
 		</div><!--end for list-->

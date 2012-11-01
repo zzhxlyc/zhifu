@@ -20,6 +20,10 @@
 	<?php echo $expert->phone?>
 </div>
 <div class="row">
+	<label for="name">手机</label>
+	<?php echo $expert->mobile?>
+</div>
+<div class="row">
 	<label for="name">网址</label>
 	<?php echo $expert->url?>
 </div>

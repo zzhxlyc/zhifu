@@ -7,11 +7,11 @@
 			<a href="<?php echo $home.'/submit?id='.$Idea->id?>" class="join-btn btn">我有创意</a>
 			<?php }?>
 			<?php if(is_company($User) && $User->id == $Idea->company && $Idea->status == 0){?>
-			<a href="<?php echo $home.'/edit?id='.$Idea->id?>" class="edit">编辑该创意</a>
+			<a href="<?php echo $home.'/edit?id='.$Idea->id?>" class="edit">编辑</a>
 			<?php }?>
 		</h3>
 		<div class="content status clearfix">
-			<div class="status-item <?php $HTML->current($Idea->status, 0)?>">竞标中</div>
+			<div class="status-item <?php $HTML->current($Idea->status, 0)?>">投稿中</div>
 			<div class="status-item <?php $HTML->current($Idea->status, 1)?>">评奖中</div>
 			<div class="status-item  <?php $HTML->current($Idea->status, 2)?>">发放奖金</div>
 			<div class="status-item last  <?php $HTML->current($Idea->status, 3)?>">结束</div>
@@ -77,7 +77,7 @@
 	<?php }?>
 
 	<div class="section">
-		<h3>竞标专家（<?php echo count($items)?>）</h3>
+		<h3>共提交（<?php echo count($items)?>）个方案</h3>
 		<div class="content line-list">
 			<?php 
 				foreach($items as $item){
@@ -94,17 +94,18 @@
 					</a>
 				</div>
 				<div class="des">
-					<h4><?php echo $item->title?></h4>
-					<p><?php output_desc($item->content)?></p>
 					<?php 
 						if(is_company_object($User, $Idea) || is_expert_object($User, $item)){
 					?>
-					<p>
+					<h4>
 						<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
-						点击查看方案
+						<?php echo $item->title?>
 						</a>
-					</p>
+					</h4>
+					<?php }else{?>
+					<h4><?php echo $item->title?></h4>
 					<?php }?>
+					<p><?php output_desc($item->content)?></p>
 				</div>
 			</div><!--end for item-->
 			<?php }?>

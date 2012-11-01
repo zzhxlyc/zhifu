@@ -57,9 +57,9 @@ class ApplyController extends AppController {
 	}
 	
 	public function add(){
+		$User = $this->get('User');
 		if($this->request->post){
 			$post = $this->request->post;
-			$User = $this->get('User');
 			$post['belong'] = $User->id;
 			$post['type'] = $User->get_type();
 			$post['username'] = $User->username;
@@ -71,11 +71,20 @@ class ApplyController extends AppController {
 				$post['time'] = DATETIME;
 				$this->Apply->escape($post);
 				$id = $this->Apply->save($post);
+				
+				$this->update_user_info($User, $post);
+				
 				$this->redirect('show?id='.$id);
 			}
-			$this->set('$apply', $apply);
 			$this->set('$errors', $errors);
 		}
+		else{
+			$apply = new Apply();
+			$apply->name = $User->name;
+			$apply->mobile = $User->mobile;
+			$apply->email = $User->email;
+		}
+		$this->set('$apply', $apply);
 	}
 	
 	public function edit(){

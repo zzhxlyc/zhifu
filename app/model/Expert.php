@@ -7,8 +7,8 @@ class Expert extends User {
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('name', 'verified', 'email'),
-			'length' => array('description'=>1000, 'phone'=>20),
-			'int' => array('verified', 'rate_total', 'rate_num', 'phone'),
+			'length' => array('description'=>1000, 'phone'=>20, 'mobile'=>20),
+			'int' => array('phone', 'mobile'),
 			'email' => array('email'),
 			'word' => array('name', 'description', 'workplace', 'job')
 		);

@@ -4,7 +4,9 @@
 		<img src="<?php img($Problem->image, $Problem->default_image())?>" 
 			alt="<?php echo $Problem->title?>" width="180" height="135"/>
 		<p><?php echo $Problem->title?></p>
+		<?php if(!empty($Problem->budget)){?>
 		<p>金额：<span class="price"><?php output_money($Problem->budget)?>万元</span></p>
+		<?php }?>
 		<?php if(!empty($Problem->cat_name)){?>
 		<p>类别：<?php echo $Problem->cat_name?> <?php echo $Problem->subcat_name?></p>
 		<?php }?>

@@ -14,11 +14,11 @@
 	<a href="<?php echo $home.'/detail?id='.$Problem->id?>" class="back-btn">返回</a>
 	<?php }else{?>
 	<div class="section">
-		<h3>解决难题</h3>
+		<h3>提交竞标方案</h3>
 		<div class="content line-list">
 			<form action="" method="post" <?php $HTML->file_form_need()?>>
 <div class="row">
-	<label for="name">方案</label>
+	<label for="name">竞标方案名称</label>
 	<input size="70" class="text" type="text" name="title" value="<?php echo $solution->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>

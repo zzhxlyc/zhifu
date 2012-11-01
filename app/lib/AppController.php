@@ -207,6 +207,29 @@ class AppController extends Controller{
 		}
 	}
 	
+	protected function set_user_info(&$User, &$object){
+		$array = array('name', 'phone', 'mobile', 'email');
+		foreach($array as $item){
+			$object->$item = $User->$item;
+		}
+	}
+	
+	protected function update_user_info($User, $info){
+		$array = array('name', 'phone', 'mobile', 'email');
+		$data = array('id'=>$User->id);
+		foreach($array as $item){
+			if(empty($User->$item) && !empty($info[$item])){
+				$data[$item] = $info[$item];
+			}
+		}
+		if($User->is_company()){
+			$this->Company->save($data);
+		}
+		else if($User->is_expert()){
+			$this->Expert->save($data);
+		}
+	}
+	
 	protected function add_categorys(){
 		$cat_array = $this->Category->get_category();
 		$this->set('cat_array', $cat_array);
