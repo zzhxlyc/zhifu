@@ -46,9 +46,9 @@
 	?>
 </div>
 
-<div class="row">
+<div class="row clearfix">
 	<label for="name">公司简介</label>
-	<?php echo $company->description?>
+	<div class="fl" style="width:370px;"><?php echo $company->description?></div>
 </div>
 
 <div class="row">

@@ -30,9 +30,9 @@
 				<label for="name">标题</label>
 				<?php echo $Message->title?>
 			</div>
-			<div class="row">
+			<div class="row clearfix">
 				<label for="">内容</label>
-				<?php echo $Message->content?>
+				<div class="fl" style="width:560px;"><?php echo $Message->content?></div>
 			</div>
 			<?php if($Message->from_type != BelongType::ADMIN && 
 						$User->id == $Message->to && $User->get_type() == $Message->to_type){?>

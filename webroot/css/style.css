@@ -1284,6 +1284,7 @@ margin-right:20px;
 }
 .idea-wrapper .item,.problem-wrapper .item{
 width:300px;
+height: 90px;
 float:left;
 border-bottom:0;
 }
@@ -1298,6 +1299,7 @@ border-bottom:0;
 .video-wrapper .item{
 	padding:10px;
 	width:100px;
+	height: 130px;
 	float:left;
 }
 .video-wrapper .item .pic{

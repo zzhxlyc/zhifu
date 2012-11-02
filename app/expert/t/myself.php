@@ -49,9 +49,9 @@
 	?>
 </div>
 	
-<div class="row">
+<div class="row clearfix">
 	<label for="name">自我介绍</label>
-	<?php echo $expert->description?>
+	<div class="fl" style="width:370px;"><?php echo $expert->description?></div>
 </div>
 
 </div>	<!--end for edit-left-->
