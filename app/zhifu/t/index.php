@@ -63,7 +63,6 @@
 <div class="right-content">
 	<div class="video-wrapper list ">
 		<span class="icon6"></span><h3>精彩视频</h3>
-		<div class="clearfix">
 		
 		<?php foreach($videos as $video){?>
 		<div class="item clearfix">
@@ -77,7 +76,6 @@
 				<p>点击：<?php echo $video->click?></p>
 			</div>
 		</div><!--end for item-->
-		</div>
 		<?php }?>
 		<span class="more"><a href="<?php echo ROOT_URL.'/video'?>">查看更多</a></span>
 	</div>
