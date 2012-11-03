@@ -3,6 +3,8 @@
 
 	<div class="idea-wrapper list clearfix">
 		<span class="icon1"></span><h3>创意悬赏</h3>
+		<div class="clearfix">
+		
 		<?php foreach($ideas as $idea){?>
 		<div class="item clearfix">
 			<div class="pic">
@@ -22,12 +24,17 @@
 			</div>
 		</div><!--end for item-->
 		<?php }?>
+		</div>
 		<span class="more"><a href="<?php echo ROOT_URL.'/idea'?>">查看更多</a></span>
 	</div>
 	
 	<div class="problem-wrapper list">
 		<span class="icon2"></span><h3>技术难题</h3>
+		<div class="clearfix">
+		
 		<?php foreach($problems as $problem){?>
+			
+			
 		<div class="item clearfix">
 			<div class="pic">
 				<img src="<?php img($problem->image, $problem->default_image())?>" width="100" height="75" alt="<?php echo $problem->title?>">			
@@ -45,6 +52,8 @@
 			</div>
 		</div><!--end for item-->
 		<?php }?>
+		</div>
+		
 		<span class="more"><a href="<?php echo ROOT_URL.'/problem'?>">查看更多</a></span>
 	</div>
 	
@@ -54,6 +63,8 @@
 <div class="right-content">
 	<div class="video-wrapper list ">
 		<span class="icon6"></span><h3>精彩视频</h3>
+		<div class="clearfix">
+		
 		<?php foreach($videos as $video){?>
 		<div class="item clearfix">
 			<div class="pic">
@@ -66,6 +77,7 @@
 				<p>点击：<?php echo $video->click?></p>
 			</div>
 		</div><!--end for item-->
+		</div>
 		<?php }?>
 		<span class="more"><a href="<?php echo ROOT_URL.'/video'?>">查看更多</a></span>
 	</div>
@@ -97,6 +109,7 @@
 	
 <div class="patent-wrapper list clearfix">
 	<span class="icon4"></span><h3>科技成果</h3>
+	
 	<?php foreach($patents as $patent){?>
 	<div class="item">
 		<span class="title"><a href="<?php echo ROOT_URL.'/patent/detail?id='.$patent->id?>" title="<?php echo $patent->title?>"><?php echo subString($patent->title, 10)?></a></span>
@@ -109,6 +122,8 @@
 
 <div class="case-wrapper list clearfix">
 	<span class="icon5"></span><h3>案例展示</h3>
+	<div class="clearfix">
+	
 	<?php foreach($articles as $article){?>
 	<div class="item clearfix">
 		<div class="content">
@@ -119,6 +134,7 @@
 		</div>
 	</div><!--end for item-->
 	<?php }?>
+	</div>
 	<span class="more"><a href="<?php echo ROOT_URL.'/article'?>">查看更多</a></span>
 </div><!--end for case-wrapper-->
 	
