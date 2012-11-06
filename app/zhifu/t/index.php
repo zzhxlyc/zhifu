@@ -124,6 +124,29 @@
 	</div>
 	
 
+</div><!--end for right-content-->
+<div class="clear"></div>
+<div class="job-wrapper job list">
+	<span class="icon3"></span><h3>兼职顾问</h3>
+	<table>
+		<tr class="top">
+			<th width="100">人才类型</th>
+			<th>职位名称</th>
+			<th width="120">公司名称</th>
+			<th width="200">工作地区</th>
+			<th width="140">发布时间</th>				
+		</tr>
+		<?php foreach($recruits as $recruit){?>
+		<tr>
+			<td><?php output_identity($recruit->identity)?></td>
+			<td><a href="<?php echo ROOT_URL.'/recruit/show?id='.$recruit->id?>" title="<?php echo $recruit->title?>"><?php echo subString($recruit->title, 30)?></a></td>
+			<td><?php output_author_link2($recruit->belong, $recruit->type, $recruit->company)?></td>
+			<td><?php echo $recruit->area?></td>
+			<td><?php echo $recruit->time?></td>
+		</tr>
+		<?php }?>
+	</table>
+	<span class="more"><a href="<?php echo ROOT_URL.'/recruit'?>">查看更多</a></span>
 </div>
 
 
