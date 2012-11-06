@@ -18,6 +18,16 @@
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
 <div class="row">
+	<label for="title">公司名称</label>
+	<input class="text wide" type="text" name="company" value="<?php echo $recruit->company?>" />
+	<span class="error"><?php echo $errors['company']?></span>
+</div>
+<div class="row">
+	<label for="title">公司简介</label>
+	<textarea rows="5" cols="80" name="companydesc" class="text"><?php echo $recruit->companydesc?></textarea>
+	<span class="error"><?php echo $errors['companydesc']?></span>
+</div>
+<div class="row">
 	<label for="title">招聘人数</label>
 	<input class="text" type="text" name="num" value="<?php echo $recruit->num?>" />
 	<span class="error"><?php echo $errors['num']?></span>

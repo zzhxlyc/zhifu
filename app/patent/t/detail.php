@@ -34,13 +34,14 @@
 	</div>	
 
 	<div class="section">
-		<h3>购买用户（<?php echo count($deals)?>）</h3>
+		<h3>购买者留言</h3>
 		<div class="content line-list">
 			<?php 
 				foreach($deals as $deal){
 					$buyer = $buyers[$deal->id];
 			?>
 			<div class="item clearfix">
+				<!-- 
 				<div class="pic">
 					<a target="_blank" href="<?php echo get_author_link($buyer->id, $buyer->get_type())?>">
 					<img src="<?php img($buyer->image, $buyer->default_image())?>" alt="<?php echo $buyer->name?>"
@@ -52,13 +53,14 @@
 						</a>
 					</span>
 				</div>
+				 -->
 				<div class="des">
+					<p><?php echo $deal->note?></p>
 					<p>购买时间：<?php echo $deal->time?></p>
-					<?php if(is_expert_object($User, $deal)){?>
-					<p>购买者：<?php echo $deal->name?></p>
+					<?php if(is_expert_object($User, $deal) || is_his_object($User, $deal)){?>
+					<p>购买者：<a href="<?php echo get_author_link($deal->belong, $deal->type)?>"><?php echo $deal->name?></a></p>
 					<p>联系方式：<?php echo $deal->phone?></p>
 					<p>评估价格：<?php echo $deal->price?></p>
-					<p><?php echo $deal->note?></p>
 					<?php }?>
 				</div>
 			</div><!--end for item-->

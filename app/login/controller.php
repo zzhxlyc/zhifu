@@ -47,7 +47,14 @@ class LoginController extends AppController {
 							$cookie = $this->get_cookie(BelongType::EXPERT, $User);
 						}
 						$this->response->set_cookie(COOKIE_U, $cookie);
-						$this->redirect('/');
+						
+						$url = trim($post['url']);
+						if($url){
+							$this->response->redirect($url);
+						}
+						else{
+							$this->redirect('/');
+						}
 					}
 				}
 				$errors['pswd'] = '用户名或密码错误';

@@ -20,7 +20,7 @@
 		<?php }?>
 		<div class="content line-list">
 			<?php if(is_expert_object($User, $Item) && $Idea->status == 0){?>
-			<a href="<?php echo $home."/itemedit?idea=$Idea->id&item=$Item->id"?>">编辑</a>
+			<a href="<?php echo $home."/itemedit?idea=$Idea->id&item=$Item->id"?>">修改</a>
 			<?php }?>
 			<?php if(is_company_object($User, $Idea) && $Idea->status == 1){?>
 			<select class="idea_prize_choose">

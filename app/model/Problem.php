@@ -6,12 +6,13 @@ class Problem extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'company', 'description', 'contact', 'phone'),
+			'need' => array('title', 'name', 'description', 
+							'contact', 'phone'),
 			'length' => array('description'=>1000, 'phone'=>20),
-			'int' => array('company', 'cat', 'subcat', 'phone'),
+			'int' => array('phone'),
 			'number' => array('budget'),
 			'email' => array(),
-			'word'=> array('title', 'description', 'contact'),
+			'word'=> array('title', 'description', 'contact', 'name'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		return $errors;
@@ -19,7 +20,7 @@ class Problem extends AppModel{
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title', 'contact', 'phone'),
+			'string'=>array('title', 'contact', 'name'),
 			'url'=>array(),
 			'html'=>array('description')
 		);

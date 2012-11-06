@@ -18,9 +18,9 @@
 		<span class="error"><?php echo $errors['captcha']?></span>
 	</div>
 	<div class="row clearfix button-area">
+		<input type="hidden" name="url" value="<?php echo $_GET['url']?>" />
 		<input type="submit" class="submit btn fl" value="登陆" />
 		<a href="<?php echo $home.'/forget'?>" class="fl">忘记密码</a>
 	</div>
 	</form>
-	
 </div>

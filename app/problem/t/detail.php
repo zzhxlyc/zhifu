@@ -4,7 +4,11 @@
 	<div class="section">
 		<h3>项目状态
 			<?php if(is_expert($User) && $Problem->status <= 1){?>
-			<a href="<?php echo $home.'/submit?id='.$Problem->id?>" class="join-btn btn">我要竞标</a>
+				<?php if($solution){?>
+				<a href="<?php echo $home.'/itemedit?problem='.$Problem->id.'&item='.$solution->id?>" class="join-btn btn">修改竞标</a>
+				<?php }else{?>
+				<a href="<?php echo $home.'/submit?id='.$Problem->id?>" class="join-btn btn">我要竞标</a>
+				<?php }?>
 			<?php }?>
 			<?php if(is_company($User) && $User->id == $Problem->company && ($Problem->status <= 1)){?>
 			<a href="<?php echo $home.'/edit?id='.$Problem->id?>" class="edit">编辑</a>
@@ -44,17 +48,17 @@
 					<?php }?>
 				</div>
 				<div class="des">
-					<p><?php echo $Solver->title;?></p>
+					<?php 
+						if(is_company_object($User, $Problem) 
+								|| is_expert_object($User, $Solver)){
+					?>
+					<p><a href="<?php echo $home."/item?problem=$Problem->id&item=$Solver->id"?>">
+					<strong><?php echo $Solver->title;?></strong></a></p>
+					<?php }else{?>
+					<p><strong><?php echo $Solver->title;?></strong></p>
+					<?php }?>
 					<p><?php output_desc($Solver->description)?></p>
 				</div>
-				<?php 
-					if(is_company_object($User, $Problem) 
-							|| is_expert_object($User, $Solver)){
-				?>
-				<div class="des">
-					<a href="<?php echo $home."/item?problem=$Problem->id&item=$Solver->id"?>"><strong>查看此竞标方案</strong></a>
-				</div>
-				<?php }?>
 			</div><!--end for item-->
 		</div><!--end for list-->
 	</div><!--end for section-->
@@ -78,17 +82,17 @@
 					<?php }?>
 				</div>
 				<div class="des">
-					<p><?php echo $solution->title;?></p>
+					<?php 
+						if(is_company_object($User, $Problem) 
+								|| is_expert_object($User, $Solver)){
+					?>
+					<p><a href="<?php echo $home."/item?problem=$Problem->id&item=$Solver->id"?>">
+					<strong><?php echo $Solver->title;?></strong></a></p>
+					<?php }else{?>
+					<p><strong><?php echo $Solver->title;?></strong></p>
+					<?php }?>
 					<p><?php output_desc($solution->description)?></p>
 				</div>
-				<?php 
-					if(is_company_object($User, $Problem) 
-							|| is_expert_object($User, $solution)){
-				?>
-				<div class="des">
-					<a href="<?php echo $home."/item?problem=$Problem->id&item=$solution->id"?>"><strong>查看此竞标方案</strong></a>
-				</div>
-				<?php }?>
 			</div><!--end for item-->
 			<?php }?>
 		</div><!--end for list-->

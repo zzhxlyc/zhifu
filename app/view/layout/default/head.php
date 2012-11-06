@@ -2,7 +2,7 @@
 	<div class="header">
 		<h1 class="logo">
 			<a href="<?php echo ROOT_URL?>">
-				<img src="<?php echo $LOGO?>" alt="知富网" title="<?php echo WEB_TITLE?>" />
+				<img src="<?php echo $LOGO?>" alt="<?php echo $view->title?>" title="<?php echo $view->title?>" />
 			</a>
 			<span><?php echo $SLOGAN?></span>
 		</h1>

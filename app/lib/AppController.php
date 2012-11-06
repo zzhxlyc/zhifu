@@ -123,7 +123,8 @@ class AppController extends Controller{
 			$redirect = false;
 		}
 		if($redirect){
-			$this->response->redirect(LOGIN_HOME);
+			$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+			$this->response->redirect(LOGIN_HOME.'?url='.$url);
 		}
 	}
 	

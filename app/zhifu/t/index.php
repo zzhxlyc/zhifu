@@ -86,7 +86,7 @@
 		<tr>
 			<td><?php output_identity($recruit->identity)?></td>
 			<td><a href="<?php echo ROOT_URL.'/recruit/show?id='.$recruit->id?>" title="<?php echo $recruit->title?>"><?php echo subString($recruit->title, 30)?></a></td>
-			<td><?php output_author_link2($recruit->belong, $recruit->type, $recruit->username)?></td>
+			<td><?php output_author_link2($recruit->belong, $recruit->type, $recruit->company)?></td>
 			<td><?php echo $recruit->area?></td>
 			<td><?php echo $recruit->time?></td>
 		</tr>

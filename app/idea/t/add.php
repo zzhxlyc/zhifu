@@ -12,6 +12,17 @@
 	<input class="text" size="50" type="text" name="title" value="<?php echo $idea->title?>" />
 	<span class="error"><?php echo $errors['title']?></span>
 </div>
+<div class="row">
+	<label for="">公司名</label>
+	<input class="text" size="50" type="text" name="name" value="<?php echo $idea->name?>" />
+	<span class="error"><?php echo $errors['name']?></span>
+</div>
+<div class="row">
+	<label for="">联系方式</label>
+	<input class="text" size="30" type="text" name="phone" value="<?php echo $idea->phone?>" />
+	<span class="error"><?php echo $errors['phone']?></span>
+	<span>手机号或电话号码</span>
+</div>
 
 <div class="row">
 	<label for="cat">所属行业</label>

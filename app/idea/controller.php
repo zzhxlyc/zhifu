@@ -126,9 +126,9 @@ class IdeaController extends AppController {
 	}
 	
 	public function add(){
+		$User = $this->get('User');
 		if($this->request->post){
 			$post = $this->request->post;
-			$User = $this->get('User');
 			$post['company'] = $User->id;
 			$post['username'] = $User->username;
 			$post['author'] = $User->name;
@@ -156,9 +156,15 @@ class IdeaController extends AppController {
 				$this->redirect('detail?id='.$id);
 			}
 			$idea = $this->set_model($post);
-			$this->set('$idea', $idea);
 			$this->set('errors', $errors);
 		}
+		else{
+			$idea = new Idea();
+			$idea->name = $User->name;
+			$idea->phone = $User->phone;
+			if($idea->phone == '') $idea->phone = $User->mobile;
+		}
+		$this->set('$idea', $idea);
 		$this->add_data();
 	}
 	

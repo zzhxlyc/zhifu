@@ -175,7 +175,7 @@
 
 
 <div class="row">
-	<input type="submit" value="保存" class="btn" />
+	<input type="submit" value="发布" class="btn" />
 </div>
 
 </form>

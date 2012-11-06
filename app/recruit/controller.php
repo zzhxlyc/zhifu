@@ -69,9 +69,9 @@ class RecruitController extends AppController {
 	}
 	
 	public function add(){
+		$User = $this->get('User');
 		if($this->request->post){
 			$post = $this->request->post;
-			$User = $this->get('User');
 			$post['belong'] = $User->id;
 			$post['type'] = $User->get_type();
 			$post['username'] = $User->username;
@@ -79,19 +79,20 @@ class RecruitController extends AppController {
 			$recruit = $this->set_model($post);
 			$errors = $this->Recruit->check($post);
 			if(count($errors) == 0){
-//				$old_tag = $post['old_tag'];
-//				$new_tag = $post['new_tag'];
-//				unset($post['old_tag'], $post['new_tag']);
 				$post['status'] = 1;
 				$post['time'] = DATETIME;
 				$this->Recruit->escape($post);
 				$id = $this->Recruit->save($post);
-//				$this->do_tag($id, BelongType::RECRUIT, $old_tag, $new_tag);
 				$this->redirect('show?id='.$id);
 			}
-			$this->set('$recruit', $recruit);
 			$this->set('$errors', $errors);
 		}
+		else{
+			$recruit = new Recruit();
+			$recruit->company = $User->name;
+			$recruit->companydesc = $User->description;
+		}
+		$this->set('$recruit', $recruit);
 	}
 	
 	public function edit(){

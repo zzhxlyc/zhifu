@@ -44,6 +44,7 @@ class ProblemController extends AppController {
 	public function detail(){
 		$get = $this->request->get;
 		$id = get_id($get);
+		$User = $this->get('User');
 		$has_error = true;
 		if($id){
 			$Problem = $this->Problem->get($id);
@@ -95,6 +96,10 @@ class ProblemController extends AppController {
 			$this->Problem->save($data);
 		}
 		
+		$cond = array('problem'=>$id, 'expert'=>$User->id);
+		$solution = $this->Solution->get_row($cond);
+		$this->set('$solution', $solution);
+		
 		$User = $this->get('User');
 		if(is_expert($User)){
 			foreach($solutions as $solution){
@@ -126,6 +131,7 @@ class ProblemController extends AppController {
 	}
 	
 	public function add(){
+		$User = $this->get('User');
 		if($this->request->post){
 			$post = $this->request->post;
 			$post['verify'] = 1;
@@ -142,7 +148,6 @@ class ProblemController extends AppController {
 			if(isset($post['type'])){
 				unset($post['type'], $post['desc']);
 			}
-			$User = $this->get('User');
 			$post['company'] = $User->id;
 			$post['author'] = $User->name;
 			$post['username'] = $User->username;
@@ -174,12 +179,16 @@ class ProblemController extends AppController {
 				}
 			}
 			$problem = $this->set_model($post, new Problem());
-			$this->set('$problem', $problem);
 			$this->set('errors', $errors);
 		}
 		else{
 			$this->set('type', 0);
+			$problem = new Problem();
+			$problem->name = $User->name;
+			$problem->phone = $User->phone;
+			if($problem->phone == '') $problem->phone = $User->mobile;
 		}
+		$this->set('$problem', $problem);
 		$this->add_data();
 	}
 	
@@ -239,6 +248,11 @@ class ProblemController extends AppController {
 		if($id){
 			$Problem = $this->Problem->get($id);
 			if($Problem && $Problem->verify == 1 && $User->is_expert()){
+				$cond = array('problem'=>$id, 'expert'=>$User->id);
+				$solution = $this->Solution->get_row($cond);
+				if($solution){
+					$this->redirect("itemedit?problem=$id&item=$solution->id");
+				}
 				$has_error = false;
 			}
 		}
