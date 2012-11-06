@@ -125,7 +125,6 @@
 	
 
 </div><!--end for right-content-->
-<div class="clear"></div>
 
 
 <div class="problem-more fr">
