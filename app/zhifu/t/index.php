@@ -41,7 +41,7 @@
 					<?php if(strtotime($idea->deadline) > 0){?>
 					<?php echo get_date($idea->deadline)?> 截止
 					<?php }?>
-					<?php echo $idea->item_count?>人提交方案
+					<?php echo $idea->item_count?>个方案
 					</p>
 					<p><?php output_desc($idea->description, 20)?></p>
 				</div>
@@ -130,6 +130,7 @@
 <div class="problem-more fr">
 	<div class="problem-add">
 		<div class="content">
+			<form action="<?php echo PROBLEM_HOME.'/add'?>" method="post">
 			<p>难题名称</p>
 			<p><input type="text"  class="text" name="title" /><span class="error"></span></p>
 			<p>所属行业
@@ -142,6 +143,8 @@
 				</select>
 				<span class="error"></span>	
 			</p>
+			<p>公司名称</p>
+			<p><input class="text" size="50" type="text" name="name" /><span class="error"></span></p>
 			<p>联系人姓名</p>
 			<p><input type="text"  class="text" name="contact" /><span class="error"></span></p>
 			<p>联系方式</p>
@@ -153,7 +156,11 @@
 			<textarea name="desc" class="text"> </textarea>
 			<span class="error"></span>
 			</p>
-			<p><input type="submit" value="发布" /></p>
+			<p>
+				<input type="hidden" id="type" name="type" value="1" />
+				<input type="submit" value="发布" />
+			</p>
+			</form>
 		</div>
 	</div>
 	
@@ -162,7 +169,7 @@
 			<p><a href="">难题名称</a></p>
 			<p><a href="">难题名称</a></p>
 			<p><a href="">难题名称</a></p>
-			
+			<p><a href="">难题名称</a></p>
 			<p><a href="">难题名称</a></p>
 			
 		</div>
@@ -171,7 +178,10 @@
 	
 	<div class="problem-search">
 		<div class="content">
-			<input type="text"  class="text"/><input type="submit" value="搜索" />
+			<form action="<?php echo PROBLEM_HOME?>" method="get">
+			<input type="text" class="text" name="title"/>
+			<input type="submit" value="搜索" />
+			</form>
 		</div>
 	</div>
 	
@@ -204,3 +214,10 @@
 </div><!--end for case-wrapper-->
 	
 </div>
+<?php category_js($cat_array)?>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	catEventInitNormal();
+});	
+</script>

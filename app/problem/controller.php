@@ -33,10 +33,17 @@ class ProblemController extends AppController {
 			$order['id'] = 'DESC';
 		}
 		$condition = array('verify'=>1);
+		if($get['title']){
+			$condition['title like'] = $get['title'];
+		}
 		$all = $this->Problem->count($condition);
 		$pager = new Pager($all, $page, $limit);
 		$list = $this->Problem->get_page($condition, $order, $pager->now(), $limit);
-		$links = $pager->get_page_links(PROBLEM_HOME.'/index?');
+		$base = PROBLEM_HOME.'/index?';
+		if($condition['title like']){
+			$base .= 'title='.$condition['title like'].'&';
+		}
+		$links = $pager->get_page_links($base);
 		$this->set('list', $list);
 		$this->set('links', $links);
 	}

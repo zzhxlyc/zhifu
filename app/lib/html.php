@@ -59,3 +59,26 @@ function comment_js(){
 </script>
 <?php 
 }
+
+function category_js(&$cat_array){
+?>
+<script type="text/javascript">
+<!--
+var catList = {<?php 
+	$l = array();
+	foreach($cat_array as $id => $cat){
+		$c = array();
+		foreach($cat['c'] as $iid => $subcat){
+			$n = $subcat['name'];
+			$c[] = "{'id':$iid, 'name':'$n'}";
+		}
+		$l[] = sprintf("\n%d:{'id':%d, 'n':'%s', 'c':[%s]}", 
+						$id, $id, $cat['name'], join(',', $c));
+	}
+	echo join(',', $l)."\n";
+?>
+};
+//-->
+</script>
+<?php 	
+}

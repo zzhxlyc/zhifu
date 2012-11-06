@@ -6,7 +6,7 @@ class ZhifuController extends AppController {
 	
 	public $models = array('Problem', 'Idea', 'IdeaItem', 'Article', 
 							'Video', 'Patent', 'Recruit', 'Apply', 
-							'Tag', 'TagItem');
+							'Tag', 'TagItem', 'Category');
 	
 	public function before(){
 		parent::before();
@@ -17,7 +17,7 @@ class ZhifuController extends AppController {
 		$order_hot = array('click'=>'DESC');
 		$limit = 4;
 		$cond = array();
-		$problems = $this->Problem->get_list($cond, $order, $limit);
+		$problems = $this->Problem->get_list($cond, $order, 5);
 //		$p_ids = get_ids($problems);
 
 		$ideas = $this->Idea->get_list($cond, $order, $limit);
@@ -45,6 +45,8 @@ class ZhifuController extends AppController {
 		$this->set('$recruits', $recruits);
 		$this->set('$patents', $patents);
 		$this->set('$articles', $articles);
+		
+		$this->add_categorys();
 	}
 	
 	public function captcha(){
