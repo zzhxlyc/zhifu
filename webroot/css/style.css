@@ -107,7 +107,7 @@ color:red;
 }
 
 .header_wrap {
-height: 166px;
+height: 140px;
 width: 100%;
 min-width: 1024px;
 }
@@ -1290,6 +1290,7 @@ border-bottom:0;
 
 	width:300px;
 	float:left;
+	margin-top:0;
 }
 .video-wrapper .top-title{
 	background: url(../images/video-title.jpg) no-repeat 0 0;
@@ -1343,7 +1344,7 @@ border-bottom:0;
 	float:right;
 }
 .problem-wrapper .item{
-width:600px;
+width:580px;
 height: 90px;
 border-bottom:1px dotted #ccc;
 }
