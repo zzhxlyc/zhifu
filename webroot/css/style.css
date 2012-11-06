@@ -20,7 +20,7 @@ height: 100%;
 }
 
 body {
-background: #F2F2F2;
+background: #f8f8f8;
 font: 12px/1.5 tahoma,arial,\5b8b\4f53;
 color: #333333;
 height: 100%;
@@ -101,19 +101,21 @@ background: url(../images/btn-bg-blue-s.png) no-repeat 0 0;
 color:red;	
 }
 /*************************header***************************/
+#container{
+	background: url(../images/header.jpg) repeat-x;
+	
+}
 
 .header_wrap {
 height: 166px;
 width: 100%;
-background: url(../images/header_bg.jpg) repeat-x;
 min-width: 1024px;
 }
 
 .header_wrap .header {
-width: 958px;
+width: 960px;
 margin: 0 auto;
 overflow: visible;
-background: url(../images/userinfo_bg.jpg) no-repeat right -8px;
 z-index: 9999;
 visibility: visible;
 position: relative;
@@ -188,14 +190,14 @@ text-decoration: underline;
 
 
 .main-nav {
-padding-top: 1px;
-height: 35px;
-padding-top: 5px!important;
+margin-top: 10px;
+height: 40px;
+background: url(../images/nav-bg.png) no-repeat 0 0;
+
 }
 
 .main-nav li {
 float: left;
-background: url(../images/nav_libg.gif) repeat-x 0px 1px;
 height: 35px;
 }
 
@@ -204,25 +206,22 @@ font-size: 16px;
 font-family: '微软雅黑','黑体';
 line-height: 35px;
 text-align: center;
-color: white;
+color: #ccc;
 width: 118px;
 height: 35px;
 display: block;
 margin-top: 1px;
-background: url(../images/aa.gif) right 0px no-repeat;
 }
 
 
 
 .main-nav li .last {
 width: 124px;
-background: url(../images/bb.gif) right -1px no-repeat;
 }
 
 .main-nav li .current {
-background: url(../images/nav_libg_now.gif) repeat-x right 0px white;
 vertical-align: bottom;
-color: #2271A8;
+color: #fff;
 }
 .cat-wrapper{
 position:absolute;
@@ -298,17 +297,13 @@ padding-left: 10px;
 
 .wrapper {
 clear: both;
-width: 958px;
+width: 930px;
 margin: 0 auto;
 float: none;
 vertical-align: top;
-padding: 25px 15px 0 15px;
-background: url(../images/main_bg.jpg) no-repeat top;
-}
-.main{
-padding: 0 9px 20px 9px;	
-background: white;
-width: 935px;
+padding: 15px;
+background:#F8F8F8;
+border:1px solid #ddd;
 }
 
 
@@ -1260,30 +1255,30 @@ padding-left:10px;
 
 /************index**************/
 .index .more{
+width:50px;
 float:right;
-padding:3px;	
 }
-.index .more a{
-padding:3px;	
-}
-.index .more a:hover{
-color:#fff;
-background:#259;	
-}
+
 .index .left-content,.index .right-content{
 float:left;	
+margin-bottom:20px;
 }
 .index .left-content{
 margin-right:20px;	
 }
 .idea-wrapper,.problem-wrapper{
-	width:640px;
+	width:600px;
 }
-.idea-wrapper h3{
-
+.idea-wrapper{
+	margin-top:0;
+}
+.idea-wrapper .top-title{
+	background: url(../images/idea-title.jpg) no-repeat 0 0;
+	text-indent:-9999em;
+	height:100px;
 }
 .idea-wrapper .item,.problem-wrapper .item{
-width:300px;
+width:260px;
 height: 90px;
 float:left;
 border-bottom:0;
@@ -1293,13 +1288,34 @@ border-bottom:0;
 }
 .index .video-wrapper{
 
-	width:260px;
+	width:300px;
 	float:left;
+}
+.video-wrapper .top-title{
+	background: url(../images/video-title.jpg) no-repeat 0 0;
+	text-indent:-9999em;
+	height:45px;
+	margin-bottom:10px;
+}
+
+.video-wrapper .item{
+	border:1px solid #ccc;
+	margin-right:15px;
+	background:#fff;
+}
+.video-wrapper .top-title h3{
+	width:100px;
+	float:left;
+}
+.video-wrapper .top-title .more{
+	padding-top:15px;
+	width:50px;
+	float:right;
 }
 .video-wrapper .item{
 	padding:10px;
-	width:100px;
-	height: 130px;
+	width:110px;
+	height: 100px;
 	float:left;
 }
 .video-wrapper .item .pic{
@@ -1310,23 +1326,144 @@ border-bottom:0;
 	text-align:center;
 }
 
-.job-wrapper{
-	width:100%;
+.problem-wrapper .top-title{
+	background: url(../images/problem-title.jpg) no-repeat 0 0;
+	text-indent:-9999em;
+	height:30px;
+	margin-bottom:10px;
 }
-.job-wrapper table{
-	width:100%;
+.problem-wrapper .top-title h3{
+	width:100px;
+	float:left;
+}
+.problem-wrapper .top-title .more{
+	padding-top:15px;
+	width:50px;
+	float:right;
+}
+.problem-wrapper .item{
+width:600px;
+height: 90px;
+border-bottom:1px dotted #ccc;
 }
 
-
-.patent-wrapper{
-margin-top:30px;	
+.problem-more .problem-add{
+	background: url(../images/problem-add.jpg) no-repeat 0 0;
+	width:315px;
+	height:460px;
 }
-
-.patent-wrapper .item{
+.problem-add .content{
+	padding:60px 10px 0 10px;
+	color:#ddd;
+	
+}
+.problem-add .content p{
+	padding-bottom:5px;
+	
+}
+.problem-add .content .text{
+	border:1px solid #ccc;
+border-radius: 5px;
 width:280px;
-float:left;	
+height:20px;
+}
+.problem-add .content textarea{
+	border:1px solid #ccc;
+border-radius: 5px;
+width:280px;
+height:80px;
+}
+.problem-more .problem-interest{
+	background: url(../images/problem-interest.jpg) no-repeat 0 0;
+	width:315px;
+	height:180px;
+}
+.problem-interest .content{
+	padding:50px 10px 0 10px;
+	color:#ddd;
+	height:90px;
+	
+}
+.problem-interest .content p{
+	padding-left:18px;
+	background: url(../images/list.jpg) no-repeat 0 2px;
+	line-height:20px;
+
+	
+}
+.problem-interest .more{
+	float:right;
+	width:50px;
+	height:30px;
+	display:block;
+	
+}
+.problem-more .problem-search{
+	background: url(../images/problem-search.jpg) no-repeat 0 0;
+	width:315px;
+	height:95px;
+}
+.problem-search .content{
+	padding:50px 10px 0 10px;
+	color:#ddd;
+	
+}
+.problem-search .content .text{
+		border:1px solid #ccc;
+	border-radius: 5px;
+	width:230px;
+	height:20px;
+}
+.job-wrapper{
+	width:600px;
+}
+.job-wrapper .top-title{
+	background: url(../images/job-title.jpg) no-repeat 0 0;
+	text-indent:-9999em;
+	height:30px;
+	margin-bottom:10px;
+}
+.job-wrapper .top-title h3{
+	width:100px;
+	float:left;
+}
+.job-wrapper .top-title .more{
+	padding-top:15px;
+	width:50px;
+	float:right;
+}
+.job-wrapper .content .item{
+width:370px;
+padding:5px 0 2px 0;
+}
+.patent-wrapper{
+margin-top:10px;	
+width:600px;
+}
+.patent-wrapper .top-title{
+	background: url(../images/patent-title.jpg) no-repeat 0 0;
+	text-indent:-9999em;
+	height:100px;
+}
+.patent-wrapper .content{
+width:450px;
+}
+.patent-wrapper .content .item{
+width:440px;
+padding:5px 5px 0 0;
 }
 
+.patent-wrapper .top-title h3{
+	padding-top:75px;
+	
+	width:100px;
+	float:left;
+}
+.patent-wrapper .top-title .more{
+	padding-top:75px;
+	width:50px;
+	float:right;
+}
 
 .patent-wrapper .item .title{
 padding-right:10px;	
@@ -1337,6 +1474,12 @@ padding-right:10px;
 margin-top:30px;	
 }
 
+.case-wrapper .top-title{
+	background: url(../images/case-title.jpg) no-repeat 0 0;
+	text-indent:-9999em;
+	height:140px;
+	margin-bottom:10px;
+}
 .case-wrapper .item{
 width:280px;
 float:left;	
