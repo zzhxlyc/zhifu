@@ -1278,7 +1278,7 @@ margin-right:20px;
 	height:100px;
 }
 .idea-wrapper .item,.problem-wrapper .item{
-width:260px;
+width:280px;
 height: 90px;
 float:left;
 border-bottom:0;
@@ -1302,6 +1302,11 @@ border-bottom:0;
 	border:1px solid #ccc;
 	margin-right:15px;
 	background:#fff;
+	margin-bottom:15px;
+	padding:10px;
+	width:110px;
+	height: 100px;
+	float:left;
 }
 .video-wrapper .top-title h3{
 	width:100px;
@@ -1312,18 +1317,14 @@ border-bottom:0;
 	width:50px;
 	float:right;
 }
-.video-wrapper .item{
-	padding:10px;
-	width:110px;
-	height: 100px;
-	float:left;
-}
+
 .video-wrapper .item .pic{
 	padding:0;
 }
 
 .video-wrapper .item .title{
 	text-align:center;
+	font-size: 12px;
 }
 
 .problem-wrapper .top-title{
@@ -1467,6 +1468,7 @@ padding:5px 5px 0 0;
 
 .patent-wrapper .item .title{
 padding-right:10px;	
+font-size:12px;
 }
 
 
