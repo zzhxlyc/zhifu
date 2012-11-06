@@ -259,7 +259,7 @@ class PatentController extends AppController {
 					$this->set_belong($data, $User);
 					$data['time'] = DATETIME;
 					$this->Deal->save($data);
-					$this->redirect('submit?succ&id='.$id);
+					$this->redirect('detail?id='.$id);
 				}
 				$this->set('errors', $errors);
 				$this->set('deal', $this->set_model($post, new Deal()));

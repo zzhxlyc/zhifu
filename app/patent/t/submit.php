@@ -16,7 +16,7 @@
 
 	<?php if(!is_expert_object($User, $Patent)){?>
 	<div class="section">
-		<h3>购买专利</h3>
+		<h3>给专利持有人留言</h3>
 		<div class="content line-list">
 			<?php if(!$buyed){?>
 			<form action="" method="post">
@@ -38,12 +38,19 @@
 				</div>
 				<div class="row">
 					<label for="name">留言</label>
-					<textarea rows="3" cols="70" name="note"><?php echo $deal->note?></textarea>
-					<span class="error"><?php echo $errors['note']?></span>
+					<textarea rows="3" cols="70" name="note" style="border: 1px solid #DDD;"><?php echo $deal->note?></textarea>
+					<span class="error"><?php echo $errors['note']?></span> <br>
 				</div>
-				<input type="submit" value="有意向购买" class="btn fl">
-				<input type="hidden" name="id" value="<?php echo $Patent->id?>">
-				<a href="<?php echo $home.'/detail?id='.$Patent->id?>" class="back-btn">返回</a>
+				<div class="row">
+					<label for="name">提示</label>
+					<span>给技术持有人留言，简要说明您的投资意向或问题，勿在详细内容里留下电话以防骚扰</span>
+				</div>
+				<div class="row">
+					<label for="name"></label>
+					<input type="submit" value="提交" class="btn fl">
+					<input type="hidden" name="id" value="<?php echo $Patent->id?>">
+					<a href="<?php echo $home.'/detail?id='.$Patent->id?>" class="back-btn">返回</a>
+				</div>
 			</form>
 			<?php }else if(!output_edit_succ()){?>
 				已购买

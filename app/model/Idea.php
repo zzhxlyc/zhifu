@@ -6,11 +6,12 @@ class Idea extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'company', 'budget', 'description'),
-			'length' => array('description'=>1000),
-			'int' => array('one', 'two', 'three'),
+			'need' => array('title', 'company', 'budget', 
+								'description', 'name', 'phone'),
+			'length' => array('description'=>1000, 'phone'=>20),
+			'int' => array('one', 'two', 'three', 'phone'),
 			'number' => array('budget', 'one_m', 'two_m', 'three_m'),
-			'word'=> array('title', 'description'),
+			'word'=> array('title', 'description', 'name'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		return $errors;
@@ -18,7 +19,7 @@ class Idea extends AppModel{
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('title'),
+			'string'=>array('title', 'name'),
 			'url'=>array(),
 			'html'=>array('description')
 		);

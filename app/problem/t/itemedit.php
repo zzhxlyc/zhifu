@@ -9,7 +9,7 @@
 	<a href="<?php echo $home.'/detail?id='.$Problem->id?>" class="back-btn">返回</a>
 	<?php }else{?>
 	<div class="section">
-		<h3>编辑难题解决方案</h3>
+		<h3>修改竞标方案</h3>
 		<div class="content line-list">
 			<form action="" method="post" <?php $HTML->file_form_need()?>>
 <div class="row">

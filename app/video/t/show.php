@@ -3,7 +3,7 @@
 <div class="meta">
 	<span>
 		<label for="desc">发布者</label>
-		<?php output_author_link2($video->belong, $video->type, '管理员')?>
+		<?php output_author_link2($video->belong, $video->type, $video->username)?>
 	</span>
 	<span>
 		<label for="desc">发布时间</label>

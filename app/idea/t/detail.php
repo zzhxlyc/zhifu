@@ -26,26 +26,22 @@
 				if($list && count($list) > 0){
 		?>
 		<h3><?php echo $title?></h3>
-		<div class="content line-list">
+		<div class="content line-list" style="padding: 0px">
 			<?php 
 				foreach($list as $item){
 					$expert = $experts[$item->expert];
 			?>
 			<div class="item clearfix">
 				<div class="pic">
-					<a target="_blank" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
-					<img src="<?php img($expert->image)?>" alt="<?php echo $expert->name?>"
-						 width="100" height="100"/>
-					</a>
 					<span class="name">
 						<a target="_blank" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
 						<?php echo $expert->username?>
 						</a>
 						<?php if(is_company_object($User, $Idea)){?>
 						<br/>
-						<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
+						<!-- <a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
 						给TA评分
-						</a>
+						</a> -->
 						<?php }?>
 						<?php if(is_expert_object($User, $item)){?>
 						<br/>
@@ -54,7 +50,7 @@
 					</span>
 				</div>
 				<div class="des">
-					<?php if(is_expert_object($User, $item)){?>
+					<?php if(is_company_object($User, $Idea) || is_expert_object($User, $item)){?>
 					<a href="<?php echo $home."/item?idea=$Idea->id&item=$item->id"?>">
 					<?php echo $item->title?>
 					</a>
@@ -63,8 +59,6 @@
 							echo $item->title;
 						}
 					?>
-					
-					<?php echo $item->content?>
 				</div>
 			</div><!--end for item-->
 			<?php }?>
@@ -77,7 +71,11 @@
 	<?php }?>
 
 	<div class="section">
-		<h3>共提交（<?php echo count($items)?>）个方案</h3>
+		<h3>共提交（<?php echo count($items)?>）个方案 
+			<?php if($Idea->status == 0){?>
+				<a href="javascript:void(0)" class="idea_finish">结束提交</a>
+			<?php }?>
+		</h3>
 		<div class="content line-list">
 			<?php 
 				foreach($items as $item){
@@ -129,3 +127,46 @@
 </div><!--end for main-content-->
 
 <?php comment_js()?>
+
+
+<?php if(is_company_object($User, $Idea)){?>
+<script type="text/javascript">
+<!--
+$(".idea_finish").click(function (){
+	var idea = $("#object").val();
+	$.ajax({
+		type: "POST",
+		url: window.ROOT_URL + "/idea/finish",
+		data: "idea="+idea,
+		success: function(msg){
+			if(msg == '0'){
+				alert('已成功结束提交');
+//				$(".idea_finish").hide();
+				location.href = window.ROOT_URL + '/idea/detail?id=' + idea;
+			}
+			else{
+				alert(msg);
+			}
+		}
+	});
+});
+$(".idea_done").click(function (){
+	var idea = $("#object").val();
+	$.ajax({
+		type: "POST",
+		url: window.ROOT_URL + "/idea/done",
+		data: "idea="+idea,
+		success: function(msg){
+			if(msg == '0'){
+				alert('已成功结束评奖');
+//				$(".idea_finish").hide();
+				location.href = window.ROOT_URL + '/idea/detail?id=' + idea;
+			}
+			else{
+				alert(msg);
+			}
+		}
+	});
+});
+</script>
+<?php }?>
