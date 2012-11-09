@@ -1,5 +1,12 @@
 <?php
 
+function head_tab0(){
+	global $request;
+	$array = array('zhifu');
+	if(in_array($request->get_module(), $array)){
+		echo 'class="current"';
+	}
+}
 function head_tab1(){
 	global $request;
 	$array = array('problem');

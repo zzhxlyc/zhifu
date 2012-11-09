@@ -33,6 +33,12 @@ class VideoController extends AdminBaseController {
 			$post['author'] = '管理员';
 			$errors = $this->Video->check($post);
 			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('image2', $errors, $files);
+				$this->resize_upload_image($path);
+				if($path){$post['image'] = $path;}
+			}
+			if(count($errors) == 0){
 				$post['time'] = DATETIME;
 				$post['click'] = 0;
 				if(strpos($post['url'], 'youku.com') !== false){
@@ -74,6 +80,12 @@ class VideoController extends AdminBaseController {
 				$video = $this->set_model($post, $video);
 				$errors = $this->Video->check($video);
 				if(count($errors) == 0){
+					$files = $this->request->file;
+					$path = $this->do_file('image2', $errors, $files);
+					$this->resize_upload_image($path);
+					if($path){$post['image'] = $path;}
+				}
+				if(count($errors) == 0){
 					if($post['url'] != $old_url){
 						if(strpos($post['url'], 'youku.com') !== false){
 							$data = VideoUrlParser::parse($post['url']);
@@ -88,6 +100,9 @@ class VideoController extends AdminBaseController {
 					$old_tag = $post['old_tag'];
 					$new_tag = $post['new_tag'];
 					unset($post['old_tag'], $post['new_tag']);
+					if($post['image'] && $video->image){
+						FileSystem::remove($video->image);
+					}
 					$this->Video->escape($post);
 					$this->Video->save($post);
 					$this->do_tag($id, BelongType::VIDEO, $old_tag, $new_tag);

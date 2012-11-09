@@ -5,7 +5,7 @@
 	else{
 		output_edit_succ();
 ?>
-<form action="<?php echo $home.'/edit?id='.$expert->id?>" method="post" >
+<form action="<?php echo $home.'/edit?id='.$expert->id?>" method="post" <?php $HTML->file_form_need()?>>
 <div class="row">
 	<label for="name">姓名</label>
 	<input size="100" type="text" name="name" value="<?php echo $expert->name?>" />
@@ -20,6 +20,11 @@
 	<label for="name">电话</label>
 	<input size="100" type="text" name="phone" value="<?php echo $expert->phone?>" />
 	<span class="error"><?php echo $errors['phone']?></span>
+</div>
+<div class="row">
+	<label for="name">手机</label>
+	<input size="100" type="text" name="mobile" value="<?php echo $expert->mobile?>" />
+	<span class="error"><?php echo $errors['mobile']?></span>
 </div>
 <div class="row">
 	<label for="name">网址</label>
@@ -37,7 +42,7 @@
 	<span class="error"><?php echo $errors['workplace']?></span>
 </div>
 <div class="row">
-	<label for="tag">领域标签</label>
+	<label for="tag">擅长领域</label>
 	<input size="20" type="text" value="" id="new-tag" /> 
 	<a href="javascript:;" id="add-tag">添加</a>
 </div>	
@@ -70,16 +75,20 @@
 </div>
 
 <div class="row">
-	<label for="name">描述</label><br/><br/>
-	<textarea class="ckeditor" name="description" rows="10" cols="80"><?php echo $expert->description?></textarea>
+	<label for="name">描述</label>
+	<textarea name="description" rows="5" cols="80"><?php echo $expert->description?></textarea>
 	<span class="error"><?php echo $errors['description']?></span>
 </div>
 
 <div class="row">
 	<label for="name">头像</label>
 	<?php if($expert->image){?>
-	<img src="<?php img($expert->image)?>" />
+	<img src="<?php img($expert->image)?>" width="200" height="150" />
+	修改头像：
+	<?php }else{?>
+	上传头像：
 	<?php }?>
+	<input type="file" name="image" />
 </div>
 <div class="row">
 	<?php if($expert->verified == 0){?>

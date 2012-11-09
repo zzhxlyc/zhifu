@@ -7,7 +7,7 @@ class Solution extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('title', 'problem', 'expert', 'description'),
-			'length' => array('description'=>1000),
+			'length' => array('description'=>5000),
 			'int' => array('problem', 'expert'),
 			'word'=> array('title', 'description', 'c_comment', 'e_comment'),
 		);

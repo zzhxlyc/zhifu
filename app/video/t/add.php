@@ -1,6 +1,6 @@
 <h2>发布视频</h2>
 
-<form action="" method="post">
+<form action="" method="post" <?php $HTML->file_form_need()?>>
 
 <div class="row">
 	<label for="">标题</label>
@@ -19,13 +19,18 @@
 	<span class="error"><?php echo $errors['url']?></span>
 </div>
 <div class="row">
-	<label for="desc"></label>
+	<label for="desc">*</label>
 	优酷的视频直接填写html地址即可，也不用填封面图片
 </div>
 <div class="row">
 	<label for="">封面图</label>
 	<input class="text wide"  type="text" name="image" value="<?php echo $video->image?>" />
 	<span class="error"><?php echo $errors['image']?></span>
+</div>
+<div class="row">
+	<label for="">上传封面图</label>
+	<input type="file" name="image2" />
+	<span class="error"><?php echo $errors['image2']?></span>
 </div>
 
 <div class="row">

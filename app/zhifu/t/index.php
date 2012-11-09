@@ -9,7 +9,9 @@
 		<?php foreach($videos as $video){?>
 		<div class="item clearfix">
 			<div class="pic">
+				<a href="<?php echo ROOT_URL.'/video/show?id='.$video->id?>" title="<?php echo $video->title?>">
 				<img src="<?php img($video->image, $video->default_image())?>" width="110" height="85" alt="<?php echo $video->title?>">			
+				</a>
 			</div>
 			<div class="title">
 				<a href="<?php echo ROOT_URL.'/video/show?id='.$video->id?>" title="<?php echo $video->title?>"><?php echo subString($video->title, 6)?></a>

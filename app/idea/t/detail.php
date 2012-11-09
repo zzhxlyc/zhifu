@@ -72,8 +72,12 @@
 
 	<div class="section">
 		<h3>共提交（<?php echo count($items)?>）个方案 
+			<?php if(is_company_object($User, $Idea)){?>
 			<?php if($Idea->status == 0){?>
-				<a href="javascript:void(0)" class="idea_finish">结束提交</a>
+				<a href="javascript:void(0)" class="idea_finish" style="float: right;">结束提交方案</a>
+			<?php }else if($Idea->status == 1){?>
+			<a href="javascript:void(0)" class="idea_done" style="float: right;">结束评奖</a>
+			<?php }?>
 			<?php }?>
 		</h3>
 		<div class="content line-list">

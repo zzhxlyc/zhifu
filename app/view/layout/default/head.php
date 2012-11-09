@@ -39,7 +39,7 @@
 		<?php }?>
 		
 		<ul class="main-nav">
-			<li><a href="<?php echo ROOT_URL?>">首页</a></li>
+			<li><a href="<?php echo ROOT_URL?>" <?php head_tab0()?>>首页</a></li>
 			
 			<li><a href="<?php echo VIDEO_HOME?>" <?php head_tab6()?>>科技视频</a></li>
 			<li><a href="<?php echo PATENT_HOME?>" <?php head_tab3()?>>科技成果</a></li>

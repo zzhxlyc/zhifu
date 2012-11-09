@@ -5,7 +5,7 @@
 	else{
 		output_edit_succ();
 ?>
-<form action="<?php echo $home.'/edit?id='.$video->id?>" method="post">
+<form action="<?php echo $home.'/edit?id='.$video->id?>" method="post" <?php $HTML->file_form_need()?>>
 <table>
 <tr>
 	<td>标题</td>
@@ -41,6 +41,13 @@
 	<td>
 		<input size="100" type="text" name="image" value="<?php echo $video->image?>" />
 		<span class="error"><?php echo $errors['image']?></span>
+	</td>
+</tr>
+<tr>
+	<td>上传图片</td>
+	<td>
+		<input type="file" name="image2"/>
+		<span class="error"><?php echo $errors['image2']?></span>
 	</td>
 </tr>
 <tr><td colspan="2">

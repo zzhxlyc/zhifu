@@ -19,6 +19,10 @@
 	<?php echo $expert->phone?>
 </div>
 <div class="row">
+	<label for="name">手机</label>
+	<?php echo $expert->mobile?>
+</div>
+<div class="row">
 	<label for="name">网址</label>
 	<?php echo $expert->url?>
 </div>
@@ -29,6 +33,10 @@
 <div class="row">
 	<label for="workplace">工作单位</label>
 	<?php echo $expert->workplace?>
+</div>
+<div class="row">
+	<label for="name">难题数</label>
+	<?php echo $expert->problem_num?>
 </div>
 <div class="row">
 	<label for="name">专利数</label>
@@ -51,7 +59,7 @@
  -->
 
 <div class="tag row">
-	<label for="">领域标签</label>
+	<label for="">擅长领域</label>
 	<?php 
 	if(is_array($tag_list)){
 		foreach($tag_list as $tag){
@@ -70,7 +78,7 @@
 <div class="row">
 	<label for="name">头像</label>
 	<?php if($expert->image){?>
-	<img src="<?php img($expert->image)?>" />
+	<img src="<?php img($expert->image)?>"  width="200" height="150"/>
 	<?php }?>
 </div>
 

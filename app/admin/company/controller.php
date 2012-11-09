@@ -2,7 +2,8 @@
 
 class CompanyController extends AdminBaseController {
 	
-	public $models = array('Company', 'Problem', 'Log', 'Tag', 'TagItem');
+	public $models = array('Company', 'Problem', 'Log', 'Tag', 
+								'TagItem', 'Patent', 'Deal');
 	public $no_session = array();
 	
 	public function before(){
@@ -33,8 +34,9 @@ class CompanyController extends AdminBaseController {
 		}
 		$company->problem_budget = $sum;
 		
-		$company->patent_num = 0;
-		$company->patent_budget = 0;
+		$list = $this->Deal->get_list(array('belong'=>$company->id, 
+								'type'=>BelongType::COMPANY));
+		$company->patent_num = count($list);
 	}
 	
 	public function verify(){
@@ -111,9 +113,10 @@ class CompanyController extends AdminBaseController {
 			if(count($errors) == 0){
 				$files = $this->request->file;
 				$path = $this->do_file('image', $errors, $files);
+				$this->resize_upload_image($path);
 				if($path){$post['image'] = $path;}
-				$path = $this->do_file('file', $errors, $files);
-				if($path){$post['file'] = $path;}
+				$path = $this->do_file('license', $errors, $files);
+				if($path){$post['license'] = $path;}
 			}
 			if(count($errors) == 0){
 				$this->do_tag($id, BelongType::COMPANY, 
@@ -122,8 +125,8 @@ class CompanyController extends AdminBaseController {
 				if($post['image'] && $Company->image){
 					FileSystem::remove($Company->image);
 				}
-				if($post['file'] && $Company->file){
-					FileSystem::remove($Company->file);
+				if($post['license'] && $Company->license){
+					FileSystem::remove($Company->license);
 				}
 				$this->Company->escape($post);
 				$this->Company->save($post);

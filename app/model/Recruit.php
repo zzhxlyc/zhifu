@@ -7,7 +7,7 @@ class Recruit extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('title', 'company', 'companydesc'),
-			'length' => array('title'=>250, 'description'=>1000, 'companydesc'=>500),
+			'length' => array('description'=>3000, 'companydesc'=>500),
 			'int' => array('num', 'identity', 'degree', 'eatroom'),
 			'number' => array(),
 			'word'=> array('title', 'description', 'specialty', 'area', 

@@ -2,7 +2,8 @@
 
 class ExpertController extends AdminBaseController {
 	
-	public $models = array('Expert', 'Patent', 'Log', 'Tag', 'TagItem');
+	public $models = array('Expert', 'Patent', 'Log', 
+						'Tag', 'TagItem', 'Solution');
 	public $no_session = array();
 	
 	public function before(){
@@ -32,6 +33,9 @@ class ExpertController extends AdminBaseController {
 			$sum += $o->budget;
 		}
 		$expert->patent_budget = $sum;
+		
+		$cond = array('expert'=>$expert->id);
+		$expert->problem_num = $this->Solution->count($cond);
 	}
 	
 	public function verify(){
@@ -97,9 +101,18 @@ class ExpertController extends AdminBaseController {
 			$expert = $this->set_model($post, $expert);
 			$errors = $this->Expert->check($expert);
 			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('image', $errors, $files);
+				$this->resize_upload_image($path);
+				if($path){$post['image'] = $path;}
+			}
+			if(count($errors) == 0){
 				$this->do_tag($id, BelongType::EXPERT, 
 									$post['old_tag'], $post['new_tag']);
 				unset($post['old_tag'], $post['new_tag']);
+				if($post['image'] && $expert->image){
+					FileSystem::remove($expert->image);
+				}
 				$this->Expert->escape($post);
 				$this->Expert->save($post);
 				$admin = get_admin_session($this->session);

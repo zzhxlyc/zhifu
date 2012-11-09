@@ -10,12 +10,20 @@
 	<?php echo $company->name?>
 </div>
 <div class="row">
+	<label for="name">联系人</label>
+	<?php echo $company->contact?>
+</div>
+<div class="row">
 	<label for="name">邮箱</label>
 	<?php echo $company->email?>
 </div>
 <div class="row">
 	<label for="name">电话</label>
 	<?php echo $company->phone?>
+</div>
+<div class="row">
+	<label for="name">手机</label>
+	<?php echo $company->mobile?>
 </div>
 <div class="row">
 	<label for="name">网址</label>
@@ -25,22 +33,26 @@
 	<label for="name">难题数</label>
 	<?php echo $company->problem_num?>
 </div>
+<!-- 
 <div class="row">
 	<label for="name">难题总金额</label>
 	<?php echo $company->problem_budget?>
 </div>
+-->
 
 <div class="row">
 	<label for="name">专利数</label>
 	<?php echo $company->patent_num?>
 </div>
+<!-- 
 <div class="row">
 	<label for="name">专利总金额</label>
 	<?php echo $company->patent_budget?>
 </div>
+ -->
 
 <div class="tag row">
-	<label for="">领域标签</label>
+	<label for="">擅长领域</label>
 	<?php 
 	if(is_array($tag_list)){
 		foreach($tag_list as $tag){
@@ -57,9 +69,15 @@
 	<?php echo $company->description?>
 </div>
 <div class="row">
+	<label for="name">头像</label>
+	<?php if($company->image){?>
+	<img src="<?php img($company->image)?>" width="200" height="150"/>
+	<?php }?>
+</div>
+<div class="row">
 	<label for="name">营业执照</label>
 	<?php if($company->license){?>
-	<a href="<?php download($company->license)?>">点击下载</a>
+	<a target="_blank" href="<?php download($company->license)?>">点击下载</a>
 	<?php }?>
 </div>
 

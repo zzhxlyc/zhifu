@@ -64,6 +64,12 @@ class VideoController extends AppController {
 			$post['author'] = $User->name;
 			$errors = $this->Video->check($post);
 			if(count($errors) == 0){
+				$files = $this->request->file;
+				$path = $this->do_file('image2', $errors, $files);
+				$this->resize_upload_image($path);
+				if($path){$post['image'] = $path;}
+			}
+			if(count($errors) == 0){
 				$post['time'] = DATETIME;
 				$post['click'] = 0;
 				if(strpos($post['url'], 'youku.com') !== false){
@@ -110,6 +116,7 @@ class VideoController extends AppController {
 		}
 		
 		$video->click_up();
+		$video->click = $video->click + 1; 
 		$page = get_page($get);
 		$this->add_comments($video, $page);
 		$this->set('video', $video);
