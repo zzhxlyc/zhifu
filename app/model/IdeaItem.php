@@ -6,7 +6,7 @@ class IdeaItem extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('idea', 'expert', 'title', 'content'),
+			'need' => array('title', 'content'),
 			'length' => array('content'=>5000),
 			'int' => array('idea', 'expert'),
 			'word'=> array('title', 'content', 'c_comment', 'e_comment'),

@@ -1,3 +1,10 @@
+<div>
+	<span>当前位置：</span>
+	<a href="<?php echo ROOT_URL?>">首页</a> > 
+	<a href="<?php echo $home?>">话题</a> > 
+	<a><?php echo $topic->title?></a>
+</div>
+
 <div class="topic">
 	<h2><?php echo $topic->title?></h2>
 	<div class="topic-meta">

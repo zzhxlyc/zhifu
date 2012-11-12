@@ -8,9 +8,10 @@ class Idea extends AppModel{
 		$check_arrays = array(
 			'need' => array('title', 'company', 'budget', 
 								'description', 'name', 'phone'),
-			'length' => array('description'=>1000, 'phone'=>20),
-			'int' => array('one', 'two', 'three', 'phone'),
+			'length' => array('description'=>3000),
+			'int' => array('one', 'two', 'three'),
 			'number' => array('budget', 'one_m', 'two_m', 'three_m'),
+			'phone' => array('phone'),
 			'word'=> array('title', 'description', 'name'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);

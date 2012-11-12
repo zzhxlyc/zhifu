@@ -8,9 +8,10 @@ class Problem extends AppModel{
 		$check_arrays = array(
 			'need' => array('title', 'name', 'description', 
 							'contact', 'phone'),
-			'length' => array('description'=>1000, 'phone'=>20),
-			'int' => array('phone'),
+			'length' => array('description'=>3000),
+			'int' => array(),
 			'number' => array('budget'),
+			'phone' => array('phone'),
 			'email' => array(),
 			'word'=> array('title', 'description', 'contact', 'name'),
 		);

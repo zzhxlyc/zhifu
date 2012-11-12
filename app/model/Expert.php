@@ -7,9 +7,11 @@ class Expert extends User {
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('name', 'verified', 'email'),
-			'length' => array('description'=>1000, 'phone'=>20, 'mobile'=>20),
-			'int' => array('phone', 'mobile'),
+			'length' => array('description'=>3000),
+			'int' => array('mobile'),
 			'email' => array('email'),
+			'phone' => array('phone'),
+			'mobile' => array('mobile'),
 			'word' => array('name', 'description', 'workplace', 'job')
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
@@ -20,7 +22,7 @@ class Expert extends User {
 		$escape_array = array(
 			'string'=>array('name', 'description', 'workplace', 'job'),
 			'url'=>array('url'),
-			'html'=>array('description')
+			'html'=>array()
 		);
 		return parent::escape($data, $escape_array, $ignore);
 	}

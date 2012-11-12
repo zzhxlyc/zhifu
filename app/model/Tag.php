@@ -6,8 +6,8 @@ class Tag extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('name', 'count'),
-			'length' => array('name'=>250),
+			'need' => array('name'),
+			'length' => array(),
 			'int' => array('count'),
 			'word' => array('name'),
 		);

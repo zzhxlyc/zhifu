@@ -1,4 +1,8 @@
-
+<div>
+	<span>当前位置：</span>
+	<a href="<?php echo ROOT_URL?>">首页</a> > 
+	<a href="<?php echo $home?>">科技成果</a>
+</div>
 	<!-- 
 <div class="filter clearfix">
 	<div class="order">
@@ -38,11 +42,13 @@
 
 		<div class="right">
 			<div class="price-deadline">
+				<p>发布者：<a href="<?php echo get_author_link($o->expert, BelongType::EXPERT)?>"><?php echo $o->username?></a></p>
 				<?php if($o->budget){?>
 				<p>转让费：<span class="num"><?php echo $o->budget?></span>万元</p>
 				<?php }?>
 				<p>发布时间：<?php echo get_date($o->time)?></p>
 			</div>
+			<!-- 
 			<?php if(is_expert_object($User, $o)){?>
 			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">查看购买</a>
 			<?php }else if($User && in_array($o->id, $buyed_patents)){?>
@@ -50,6 +56,7 @@
 			<?php }else{?>
 			<a href="<?php echo $home.'/submit?id='.$o->id?>" class="btn">有意向购买</a>
 			<?php }?>
+			 -->
 		</div><!--end for right-->
 	</div><!--end for item-->
 	<?php 

@@ -6,9 +6,8 @@ class Category extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('name', 'parent'),
-			'length' => array('name'=>250),
-			'int' => array('parent'),
+			'need' => array('name'),
+			'length' => array(),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		return $errors;

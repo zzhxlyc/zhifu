@@ -8,7 +8,7 @@ class Word extends Model{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('name'),
-			'length' => array('name'=>250),
+			'length' => array(),
 			'int' => array(),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);

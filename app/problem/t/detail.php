@@ -1,3 +1,10 @@
+<div>
+	<span>当前位置：</span>
+	<a href="<?php echo ROOT_URL?>">首页</a> > 
+	<a href="<?php echo $home?>">技术难题</a> >
+	<a><?php echo $Problem->title?></a>
+</div>
+
 <?php include('sidebar.php')?>
 
 <div class="main-content">
@@ -84,12 +91,12 @@
 				<div class="des">
 					<?php 
 						if(is_company_object($User, $Problem) 
-								|| is_expert_object($User, $Solver)){
+								|| is_expert_object($User, $solution)){
 					?>
-					<p><a href="<?php echo $home."/item?problem=$Problem->id&item=$Solver->id"?>">
-					<strong><?php echo $Solver->title;?></strong></a></p>
+					<p><a href="<?php echo $home."/item?problem=$Problem->id&item=$solution->id"?>">
+					<strong><?php echo $solution->title;?></strong></a></p>
 					<?php }else{?>
-					<p><strong><?php echo $Solver->title;?></strong></p>
+					<p><strong><?php echo $solution->title;?></strong></p>
 					<?php }?>
 					<p><?php output_desc($solution->description)?></p>
 				</div>

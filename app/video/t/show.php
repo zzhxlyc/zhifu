@@ -1,3 +1,10 @@
+<div>
+	<span>当前位置：</span>
+	<a href="<?php echo ROOT_URL?>">首页</a> > 
+	<a href="<?php echo $home?>">科技视频</a> >
+	<a><?php echo $video->title?></a>
+</div>
+
 <h3><?php echo $video->title?></h3>
 
 <div class="meta">

@@ -182,7 +182,7 @@ class ProblemController extends AppController {
 					$this->redirect('detail?id='.$id);
 				}
 				else{
-					$this->redirect('index');
+					$this->redirect('simple');
 				}
 			}
 			$problem = $this->set_model($post, new Problem());
@@ -198,6 +198,8 @@ class ProblemController extends AppController {
 		$this->set('$problem', $problem);
 		$this->add_data();
 	}
+	
+	public function simple(){}
 	
 	public function edit(){
 		$data = $this->get_data();

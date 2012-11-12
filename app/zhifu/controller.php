@@ -17,8 +17,7 @@ class ZhifuController extends AppController {
 		$order_hot = array('click'=>'DESC');
 		$limit = 4;
 		$cond = array();
-		$problems = $this->Problem->get_list($cond, $order, 5);
-//		$p_ids = get_ids($problems);
+		$problems = $this->Problem->get_list(array('verify'=>1), $order, 5);
 
 		$ideas = $this->Idea->get_list($cond, $order, $limit);
 		if(count($ideas) > 0){
@@ -74,15 +73,13 @@ class ZhifuController extends AppController {
 			$mobile = trim(esc_text($post['mobile']));
 			$captcha = trim($post['captcha']);
 			$agree = trim($post['agree']);
+			
 			$errors = array();
 			if(strlen($user) == 0){
 				$errors['user'] = '用户名为空';
 			}
 			else if(!$this->check_username($user)){
 				$errors['user'] = '用户名不符合规范 ';
-			}
-			else{
-				$this->set('username', $user);
 			}
 			if(strlen($pswd) == 0){
 				$errors['pswd'] = '密码为空';
@@ -99,19 +96,13 @@ class ZhifuController extends AppController {
 			if(empty($type)){
 				$errors['type'] = '类型为空';
 			}
-			if(empty($mobile)){
-				$errors['mobile'] = '手机为空';
-			}
-			else if(intval($mobile) == 0){
+			if(!empty($mobile) && CheckUtils::check_mobile($mobile) == false){
 				 $errors['mobile'] = '手机格式有误';
-			}
-			else{
-				$this->set('mobile', $mobile);
 			}
 			if(strlen($email) == 0){
 				$errors['email'] = '邮箱为空';
 			}
-			else if(!StringUtils::check_email($email)){
+			else if(!CheckUtils::check_email($email)){
 				$errors['email'] = '邮箱不符合规范';
 			}
 			else if($this->find_user_by_email($email) !== false){
@@ -164,7 +155,8 @@ class ZhifuController extends AppController {
 			}
 			$this->set('username', $user);
 			$this->set('type', $type);
-			$this->set('$email', $email);
+			$this->set('mobile', $mobile);
+			$this->set('email', $email);
 			$this->set('errors', $errors);
 		}
 	}

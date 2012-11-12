@@ -49,7 +49,7 @@
 	</div>
 	<div class="row captcha">
 		<label for=""></label>
-		<input type="checkbox" name="agree" />
+		<input type="checkbox" name="agree" checked="checked" />
 		<font color="red">*</font>
 		<strong>同意会员注册服务条款</strong>
 		<span class="error"><?php echo $errors['agree']?></span>

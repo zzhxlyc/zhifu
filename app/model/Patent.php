@@ -6,11 +6,12 @@ class Patent extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'expert', 'pid', 'description', 'phone'),
-			'length' => array('description'=>1000, 'phone'=>20),
-			'int' => array('pid', 'phone', 'app', 'skill', 'example', 'kind', 'transfer', 'owner'),
+			'need' => array('title', 'pid', 'description', 'phone'),
+			'length' => array('description'=>3000),
+			'int' => array('pid', 'app', 'skill', 
+								'example', 'kind', 'transfer', 'owner'),
 			'number' => array('budget'),
-			'email' => array(), 
+			'phone' => array('phone'),
 			'word'=> array('title', 'description'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);

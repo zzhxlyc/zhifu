@@ -8,8 +8,13 @@
 	</ul>
 </div>
 	 -->
+	 
+<div>
+	<span>当前位置：</span>
+	<a href="<?php echo ROOT_URL?>">首页</a> > 
+	<a href="<?php echo $home?>">技术难题</a>
+</div>
 
-<!-- -->
 <div class="filter clearfix">
 	<div class="order">
 		<label for="">排序:</label>
@@ -18,10 +23,12 @@
 		<a href="<?php echo $home.'/index?order=budget'?>" <?php $HTML->if_current($_GET['order'] == 'budget')?>>任务金额</a>
 	</div>
 	
+	<form action="" method="get">
 	<div class="search">
-		<input type="text" class="text">
-		<input type="button" class="btn">
+		<input type="text" class="text" name="title" value="<?php echo $_GET['title']?>">
+		<input type="submit" class="btn" value="">
 	</div>
+	</form>
 </div>
 
 

@@ -6,10 +6,11 @@ class Company extends User {
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('name', 'verified', 'email'),
-			'length' => array('description'=>1000, 'phone'=>20, 'mobile'=>20, 'url'=>250),
-			'int' => array('phone', 'mobile'),
+			'need' => array('name', 'email'),
+			'length' => array('description'=>3000),
 			'email' => array('email'),
+			'phone' => array('phone'),
+			'mobile' => array('mobile'),
 			'word' => array('name', 'description', 'contact')
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
@@ -18,9 +19,9 @@ class Company extends User {
 	
 	public function escape(&$data, array $ignore = array()){
 		$escape_array = array(
-			'string'=>array('name', 'contact'),
+			'string'=>array('name', 'contact', 'description'),
 			'url'=>array('url'),
-			'html'=>array('description')
+			'html'=>array()
 		);
 		return parent::escape($data, $escape_array, $ignore);
 	}

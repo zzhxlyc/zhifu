@@ -7,10 +7,12 @@ class Apply extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('title', 'name'),
-			'length' => array('description'=>1000),
-			'int' => array('num', 'identity', 'education', 'mobile', 'year', 'age'),
+			'length' => array('description'=>3000),
+			'int' => array('num', 'identity', 'education', 'year', 'age'),
 			'email' => array('email'),
-			'word'=> array('title', 'name', 'description', 'address', 'area', 'evaluate'),
+			'mobile' => array('mobile'),
+			'word'=> array('title', 'name', 'description', 
+								'address', 'area', 'evaluate'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);
 		

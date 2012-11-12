@@ -17,4 +17,5 @@ include(CORE_CORE_DIR.'/Error.php');
 include(CORE_CORE_DIR.'/App.php');
 include(CORE_UTIL_DIR.'/Session.php');
 include(CORE_UTIL_DIR.'/StringUtils.php');
+include(CORE_UTIL_DIR.'/CheckUtils.php');
 include(CORE_UTIL_DIR.'/HTMLHelper.php');

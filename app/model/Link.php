@@ -7,7 +7,7 @@ class Link extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('title', 'url'),
-			'length' => array('title'=>250, 'url'=>250),
+			'length' => array(),
 			'int' => array(),
 			'word'=> array('title'),
 		);

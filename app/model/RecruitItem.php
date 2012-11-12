@@ -7,9 +7,10 @@ class RecruitItem extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('name', 'sex', 'mobile', 'phone', 'email', 'resume'),
-			'length' => array('mobile'=>20, 'phone'=>20),
-			'int' => array('sex', 'mobile', 'phone'),
-			'number' => array(),
+			'length' => array(),
+			'int' => array('sex'),
+			'phone' => array('phone'),
+			'mobile' => array('mobile'),
 			'email' => array('email'),
 			'word'=> array('name'),
 		);

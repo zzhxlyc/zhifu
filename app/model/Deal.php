@@ -7,8 +7,9 @@ class Deal extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('name', 'phone'),
-			'length' => array('phone'=>20, 'note'=>1000),
+			'length' => array('note'=>1000),
 			'int' => array('patent', 'company', 'phone'),
+			'phone' => array('phone'),
 			'word'=> array('name', 'note', 'price'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);

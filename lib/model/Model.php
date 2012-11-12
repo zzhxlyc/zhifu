@@ -52,6 +52,8 @@ class Model extends MysqlDAO {
 		$length_check = $check_arrays['length'];
 		$must_int = $check_arrays['int'];
 		$must_number = $check_arrays['number'];	//int or double
+		$mobile = $check_arrays['mobile'];
+		$phone = $check_arrays['phone'];
 		$email = $check_arrays['email'];
 		if(is_array($ignore) && count($ignore) > 0){
 			$must_need = array_diff($must_need, $ignore);
@@ -108,7 +110,7 @@ class Model extends MysqlDAO {
 					if($v != '0'){
 						$r = doubleval($v);
 						if($r == 0){
-							$error[$field] = "不是数";
+							$error[$field] = "格式不正确";
 							continue;
 						}
 					}
@@ -117,11 +119,31 @@ class Model extends MysqlDAO {
 				}
 			}
 		}
+		if($mobile){
+			foreach($mobile as $field){
+				$v = $this->_check_get_value($data, $field);
+				if(empty($error[$field]) && strlen($v) > 0){
+					if(!CheckUtils::check_mobile($v)){
+						$error[$field] = "手机格式不正确";
+					}
+				}
+			}
+		}
+		if($phone){
+			foreach($phone as $field){
+				$v = $this->_check_get_value($data, $field);
+				if(empty($error[$field]) && strlen($v) > 0){
+					if(!CheckUtils::check_phone($v, 1)){
+						$error[$field] = "电话格式不正确";
+					}
+				}
+			}
+		}
 		if($email){
 			foreach($email as $field){
 				$v = $this->_check_get_value($data, $field);
 				if(empty($error[$field]) && strlen($v) > 0){
-					if(!StringUtils::check_email($v)){
+					if(!CheckUtils::check_email($v)){
 						$error[$field] = "邮箱格式不正确";
 					}
 				}

@@ -1,3 +1,8 @@
+<div>
+	<span>当前位置：</span>
+	<a href="<?php echo ROOT_URL?>">首页</a> > 
+	<a href="<?php echo $home?>">话题</a>
+</div>
 
 <div class="topic-list">
 	<h3>最新话题<a href="<?php echo $home.'/add'?>" class="fr btn">发表话题</a></h3>
