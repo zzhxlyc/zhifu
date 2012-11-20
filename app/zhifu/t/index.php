@@ -54,44 +54,7 @@
 		<span class="more"><a href="<?php echo ROOT_URL.'/idea'?>">查看更多</a></span>
 	</div>
 	
-	<div class="patent-wrapper list clearfix">
-		<div class="top-title clearfix">
-			<h3>科技成果</h3><a class="more" href="<?php echo ROOT_URL.'/article'?>">查看更多</a>
-		</div>
-		<img class="fl" src="<?php echo IMAGE_HOME?>/patent-img.jpg" alt="" />
-		<div class="content fl">
-			<?php foreach($patents as $patent){?>
-			<div class="item">
-				<span class="title"><a href="<?php echo ROOT_URL.'/patent/detail?id='.$patent->id?>" title="<?php echo $patent->title?>"><?php echo subString($patent->title, 10)?></a></span>
-				<span class="time fr">2012-11-1</span>
-			</div>
-			<?php }?>
-		</div>
-		
-	</div><!--end for patent-wrapper-->
-	
-	<div class="job-wrapper list">
-			<div class="top-title clearfix">
-				<h3>兼职顾问</h3><a class="more" href="<?php echo ROOT_URL.'/recruit'?>">查看更多</a>
-			</div>
-			<img class="fl" src="<?php echo IMAGE_HOME?>/job-img.jpg" alt="" />
-			
-			<div class="content fl">
-				<?php foreach($recruits as $recruit){?>
-						<div class="item">
-							<span>【<?php output_identity($recruit->identity)?>】<a href="<?php echo ROOT_URL.'/recruit/show?id='.$recruit->id?>" title="<?php echo $recruit->title?>"><?php echo subString($recruit->title, 30)?></a></span>
-							<span class="time fr">
-								<?php echo $recruit->time?>
-							</span>
 
-						</div>
-				<?php }?>
-			
-				
-			</div>
-	
-	</div>
-	
 	
 	
 </div><!--end for right-content-->
@@ -165,7 +128,7 @@
 			</form>
 		</div>
 	</div>
-	
+	<!--
 	<div class="problem-interest">
 		<div class="content">
 			<p><a href="">难题名称</a></p>
@@ -175,9 +138,12 @@
 			<p><a href="">难题名称</a></p>
 			
 		</div>
-		<a class="more" href="<?php echo ROOT_URL.'/problem'?>"></a>		
+		<a class="more" href="<?php //echo ROOT_URL.'/problem'?>"></a>		
 	</div>
-	
+	-->
+	<div class="problem-tips">
+		<span>温馨提示</span>：如果您能将难题描述得比较详细，请进入详细难题发布页面，<a href="<?php echo ROOT_URL.'/problem/add'?>">点击进入</a>
+	</div>
 	<div class="problem-search">
 		<div class="content">
 			<form action="<?php echo PROBLEM_HOME?>" method="get">
@@ -191,7 +157,45 @@
 </div>
 <div class="clear"></div>
 
+
+<div class="job-wrapper list">
+		<div class="top-title clearfix">
+			<h3>兼职顾问</h3><a class="more" href="<?php echo ROOT_URL.'/recruit'?>">查看更多</a>
+		</div>
+		<img class="fl" src="<?php echo IMAGE_HOME?>/job-img.jpg" alt="" />
+		
+		<div class="content fl">
+			<?php foreach($recruits as $recruit){?>
+					<div class="item">
+						<span>【<?php output_identity($recruit->identity)?>】<a href="<?php echo ROOT_URL.'/recruit/show?id='.$recruit->id?>" title="<?php echo $recruit->title?>"><?php echo subString($recruit->title, 30)?></a></span>
+						<span class="time fr">
+							<?php echo $recruit->time?>
+						</span>
+
+					</div>
+			<?php }?>
+		
+			
+		</div>
+		<div class="clear"></div>
+
+</div>
 	
+<div class="patent-wrapper list clearfix">
+	<div class="top-title clearfix">
+		<h3>科技成果</h3><a class="more" href="<?php echo ROOT_URL.'/article'?>">查看更多</a>
+	</div>
+	<img class="fl" src="<?php echo IMAGE_HOME?>/patent-img.jpg" alt="" />
+	<div class="content fl">
+		<?php foreach($patents as $patent){?>
+		<div class="item">
+			<span class="title"><a href="<?php echo ROOT_URL.'/patent/detail?id='.$patent->id?>" title="<?php echo $patent->title?>"><?php echo subString($patent->title, 10)?></a></span>
+			<span class="time fr">2012-11-1</span>
+		</div>
+		<?php }?>
+	</div>
+	
+</div><!--end for patent-wrapper-->
 
 
 <div class="case-wrapper list clearfix">
@@ -203,7 +207,9 @@
 	
 	<?php foreach($articles as $article){?>
 	<div class="item clearfix">
-		<div class="content">
+		<div class="pic fl"><img src="http://localhost/zhifu/images/default.jpg" alt=""  width="200" height="150"/></div>
+		
+		<div class="content fl">
 			<div class="title"><a href="<?php echo ROOT_URL.'/article/detail?id='.$article->id?>" title="<?php echo $article->title?>"><?php echo subString($article->title, 10)?></a></div>
 			<div class="des">
 				<p><?php echo $article->time?></p>

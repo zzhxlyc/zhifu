@@ -1278,10 +1278,10 @@ margin-right:20px;
 	height:100px;
 }
 .idea-wrapper .item,.problem-wrapper .item{
-width:280px;
+width: 580px;
 height: 90px;
 float:left;
-border-bottom:0;
+
 }
 .idea-wrapper .item p,.problem-wrapper .item p{
 	line-height:20px;
@@ -1347,6 +1347,18 @@ border-bottom:0;
 width:580px;
 height: 90px;
 border-bottom:1px dotted #ccc;
+}
+.problem-more .problem-tips {
+width: 315px;
+font-weight:bold;
+color:#259;
+}
+.problem-more .problem-tips span{
+color:#000;
+}
+.problem-more .problem-tips a{
+color:#999;
+text-decoration: underline;
 }
 
 .problem-more .problem-add{
@@ -1417,7 +1429,7 @@ height:80px;
 	height:20px;
 }
 .job-wrapper{
-	width:600px;
+	width:930px;
 }
 .job-wrapper .top-title{
 	background: url(../images/job-title.jpg) no-repeat 0 0;
@@ -1435,12 +1447,12 @@ height:80px;
 	float:right;
 }
 .job-wrapper .content .item{
-width:370px;
+width:700px;
 padding:5px 0 2px 0;
 }
 .patent-wrapper{
 margin-top:10px;	
-width:600px;
+width:930px;
 }
 .patent-wrapper .top-title{
 	background: url(../images/patent-title.jpg) no-repeat 0 0;
@@ -1448,10 +1460,10 @@ width:600px;
 	height:100px;
 }
 .patent-wrapper .content{
-width:450px;
+
 }
 .patent-wrapper .content .item{
-width:440px;
+width:790px;
 padding:5px 5px 0 0;
 }
 
@@ -1476,6 +1488,18 @@ font-size:12px;
 .case-wrapper{
 margin-top:30px;	
 }
+.case-wrapper .more{
+margin-top:5px;	
+width:auto;
+}
+.case-wrapper .more a{
+background:#3681BC;
+padding:2px 5px;
+color:#fff;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
 
 .case-wrapper .top-title{
 	background: url(../images/case-title.jpg) no-repeat 0 0;
@@ -1484,10 +1508,11 @@ margin-top:30px;
 	margin-bottom:10px;
 }
 .case-wrapper .item{
-width:280px;
-float:left;	
+width:910px;
 }
-
+.case-wrapper .item .des{
+color:#999;
+}
 .list span.time{
 	padding-right:10px;
 	color:#999;
