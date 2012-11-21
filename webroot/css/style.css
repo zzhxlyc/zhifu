@@ -1286,6 +1286,13 @@ float:left;
 .idea-wrapper .item p,.problem-wrapper .item p{
 	line-height:20px;
 }
+.idea-wrapper .item p{
+font-weight:bold;
+}
+.idea-wrapper .item p span{
+color:#256;
+font-weight:bold;
+}
 .index .video-wrapper{
 
 	width:300px;
@@ -1345,8 +1352,18 @@ float:left;
 }
 .problem-wrapper .item{
 width:580px;
-height: 90px;
+height: auto;
+padding:10px;
 border-bottom:1px dotted #ccc;
+}
+.problem-wrapper .item .title{
+border:1px dotted #ccc;
+padding:3px;
+margin-bottom:10px;
+background:#fefefe;
+}
+.problem-wrapper .des{
+height:55px;
 }
 .problem-more .problem-tips {
 width: 315px;
@@ -1489,7 +1506,7 @@ font-size:12px;
 margin-top:30px;	
 }
 .case-wrapper .more{
-margin-top:5px;	
+margin-top:-20px;	
 width:auto;
 }
 .case-wrapper .more a{
@@ -1509,6 +1526,7 @@ border-radius: 4px;
 }
 .case-wrapper .item{
 width:910px;
+border-bottom:0;
 }
 .case-wrapper .item .des{
 color:#999;

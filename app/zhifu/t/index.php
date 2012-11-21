@@ -39,13 +39,9 @@
 			<div class="content">
 				<div class="title"><a href="<?php echo ROOT_URL.'/idea/detail?id='.$idea->id?>" title="<?php echo $idea->title?>"><?php echo subString($idea->title, 10)?></a></div>
 				<div class="des">
-					<p>
-					<?php if(strtotime($idea->deadline) > 0){?>
-					<?php echo get_date($idea->deadline)?> 截止
-					<?php }?>
-					<?php echo $idea->item_count?>个方案
-					</p>
-					<p><?php output_desc($idea->description, 20)?></p>
+					<p>共提交<span><?php echo $idea->item_count?></span>个创意方案</p>
+					<p>奖金：<span>111</span>&nbsp;&nbsp;&nbsp;发布日期：<span></span>&nbsp;&nbsp;&nbsp;截止日期：<span><?php echo get_date($idea->deadline)?></span></p>
+				
 				</div>
 			</div>
 		</div><!--end for item-->
@@ -70,19 +66,19 @@
 		
 		
 	<div class="item clearfix">
-		<div class="pic">
-			<img src="<?php img($problem->image, $problem->default_image())?>" width="100" height="75" alt="<?php echo $problem->title?>">			
+		<div class="title clearfix"><a href="<?php echo ROOT_URL.'/problem/detail?id='.$problem->id?>" title="<?php echo $problem->title?>"><?php echo subString($problem->title, 10)?></a>
+			<span class="fr">状态：<?php $problem->status?></span>
 		</div>
-		<div class="content">
-			<div class="title"><a href="<?php echo ROOT_URL.'/problem/detail?id='.$problem->id?>" title="<?php echo $problem->title?>"><?php echo subString($problem->title, 10)?></a></div>
-			<div class="des">
-				<p>
-				<?php if(strtotime($idea->deadline) > 0){?>
-				<?php echo get_date($idea->deadline)?> 截止
-				<?php }?>
-				</p>
-				<p><?php output_desc($problem->description, 20)?></p>
+		
+		<div class="content clearfix">
+			<div class="pic">
+				<img src="<?php img($problem->image, $problem->default_image())?>" width="100" height="75" alt="<?php echo $problem->title?>">			
 			</div>
+			<div class="des">
+				<p style="color:#666;"><?php output_desc($problem->description, 20)?></p>
+			</div>
+			<p style="font-weight:bold;">预算：<span></span>&nbsp;&nbsp;&nbsp;所在地区：<span></span>&nbsp;&nbsp;&nbsp;截止日期：<span></span></p>
+			
 		</div>
 	</div><!--end for item-->
 	<?php }?>
@@ -160,7 +156,7 @@
 
 <div class="job-wrapper list">
 		<div class="top-title clearfix">
-			<h3>兼职顾问</h3><a class="more" href="<?php echo ROOT_URL.'/recruit'?>">查看更多</a>
+			<h3>兼职顾问</h3><a href="<?php echo ROOT_URL.'/apply/add'?>" style="display:block;float:left;width:100px;height: 24px;"></a><a class="more" href="<?php echo ROOT_URL.'/recruit'?>">查看更多</a>
 		</div>
 		<img class="fl" src="<?php echo IMAGE_HOME?>/job-img.jpg" alt="" />
 		
@@ -183,7 +179,7 @@
 	
 <div class="patent-wrapper list clearfix">
 	<div class="top-title clearfix">
-		<h3>科技成果</h3><a class="more" href="<?php echo ROOT_URL.'/article'?>">查看更多</a>
+		<h3>科技成果</h3><a href="<?php echo ROOT_URL.'/patent/add'?>" style="display:block;float:left;width:100px;height: 24px;padding-top: 75px;"></a><a class="more" href="<?php echo ROOT_URL.'/article'?>">查看更多</a>
 	</div>
 	<img class="fl" src="<?php echo IMAGE_HOME?>/patent-img.jpg" alt="" />
 	<div class="content fl">
@@ -218,7 +214,7 @@
 	</div><!--end for item-->
 	<?php }?>
 	</div>
-	<span class="more"><a href="<?php echo ROOT_URL.'/article'?>">查看更多</a></span>
+	<span class="more"><a href="<?php echo ROOT_URL.'/article/detail?id='.$article->id?>">点击查看详情</a></span>
 </div><!--end for case-wrapper-->
 	
 </div>

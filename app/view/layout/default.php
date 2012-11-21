@@ -26,7 +26,7 @@
 	
 		<?php include(LAYOUT_DIR.'/default/head.php'); ?>
 	
-		<div class="wrapper">
+		<div class="wrapper clearfix">
 				
 				<?php include($TEMPLATE_PAGE); ?>
 		</div>
