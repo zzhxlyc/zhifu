@@ -161,15 +161,28 @@
 		<img class="fl" src="<?php echo IMAGE_HOME?>/job-img.jpg" alt="" />
 		
 		<div class="content fl">
-			<?php foreach($recruits as $recruit){?>
-					<div class="item">
-						<span>【<?php output_identity($recruit->identity)?>】<a href="<?php echo ROOT_URL.'/recruit/show?id='.$recruit->id?>" title="<?php echo $recruit->title?>"><?php echo subString($recruit->title, 30)?></a></span>
-						<span class="time fr">
-							<?php echo $recruit->time?>
-						</span>
-
-					</div>
-			<?php }?>
+			
+				<table>
+					<tr class="top">
+						<td>招聘对象</td>
+						<td>职位名称</td>
+						<td>公司名称</td>
+						<td>工作地区</td>
+						<td>发布时间</td>
+					</tr>
+					<?php foreach($recruits as $recruit){?>
+					<tr>
+						<td><?php output_identity($recruit->identity)?></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><?php echo $recruit->time?></td>
+					</tr>
+					<?php }?>
+					
+				</table>
+				
+				
 		
 			
 		</div>

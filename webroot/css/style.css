@@ -1467,6 +1467,33 @@ height:80px;
 width:700px;
 padding:5px 0 2px 0;
 }
+.job-wrapper .content{
+width:700px;
+}
+.job-wrapper .content table{
+width:100%;
+border-top:1px solid #333;
+
+}
+
+.job-wrapper .content table td{
+	
+border-bottom:1px dotted #999;
+padding:4px;
+text-align:center;
+border-spacing:0;
+
+}
+
+.job-wrapper .content table .top td{
+	color:#666;
+	font-weight:bold;
+	font-size:13px;
+border-bottom:1px dotted #999;
+padding:4px;
+background-image: -webkit-linear-gradient(top,#FEFEFE,#F3F3F3);
+background-image: -moz-linear-gradient(top,#FEFEFE,#F3F3F3);
+}
 .patent-wrapper{
 margin-top:10px;	
 width:930px;
