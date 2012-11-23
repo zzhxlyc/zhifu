@@ -6,10 +6,11 @@ Model::add_model('AppModel');
 Model::add_model('User');
 
 Model::load(array('BelongType', 'Word', 'Option', 
-		'Expert', 'Company', 'Admin'));
+		'Expert', 'Company', 'Admin', 'Credit'));
 
 App::load('util', 'TrieTree');
 App::load('util', 'FileSystem');
 
 include(LIB_DIR.'/AppController.php');
 include(LIB_DIR.'/functions.php');
+include(LIB_DIR.'/UserError.php');

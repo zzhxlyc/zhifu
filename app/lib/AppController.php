@@ -150,6 +150,10 @@ class AppController extends Controller{
 		$this->response->redirect_message($message);
 	}
 	
+	protected function redirect_credit(){
+		$this->redirect('cash', 'credit');
+	}
+	
 	protected function find_user_by_email($email, $not_eq_id = Null){
 		$cond = array('email'=>esc_text($email));
 		if($not_eq_id){

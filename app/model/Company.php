@@ -40,7 +40,7 @@ class Company extends User {
 	}
 	
 	public static function default_image(){
-		return IMAGE_HOME.'/default.jpg';
+		return IMAGE_HOME.'/default_company.jpg';
 	}
 
 }

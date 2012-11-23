@@ -140,6 +140,13 @@ function preg_image($content){
 	return $m[1][0];
 }
 
+function is_valid_date($date){
+	if(empty($date) || $date == '0000-00-00' || $date == '1970-01-01'){
+		return false;	
+	}
+	return true;
+}
+
 function subString($str, $allow, $last = '...'){
 	$l = strlen($str);
 	$length = 0;

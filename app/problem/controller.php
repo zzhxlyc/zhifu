@@ -2,7 +2,7 @@
 
 class ProblemController extends AppController {
 	
-	public $models = array('Problem', 'Tag', 'TagItem', 'Solution', 
+	public $models = array('Problem', 'Tag', 'TagItem', 'Solution', 'SolutionItem',
 								'Category', 'Comment');
 	
 	public function before(){
@@ -76,15 +76,27 @@ class ProblemController extends AppController {
 		$cond = array('problem'=>$id);
 		$solutions = $this->Solution->get_list($cond);
 		if(count($solutions) > 0){
+			$id_array = get_ids($solutions);
+			$cond = array('company'=>$User->id, 'solution in'=>$id_array);
+			$so_items = $this->SolutionItem->get_list($cond);
+			$so_items = array_to_map($so_items, 'solution');
+		}
+		if(count($solutions) > 0){
 			$expert_ids = get_attrs($solutions, 'expert');
 			$cond = array('id in'=>$expert_ids);
 			$experts = $this->Expert->get_list($cond);
 			
-			if($Problem->status > 1){
-				foreach($solutions as $solution){
+			foreach($solutions as $solution){
+				if($Problem->status > 1){
 					if($solution->status == 1){
 						$this->set('Solver', $solution);
 					}
+				}
+				if(array_key_exists($solution->id, $so_items)){
+					$solution->opend = true;
+				}
+				else{
+					$solution->opend = false;
 				}
 			}
 		}
@@ -327,8 +339,23 @@ class ProblemController extends AppController {
 			}
 		}
 		if($has_error){
-			$this->response->redirect_404();
+			$this->redirect_error(UserError::NOT_ALLOWED);
 			return;
+		}
+		$cond = array('company'=>$User->id, 'solution'=>$Item->id);
+		$count = $this->SolutionItem->count($cond);
+		if($count == 0){
+			$need = Credit::solutionCredit();
+			if($User->credit < $need){
+				$this->redirect_credit();
+				return;
+			}
+			else{
+				$cond['time'] = DATETIME;
+				$this->SolutionItem->save($cond);
+				$d = array('id'=>$User->id, 'credit eq'=>"credit - $need");
+				$this->Company->save($d);
+			}
 		}
 		
 		$this->set('$Problem', $Problem);
@@ -357,7 +384,7 @@ class ProblemController extends AppController {
 			}
 		}
 		if($has_error){
-			$this->response->redirect_404();
+			$this->redirect_error(UserError::NOT_ALLOWED);
 			return;
 		}
 		

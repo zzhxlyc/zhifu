@@ -46,9 +46,16 @@
 		<div class="content line-list">
 			<div class="item clearfix">
 				<div class="pic">
-					<?php if(is_expert_object($User, $Solver)){?>
-					<img src="<?php img($User->image, $expert->default_image())?>" width="100" height="100"/>
-					<span class="name"><?php echo $User->username?></span>
+					<?php if(is_expert_object($User, $Solver) 
+						|| (is_company_object($User, $Problem))){?>
+					<a href="<?php echo get_user_link($expert)?>">
+						<img src="<?php img($User->image, $expert->default_image())?>" width="100" height="100"/>
+					</a>
+					<span class="name">
+						<a href="<?php echo get_user_link($expert)?>">
+						<?php echo $User->username?>
+						</a>
+					</span>
 					<?php }else{?>
 					<img src="<?php img($expert->default_image())?>" width="100" height="100"/>
 					<span class="name">匿名</span>
@@ -80,9 +87,16 @@
 			?>
 			<div class="item clearfix">
 				<div class="pic">
-					<?php if(is_expert_object($User, $solution)){?>
+					<?php if(is_expert_object($User, $solution) 
+						|| (is_company_object($User, $Problem) && $solution->opend)){?>
+					<a href="<?php echo get_user_link($expert)?>">
 					<img src="<?php img($User->image, $expert->default_image())?>" width="100" height="100"/>
-					<span class="name"><?php echo $User->username?></span>
+					</a>
+					<span class="name">
+						<a href="<?php echo get_user_link($expert)?>">
+							<?php echo $User->username?>
+						</a>
+					</span>
 					<?php }else{?>
 					<img src="<?php img($expert->default_image())?>" width="100" height="100"/>
 					<span class="name">匿名</span>
@@ -93,8 +107,13 @@
 						if(is_company_object($User, $Problem) 
 								|| is_expert_object($User, $solution)){
 					?>
-					<p><a href="<?php echo $home."/item?problem=$Problem->id&item=$solution->id"?>">
-					<strong><?php echo $solution->title;?></strong></a></p>
+					<p>
+					<a href="<?php echo $home."/item?problem=$Problem->id&item=$solution->id"?>">
+					<strong><?php echo $solution->title;?></strong></a>
+					<?php if($solution->opend == false){?>
+						<a title="第一次打开需要扣除100积分"><font color="red">[!]</font></a>
+					<?php }?>
+					</p>
 					<?php }else{?>
 					<p><strong><?php echo $solution->title;?></strong></p>
 					<?php }?>

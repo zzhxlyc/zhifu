@@ -55,6 +55,7 @@
 			<p>评论：<?php echo $comment?></p>
 			<?php }?>
 		</div>
+		<a href="<?php echo $home.'/detail?id='.$Problem->id?>" class="back-btn">返回</a>
 	</div><!--end for section-->
 	
 </div><!--end for main-content-->

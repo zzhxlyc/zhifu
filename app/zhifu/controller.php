@@ -17,9 +17,9 @@ class ZhifuController extends AppController {
 		$order_hot = array('click'=>'DESC');
 		$limit = 4;
 		$cond = array();
-		$problems = $this->Problem->get_list(array('verify'=>1), $order, 5);
+		$problems = $this->Problem->get_list(array('verify'=>1), $order, 4);
 
-		$ideas = $this->Idea->get_list($cond, $order, $limit);
+		$ideas = $this->Idea->get_list($cond, $order, 3);
 		if(count($ideas) > 0){
 			foreach($ideas as $idea){
 				$idea->item_count = 0;

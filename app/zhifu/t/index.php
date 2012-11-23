@@ -40,8 +40,13 @@
 				<div class="title"><a href="<?php echo ROOT_URL.'/idea/detail?id='.$idea->id?>" title="<?php echo $idea->title?>"><?php echo subString($idea->title, 10)?></a></div>
 				<div class="des">
 					<p>共提交<span><?php echo $idea->item_count?></span>个创意方案</p>
-					<p>奖金：<span>111</span>&nbsp;&nbsp;&nbsp;发布日期：<span></span>&nbsp;&nbsp;&nbsp;截止日期：<span><?php echo get_date($idea->deadline)?></span></p>
-				
+					<p>
+						奖金：<span><?php echo $idea->budget?>万元</span>&nbsp;&nbsp;&nbsp;
+						发布日期：<span><?php echo get_date($idea->time)?></span>&nbsp;&nbsp;&nbsp;
+						<?php if(is_valid_date($idea->deadline)){?>
+						截止日期：<span><?php echo get_date($idea->deadline)?></span>
+						<?php }?>
+					</p>
 				</div>
 			</div>
 		</div><!--end for item-->
@@ -67,7 +72,7 @@
 		
 	<div class="item clearfix">
 		<div class="title clearfix"><a href="<?php echo ROOT_URL.'/problem/detail?id='.$problem->id?>" title="<?php echo $problem->title?>"><?php echo subString($problem->title, 10)?></a>
-			<span class="fr">状态：<?php $problem->status?></span>
+			<span class="fr">状态：<?php echo $problem->get_status()?></span>
 		</div>
 		
 		<div class="content clearfix">
@@ -75,10 +80,19 @@
 				<img src="<?php img($problem->image, $problem->default_image())?>" width="100" height="75" alt="<?php echo $problem->title?>">			
 			</div>
 			<div class="des">
-				<p style="color:#666;"><?php output_desc($problem->description, 20)?></p>
+				<p style="color:#666;"><?php output_desc($problem->description, 100)?></p>
 			</div>
-			<p style="font-weight:bold;">预算：<span></span>&nbsp;&nbsp;&nbsp;所在地区：<span></span>&nbsp;&nbsp;&nbsp;截止日期：<span></span></p>
-			
+			<p style="font-weight:bold;">
+				<?php if($problem->budget){?>
+				预算：<span><?php echo $problem->budget?>万元</span>&nbsp;&nbsp;&nbsp;
+				<?php }?>
+				<?php if($problem->city){?>
+				所在地区：<span><?php output_pcd($problem)?></span>&nbsp;&nbsp;&nbsp;
+				<?php }?>
+				<?php if(is_valid_date($problem->deadline)){?>
+				截止日期：<span><?php echo $problem->deadline?></span>
+				<?php }?>
+			</p>
 		</div>
 	</div><!--end for item-->
 	<?php }?>
@@ -137,7 +151,7 @@
 		<a class="more" href="<?php //echo ROOT_URL.'/problem'?>"></a>		
 	</div>
 	-->
-	<div class="problem-tips">
+	<div class="problem-tips" style="margin: 10px 0">
 		<span>温馨提示</span>：如果您能将难题描述得比较详细，请进入详细难题发布页面，<a href="<?php echo ROOT_URL.'/problem/add'?>">点击进入</a>
 	</div>
 	<div class="problem-search">
@@ -156,7 +170,7 @@
 
 <div class="job-wrapper list">
 		<div class="top-title clearfix">
-			<h3>兼职顾问</h3><a href="<?php echo ROOT_URL.'/apply/add'?>" style="display:block;float:left;width:100px;height: 24px;"></a><a class="more" href="<?php echo ROOT_URL.'/recruit'?>">查看更多</a>
+			<h3>兼职顾问</h3><a href="<?php echo ROOT_URL.'/recruit/add'?>" style="display:block;float:left;width:100px;height: 24px;"></a><a class="more" href="<?php echo ROOT_URL.'/recruit'?>">查看更多</a>
 		</div>
 		<img class="fl" src="<?php echo IMAGE_HOME?>/job-img.jpg" alt="" />
 		
@@ -173,10 +187,10 @@
 					<?php foreach($recruits as $recruit){?>
 					<tr>
 						<td><?php output_identity($recruit->identity)?></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td><?php echo $recruit->time?></td>
+						<td><?php echo $recruit->title?></td>
+						<td><?php echo $recruit->company?></td>
+						<td><?php echo $recruit->area?></td>
+						<td><?php echo get_date($recruit->time)?></td>
 					</tr>
 					<?php }?>
 					
