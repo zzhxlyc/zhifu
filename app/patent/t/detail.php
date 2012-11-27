@@ -75,6 +75,55 @@
 		</div><!--end for list-->
 	</div><!--end for section-->	
 	
+	<div class="section patent-comment">
+		<h3>相关咨询与投资意向</h3>
+		<div class="content line-list">
+			
+			<div class="item">
+				<div class="meta">
+					<span>用户名</span>来自：<span>地方</span><span>2012-11-11 11:11</span>
+				</div>
+				<div class="des">
+					内容
+				</div>
+				<div class="price clearfix">评估价值：<span>20000</span> <span class="fr"><a href="">回复</a></span></div>
+			</div><!--end for item-->
+			<div class="child-item">
+				<div class="meta">
+					<span>用户名</span>来自：<span>地方</span> <span>2012-11-11 16：40</span>
+				</div>
+				<div class="des">。。。。</div>
+			</div>
+			
+			
+		</div><!--end for list-->
+	</div><!--end for section-->	
+	
+	<div class="leave-comment section">
+		<h3>如果您有意向投资或咨询，请给技术持有人留言</h3>
+		<div class="row">
+			<label for="">您的姓名</label>
+			<input type="" class="text" />
+		</div>
+		<div class="row">
+			<label for="">您的电话</label>
+			<input type="" class="text" />
+		</div>
+		<div class="row">
+			<label for="">评估价格</label>
+			<input type="" class="text" />您认为这个技术价值多少
+		</div>
+		<div class="row clearfix">
+			<label for="">留言</label>
+			<textarea name="" class="text fl"></textarea>
+			<p style="clear:both;padding-left:70px;padding-top:10px">提示：给技术持有人留言，简要说明您的投资意向或问题，勿在详细内容里留下电话以防骚扰</p>
+			
+		</div>
+		
+		<a href="javascript:void(0)" class="btn">回复</a>
+		
+	</div>
+	
 	<?php comment_div($comments, $links, $Patent, BelongType::PATENT, $User)?>
 	
 </div><!--end for main-content-->
