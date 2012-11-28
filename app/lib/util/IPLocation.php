@@ -13,12 +13,12 @@ class IPLocation{
 			if($json->code == 0){
 				$data = $json->data;
 				$ret = array();
-				$ret['country'] = $data['country'];
-				$ret['area'] = $data['area'];
-				$ret['region'] = $data['region'];
-				$ret['city'] = $data['city'];
-				$ret['isp'] = $data['isp'];
-				$ret['ip'] = $data['ip'];
+				$ret['country'] = $data->country;
+				$ret['area'] = $data->area;
+				$ret['region'] = $data->region;
+				$ret['city'] = $data->city;
+				$ret['isp'] = $data->isp;
+				$ret['ip'] = $data->ip;
 				return $ret;
 			}
 		}
