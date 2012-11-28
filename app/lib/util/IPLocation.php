@@ -7,7 +7,7 @@ class IPLocation{
 			return false;
 		}
 		$api_url = "http://ip.taobao.com/service/getIpInfo.php?ip=$ip";
-		$content = file_get_contents($api_url);
+		$content = @file_get_contents($api_url);
 		if($content){
 			$json = json_decode($content);
 			if($json->code == 0){
