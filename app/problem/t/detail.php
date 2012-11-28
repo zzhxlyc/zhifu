@@ -1,4 +1,4 @@
-<div>
+<div class="top_link">
 	<span>当前位置：</span>
 	<a href="<?php echo ROOT_URL?>">首页</a> > 
 	<a href="<?php echo $home?>">技术难题</a> >

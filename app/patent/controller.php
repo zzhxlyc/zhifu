@@ -1,8 +1,11 @@
 <?php
 
+include(LIB_UTIL_DIR.'/IPLocation.php');
+
 class PatentController extends AppController {
 	
-	public $models = array('Patent', 'Tag', 'TagItem', 'Category', 'Deal', 'Comment');
+	public $models = array('Patent', 'Tag', 'TagItem', 
+					'Category', 'Deal', 'DealItem');
 	
 	public function before(){
 		$this->set('home', PATENT_HOME);
@@ -108,6 +111,7 @@ class PatentController extends AppController {
 	public function detail(){
 		$get = $this->request->get;
 		$id = get_id($get);
+		$User = $this->get('User');
 		$has_error = true;
 		if($id){
 			$Patent = $this->Patent->get($id);
@@ -157,16 +161,31 @@ class PatentController extends AppController {
 					$buyers[$deal->id] = $companys[$deal->belong];
 				}
 			}
+			$ids = get_ids($deals);
+			$cond = array('deal in'=>$ids);
+			$comments = $this->DealItem->get_list($cond);
+			$comments_map = array();
+			foreach($comments as $comment){
+				if(!array_key_exists($comment->deal, $comments_map)){
+					$comments_map[$comment->deal] = array();
+				}
+				$comments_map[$comment->deal][] = $comment;
+			}
 		}
 		else{
 			$buyers = array();
 		}
+		if($User->is_company() && !empty($companys) && array_key_exists($User->id, $companys)
+			|| ($User->is_expert() && $User->id != $Patent->expert 
+					&& !empty($experts) && array_key_exists($User->id, $experts))){
+			$this->set('buyed', true);
+		}
 		$this->set('$buyers', $buyers);
 		$this->set('$deals', $deals);
+		$this->set('$comments_map', $comments_map);
 		
 		$this->show_categorys($Patent);
 		$page = get_page($get);
-		$this->add_comments($Patent, $page);
 	}
 	
 	public function edit(){
@@ -216,6 +235,92 @@ class PatentController extends AppController {
 		}
 		$this->set_data($Patent);
 		$this->set('patent', $Patent);
+	}
+	
+	public function deal(){
+		$this->layout('ajax');
+		$User = $this->get('User');
+		$ret = array();
+		if($User){
+			if($this->request->post){
+				$post = $this->request->post;
+				$User = $this->get('User');
+				$this->set_belong($post, $User);
+				$errors = $this->Deal->check($post);
+				if(count($errors) == 0){
+					$post['time'] = DATETIME;
+					$post['ip'] = IP;
+					$ipinfo = IPLocation::get_district(IP);
+					$post['dis1'] = $ipinfo[0];
+					$post['dis2'] = $ipinfo[1];
+					$id = $this->Deal->save($post);
+					$ret['succ'] = 1;
+				}
+				else{
+					$ret['succ'] = 0;
+					if($errors['name']){
+						$ret['error'] = $errors['name'];
+					}
+					else if($errors['phone']){
+						$ret['error'] = $errors['phone'];
+					}
+					else if($errors['price']){
+						$ret['error'] = $errors['price'];
+					}
+					else if($errors['note']){
+						$ret['error'] = $errors['note'];
+					}
+				}
+			}
+		}
+		else{
+			$ret['succ'] = -1;
+			$ret['error'] = '请先登录';
+		}
+		echo json_encode($ret);
+	}
+	
+	public function dealitem(){
+		$this->layout('ajax');
+		$User = $this->get('User');
+		$ret = array();
+		if($User){
+			if($this->request->post){
+				$post = $this->request->post;
+				$User = $this->get('User');
+				$this->set_belong($post, $User);
+				$errors = $this->DealItem->check($post);
+				if(count($errors) == 0){
+					$post['time'] = DATETIME;
+					$post['ip'] = IP;
+					$ipinfo = IPLocation::get_district(IP);
+					$post['dis1'] = $ipinfo[0];
+					$post['dis2'] = $ipinfo[1];
+					$id = $this->DealItem->save($post);
+					$ret['succ'] = 1;
+					$ret['uid'] = $User->id;
+					$ret['type'] = strtolower($User->get_type());
+					$ret['username'] = $User->username;
+					$ret['dis1'] = $post['dis1'];
+					$ret['dis2'] = $post['dis2'];
+					$ret['time'] = DATETIME;
+				}
+				else{
+					$ret['succ'] = 0;
+					if($errors['phone']){
+						$ret['error'] = $errors['phone'];
+					}
+					else if($errors['comment']){
+						$ret['error'] = $errors['comment'];
+					}
+				}
+			}
+		}
+		else{
+			$ret['succ'] = -1;
+			$ret['error'] = '请先登录';
+		}
+		echo json_encode($ret);
 	}
 	
 	public function submit(){

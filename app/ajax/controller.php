@@ -2,7 +2,7 @@
 
 class AjaxController extends AppController {
 	
-	public $models = array('Word', 'Comment');
+	public $models = array('Word', 'Comment', 'Deal', 'DealItem');
 	
 	public function before(){
 		parent::before();

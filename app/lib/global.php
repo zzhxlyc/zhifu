@@ -98,6 +98,10 @@ function output_pcd2($o){
 	echo "$o->province2$o->city2$o->district2";
 }
 
+function output_district($o){
+	echo "$o->dis1 $o->dis2";
+}
+
 function output_deadline($datetime){
 	if($datetime && $datetime != '0000-00-00'){
 		if(!is_expire($datetime)){

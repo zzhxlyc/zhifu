@@ -425,7 +425,6 @@ float: left;
 .filter{
 	height: 43px;
 	margin: 0 auto;
-	margin-top : 10px;
 	border: 1px #D8D8D8 solid;
 	background: #F7F7F7;
 	padding: 0 10px;	
@@ -1599,4 +1598,8 @@ width: 60px;
 
 .leave-comment .btn{
 	margin-left:70px;
+}
+
+.top_link{
+	margin-bottom: 10px;
 }

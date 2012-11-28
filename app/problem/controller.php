@@ -34,7 +34,7 @@ class ProblemController extends AppController {
 		}
 		$condition = array('verify'=>1);
 		if($get['title']){
-			$condition['title like'] = $get['title'];
+			$condition['title like'] = esc_text($get['title']);
 		}
 		$all = $this->Problem->count($condition);
 		$pager = new Pager($all, $page, $limit);
