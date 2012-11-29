@@ -50,6 +50,7 @@
 			
 			<li><a href="<?php echo EXPERT_HOME?>" <?php head_tab5()?>>领域专家</a></li>
 			<li><a href="<?php echo TOPIC_HOME?>" <?php head_tab7()?>>话题</a></li>
+			<li><a href="<?php echo ARTICLE_HOME?>" <?php head_tab8()?>>案例展示</a></li>
 
 		</ul>
 	</div><!--end for header-->

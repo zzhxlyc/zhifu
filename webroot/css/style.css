@@ -207,7 +207,7 @@ font-family: '微软雅黑','黑体';
 line-height: 35px;
 text-align: center;
 color: #ccc;
-width: 118px;
+width: 104px;
 height: 35px;
 display: block;
 margin-top: 1px;
@@ -759,7 +759,7 @@ background-color:#369;
 
 /*添加job*/
 .row{
-padding-bottom:15px;	
+line-height: 30px;
 clear:both;
 font-size:12px;
 
@@ -1257,6 +1257,18 @@ padding-left:10px;
 .index .more{
 width:50px;
 float:right;
+
+}
+.index .more:hover{
+	text-decoration: underline;
+}
+.idea-wrapper .more{
+	margin-top: 50px;
+	margin-right: 150px;
+	width: 50px;
+	float: right;
+	background: #F8F8F8;
+	text-indent: 0;
 }
 
 .index .left-content,.index .right-content{
@@ -1321,9 +1333,12 @@ font-weight:bold;
 	float:left;
 }
 .video-wrapper .top-title .more{
-	padding-top:15px;
-	width:50px;
-	float:right;
+	padding-top: 15px;
+	width: 50px;
+	float: right;
+	background: #F8F8F8;
+	height: 28px;
+	text-indent: 0;
 }
 
 .video-wrapper .item .pic{
@@ -1363,7 +1378,7 @@ margin-bottom:10px;
 background:#fefefe;
 }
 .problem-wrapper .des{
-height:55px;
+height:60px;
 }
 .problem-more .problem-tips {
 width: 315px;
@@ -1398,11 +1413,11 @@ border-radius: 5px;
 width:280px;
 height:20px;
 }
-.problem-add .content textarea{
+.problem-add .content textarea.text{
 	border:1px solid #ccc;
 border-radius: 5px;
 width:280px;
-height:80px;
+height:40px;
 }
 .problem-more .problem-interest{
 	background: url(../images/problem-interest.jpg) no-repeat 0 0;
@@ -1459,9 +1474,11 @@ height:80px;
 	float:left;
 }
 .job-wrapper .top-title .more{
-	padding-top:15px;
+	padding-top:6px;
 	width:50px;
 	float:right;
+	background: #F8F8F8;
+	text-indent: 0;
 }
 .job-wrapper .content .item{
 width:700px;
@@ -1518,9 +1535,11 @@ padding:5px 5px 0 0;
 	float:left;
 }
 .patent-wrapper .top-title .more{
-	padding-top:75px;
+	padding-top:70px;
 	width:50px;
 	float:right;
+	background: #F8F8F8;
+	text-indent: 0;
 }
 
 .patent-wrapper .item .title{
@@ -1533,8 +1552,12 @@ font-size:12px;
 margin-top:30px;	
 }
 .case-wrapper .more{
-margin-top:-20px;	
-width:auto;
+margin-top:70px;
+margin-right:200px;	
+width: 50px;
+float: right;
+background: #F8F8F8;
+text-indent: 0;
 }
 .case-wrapper .more a{
 background:#3681BC;
@@ -1554,6 +1577,9 @@ border-radius: 4px;
 .case-wrapper .item{
 width:910px;
 border-bottom:0;
+}
+.case-wrapper .item .content{
+width: 700px;
 }
 .case-wrapper .item .des{
 color:#999;

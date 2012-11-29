@@ -157,7 +157,7 @@ $(".reply").toggle(
 		var html = '<div>'+
 			'<textarea rows="3" cols="80" id="comment"></textarea>'+
 			'<input type="hidden" class="d" value="'+deal_id+'" />'+
-			'<input type="button" value="提交" onclick="dealitem_submit(this)" />'+
+			'<input type="button" value="提交" class="btn" onclick="dealitem_submit(this)" />'+
 			'</div>';
 		$(this).parents(".item").find(".comm").append(html);
 	},

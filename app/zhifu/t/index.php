@@ -37,7 +37,7 @@
 				<img src="<?php img($idea->image, $idea->default_image())?>" width="100" height="75" alt="<?php echo $idea->title?>">			
 			</div>
 			<div class="content">
-				<div class="title"><a href="<?php echo ROOT_URL.'/idea/detail?id='.$idea->id?>" title="<?php echo $idea->title?>"><?php echo subString($idea->title, 10)?></a></div>
+				<div class="title"><a href="<?php echo ROOT_URL.'/idea/detail?id='.$idea->id?>" title="<?php echo $idea->title?>"><?php echo subString($idea->title, 20)?></a></div>
 				<div class="des">
 					<p>共提交<span><?php echo $idea->item_count?></span>个创意方案</p>
 					<p>
@@ -52,7 +52,6 @@
 		</div><!--end for item-->
 		<?php }?>
 		</div>
-		<span class="more"><a href="<?php echo ROOT_URL.'/idea'?>">查看更多</a></span>
 	</div>
 	
 
@@ -187,7 +186,7 @@
 					<?php foreach($recruits as $recruit){?>
 					<tr>
 						<td><?php output_identity($recruit->identity)?></td>
-						<td><?php echo $recruit->title?></td>
+						<td><a href="<?php echo ROOT_URL.'/recruit/show?id='.$recruit->id?>" target="_blank"><?php echo $recruit->title?></a></td>
 						<td><?php echo $recruit->company?></td>
 						<td><?php echo $recruit->area?></td>
 						<td><?php echo get_date($recruit->time)?></td>
@@ -233,15 +232,15 @@
 		<div class="pic fl"><img src="http://localhost/zhifu/images/default.jpg" alt=""  width="200" height="150"/></div>
 		
 		<div class="content fl">
-			<div class="title"><a href="<?php echo ROOT_URL.'/article/detail?id='.$article->id?>" title="<?php echo $article->title?>"><?php echo subString($article->title, 10)?></a></div>
+			<div class="title"><a href="<?php echo ROOT_URL.'/article/detail?id='.$article->id?>" title="<?php echo $article->title?>"><?php echo subString($article->title, 20)?></a></div>
 			<div class="des">
-				<p><?php echo $article->time?></p>
+				<?php echo $article->content?>
+			
 			</div>
 		</div>
 	</div><!--end for item-->
 	<?php }?>
 	</div>
-	<span class="more"><a href="<?php echo ROOT_URL.'/article/detail?id='.$article->id?>">点击查看详情</a></span>
 </div><!--end for case-wrapper-->
 	
 </div>
