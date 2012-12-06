@@ -65,4 +65,10 @@ class IdeaitemController extends AdminBaseController {
 		}
 	}
 	
+	public function delete(){
+		$get = $this->request->get;
+		parent::delete('IdeaItem', false);
+		$this->redirect('index?pid='.$get['id']);
+	}
+	
 }

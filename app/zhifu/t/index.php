@@ -229,7 +229,7 @@
 	
 	<?php foreach($articles as $article){?>
 	<div class="item clearfix">
-		<div class="pic fl"><img src="http://localhost/zhifu/images/default.jpg" alt=""  width="200" height="150"/></div>
+		<div class="pic fl"><img src="<?php img($article->image)?>" alt=""  width="200" height="150"/></div>
 		
 		<div class="content fl">
 			<div class="title"><a href="<?php echo ROOT_URL.'/article/detail?id='.$article->id?>" title="<?php echo $article->title?>"><?php echo subString($article->title, 20)?></a></div>

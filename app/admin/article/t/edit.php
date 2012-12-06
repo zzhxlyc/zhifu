@@ -19,6 +19,20 @@
 </div>
 
 <div class="row">
+	<label for="">图片</label>
+	<?php if($article->image){?>
+	<img alt="" src="<?php img($article->image)?>" width="200">
+	<?php }else{?>
+	还没有图片
+	<?php }?>
+</div>
+<div class="row">
+	<label for="">修改图片</label>
+	<input type="file" name="image" />
+	<span class="error"><?php echo $errors['image']?></span>
+</div>
+
+<div class="row">
 	<label for="">附件</label>
 	<?php if($article->file){?>
 	<a target="_blank" href="<?php echo UPLOAD_HOME."/$article->file"?>">点击下载</a>

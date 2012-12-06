@@ -32,6 +32,9 @@ class ArticleController extends AdminBaseController {
 			$errors = $this->Article->check($post);
 			if(count($errors) == 0){
 				$files = $this->request->file;
+				$path = $this->do_file('image', $errors, $files);
+				$this->resize_upload_image($path);
+				if($path){$post['image'] = $path;}
 				$path = $this->do_file('file', $errors, $files);
 				if($path){$post['file'] = $path;}
 			}
@@ -39,10 +42,6 @@ class ArticleController extends AdminBaseController {
 				$post['time'] = DATETIME;
 				$post['lastmodify'] = DATETIME;
 				$post['click'] = 0;
-				$image = preg_image($post['content']);
-				if($image){
-					$post['image'] = $image;
-				}
 				$this->Article->escape($post);
 				$this->Article->save($post);
 				$this->Log->action_article_add($Admin->id, $post['title']);
@@ -77,11 +76,17 @@ class ArticleController extends AdminBaseController {
 			$errors = $this->Article->check($Article);
 			if(count($errors) == 0){
 				$files = $this->request->file;
+				$path = $this->do_file('image', $errors, $files);
+				$this->resize_upload_image($path);
+				if($path){$post['image'] = $path;}
 				$path = $this->do_file('file', $errors, $files);
 				if($path){$post['file'] = $path;}
 			}
 			if(count($errors) == 0){
 				$post['lastmodify'] = DATETIME;
+				if($post['image'] && $Article->image){
+					FileSystem::remove($Article->image);
+				}
 				if($post['file'] && $Article->file){
 					FileSystem::remove($Article->file);
 				}
