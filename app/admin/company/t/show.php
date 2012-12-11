@@ -33,23 +33,10 @@
 	<label for="name">难题数</label>
 	<?php echo $company->problem_num?>
 </div>
-<!-- 
 <div class="row">
 	<label for="name">难题总金额</label>
-	<?php echo $company->problem_budget?>
+	<?php echo $company->problem_budget?>万元
 </div>
--->
-
-<div class="row">
-	<label for="name">专利数</label>
-	<?php echo $company->patent_num?>
-</div>
-<!-- 
-<div class="row">
-	<label for="name">专利总金额</label>
-	<?php echo $company->patent_budget?>
-</div>
- -->
 
 <div class="tag row">
 	<label for="">擅长领域</label>

@@ -137,6 +137,28 @@ class AppController extends Controller{
 		}
 	}
 	
+	protected function user_init(&$data){
+		$data['time'] = DATETIME;
+		$data['rate_total'] = 0;
+		$data['rate_num'] = 0;
+		$data['budget'] = 0;
+		$data['verified'] = 0;
+		$data['problems'] = 0;
+		$data['ideas'] = 0;
+	}
+	
+	protected function update_last_login($User){
+		$d = array('id'=>$User->id);
+		$d['lastlogin'] = DATETIME;
+		$d['lastip'] = IP;
+		if($User->get_type() == BelongType::COMPANY){
+			$this->Company->save($d);
+		}
+		else if($User->get_type() == BelongType::EXPERT){
+			$this->Expert->save($d);
+		}
+	}
+	
 	protected function check_pswd($pswd){
 		$chars = "/^(.){6,16}\$/i";
 		if(preg_match($chars, $pswd)){
@@ -232,6 +254,25 @@ class AppController extends Controller{
 		}
 		else if($User->is_expert()){
 			$this->Expert->save($data);
+		}
+	}
+	
+	protected function update_count_info($User, $type){
+		$d = array('id'=>$User->id);
+		if($type == BelongType::PROBLEM){
+			$d['problems eq'] = 'problems + 1';
+		}
+		else if($type == BelongType::IDEA){
+			$d['ideas eq'] = 'ideas + 1';
+		}
+		else if($type == BelongType::PATENT){
+			$d['patents eq'] = 'patents + 1';
+		}
+		if($User->get_type() == BelongType::COMPANY){
+			$this->Company->save($d);
+		}
+		else if($User->get_type() == BelongType::EXPERT){
+			$this->Expert->save($d);
 		}
 	}
 	

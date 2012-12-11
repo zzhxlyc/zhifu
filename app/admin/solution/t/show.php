@@ -7,7 +7,7 @@
 
 <div class="row">
 	<label for="name">难题名称</label>
-	<?php echo $problem->title?>
+	<a target="_blank" href="<?php echo PROBLEM_HOME.'/detail?id='.$problem->id?>"><?php echo $problem->title?></a>
 </div>	
 
 <div class="row">

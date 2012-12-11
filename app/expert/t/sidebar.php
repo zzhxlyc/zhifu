@@ -1,6 +1,7 @@
 <div class="sidebar">
 	<div class="pic">
-		<img src="<?php img($Expert->image, $Expert->default_image())?>" alt="<?php echo $Expert->name?>" width="200" height="150"/>
+		<img src="<?php img($Expert->image, $Expert->default_image())?>" 
+			alt="<?php echo $Expert->name?>" width="150" height="150"/>
 	</div>
 	<div class="detail-profile">
 		<p>用户名：<?php echo $Expert->username?></p>
@@ -14,7 +15,7 @@
 	</div><!--end for detail-profile-->
 	
 	<div class="side-section">
-		<div class="title"><h4>领域标签</h4></div>
+		<div class="title"><h4>擅长领域</h4></div>
 		<div class="content">
 			<?php foreach($tags as $tag){?>
 			<span class="item"><?php echo $tag->name?></span>

@@ -123,11 +123,7 @@ class ZhifuController extends AppController {
 				$data['password'] = md5($pswd);
 				$data['email'] = $email;
 				$data['mobile'] = $mobile;
-				$data['time'] = DATETIME;
-				$data['rate_total'] = 0;
-				$data['rate_num'] = 0;
-				$data['budget'] = 0;
-				$data['verified'] = 0;
+				$this->user_init($data);
 				$cond = array('username'=>$user);
 				if($type == BelongType::COMPANY){
 					$Company = $this->Company->get_row($cond);
@@ -140,6 +136,7 @@ class ZhifuController extends AppController {
 					}
 				}
 				else if($type == BelongType::EXPERT){
+					$data['patents'] = 0;
 					$Expert = $this->Company->get_row($cond);
 					if($Expert){
 						$errors['user'] = '此用户已被使用';

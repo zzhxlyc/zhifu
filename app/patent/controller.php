@@ -63,9 +63,9 @@ class PatentController extends AppController {
 	}
 	
 	public function add(){
+		$User = $this->get('User');
 		if($this->request->post){
 			$post = $this->request->post;
-			$User = $this->get('User');
 			$post['expert'] = $User->id;
 			$post['username'] = $User->username;
 			$post['author'] = $User->name;
@@ -89,6 +89,7 @@ class PatentController extends AppController {
 				$this->Patent->escape($post);
 				$id = $this->Patent->save($post);
 				$this->do_tag($id, BelongType::PATENT, $old_tag, $new_tag);
+				$this->update_count_info($User, BelongType::PATENT);
 				$this->redirect('detail?id='.$id);
 			}
 			$patent = $this->set_model($post, new Patent());

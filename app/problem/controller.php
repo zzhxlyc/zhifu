@@ -190,6 +190,7 @@ class ProblemController extends AppController {
 				$this->Problem->escape($post);
 				$id = $this->Problem->save($post);
 				$this->do_tag($id, BelongType::PROBLEM, $old_tag, $new_tag);
+				$this->update_count_info($User, BelongType::PROBLEM);
 				if($post['verify'] == 1){
 					$this->redirect('detail?id='.$id);
 				}
@@ -302,6 +303,7 @@ class ProblemController extends AppController {
 				unset($post['id']);
 				$this->Solution->escape($post);
 				$item = $this->Solution->save($post);
+				$this->update_count_info($User, BelongType::PROBLEM);
 				$this->redirect("item?problem=$Problem->id&item=$item");
 			}
 			$this->set('$solution', $Solution);
@@ -343,18 +345,20 @@ class ProblemController extends AppController {
 			return;
 		}
 		$cond = array('company'=>$User->id, 'solution'=>$Item->id);
-		$count = $this->SolutionItem->count($cond);
-		if($count == 0){
-			$need = Credit::solutionCredit();
-			if($User->credit < $need){
-				$this->redirect_credit();
-				return;
-			}
-			else{
-				$cond['time'] = DATETIME;
-				$this->SolutionItem->save($cond);
-				$d = array('id'=>$User->id, 'credit eq'=>"credit - $need");
-				$this->Company->save($d);
+		if($User->is_company()){
+			$count = $this->SolutionItem->count($cond);
+			if($count == 0){
+				$need = Credit::solutionCredit();
+				if($User->credit < $need){
+					$this->redirect_credit();
+					return;
+				}
+				else{
+					$cond['time'] = DATETIME;
+					$this->SolutionItem->save($cond);
+					$d = array('id'=>$User->id, 'credit eq'=>"credit - $need");
+					$this->Company->save($d);
+				}
 			}
 		}
 		

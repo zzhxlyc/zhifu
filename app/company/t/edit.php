@@ -40,7 +40,7 @@
 	<span class="error"><?php echo $errors['url']?></span>
 </div>
 <div class="row">
-	<label for="tag">领域标签</label>
+	<label for="tag">擅长领域</label>
 	<input size="20" type="text" class="text" value="" id="new-tag" /> 
 	<a href="javascript:;" id="add-tag">添加</a>
 </div>	

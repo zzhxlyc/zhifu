@@ -48,14 +48,11 @@ class ExpertController extends AdminBaseController {
 			}
 			if($expert){
 				$expert = $this->set_model($post, $expert);
-				$errors = $this->Expert->check($expert);
-				if(count($errors) == 0){
-					$post['verified'] = 1;
-					$this->Expert->escape($post);
-					$this->Expert->save($post);
-					$this->Log->action_expert_pass($admin, $expert->name);
-					$this->response->redirect('show?id='.$expert->id);
-				}
+				$post['verified'] = 1;
+				$this->Expert->escape($post);
+				$this->Expert->save($post);
+				$this->Log->action_expert_pass($admin, $expert->name);
+				$this->response->redirect('show?id='.$expert->id);
 			}
 			$this->redirect('show?id='.$id);
 		}

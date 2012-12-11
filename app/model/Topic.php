@@ -7,7 +7,7 @@ class Topic extends AppModel{
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
 			'need' => array('content', 'parent', 'belong', 'type'),
-			'length' => array('content'=>1000),
+			'length' => array('content'=>10000),
 			'int' => array('parent', 'belong'),
 			'word' => array('title', 'content')
 		);

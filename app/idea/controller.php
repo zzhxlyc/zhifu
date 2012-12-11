@@ -153,6 +153,7 @@ class IdeaController extends AppController {
 				$this->Idea->escape($post);
 				$id = $this->Idea->save($post);
 				$this->do_tag($id, BelongType::IDEA, $old_tag, $new_tag);
+				$this->update_count_info($User, BelongType::IDEA);
 				$this->redirect('detail?id='.$id);
 			}
 			$idea = $this->set_model($post);

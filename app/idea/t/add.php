@@ -37,12 +37,6 @@
 </div>
 
 <div class="row">
-	<label for="budget">预算</label>
-	<input size="20" type="text" class="text" name="budget" value="<?php echo $idea->budget?>" />万元
-	<span class="error"><?php echo $errors['budget']?></span>
-</div>
-
-<div class="row">
 	<label for="deadline">截止日期</label>
 	<input size="20" type="text" name="deadline" class="datepicker text" value="<?php echo get_date($idea->deadline)?>" readonly="readonly" />
 	<span class="error"><?php echo $errors['deadline']?></span>
@@ -82,28 +76,35 @@
 	<input type="hidden" name="old_tag" />
 </div>
 
-<div class="row">
+<div class="row prize">
 	<label for="">一等奖</label>
-	<input size="10" type="text" class="text" name="one" value="<?php echo $idea->one?>" />名
+	<input size="10" type="text" class="text num" name="one" value="<?php echo $idea->one?>" />名
 	<span class="error"><?php echo $errors['one']?></span>
-	<input size="10" type="text" class="text" name="one_m" value="<?php echo $idea->one_m?>" />万
+	<input size="10" type="text" class="text val" name="one_m" value="<?php echo $idea->one_m?>" />万
 	<span class="error"><?php echo $errors['one_m']?></span>
 </div>
 
-<div class="row">
+<div class="row prize">
 	<label for="">二等奖</label>
-	<input size="10" type="text" class="text" name="two" value="<?php echo $idea->two?>" />名
+	<input size="10" type="text" class="text num" name="two" value="<?php echo $idea->two?>" />名
 	<span class="error"><?php echo $errors['two']?></span>
-	<input size="10" type="text" class="text" name="two_m" value="<?php echo $idea->two_m?>" />万
+	<input size="10" type="text" class="text val" name="two_m" value="<?php echo $idea->two_m?>" />万
 	<span class="error"><?php echo $errors['two_m']?></span>
 </div>
 
-<div class="row">
+<div class="row prize">
 	<label for="">三等奖</label>
-	<input size="10" type="text" class="text" name="three" value="<?php echo $idea->three?>" />名
+	<input size="10" type="text" class="text num" name="three" value="<?php echo $idea->three?>" />名
 	<span class="error"><?php echo $errors['three']?></span>
-	<input size="10" type="text" class="text" name="three_m" value="<?php echo $idea->three_m?>" />万
+	<input size="10" type="text" class="text val" name="three_m" value="<?php echo $idea->three_m?>" />万
 	<span class="error"><?php echo $errors['three_m']?></span>
+</div>
+
+<div class="row">
+	<label for="budget">总赏金</label>
+	<span id="budget"><?php echo $idea->budget?></span>
+	<input id="budget_v" type="hidden" name="budget" value="" />
+	<span class="error"><?php echo $errors['budget']?></span>
 </div>
 
 </div>	<!--end for edit-left-->
@@ -163,5 +164,13 @@ $(document).ready(function($){
 	dateEventInit();
 	tagEventInit();
 	catEventInit();
-});	
+});
+$(".prize :text").blur(function (){
+	var sum = 0;
+	$(".prize").each(function(){
+		sum += $(this).find(".num").val() * $(this).find(".val").val();
+	});
+	$("#budget_v").val(sum);
+	$("#budget").html(sum + "万元");
+});
 </script>

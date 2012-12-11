@@ -8,9 +8,9 @@ class Video extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'url', 'belong', 'type'),
+			'need' => array('title', 'url'),
 			'length' => array('desc'=>500),
-			'int' => array('belong', 'type'),
+			'int' => array('belong'),
 			'word'=> array('title', 'desc'),
 		);
 		$errors = &parent::check($data, $check_arrays, $ignore);

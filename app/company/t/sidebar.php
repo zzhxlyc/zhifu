@@ -14,7 +14,7 @@
 	</div><!--end for detail-profile-->
 	
 	<div class="side-section">
-		<div class="title"><h4>领域标签</h4></div>
+		<div class="title"><h4>擅长领域</h4></div>
 		<div class="content">
 			<?php foreach($tags as $tag){?>
 			<span class="item"><?php echo $tag->name?></span>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2012-11-29 19:10:47
+Date: 2012-12-11 11:20:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,7 @@ CREATE TABLE `admins` (
 -- ----------------------------
 -- Records of admins
 -- ----------------------------
-INSERT INTO `admins` VALUES ('1', '1', 'root', '202cb962ac59075b964b07152d234b70', '0', '2012-11-09 14:43:48', '::1', '2012-06-26 15:16:33');
+INSERT INTO `admins` VALUES ('1', '1', 'root', '202cb962ac59075b964b07152d234b70', '0', '2012-12-11 10:36:27', '::1', '2012-06-26 15:16:33');
 INSERT INTO `admins` VALUES ('11', '1', 'admin', '202cb962ac59075b964b07152d234b70', '0', '2012-10-23 18:02:00', '::1', '2012-07-26 20:19:31');
 
 -- ----------------------------
@@ -89,12 +89,13 @@ CREATE TABLE `articles` (
   `time` datetime DEFAULT NULL,
   `lastmodify` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of articles
 -- ----------------------------
-INSERT INTO `articles` VALUES ('1', '发一篇文章', '<p>\r\n	<span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">原本可能是一个门的</span><a href=\"http://baike.baidu.com/view/115742.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">符号</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">，像在古埃及的</span><a href=\"http://baike.baidu.com/view/104404.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">象形文字</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">里（1）。最早什么时候出现在</span><a href=\"http://baike.baidu.com/view/179090.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">闪族</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">的书面当中我们已经无法知道了。大约在</span><a href=\"http://baike.baidu.com/view/1039767.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">公元前</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">1000年，在比布鲁斯（</span><a href=\"http://baike.baidu.com/view/366210.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">古地中海</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">港市，位于现黎嫩</span><a href=\"http://baike.baidu.com/view/132820.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">贝鲁特</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">以北的朱拜勒，公元第二千年成为繁华的</span><a href=\"http://baike.baidu.com/view/36703.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">腓尼基</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">城）和腓尼基的其他一些方以及迦南的中心这符号是特定的线性形式（2），对于的性形式来说。在闪族的语言叫做th，意思door（门）。</span></p>\r\n<div class=\"spctrl\" style=\"height: 14px; line-height: 14px; overflow: hidden; color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; \">\r\n	&nbsp;</div>\r\n<p>\r\n	<span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">　　</span><a href=\"http://baike.baidu.com/view/310524.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">希腊人</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">重新改变的</span><a href=\"http://baike.baidu.com/view/1519757.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">闪族人</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">的命名为delta他们保留了</span><a href=\"http://baike.baidu.com/view/262077.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">腓尼基人</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">的符号（3）。在</span><a href=\"http://baike.baidu.com/view/3784.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">意大利</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">的殖民地-希腊的Khalkis（或Chalcis-卡尔</span><a href=\"http://baike.baidu.com/view/1641230.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">基斯</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">(希腊东南部一港市）</span><a href=\"http://baike.baidu.com/view/256204.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">母</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">有了轻微的弧度（4）。这种形状致使它也存在于</span><a href=\"http://baike.baidu.com/view/18498.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">拉丁文</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">的书写中（5）。从拉丁时代这个三角逐渐的被圆滑（6）</span></p>\r\n', '1', '', null, null, '15', '2012-09-25 09:19:40', null);
+INSERT INTO `articles` VALUES ('1', '发一篇文章', '<p>\r\n	<span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">原本可能是一个门的</span><a href=\"http://baike.baidu.com/view/115742.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">符号</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">，像在古埃及的</span><a href=\"http://baike.baidu.com/view/104404.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">象形文字</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">里（1）。最早什么时候出现在</span><a href=\"http://baike.baidu.com/view/179090.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">闪族</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">的书面当中我们已经无法知道了。大约在</span><a href=\"http://baike.baidu.com/view/1039767.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">公元前</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">1000年，在比布鲁斯（</span><a href=\"http://baike.baidu.com/view/366210.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">古地中海</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">港市，位于现黎嫩</span><a href=\"http://baike.baidu.com/view/132820.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">贝鲁特</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">以北的朱拜勒，公元第二千年成为繁华的</span><a href=\"http://baike.baidu.com/view/36703.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">腓尼基</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">城）和腓尼基的其他一些方以及迦南的中心这符号是特定的线性形式（2），对于的性形式来说。在闪族的语言叫做th，意思door（门）。</span></p>\r\n<div class=\"spctrl\" style=\"height: 14px; line-height: 14px; overflow: hidden; color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; \">\r\n	&nbsp;</div>\r\n<p>\r\n	<span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">　　</span><a href=\"http://baike.baidu.com/view/310524.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">希腊人</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">重新改变的</span><a href=\"http://baike.baidu.com/view/1519757.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">闪族人</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">的命名为delta他们保留了</span><a href=\"http://baike.baidu.com/view/262077.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">腓尼基人</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">的符号（3）。在</span><a href=\"http://baike.baidu.com/view/3784.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">意大利</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">的殖民地-希腊的Khalkis（或Chalcis-卡尔</span><a href=\"http://baike.baidu.com/view/1641230.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">基斯</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">(希腊东南部一港市）</span><a href=\"http://baike.baidu.com/view/256204.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">母</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">有了轻微的弧度（4）。这种形状致使它也存在于</span><a href=\"http://baike.baidu.com/view/18498.htm\" style=\"color: rgb(19, 110, 194); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \" target=\"_blank\">拉丁文</a><span style=\"color: rgb(0, 0, 0); font-family: arial, 宋体, sans-serif; font-size: 14px; line-height: 24px; \">的书写中（5）。从拉丁时代这个三角逐渐的被圆滑（6）</span></p>\r\n', '1', '', null, null, '17', '2012-09-25 09:19:40', null);
+INSERT INTO `articles` VALUES ('2', '标题标题标题标题标题标题标题标题', '<p>\r\n	<span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 18px;\">内容</span></p>\r\n', '1', '', '2012/12/1354712742213.jpg', '2012/12/1354712742647.jpg', '0', '2012-12-05 21:05:42', '2012-12-05 21:05:42');
 
 -- ----------------------------
 -- Table structure for `categorys`
@@ -169,6 +170,8 @@ CREATE TABLE `companys` (
   `url` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `budget` double DEFAULT NULL,
+  `problems` int(11) DEFAULT NULL,
+  `ideas` int(11) DEFAULT NULL,
   `rate_total` int(11) DEFAULT NULL,
   `rate_num` int(11) DEFAULT NULL,
   `credit` int(11) DEFAULT NULL,
@@ -183,8 +186,8 @@ CREATE TABLE `companys` (
 -- ----------------------------
 -- Records of companys
 -- ----------------------------
-INSERT INTO `companys` VALUES ('1', 'lyc', '202cb962ac59075b964b07152d234b70', '我市企业', '刘玉翠', '高凤阁然后然后发\r\n', 'liuyunchao@zju.edu.cn', '13444515', '1234567', 'http://blog.stariy.org/', '2012/11/1352444644351.jpg', '0', '5', '1', '0', '2012/11/1352444781166.jpg', '1', '2012-09-24 11:20:01', null, null);
-INSERT INTO `companys` VALUES ('3', 'abc', '202cb962ac59075b964b07152d234b70', null, null, null, 'ew424A@eqwrwqf.com', null, '134', null, null, '0', '0', '0', null, null, '0', '2012-10-18 20:02:29', null, null);
+INSERT INTO `companys` VALUES ('1', 'lyc', '202cb962ac59075b964b07152d234b70', '我市企业', '刘玉翠', '高凤阁然后然后发\r\n', 'liuyunchao@zju.edu.cn', '13444515', '1234567', 'http://blog.stariy.org/', '2012/11/1352444644351.jpg', '0', '1', '2', '4', '1', '0', '2012/11/1352444781166.jpg', '1', '2012-09-24 11:20:01', '2012-12-11 09:33:06', '::1');
+INSERT INTO `companys` VALUES ('3', 'abc', '202cb962ac59075b964b07152d234b70', null, null, null, 'ew424A@eqwrwqf.com', null, '134', null, null, '0', '0', '0', '0', '0', '0', null, '0', '2012-10-18 20:02:29', null, null);
 
 -- ----------------------------
 -- Table structure for `deals`
@@ -272,6 +275,9 @@ CREATE TABLE `experts` (
   `image` varchar(255) DEFAULT NULL,
   `budget` double DEFAULT NULL,
   `credit` int(11) DEFAULT NULL,
+  `problems` int(11) DEFAULT NULL,
+  `ideas` int(11) DEFAULT NULL,
+  `patents` int(11) DEFAULT NULL,
   `rate_total` int(11) DEFAULT NULL,
   `rate_num` int(11) DEFAULT NULL,
   `verified` tinyint(4) DEFAULT NULL,
@@ -284,9 +290,9 @@ CREATE TABLE `experts` (
 -- ----------------------------
 -- Records of experts
 -- ----------------------------
-INSERT INTO `experts` VALUES ('1', 'hpp', '202cb962ac59075b964b07152d234b70', '韩盼盼', '浙江大学', '学生', 'hanpanpan@zju.edu.cn', '12345', '654321111', 'http://zjuhpp.com', '噶额个股', '2012/11/1352443886856.jpg', '0', null, '8', '2', '0', '2012-09-24 11:20:18', null, null);
-INSERT INTO `experts` VALUES ('2', 'zll', '202cb962ac59075b964b07152d234b70', '周琳琳', '', '', 'zll@qq.com', '', null, '', '', '2012/09/1348537808279.jpg', '0', null, '0', '0', '0', '2012-09-25 09:35:27', null, null);
-INSERT INTO `experts` VALUES ('3', '&#92;', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, 'afdwf@qq.com', null, '24324325325', null, null, null, '0', null, '0', '0', '0', '2012-09-27 09:18:21', null, null);
+INSERT INTO `experts` VALUES ('1', 'hpp', '202cb962ac59075b964b07152d234b70', '韩盼盼', '浙江大学', '学生', 'hanpanpan@zju.edu.cn', '12345', '654321111', 'http://zjuhpp.com', '噶额个股', '2012/11/1352443886856.jpg', '0', '0', '1', '0', '1', '8', '2', '1', '2012-09-24 11:20:18', '2012-12-11 09:35:46', '::1');
+INSERT INTO `experts` VALUES ('2', 'zll', '202cb962ac59075b964b07152d234b70', '周琳琳', '', '', 'zll@qq.com', '', null, '', '', '2012/09/1348537808279.jpg', '0', '0', '0', '0', '0', '0', '0', '0', '2012-09-25 09:35:27', null, null);
+INSERT INTO `experts` VALUES ('3', '&#92;', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, 'afdwf@qq.com', null, '24324325325', null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', '2012-09-27 09:18:21', null, null);
 
 -- ----------------------------
 -- Table structure for `files`
@@ -335,7 +341,7 @@ CREATE TABLE `ideas` (
   `time` datetime DEFAULT NULL,
   `lastmodify` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ideas
@@ -345,6 +351,8 @@ INSERT INTO `ideas` VALUES ('2', '1', 'lyc', '我市企业', '第二个创意悬
 INSERT INTO `ideas` VALUES ('3', '1', 'lyc', '我市企业', '创意悬赏创意悬赏', null, null, '-1', '-1', '22', '1970-01-01', '<p>\r\n	gewg法国法额个股</p>\r\n', '0', '0', '0', '0', '0', '0', null, null, '0', '1', '2012-10-25 10:59:33', '2012-10-25 10:59:37');
 INSERT INTO `ideas` VALUES ('4', '1', 'lyc', '我市企业', '无法无法', null, null, '2', '4', '22', '0000-00-00', '<p>\r\n	22</p>\r\n', '0', '0', '0', '0', '0', '0', null, null, '0', '0', '2012-10-31 21:21:51', '2012-10-31 21:22:16');
 INSERT INTO `ideas` VALUES ('5', '1', 'lyc', '我市企业', '名称名称', '公司公司', '235235', '1', '10', '33', '0000-00-00', '<p>\r\n	<span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; font-weight: bold; line-height: 18px; text-align: right; \">公司</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; font-weight: bold; line-height: 18px; text-align: right; \">公司</span></p>\r\n', '0', '0', '0', '0', '0', '0', null, null, '2', '0', '2012-11-06 10:17:22', '2012-11-06 10:17:22');
+INSERT INTO `ideas` VALUES ('6', '1', 'lyc', '我市企业', '悬赏悬赏悬赏悬赏', '我市企业', '13444515', '0', '0', '22', '2012-12-30', '<p>\r\n	额嘎嘎<span style=\"background-color: rgb(248, 248, 248); color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; font-weight: bold; line-height: 30px; text-align: right;\">详细描述</span><span style=\"background-color: rgb(248, 248, 248); color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; font-weight: bold; line-height: 30px; text-align: right;\">详细描述</span><span style=\"background-color: rgb(248, 248, 248); color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; font-weight: bold; line-height: 30px; text-align: right;\">详细描述</span></p>\r\n', '1', '11', '1', '11', '0', '0', '2012/12/1355189720273.jpg', null, '0', '0', '2012-12-11 09:35:20', '2012-12-11 09:35:20');
+INSERT INTO `ideas` VALUES ('7', '1', 'lyc', '我市企业', '新的创意悬赏', '我市企业', '13444515', '1', '3', '44', '2012-12-31', '<p>\r\n	&nbsp;</p>\r\n<p>\r\n	<br />\r\n	<div>\r\n		<a count=\"14\" href=\"\" id=\"tag_3\" style=\"margin: 0px; padding: 3px 5px; border: 0px; outline: 0px; vertical-align: baseline; background-color: rgb(218, 245, 250); text-decoration: initial; color: rgb(65, 132, 187); font-family: tahoma, arial, 宋体; line-height: 30px;\" tagid=\"3\">妹子</a><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 30px; background-color: rgb(248, 248, 248);\"> </span><a count=\"9\" href=\"\" id=\"tag_2\" style=\"margin: 0px; padding: 3px 5px; border: 0px; outline: 0px; vertical-align: baseline; background-color: rgb(218, 245, 250); text-decoration: initial; color: rgb(65, 132, 187); font-family: tahoma, arial, 宋体; line-height: 30px;\" tagid=\"2\">pp</a><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 30px; background-color: rgb(248, 248, 248);\"> </span><a count=\"7\" href=\"\" id=\"tag_1\" style=\"margin: 0px; padding: 3px 5px; border: 0px; outline: 0px; vertical-align: baseline; background-color: rgb(218, 245, 250); text-decoration: initial; color: rgb(65, 132, 187); font-family: tahoma, arial, 宋体; line-height: 30px;\" tagid=\"1\">西安</a><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 30px; background-color: rgb(248, 248, 248);\"> </span><a count=\"6\" href=\"\" id=\"tag_6\" style=\"margin: 0px; padding: 3px 5px; border: 0px; outline: 0px; vertical-align: baseline; background-color: rgb(218, 245, 250); text-decoration: initial; color: rgb(65, 132, 187); font-family: tahoma, arial, 宋体; line-height: 30px;\" tagid=\"6\">飞机</a><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 30px; background-color: rgb(248, 248, 248);\"> </span><a count=\"4\" href=\"\" id=\"tag_12\" style=\"margin: 0px; padding: 3px 5px; border: 0px; outline: 0px; vertical-align: baseline; background-color: rgb(218, 245, 250); text-decoration: initial; color: rgb(65, 132, 187); font-family: tahoma, arial, 宋体; line-height: 30px;\" tagid=\"12\">工业</a></div>\r\n</p>\r\n', '1', '2', '3', '4', '5', '6', null, null, '0', '0', '2012-12-11 10:35:48', '2012-12-11 10:35:48');
 
 -- ----------------------------
 -- Table structure for `idea_items`
@@ -367,14 +375,14 @@ CREATE TABLE `idea_items` (
   `file` varchar(255) DEFAULT NULL,
   `time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_items
 -- ----------------------------
 INSERT INTO `idea_items` VALUES ('1', '2', '第二个创意悬赏', '1', 'hpp', '韩盼盼', '我的创意', '<p>\r\n	罚恶个股</p>\r\n', '1', null, null, null, null, '2012/10/1351132661608.jpg', '2012-10-25 10:37:41');
 INSERT INTO `idea_items` VALUES ('2', '2', '第二个创意悬赏', '2', 'zll', '周琳琳', '非法', '<p>\r\n	分隔</p>\r\n', '0', null, null, null, null, null, '2012-10-25 10:47:23');
-INSERT INTO `idea_items` VALUES ('3', '5', '名称名称', '1', 'hpp', '韩盼盼', 'fafsfsafsaf', '<p>\r\n	afdsf</p>\r\n', '0', null, null, null, null, null, '2012-11-09 15:25:28');
+INSERT INTO `idea_items` VALUES ('4', '6', '悬赏悬赏悬赏悬赏', '1', 'hpp', '韩盼盼', '方案方案方案方案方案', '<p>\r\n	<label for=\"\" style=\"display: block; float: left; width: 90px; font-weight: bold; text-align: right; padding-right: 10px; color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 30px; background-color: rgb(248, 248, 248);\">详细描述</label></p>\r\n<div>\r\n	<label for=\"\" style=\"display: block; float: left; width: 90px; font-weight: bold; text-align: right; padding-right: 10px; color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 30px; background-color: rgb(248, 248, 248);\">详细描述</label>\r\n	<div>\r\n		<label for=\"\" style=\"display: block; float: left; width: 90px; font-weight: bold; text-align: right; padding-right: 10px; color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; line-height: 30px; background-color: rgb(248, 248, 248);\">详细描述</label>\r\n		<div>\r\n			&nbsp;</div>\r\n	</div>\r\n</div>\r\n<p>\r\n	&nbsp;</p>\r\n', '0', null, null, null, null, null, '2012-12-11 09:36:09');
 
 -- ----------------------------
 -- Table structure for `links`
@@ -406,7 +414,7 @@ CREATE TABLE `logs` (
   `ip` varchar(100) DEFAULT NULL,
   `time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of logs
@@ -458,6 +466,11 @@ INSERT INTO `logs` VALUES ('44', '1', '管理员 root 修改企业 我市企业'
 INSERT INTO `logs` VALUES ('45', '1', '管理员 root 修改企业 我市企业', '2', '::1', '2012-11-09 15:05:21');
 INSERT INTO `logs` VALUES ('46', '1', '管理员 root 修改企业 我市企业', '2', '::1', '2012-11-09 15:06:21');
 INSERT INTO `logs` VALUES ('47', '1', '管理员 root 添加视频 121313', '1', '::1', '2012-11-09 15:15:01');
+INSERT INTO `logs` VALUES ('48', '1', '管理员 root 登陆', '1', '::1', '2012-12-05 20:55:56');
+INSERT INTO `logs` VALUES ('49', '1', '管理员 root 添加文章 标题标题标题标题标题标题标题标题', '1', '::1', '2012-12-05 21:05:42');
+INSERT INTO `logs` VALUES ('50', '1', '管理员 root 登陆', '1', '::1', '2012-12-11 09:42:03');
+INSERT INTO `logs` VALUES ('51', '1', '管理员 root 审核通过专家 韩盼盼', '2', '::1', '2012-12-11 09:46:45');
+INSERT INTO `logs` VALUES ('52', '1', '管理员 root 登陆', '1', '::1', '2012-12-11 10:36:27');
 
 -- ----------------------------
 -- Table structure for `messages`
@@ -506,7 +519,7 @@ CREATE TABLE `options` (
 INSERT INTO `options` VALUES ('1', 'MOST_COMMON_TAGS', 'a:5:{i:0;a:3:{s:2:\"id\";s:1:\"3\";s:4:\"name\";s:6:\"妹子\";s:5:\"count\";s:2:\"14\";}i:1;a:3:{s:2:\"id\";s:1:\"2\";s:4:\"name\";s:2:\"pp\";s:5:\"count\";s:1:\"9\";}i:2;a:3:{s:2:\"id\";s:1:\"1\";s:4:\"name\";s:6:\"西安\";s:5:\"count\";s:1:\"7\";}i:3;a:3:{s:2:\"id\";s:1:\"6\";s:4:\"name\";s:6:\"飞机\";s:5:\"count\";s:1:\"6\";}i:4;a:3:{s:2:\"id\";s:2:\"12\";s:4:\"name\";s:6:\"工业\";s:5:\"count\";s:1:\"4\";}}');
 INSERT INTO `options` VALUES ('2', 'ADMIN_MANAGE_BASE', 'a:2:{s:5:\"title\";s:9:\"知富网\";s:6:\"slogan\";s:3:\"123\";}');
 INSERT INTO `options` VALUES ('9', 'SENSITIVE_TRIE_TREE', 'a:4:{s:3:\"胡\";a:1:{s:3:\"锦\";a:1:{s:3:\"涛\";a:1:{s:0:\"\";a:0:{}}}}s:3:\"温\";a:1:{s:3:\"家\";a:1:{s:3:\"宝\";a:1:{s:0:\"\";a:0:{}}}}s:3:\"江\";a:1:{s:3:\"泽\";a:1:{s:3:\"民\";a:1:{s:0:\"\";a:0:{}}}}s:3:\"毛\";a:1:{s:3:\"泽\";a:1:{s:3:\"东\";a:1:{s:0:\"\";a:0:{}}}}}');
-INSERT INTO `options` VALUES ('4', 'CRON', 'a:1:{i:1354127962;a:1:{s:6:\"action\";s:16:\"build_common_tag\";}}');
+INSERT INTO `options` VALUES ('4', 'CRON', 'a:1:{i:1355251941;a:1:{s:6:\"action\";s:16:\"build_common_tag\";}}');
 
 -- ----------------------------
 -- Table structure for `patents`
@@ -538,13 +551,14 @@ CREATE TABLE `patents` (
   `time` datetime DEFAULT NULL,
   `lastmodify` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of patents
 -- ----------------------------
 INSERT INTO `patents` VALUES ('1', '5', '8', '发paper啦', '12345', '11', '<p>\r\n	法额饿个</p>\r\n', '214124', '4214214', '2424@qq.co', 'http://abc.com', '1', '5', '2', '1', '1', '1', '1', 'hpp', '韩盼盼', null, null, '2012-09-24 11:46:44', null);
 INSERT INTO `patents` VALUES ('2', '1', '3', '专利名称专利名称', '124123', '24', '<p>\r\n	gew各个额哥恶化</p>\r\n', '23214', null, null, '', '0', '0', null, '0', '30', null, '1', 'hpp', '韩盼盼', '2012/10/1351135167669.jpg', '2012/10/1351481042501.jpg', '2012-10-25 11:19:27', '2012-10-29 11:24:02');
+INSERT INTO `patents` VALUES ('3', '2', '4', '专利专利专利专利专利', '232424', '22', '<p>\r\n	阿发额哥阿嘎恶法非法</p>\r\n', '21312324', null, null, '', '2', '2', '3', '3', '4', '3', '1', 'hpp', '韩盼盼', '2012/12/1355189839983.jpg', null, '2012-12-11 09:37:19', '2012-12-11 09:37:19');
 
 -- ----------------------------
 -- Table structure for `pay`
@@ -602,19 +616,20 @@ CREATE TABLE `problems` (
   `time` datetime DEFAULT NULL,
   `lastmodify` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of problems
 -- ----------------------------
-INSERT INTO `problems` VALUES ('1', null, null, '1', '3', '安徽省', '合肥市', '包河区', null, null, null, '22', '2012-12-01', '1', 'lyc', '', '第一个难题', '12345', '54321', 'fafwa@qq.com', '<p>\r\n	afsaf</p>\r\n', '3', '0', null, null, '1', '2012-09-24 11:26:02', '2012-09-24 11:26:02');
-INSERT INTO `problems` VALUES ('2', null, null, '1', '3', '湖北省', '武汉市', '江汉区', null, null, null, '33', '2012-12-07', '1', 'lyc', '浙江大学', '第二个难题', '12345', '13212', '24@qq.com', '<p>\r\n	wa发达反外挂</p>\r\n', '3', '0', null, null, '1', '2012-09-24 12:24:41', '2012-09-24 12:24:41');
-INSERT INTO `problems` VALUES ('3', null, '打劫个', '0', '0', '', '', '', '', '', '', '23', null, '1', 'lyc', '我市企业', '布技术难题布技术难题', '23', null, null, '歌舞和维护', '1', '0', null, null, '1', '2012-10-25 11:13:33', '2012-10-25 11:13:33');
-INSERT INTO `problems` VALUES ('4', null, '发布技术难题', '1', '3', '', '', '', '', '', '', '22', '2012-11-23', '1', 'lyc', '我市企业', '发布技术难题', '234235', null, null, '<p>\r\n	&nbsp;</p>\r\n<h2 style=\"margin: 5px 0px 15px; padding: 0px; border: 0px; outline: 0px; font-size: 20px; vertical-align: baseline; color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; \">\r\n	发布技术难题</h2>\r\n', '1', '1', '2012/10/1351479510327.jpg', null, '1', '2012-10-29 10:41:56', '2012-10-31 21:21:03');
+INSERT INTO `problems` VALUES ('1', '公司公司', '姓名姓名', '1', '3', '安徽省', '合肥市', '包河区', null, null, null, '22', '2012-12-01', '1', 'lyc', '', '第一个难题', '12345', '54321', 'fafwa@qq.com', '<p>\r\n	afsaf</p>\r\n', '3', '0', null, null, '1', '2012-09-24 11:26:02', '2012-09-24 11:26:02');
+INSERT INTO `problems` VALUES ('2', '公司公司', '姓名姓名', '1', '3', '湖北省', '武汉市', '江汉区', null, null, null, '33', '2012-12-07', '1', 'lyc', '浙江大学', '第二个难题', '12345', '13212', '24@qq.com', '<p>\r\n	wa发达反外挂</p>\r\n', '3', '0', null, null, '1', '2012-09-24 12:24:41', '2012-09-24 12:24:41');
+INSERT INTO `problems` VALUES ('3', '公司公司', '打劫个', '1', '3', '', '', '', '', '', '', '23', null, '1', 'lyc', '我市企业', '布技术难题布技术难题', '23', null, null, '歌舞和维护', '1', '0', null, null, '1', '2012-10-25 11:13:33', '2012-10-25 11:13:33');
+INSERT INTO `problems` VALUES ('4', '好公司哦', '发布技术难题', '1', '3', '安徽省', '合肥市', '包河区', '', '', '', '22', '2012-11-23', '1', 'lyc', '我市企业', '发布技术难题', '234235', null, null, '<p>\r\n	&nbsp;</p>\r\n<h2 style=\"margin: 5px 0px 15px; padding: 0px; border: 0px; outline: 0px; font-size: 20px; vertical-align: baseline; color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; \">\r\n	发布技术难题</h2>\r\n', '1', '1', '2012/10/1351479510327.jpg', null, '1', '2012-10-29 10:41:56', '2012-12-11 10:59:23');
 INSERT INTO `problems` VALUES ('5', '公司公司', '姓名姓名', '1', '10', '', '', '', '', '', '', '0', null, '1', 'lyc', '我市企业', '名称名称', '323251', null, null, '<p>\r\n	fafag<span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; font-weight: bold; line-height: 18px; text-align: right; \">详细描</span><span style=\"color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体; font-weight: bold; line-height: 18px; text-align: right; \">详细描</span></p>\r\n', '1', '0', null, null, '1', '2012-11-06 10:15:55', '2012-11-06 10:15:55');
 INSERT INTO `problems` VALUES ('6', '首页难题', '首页难题', '-1', '-1', null, null, null, null, null, null, null, null, '1', 'lyc', '我市企业', '首页难题', '444242432', null, null, ' 首页难题首页难题', '0', '0', null, null, '0', '2012-11-06 16:48:13', '2012-11-06 16:48:13');
 INSERT INTO `problems` VALUES ('7', '首页难题', '首页难题', '-1', '-1', null, null, null, null, null, null, null, null, '1', 'lyc', '我市企业', '首页难题', '444242432', null, null, ' 首页难题首页难题', '0', '0', null, null, '0', '2012-11-06 16:48:14', '2012-11-06 16:48:14');
 INSERT INTO `problems` VALUES ('8', '非阿哥阿哥', '任务任务', '1', '3', null, null, null, null, null, null, null, null, '1', 'lyc', '我市企业', '发放瓦哇嘎', '131142442', null, null, ' 23131', '0', '0', null, null, '0', '2012-11-12 09:52:24', '2012-11-12 09:52:24');
+INSERT INTO `problems` VALUES ('9', '我市企业', '广东人', '1', '3', '', '', '', '', '', '', '11', '2012-12-29', '1', 'lyc', '我市企业', '发哥哥噶飞啊', '13444515', null, null, '<p>\r\n	发给非阿哥阿哥阿哥</p>\r\n', '1', '0', '2012/12/1355189661511.jpg', null, '1', '2012-12-11 09:34:21', '2012-12-11 09:34:21');
 
 -- ----------------------------
 -- Table structure for `recruits`
@@ -717,7 +732,7 @@ CREATE TABLE `solutions` (
   `status` tinyint(4) DEFAULT NULL,
   `time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of solutions
@@ -726,6 +741,7 @@ INSERT INTO `solutions` VALUES ('1', '1', '第一个难题', '1', 'hpp', '韩盼
 INSERT INTO `solutions` VALUES ('2', '1', '第一个难题', '1', 'hpp', '韩盼盼', '竞标方案2', '<p>\r\n	竞标方案2竞标方案2</p>\r\n', '5', '不错不错', '5', '不错不错', null, '1', '2012-09-24 12:22:55');
 INSERT INTO `solutions` VALUES ('3', '2', '第二个难题', '1', 'hpp', '韩盼盼', '发风光', '<p>\r\n	个峰</p>\r\n', '3', '234', null, null, null, '1', '2012-09-24 15:46:52');
 INSERT INTO `solutions` VALUES ('4', '4', '发布技术难题', '1', 'hpp', '韩盼盼', '提交竞标方案1', '<p>\r\n	案1</p>\r\n', null, null, null, null, null, '0', '2012-11-01 09:58:11');
+INSERT INTO `solutions` VALUES ('5', '9', '发哥哥噶飞啊', '1', 'hpp', '韩盼盼', '竞标方案竞标方案竞标方案竞标方案', '<p>\r\n	&nbsp;</p>\r\n<h3 style=\"margin: 0px; padding: 5px; border: 0px; outline: 0px; font-size: 16px; vertical-align: baseline; background-color: rgb(240, 245, 248); color: rgb(51, 51, 51); font-family: tahoma, arial, 宋体;\">\r\n	竞标方案竞标方案竞标方案</h3>\r\n', null, null, null, null, null, '0', '2012-12-11 09:37:39');
 
 -- ----------------------------
 -- Table structure for `solution_items`
@@ -759,9 +775,9 @@ CREATE TABLE `tags` (
 -- ----------------------------
 -- Records of tags
 -- ----------------------------
-INSERT INTO `tags` VALUES ('1', '西安', '9');
-INSERT INTO `tags` VALUES ('2', 'pp', '15');
-INSERT INTO `tags` VALUES ('3', '妹子', '19');
+INSERT INTO `tags` VALUES ('1', '西安', '12');
+INSERT INTO `tags` VALUES ('2', 'pp', '16');
+INSERT INTO `tags` VALUES ('3', '妹子', '20');
 INSERT INTO `tags` VALUES ('4', '旅游', '2');
 INSERT INTO `tags` VALUES ('5', '青岛', '1');
 INSERT INTO `tags` VALUES ('6', '飞机', '8');
@@ -788,7 +804,7 @@ CREATE TABLE `tag_items` (
   `belong` int(11) DEFAULT NULL,
   `type` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tag_items
@@ -817,6 +833,11 @@ INSERT INTO `tag_items` VALUES ('27', '6', '4', 'Idea');
 INSERT INTO `tag_items` VALUES ('28', '12', '4', 'Idea');
 INSERT INTO `tag_items` VALUES ('29', '2', '14', 'Video');
 INSERT INTO `tag_items` VALUES ('30', '3', '14', 'Video');
+INSERT INTO `tag_items` VALUES ('31', '1', '6', 'Idea');
+INSERT INTO `tag_items` VALUES ('32', '3', '7', 'Idea');
+INSERT INTO `tag_items` VALUES ('33', '2', '7', 'Idea');
+INSERT INTO `tag_items` VALUES ('34', '1', '7', 'Idea');
+INSERT INTO `tag_items` VALUES ('35', '1', '14', 'Video');
 
 -- ----------------------------
 -- Table structure for `topics`
@@ -874,7 +895,7 @@ INSERT INTO `videos` VALUES ('11', '北爱', '撒旦的飒飒', 'http://player.y
 INSERT INTO `videos` VALUES ('10', '被爱', 'e', 'http://player.youku.com/player.php/sid/XMzQxNzQzNDg0/v.swf', '2012/10/1350479868717', '7', '11', 'Admin', 'admin', '管理员', '2012-10-17 21:17:48');
 INSERT INTO `videos` VALUES ('12', '爱爱', '', 'http://player.youku.com/player.php/sid/XMzQxNzQzNDg0/v.swf', '2012/11/1352445260665.jpg', '18', '11', 'Admin', 'admin', '管理员', '2012-10-17 22:07:27');
 INSERT INTO `videos` VALUES ('13', '121313', '131313', 'http://player.youku.com/player.php/sid/XMzQxNzQzNDg0/v.swf', '2012/11/1352445301414.jpg', '0', '1', 'Admin', 'admin', '管理员', '2012-11-09 15:15:01');
-INSERT INTO `videos` VALUES ('14', '42424', '234234', 'http://player.youku.com/player.php/sid/XMzQxNzQzNDg0/v.swf', '2012/11/1352445465233.jpg', '7', '1', 'Company', 'lyc', '我市企业', '2012-11-09 15:17:45');
+INSERT INTO `videos` VALUES ('14', '42424111111111111111111', '234234111111111111111111', 'http://player.youku.com/player.php/sid/XMzQxNzQzNDg0/v.swf', '2012/11/1352445465233.jpg', '10', '1', 'Company', 'lyc', '我市企业', '2012-11-09 15:17:45');
 
 -- ----------------------------
 -- Table structure for `words`

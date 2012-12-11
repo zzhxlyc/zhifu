@@ -46,6 +46,7 @@ class LoginController extends AppController {
 						if($User->is_expert()){
 							$cookie = $this->get_cookie(BelongType::EXPERT, $User);
 						}
+						$this->update_last_login($User);
 						$this->response->set_cookie(COOKIE_U, $cookie);
 						
 						$url = trim($post['url']);

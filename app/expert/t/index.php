@@ -34,8 +34,10 @@
 	<div class="item clearfix">
 		<div class="pic">
 			<a href="<?php echo $home.'/profile?id='.$o->id?>">
-			<img src="<?php img($o->image, $o->default_image())?>" width="200" height="150"  alt="<?php echo $o->title?>">
+			<img src="<?php img($o->image, $o->default_image())?>" width="100" height="100"  alt="<?php echo $o->title?>">
 			</a>
+			<p><?php echo $o->job?></p>
+			<p><?php echo $o->workplace?></p>
 		</div><!--end for pic-->
 		<div class="middle">
 			<h3 class="title"><a href="<?php echo $home.'/profile?id='.$o->id?>"><?php output_username($o, 2)?></a></h3>

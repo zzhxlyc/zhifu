@@ -110,7 +110,7 @@
 					<p>
 					<a href="<?php echo $home."/item?problem=$Problem->id&item=$solution->id"?>">
 					<strong><?php echo $solution->title;?></strong></a>
-					<?php if($solution->opend == false){?>
+					<?php if($User->is_company() && $solution->opend == false){?>
 						<a title="第一次打开需要扣除100积分"><font color="red">[!]</font></a>
 					<?php }?>
 					</p>

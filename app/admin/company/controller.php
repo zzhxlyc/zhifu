@@ -33,10 +33,6 @@ class CompanyController extends AdminBaseController {
 			$sum += $o->budget;
 		}
 		$company->problem_budget = $sum;
-		
-		$list = $this->Deal->get_list(array('belong'=>$company->id, 
-								'type'=>BelongType::COMPANY));
-		$company->patent_num = count($list);
 	}
 	
 	public function verify(){

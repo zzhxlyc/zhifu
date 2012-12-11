@@ -91,11 +91,11 @@ function output_money($money, $zero = 1){
 }
 
 function output_pcd($o){
-	echo "$o->province$o->city$o->district";
+	echo "$o->province $o->city $o->district";
 }
 
 function output_pcd2($o){
-	echo "$o->province2$o->city2$o->district2";
+	echo "$o->province2 $o->city2 $o->district2";
 }
 
 function output_district($o){

@@ -34,7 +34,7 @@
 </div>
 
 <div class="tag row">
-	<label for="">领域标签</label>
+	<label for="">擅长领域</label>
 	<?php 
 	if(is_array($tag_list)){
 		foreach($tag_list as $tag){
