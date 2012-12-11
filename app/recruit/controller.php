@@ -256,7 +256,7 @@ class RecruitController extends AppController {
 		$has_error = true;
 		if($id){
 			$recruit = $this->Recruit->get($id);
-			if($recruit && is_company_object($User, $recruit)){
+			if($recruit && $recruit->belong == $User->id && $User->is_company()){
 				$has_error = false;
 			}
 		}
