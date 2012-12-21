@@ -203,7 +203,7 @@
 
 </div>
 	
-<div class="patent-wrapper list clearfix">
+<div class="patent-wrapper list clearfix fl">
 	<div class="top-title clearfix">
 		<h3>科技成果</h3><a href="<?php echo ROOT_URL.'/patent/add'?>" style="display:block;float:left;width:100px;height: 24px;padding-top: 75px;"></a><a class="more" href="<?php echo ROOT_URL.'/article'?>">查看更多</a>
 	</div>
@@ -219,8 +219,68 @@
 	
 </div><!--end for patent-wrapper-->
 
+<div class="newexpert-wrapper fl">
+	<div class="top-title clearfix">
+		<h3>最新加入专家</h3><a class="more" href="<?php echo ROOT_URL.'/article'?>">查看更多</a>
+	</div>
+	
+	<div class="item clearfix">
+		<div class="pic fl">
+			<img src="<?php img($problem->image, $problem->default_image())?>" width="100" height="60" alt="<?php echo $problem->title?>">		
+		</div>
+		<div class="detail fl">
+			<p><a class="name" href="#">专家名</a> <a href="javascript:;" class="tag" title="标签标签 标签标签 标签标签">标签标签 标签标签 标签标签</a></p>
+			<p>浙大 教授</p>
+		</div>
+		
+	</div><!--end for item-->	
+	<div class="item clearfix">
+		<div class="pic fl">
+			<img src="<?php img($problem->image, $problem->default_image())?>" width="100" height="60" alt="<?php echo $problem->title?>">		
+		</div>
+		<div class="detail fl">
+			<p><a class="name" href="#">专家名</a> <a href="javascript:;" class="tag" title="标签标签 标签标签 标签标签">标签标签 标签标签 标签标签</a></p>
+			<p>浙大 教授</p>
+		</div>
+		
+	</div><!--end for item-->
+	<div class="item clearfix">
+		<div class="pic fl">
+			<img src="<?php img($problem->image, $problem->default_image())?>" width="100" height="60" alt="<?php echo $problem->title?>">		
+		</div>
+		<div class="detail fl">
+			<p><a class="name" href="#">专家名</a> <a href="javascript:;" class="tag" title="标签标签 标签标签 标签标签">标签标签 标签标签 标签标签</a></p>
+			<p>浙大 教授</p>
+		</div>
+		
+	</div><!--end for item-->	
+	
+	
+</div>
 
-<div class="case-wrapper list clearfix">
+<div class="clear"></div>
+
+<div class="newtopic-wrapper list fl">
+	<div class="top-title clearfix">
+		<h3>最新话题</h3><a class="more" href="<?php echo ROOT_URL.'/article'?>">查看更多</a>
+	</div>
+	<div class="item">
+		<span class="title"><a href="http://localhost/zhifu/patent/detail?id=3" title="最新话题">最新话题</a></span>
+		<span class="time fr">2012-11-1</span>
+	</div>
+	<div class="item">
+		<span class="title"><a href="http://localhost/zhifu/patent/detail?id=3" title="最新话题">最新话题</a></span>
+		<span class="time fr">2012-11-1</span>
+	</div>
+	<div class="item">
+		<span class="title"><a href="http://localhost/zhifu/patent/detail?id=3" title="最新话题">最新话题</a></span>
+		<span class="time fr">2012-11-1</span>
+	</div>
+	
+	
+</div>
+
+<div class="case-wrapper list clearfix fl">
 	<div class="top-title clearfix">
 		<h3>案例展示</h3><a class="more" href="<?php echo ROOT_URL.'/article'?>">查看更多</a>
 	</div>
