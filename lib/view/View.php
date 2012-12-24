@@ -55,7 +55,7 @@ class View{
 	
 	public function get_template_dir(){
 		if($this->template_abs){
-			return basename($this->template_abs);
+			return dirname($this->template);
 		}
 		else{
 			$pf = $this->prefix_folder;
