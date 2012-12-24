@@ -221,40 +221,28 @@
 
 <div class="newexpert-wrapper fl">
 	<div class="top-title clearfix">
-		<h3>最新加入专家</h3><a class="more" href="<?php echo ROOT_URL.'/article'?>">查看更多</a>
+		<h3>最新加入专家</h3><a class="more" href="<?php echo ROOT_URL.'/expert'?>">查看更多</a>
 	</div>
-	
+	<?php 
+		foreach($experts as $expert){
+	?>
 	<div class="item clearfix">
 		<div class="pic fl">
-			<img src="<?php img($problem->image, $problem->default_image())?>" width="100" height="60" alt="<?php echo $problem->title?>">		
+			<a class="name" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
+			<img src="<?php img($expert->image, $expert->default_image())?>" width="100" height="60" title="<?php echo output_username($expert, 2, 'name')?>">		
+			</a>
 		</div>
 		<div class="detail fl">
-			<p><a class="name" href="#">专家名</a> <a href="javascript:;" class="tag" title="标签标签 标签标签 标签标签">标签标签 标签标签 标签标签</a></p>
-			<p>浙大 教授</p>
+			<p>
+				<a class="name" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
+					<?php echo output_username($expert, 2, 'name')?>
+				</a>
+				<?php echo $expert->workplace?> <?php echo $expert->job?>
+			</p>
+			<p><?php echo output_desc($expert->description, 50)?></p>
 		</div>
-		
 	</div><!--end for item-->	
-	<div class="item clearfix">
-		<div class="pic fl">
-			<img src="<?php img($problem->image, $problem->default_image())?>" width="100" height="60" alt="<?php echo $problem->title?>">		
-		</div>
-		<div class="detail fl">
-			<p><a class="name" href="#">专家名</a> <a href="javascript:;" class="tag" title="标签标签 标签标签 标签标签">标签标签 标签标签 标签标签</a></p>
-			<p>浙大 教授</p>
-		</div>
-		
-	</div><!--end for item-->
-	<div class="item clearfix">
-		<div class="pic fl">
-			<img src="<?php img($problem->image, $problem->default_image())?>" width="100" height="60" alt="<?php echo $problem->title?>">		
-		</div>
-		<div class="detail fl">
-			<p><a class="name" href="#">专家名</a> <a href="javascript:;" class="tag" title="标签标签 标签标签 标签标签">标签标签 标签标签 标签标签</a></p>
-			<p>浙大 教授</p>
-		</div>
-		
-	</div><!--end for item-->	
-	
+	<?php }?>
 	
 </div>
 
@@ -262,22 +250,17 @@
 
 <div class="newtopic-wrapper list fl">
 	<div class="top-title clearfix">
-		<h3>最新话题</h3><a class="more" href="<?php echo ROOT_URL.'/article'?>">查看更多</a>
+		<h3>最新话题</h3><a class="more" href="<?php echo ROOT_URL.'/topic'?>">查看更多</a>
 	</div>
+	<?php 
+		foreach($topics as $topic){
+	?>
 	<div class="item">
-		<span class="title"><a href="http://localhost/zhifu/patent/detail?id=3" title="最新话题">最新话题</a></span>
-		<span class="time fr">2012-11-1</span>
+		<span class="title">
+			<a href="<?php echo TOPIC_HOME.'/detail?id='.$topic->id?>" title="<?php echo $topic->title?>"><?php echo $topic->title?></a></span>
+		<span class="time fr"><?php echo get_date($topic->time);?></span>
 	</div>
-	<div class="item">
-		<span class="title"><a href="http://localhost/zhifu/patent/detail?id=3" title="最新话题">最新话题</a></span>
-		<span class="time fr">2012-11-1</span>
-	</div>
-	<div class="item">
-		<span class="title"><a href="http://localhost/zhifu/patent/detail?id=3" title="最新话题">最新话题</a></span>
-		<span class="time fr">2012-11-1</span>
-	</div>
-	
-	
+	<?php }?>
 </div>
 
 <div class="case-wrapper list clearfix fl">
@@ -294,7 +277,7 @@
 		<div class="content fl">
 			<div class="title"><a href="<?php echo ROOT_URL.'/article/detail?id='.$article->id?>" title="<?php echo $article->title?>"><?php echo subString($article->title, 20)?></a></div>
 			<div class="des">
-				<?php echo subString(strip_tags($article->content), 300)?>
+				<?php echo subString(strip_tags($article->content), 100)?>
 			</div>
 		</div>
 	</div><!--end for item-->

@@ -180,14 +180,14 @@ function output_sex($sex){
 	}
 }
 
-function output_username($o, $type = 1){
+function output_username($o, $type = 1, $name="author"){
 	if($type == 1){
 		echo $o->username;
 	}
 	else if($type == 2){
 		echo $o->username;
-		if($o->author){
-			echo '（'.$o->author.'）';
+		if($o->$name){
+			echo '（'.$o->$name.'）';
 		}
 	}
 }

@@ -6,7 +6,7 @@ class ZhifuController extends AppController {
 	
 	public $models = array('Problem', 'Idea', 'IdeaItem', 'Article', 
 							'Video', 'Patent', 'Recruit', 'Apply', 
-							'Tag', 'TagItem', 'Category');
+							'Tag', 'TagItem', 'Category', 'Topic');
 	
 	public function before(){
 		parent::before();
@@ -37,6 +37,8 @@ class ZhifuController extends AppController {
 		$recruits = $this->Recruit->get_list($cond, $order, $limit);
 		$patents = $this->Patent->get_list($cond, $order, 6);
 		$articles = $this->Article->get_list($cond, $order_hot, 1);
+		$experts = $this->Expert->get_list($cond, $order, 3);
+		$topics = $this->Topic->get_list($cond, $order, 10);
 		
 		$this->set('$problems', $problems);
 		$this->set('$ideas', $ideas);
@@ -44,6 +46,8 @@ class ZhifuController extends AppController {
 		$this->set('$recruits', $recruits);
 		$this->set('$patents', $patents);
 		$this->set('$articles', $articles);
+		$this->set('$experts', $experts);
+		$this->set('$topics', $topics);
 		
 		$this->add_categorys();
 	}
