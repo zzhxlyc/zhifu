@@ -79,6 +79,9 @@ class ApplyController extends AppController {
 			$this->set('$errors', $errors);
 		}
 		else{
+			if($User->is_company()){
+				$this->redirect('add', 'recruit');
+			}
 			$apply = new Apply();
 			$apply->name = $User->name;
 			$apply->mobile = $User->mobile;

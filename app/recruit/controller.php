@@ -88,6 +88,9 @@ class RecruitController extends AppController {
 			$this->set('$errors', $errors);
 		}
 		else{
+			if($User->is_expert()){
+				$this->redirect('add', 'apply');
+			}
 			$recruit = new Recruit();
 			$recruit->company = $User->name;
 			$recruit->companydesc = $User->description;

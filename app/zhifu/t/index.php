@@ -294,8 +294,7 @@
 		<div class="content fl">
 			<div class="title"><a href="<?php echo ROOT_URL.'/article/detail?id='.$article->id?>" title="<?php echo $article->title?>"><?php echo subString($article->title, 20)?></a></div>
 			<div class="des">
-				<?php echo $article->content?>
-			
+				<?php echo subString(strip_tags($article->content), 300)?>
 			</div>
 		</div>
 	</div><!--end for item-->

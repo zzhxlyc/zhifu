@@ -50,3 +50,5 @@ define('RECRUIT_HOME', ROOT_URL.'/recruit');
 define('APPLY_HOME', ROOT_URL.'/apply');
 define('MESSAGE_HOME', ROOT_URL.'/message');
 
+define('ALIPAY_HOME', ROOT_URL.'/alipay');
+
