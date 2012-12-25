@@ -212,7 +212,7 @@
 		<?php foreach($patents as $patent){?>
 		<div class="item">
 			<span class="title"><a href="<?php echo ROOT_URL.'/patent/detail?id='.$patent->id?>" title="<?php echo $patent->title?>"><?php echo subString($patent->title, 10)?></a></span>
-			<span class="time fr">2012-11-1</span>
+			<span class="time fr"><?php echo get_date($patent->time);?></span>
 		</div>
 		<?php }?>
 	</div>
@@ -257,7 +257,8 @@
 	?>
 	<div class="item">
 		<span class="title">
-			<a href="<?php echo TOPIC_HOME.'/detail?id='.$topic->id?>" title="<?php echo $topic->title?>"><?php echo $topic->title?></a></span>
+			<a href="<?php echo TOPIC_HOME.'/detail?id='.$topic->id?>" title="<?php echo $topic->title?>">
+			<?php echo subString($topic->title, 15)?></a></span>
 		<span class="time fr"><?php echo get_date($topic->time);?></span>
 	</div>
 	<?php }?>
