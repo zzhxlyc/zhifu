@@ -8,7 +8,7 @@ class Video extends AppModel{
 	
 	public function check(&$data, array $ignore = array()){
 		$check_arrays = array(
-			'need' => array('title', 'url'),
+			'need' => array('title', 'url', 'category'),
 			'length' => array('desc'=>500),
 			'int' => array('belong'),
 			'word'=> array('title', 'desc'),

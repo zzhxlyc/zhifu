@@ -23,6 +23,20 @@
 	</td>
 </tr>
 <tr>
+	<td>类别</td>
+	<td>
+		<select name="parent" >
+			<option value="">无</option>
+			<?php
+			if(is_array($cat_list)){
+				cat_list_walk($cat_list, $video->category, 'output_select_cat_option');
+			}
+			?>
+		</select>
+		<span class="error"><?php echo $errors['category']?></span>
+	</td>
+</tr>
+<tr>
 	<td>封面图</td>
 	<td>
 		<input size="100" type="text" name="image" value="<?php echo $video->image?>" />

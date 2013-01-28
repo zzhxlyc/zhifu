@@ -547,10 +547,10 @@ class MysqlDAO {
 		return self::get_db()->query($sql);
 	}
 
-	public static function _save($table, array $data){
+	public static function _save($table, array $data, $insert_id = false){
 		$sql = 'INSERT INTO '.self::_get_table_name($table);
 		if(is_array($data) && count($data) > 0){
-			if(array_key_exists('id', $data)){
+			if(array_key_exists('id', $data) && !$insert_id){
 				$condition = array('id'=>$data['id']);
 				$new_data = $data;
 				unset($new_data['id']);
@@ -649,8 +649,8 @@ class MysqlDAO {
 		return self::_update($this->table, $set, $condition, $order, $limit);
 	}
 	
-	public function save(array $data){
-		return self::_save($this->table, $data);
+	public function save(array $data, $insert_id = false){
+		return self::_save($this->table, $data, $insert_id);
 	}
 	
 	
@@ -661,6 +661,11 @@ class MysqlDAO {
 	
 	public function select($sql){
 		return self::_select($sql);
+	}
+	
+	public function select_val($sql){
+		$ret = self::_select($sql);
+		return $ret[0];
 	}
 	
 	private static function split_by_blank($str){

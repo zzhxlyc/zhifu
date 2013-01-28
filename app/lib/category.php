@@ -15,6 +15,7 @@ function cat_list_walk($cat_list, $c, $callback){
 
 function _cat_list_walk($root, $children, $cat_list, $c, $depth, $callback){
 	foreach($root as $id){
+		//echo "root={".implode(',', $root)."}, id={$id}\n";
 		call_user_func($callback, $id, $cat_list[$id]->name, $c, $depth);
 		if(array_key_exists($id, $children)){
 			_cat_list_walk($children[$id], $children, $cat_list, $c, $depth + 1, $callback);
@@ -23,6 +24,7 @@ function _cat_list_walk($root, $children, $cat_list, $c, $depth, $callback){
 }
 
 function output_select_cat_option($value, $name, $c, $depth){
+	//echo("value={$value} name={$name} c={$c} depth={$depth}\n");
 	$front = '';
 	for($i = 0;$i < $depth;$i++) $front.= '&nbsp;&nbsp;&nbsp;'.$front;
 	$name = $front.$name;

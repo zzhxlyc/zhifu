@@ -2,7 +2,7 @@
 
 class VideoController extends AdminBaseController {
 	
-	public $models = array('Video', 'Log', 'Tag', 'TagItem');
+	public $models = array('Video', 'Log', 'Tag', 'TagItem', 'VideoCategory');
 	public $no_session = array();
 	
 	public function before(){
@@ -65,6 +65,8 @@ class VideoController extends AdminBaseController {
 				$this->set('video', $video);
 			}
 		}
+		$video_cats = $this->VideoCategory->get_list();
+		$this->set('cat_list', get_wrapped_cat_list($video_cats));
 		$this->add_common_tags();
 	}
 	
@@ -127,10 +129,130 @@ class VideoController extends AdminBaseController {
 				$this->set('video', $video);
 				$this->add_tags($video);
 				$this->add_common_tags();
+				$video_cats = $this->VideoCategory->get_list();
+				$this->set('cat_list', get_wrapped_cat_list($video_cats));
 			}
 			else{
 				$this->set('error', '不存在');
 			}
+		}
+	}
+	
+	public function cat(){
+		$get = $this->request->get;
+		$page = $get['page'];
+		$limit = 10;
+		$cond = array('parent'=>0);
+		$all = $this->VideoCategory->count($cond);
+		$pager = new Pager($all, $page, $limit);
+		$list = $this->VideoCategory->get_page($cond, array('id'=>'DESC'), 
+							$pager->now(), $limit);
+		$page_list = $pager->get_page_links(ADMIN_VIDEO_HOME.'/cat?');
+		$this->set('list', $list);
+		$this->set('$page_list', $page_list);
+		$this->render('cat/index');
+	}
+	
+	public function subcat(){
+		$get = $this->request->get;
+		$page = $get['page'];
+		$limit = 10;
+		$cond = array('parent'=>intval($get['id']));
+		$all = $this->VideoCategory->count($cond);
+		$pager = new Pager($all, $page, $limit);
+		$list = $this->VideoCategory->get_page($cond, array('id'=>'DESC'), 
+							$pager->now(), $limit);
+		$page_list = $pager->get_page_links(ADMIN_VIDEO_HOME.'/subcat?');
+		$this->set('list', $list);
+		$this->set('$page_list', $page_list);
+		$this->render('cat/subcat');
+	}
+	
+	public function addcat(){
+		if($this->request->post){
+			$post = $this->request->post;
+			if(empty($post['parent'])) $post['parent'] = 0;
+			$errors = $this->VideoCategory->check($post);
+			if(count($errors) == 0){
+				$this->VideoCategory->escape($post);
+				$id = $this->VideoCategory->save($post);
+				$this->response->redirect('cat');
+			}
+			else{
+				$videocat = $this->set_model($post);
+				$this->set('errors', $errors);
+				$this->set('videocat', $videocat);
+			}
+		}
+		$cat_list = $this->VideoCategory->get_list(array('parent'=>0));
+		$this->set('$cat_list', $cat_list);
+		$this->render('cat/add');
+	}
+	
+	public function editcat(){
+		$get = $this->request->get;
+		$id = $get['id'];
+		$has_error = true;
+		if($id){
+			$videocat = $this->VideoCategory->get($id);
+			if($videocat){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->redirect('cat');
+			return;
+		}
+		
+		if($this->request->post){
+			$post = $this->request->post;
+			$videocat = $this->set_model($post, $videocat);
+			$errors = $this->VideoCategory->check($videocat);
+			if(count($errors) == 0){
+				unset($post['parent']);
+				$this->VideoCategory->escape($post);
+				$this->VideoCategory->save($post);
+				$this->redirect('editcat?succ&id='.$id);
+			}
+			else{
+				$this->set('errors', $errors);
+			}
+		}
+		$this->set('videocat', $videocat);
+		$cat_list = $this->VideoCategory->get_list(array('parent'=>0));
+		$this->set('$cat_list', $cat_list);
+		$this->render('cat/edit');
+	}
+	
+	public function delcat(){
+		$get = $this->request->get;
+		$id = $get['id'];
+		$has_error = true;
+		if($id){
+			$videocat = $this->VideoCategory->get($id);
+			if($videocat){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->redirect('cat');
+			return;
+		}
+		
+		if($this->request->get){
+			$children = $this->VideoCategory->get_list(array('parent'=>$videocat->id));
+			if(count($children) == 0){
+				$this->VideoCategory->delete($videocat->id);
+			}
+//			else{
+//				$this->set('$error', '此类别有子类别，不能删除');
+//			}
+		}
+		if($videocat->parent == 0){
+			$this->redirect('cat');
+		}
+		else{
+			$this->redirect('subcat?id='.$videocat->parent);
 		}
 	}
 	
