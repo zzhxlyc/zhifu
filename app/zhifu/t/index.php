@@ -229,7 +229,7 @@
 	<div class="item clearfix">
 		<div class="pic fl">
 			<a class="name" href="<?php echo EXPERT_HOME.'/profile?id='.$expert->id?>">
-			<img src="<?php img($expert->image, $expert->default_image())?>" width="60" height="60" title="<?php echo output_username($expert, 2, 'name')?>">		
+			<img src="<?php img($expert->image, $expert->default_image())?>" width="50" height="50" title="<?php echo output_username($expert, 2, 'name')?>">		
 			</a>
 		</div>
 		<div class="detail fl">
