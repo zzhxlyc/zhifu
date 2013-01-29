@@ -970,7 +970,14 @@ padding-right:10px;
 padding-top:4px;
 }
 /************视频主页**************/
-
+.video-left{
+	width:630px;
+float:left;	
+}
+.video-right{
+	width:280px;
+float:right;	
+}
 
 .left-video-section{
 width:630px;
