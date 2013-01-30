@@ -59,8 +59,11 @@
 </div>
 
 
-<div class="row">
-	<input type="submit" class="btn fl" value="发布" />
+<div class="row" style="margin-top:10px">
+	<input type="submit" class="btn fl" value="发布" /> &nbsp;&nbsp;&nbsp;&nbsp;
+	<?php if(!empty($_GET['from'])){?>
+	<a href="javascript:void(0)" onclick="history.back()">返回</a>
+	<?php }?>
 </div>
 
 

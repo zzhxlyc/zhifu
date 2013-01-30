@@ -4,7 +4,7 @@ include(LIB_UTIL_DIR.'/DateCrossUtil.php');
 
 class VideoController extends AppController {
 	
-	public $models = array('Video', 'Comment', 'Tag', 'TagItem');
+	public $models = array('Video', 'Comment', 'Tag', 'TagItem', 'VideoCategory');
 	
 	public function before(){
 		$this->set('home', VIDEO_HOME);
@@ -16,23 +16,64 @@ class VideoController extends AppController {
 	}
 	
 	public function index(){
+		$cat_list = $this->VideoCategory->get_list();
+		list($root, $children) = get_root_children_cat($cat_list);
+		$level1_list = array();
+		$cat_video_list = array();
 		$get = $this->request->get;
-		$page = $get['page'];
-		$ord = $get['order'];
-		$limit = 10;
-		$cond = array();
-		$all = $this->Video->count($cond);
-		$pager = new Pager($all, $page, $limit);
-		$list = $this->Video->get_page($cond, array('time'=>'DESC'), 
-										$pager->now(), $limit);
-		$links = $pager->get_page_links($this->get('home').'/index?');
-		$this->set('list', $list);
-		$this->set('links', $links);
+		$cat_id = intval($get['cat']);
+		if($cat_id == 0){
+			foreach($cat_list as $cat){
+				if($cat->parent == 0){
+					$level1_list[] = $cat;
+					$cat_video_list[$cat->id] = array();
+				}
+			}
+		}
+		else{
+			$wapper_list = get_wrapped_cat_list($cat_list);
+			$the_cat = $wapper_list[$cat_id];
+			$level1_list[] = $the_cat;
+			$cat_video_list[$cat_id] = array();
+		}
+		$this->set('level1_list', $level1_list);
+		$this->set('cat_list', get_wrapped_cat_list($cat_list));
+		$this->set('children', $children);
 		
+		$from = date('Y-m-d H:i:s', time() - 24 * 3600 * 100);
+		if($the_cat){
+			if($the_cat->parent == 0){
+				$cond['category in'] = get_belong_to_cat($the_cat->id, $children, 1);
+			}
+			else{
+				$cond['category'] = $the_cat->id;
+			}
+		}
+		else{
+			$cond = array('time >='=>$from);
+		}
+		$temp_video_list = $this->Video->get_list($cond, array('time'=>'DESC'));
+		if($the_cat){
+			$cat_video_list[$the_cat->id] = $temp_video_list;
+		}
+		else{
+			foreach($temp_video_list as $video){
+				$top_id = get_top_cat($cat_list, $video->category);
+				if(array_key_exists($top_id, $cat_video_list)){
+					$cat_video_list[$top_id][] = $video;
+				}
+			}
+		}
+		$this->set('$cat_video_list', $cat_video_list);
+		
+		$limit = 6;
 		list($from, $to) = DateCrossUtil::this_month();
 		$cond = array('time >='=>$from);
 		$hot_list = $this->Video->get_list($cond, array('click'=>'DESC'), $limit);
 		$this->set('hot_list', $hot_list);
+		
+		$newly_list = $this->Video->get_list($cond, array('time'=>'DESC'), $limit);
+		$this->set('newly_list', $newly_list);
 	}
 	
 	public function url(){
