@@ -3,7 +3,7 @@
 	<a href="<?php echo ROOT_URL?>">首页</a> > 
 	<a href="<?php echo $home?>">科技视频</a>
 	
-	<a href="<?php echo VIDEO_HOME.'/add';?>" class="fr btn">上传视频</a>
+	<a href="<?php echo VIDEO_HOME.'/add?from=v';?>" class="fr btn">上传视频</a>
 </div>
 
 <div class="video-left">
