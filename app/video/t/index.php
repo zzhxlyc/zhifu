@@ -66,7 +66,7 @@
 		<h3>视频分类</h3>
 		<div class="list clearfix">
 			<?php 
-				foreach($children as $top_cat_id => $sub_cat_list){
+				foreach($root as $top_cat_id){
 					$top_cat = $cat_list[$top_cat_id];
 			?>
 			<span class="cat-item">
@@ -76,15 +76,24 @@
 			</span> 
 			<div class="subcat">
 				<?php
-					foreach($sub_cat_list as $cat_id){
-						$cat = $cat_list[$cat_id];
+					$sub_cat_list = $children[$top_cat_id];
+					if($sub_cat_list){
+						foreach($sub_cat_list as $cat_id){
+							$cat = $cat_list[$cat_id];
 				?>
 				<a href="<?php echo VIDEO_HOME.'?cat='.$cat->id?>"><?php echo $cat->name?></a>
-				<?php }?>
+				<?php 
+						}
+					}
+				?>
 			</div>
 			<?php }?>
 		</div>
 	</div>
+</div>
+
+<div class="page-wrapper">
+	<?php output_page_list($links);?>
 </div>
 
 

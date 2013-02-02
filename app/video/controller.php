@@ -39,6 +39,7 @@ class VideoController extends AppController {
 		$this->set('level1_list', $level1_list);
 		$this->set('cat_list', get_wrapped_cat_list($cat_list));
 		$this->set('children', $children);
+		$this->set('root', $root);
 		
 		$from = date('Y-m-d H:i:s', time() - 24 * 3600 * 100);
 		if($the_cat){
@@ -52,11 +53,20 @@ class VideoController extends AppController {
 		else{
 			$cond = array('time >='=>$from);
 		}
-		$temp_video_list = $this->Video->get_list($cond, array('time'=>'DESC'));
 		if($the_cat){
+			$page = $get['page'];
+			$limit = 12;
+			$all = $this->Video->count($cond);
+			$pager = new Pager($all, $page, $limit);
+			$base = VIDEO_HOME.'/index?cat='.$the_cat->id.'&';
+			$links = $pager->get_page_links($base);
+			$order = array('time'=>'DESC');
+			$temp_video_list = $this->Video->get_page($cond, $order, $pager->now(), $limit);
 			$cat_video_list[$the_cat->id] = $temp_video_list;
+			$this->set('$links', $links);
 		}
 		else{
+			$temp_video_list = $this->Video->get_list($cond, array('time'=>'DESC'));
 			foreach($temp_video_list as $video){
 				$top_id = get_top_cat($cat_list, $video->category);
 				if(array_key_exists($top_id, $cat_video_list)){
