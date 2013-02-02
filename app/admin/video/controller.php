@@ -113,6 +113,10 @@ class VideoController extends AdminBaseController {
 				else{
 					$this->set('errors', $errors);
 					$this->set('video', $video);
+					$video_cats = $this->VideoCategory->get_list();
+					$this->set('cat_list', get_wrapped_cat_list($video_cats));
+					$this->add_tags($video);
+					$this->add_common_tags();
 				}
 			}
 			else{

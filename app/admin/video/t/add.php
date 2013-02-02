@@ -25,7 +25,7 @@
 <tr>
 	<td>类别</td>
 	<td>
-		<select name="parent" >
+		<select name="category" >
 			<option value="">无</option>
 			<?php
 			if(is_array($cat_list)){

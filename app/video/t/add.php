@@ -14,6 +14,18 @@
 	<span class="error"><?php echo $errors['desc']?></span>
 </div>
 <div class="row">
+	<label for="">类别</label>
+	<select name="category" >
+		<option value="">无</option>
+		<?php
+		if(is_array($cat_list)){
+			cat_list_walk($cat_list, $video->category, 'output_select_cat_option');
+		}
+		?>
+	</select>
+	<span class="error"><?php echo $errors['category']?></span>
+</div>
+<div class="row">
 	<label for="">网址</label>
 	<input class="text wide"  type="text" name="url" value="<?php echo $video->url?>" />
 	<span class="error"><?php echo $errors['url']?></span>

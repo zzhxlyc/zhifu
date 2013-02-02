@@ -137,6 +137,8 @@ class VideoController extends AppController {
 			}
 		}
 		$this->add_common_tags();
+		$video_cats = $this->VideoCategory->get_list();
+		$this->set('cat_list', get_wrapped_cat_list($video_cats));
 	}
 	
 	public function add_succ(){}
