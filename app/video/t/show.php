@@ -34,6 +34,12 @@
 	</span>
 	
 </div>
+<div class="meta">
+	<span>
+		<label for="desc">简介</label>
+		<?php echo $video->desc?>
+	</span>
+</div>
 
 
 <div class="single-video">

@@ -10,7 +10,10 @@
 
 	<?php foreach($level1_list as $cat){?>
 	<div class="section left-video-section">
-		<h3><?php echo $cat->name?></h3>
+		<h3>
+			<?php echo $cat->name?>
+			<a href="<?php echo VIDEO_HOME.'?cat='.$cat->id?>" style="float: right;font-size: 12px">查看更多</a>
+		</h3>
 		<div class="list clearfix">
 			<?php 
 				$video_list = $cat_video_list[$cat->id];
@@ -69,6 +72,7 @@
 				foreach($root as $top_cat_id){
 					$top_cat = $cat_list[$top_cat_id];
 			?>
+			<div class="list clearfix">
 			<span class="cat-item">
 				<a href="<?php echo VIDEO_HOME.'?cat='.$top_cat->id?>" style="color:#333333">
 				<?php echo $top_cat->name?>
@@ -86,6 +90,7 @@
 						}
 					}
 				?>
+			</div>
 			</div>
 			<?php }?>
 		</div>
