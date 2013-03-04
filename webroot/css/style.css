@@ -1059,6 +1059,9 @@ width:630px;
 .meta p{
 	line-height:20px;
 }
+.comment-section{
+	margin-top:20px;
+}
 /************话题主页**************/
 .topic-list{
 	width:640px;
