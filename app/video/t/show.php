@@ -7,20 +7,28 @@
 
 <h3><?php echo $video->title?></h3>
 
+
+<div class="single-video">
+	<embed src="<?php echo $video->url?>" 
+		allowfullscreen="false" quality="high" width="600" height="500" 
+		align="middle" allowscriptaccess="always" 
+		type="application/x-shockwave-flash" />
+</div>
+
 <div class="meta">
-	<span>
+	<p>
 		<label for="desc">发布者</label>
 		<?php output_author_link2($video->belong, $video->type, $video->username)?>
-	</span>
-	<span>
+	</p>
+	<p>
 		<label for="desc">发布时间</label>
 		<?php echo $video->time?>
-	</span>
-	<span>
+	</p>
+	<p>
 		<label for="desc">点击次数</label>
 		<?php echo $video->click?>
-	</span>
-	<span>
+	</p>
+	<p>
 		<label for="">标签</label>
 		<?php 
 		if(is_array($tag_list)){
@@ -31,23 +39,13 @@
 			}
 		}
 		?>
-	</span>
-	
-</div>
-<div class="meta">
-	<span>
+	</p>
+	<p>
 		<label for="desc">简介</label>
 		<?php echo $video->desc?>
-	</span>
+	</p>
 </div>
-
-
-<div class="single-video">
-	<embed src="<?php echo $video->url?>" 
-		allowfullscreen="false" quality="high" width="600" height="500" 
-		align="middle" allowscriptaccess="always" 
-		type="application/x-shockwave-flash" />
-</div>
+<div class="clear"></div>
 
 <?php comment_div($comments, $links, $video, BelongType::VIDEO, $User)?>
 

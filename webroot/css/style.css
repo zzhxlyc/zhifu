@@ -1046,6 +1046,19 @@ width:630px;
 	float:left;
 	line-height:20px;
 }
+
+.single-video{
+	float:left;
+	width:600px;
+	margin-right:10px;
+}
+.meta{
+	float:left;
+	width:300px;
+}
+.meta p{
+	line-height:20px;
+}
 /************话题主页**************/
 .topic-list{
 	width:640px;
