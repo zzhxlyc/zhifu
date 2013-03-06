@@ -2,7 +2,7 @@
 
 class VideoController extends AdminBaseController {
 	
-	public $models = array('Video', 'Log', 'Tag', 'TagItem', 'VideoCategory');
+	public $models = array('Video', 'Log', 'Tag', 'TagItem', 'VideoCategory', 'Comment');
 	public $no_session = array();
 	
 	public function before(){
@@ -258,6 +258,39 @@ class VideoController extends AdminBaseController {
 		else{
 			$this->redirect('subcat?id='.$videocat->parent);
 		}
+	}
+	
+	public function comment(){
+		$get = $this->request->get;
+		$id = $get['id'];
+		$has_error = true;
+		if($id){
+			$video = $this->Video->get($id);
+			if($video){
+				$has_error = false;
+			}
+		}
+		if($has_error){
+			$this->redirect('index');
+			return;
+		}
+		
+		$page = $get['page'];
+		$limit = 10;
+		$cond = array('type'=>BelongType::VIDEO, 'object'=>$id);
+		$all = $this->Comment->count($cond);
+		$pager = new Pager($all, $page, $limit);
+		$list = $this->Comment->get_page($cond, array('id'=>'DESC'), $pager->now(), $limit);
+		$page_list = $pager->get_page_links(ADMIN_VIDEO_HOME.'/comment?');
+		$this->set('list', $list);
+		$this->set('page_list', $page_list);
+		$this->render('comment');
+	}
+	
+	public function delcomm($model = '', $redirect = true){
+		parent::delete('Comment', false);
+		$data = $this->get_data();
+		$this->redirect('comment?id='.$data['vid']);
 	}
 	
 }

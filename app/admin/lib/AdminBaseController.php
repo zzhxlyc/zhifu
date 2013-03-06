@@ -58,11 +58,11 @@ class AdminBaseController extends AppController {
 			$get = $this->request->get;
 			if(isset($get['id'])){
 				$id = $get['id'];
-				$problem = $this->{$Model}->get($id);
-				if($problem){
+				$object = $this->{$Model}->get($id);
+				if($object){
 					$this->{$Model}->delete($id);
 					if(method_exists($this->Log, $action_method)){
-						$this->Log->$action_method($admin, $problem->title);
+						$this->Log->$action_method($admin, $object->title);
 					}
 				}
 			}
