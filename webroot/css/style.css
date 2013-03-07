@@ -985,24 +985,26 @@ width:630px;
 .left-video-section .list{
 }
 .left-video-section .video-item{
-	float:left;
-	width:200px;
-	height:200px;
-	margin-top:10px;
-	margin-right:10px;
+	float: left;
+	width: 150px;
+	height: 150px;
+	margin-top: 10px;
+	margin-right: 7px;
 }
 .left-video-section .video-item a{
-	display:block;
-	width:200px;
-	height:200px;
+	display: block;
+	width: 150px;
+	height: 150px;
 }
 .left-video-section .video-item .title{
-	margin-top:-50px;
-	height:40px;
-	background:#000;
-	color:#fff;
-	padding:5px;
-	width:190px;
+	margin-top: -50px;
+	height: 30px;
+	background: black;
+	color: white;
+	padding: 5px;
+	width: 140px;
+	text-align: center;
+	padding-top: 10px;
 }
 
 .right-video-section{

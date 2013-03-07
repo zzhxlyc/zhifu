@@ -21,7 +21,7 @@
 			?>
 			<div class="video-item">
 				<a target="_blank" href="<?php echo VIDEO_HOME.'/show?id='.$video->id?>">
-					<img src="<?php img($video->image)?>" width="200" height="200" />
+					<img src="<?php img($video->image)?>" width="150" height="100" />
 				</a>
 				<div class="title"><?php echo $video->title?></div>
 			</div>
