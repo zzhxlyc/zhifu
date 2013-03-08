@@ -12,6 +12,12 @@
 </div>
 
 <div class="row">
+	<label for="">类型</label>
+	<input type="radio" name="type" value="0" <?php $HTML->checked(0, $article->type)?> /> 普通
+	<input type="radio" name="type" value="1" <?php $HTML->checked(1, $article->type)?> /> 特殊
+</div>
+
+<div class="row">
 	<label for="">修改图片</label>
 	<input type="file" name="image" />
 	<span class="error"><?php echo $errors['image']?></span>

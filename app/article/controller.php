@@ -18,7 +18,7 @@ class ArticleController extends AppController {
 		$page = $get['page'];
 		$ord = $get['order'];
 		$limit = 10;
-		$condition = array();
+		$condition = array('type'=>0);
 		$order = array();
 		if($ord == 'time'){
 			$order['time'] = 'DESC';
