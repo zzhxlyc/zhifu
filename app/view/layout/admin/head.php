@@ -1,6 +1,6 @@
 <div id="header">
 	<h1 id="logo">
-		知富网后台
+		科视网后台
 		<a target="_blank" href="<?php echo ROOT_URL?>"><span style="font-size:12px">查看前台</span></a>
 	</h1>
 	<?php if(!$is_login){?>

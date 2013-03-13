@@ -38,7 +38,7 @@ class ZhifuController extends AppController {
 		$patents = $this->Patent->get_list($cond, $order, 6);
 		$articles = $this->Article->get_list($cond, $order_hot, 1);
 		$experts = $this->Expert->get_list($cond, $order, 3);
-		$topics = $this->Topic->get_list($cond, $order, 10);
+		$topics = $this->Topic->get_list(array('type'=>0), $order, 10);
 		
 		$this->set('$problems', $problems);
 		$this->set('$ideas', $ideas);
